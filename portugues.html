@@ -283,7 +283,7 @@
   .painel{display:none;position:fixed;inset:0;z-index:70;background:rgba(74,59,105,.55);
     overflow-y:auto;padding:10px;}
   .painel.aberto{display:block;}
-  .painel-caixa{background:#FDF6FF;border-radius:24px;max-width:600px;margin:0 auto;padding:14px 12px 26px;
+  .painel-caixa{background:#FDF6FF;border-radius:24px;max-width:760px;margin:0 auto;padding:14px 12px 26px;
     box-shadow:0 10px 30px rgba(0,0,0,.3);}
   .painel-topo{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px;}
   .btn-voltar-ap{border:none;background:var(--verde);color:#fff;font-family:inherit;font-size:1.1rem;
@@ -345,6 +345,35 @@
   .item-voz .play{font-size:1.5rem;}
   .aviso-voz{background:#FFFDE7;border:3px solid var(--amarelo);border-radius:16px;padding:11px;
     font-size:.85rem;line-height:1.45;color:#5D4037;margin-top:12px;}
+  /* ---- menu em grade (lado a lado) ---- */
+  #tela-menu{max-width:980px;}
+  .grade-menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;width:100%;}
+  .grade-menu .menu-btn{margin:0;height:100%;align-items:flex-start;}
+  /* ---- painel: titulo e abas ---- */
+  .titulo-ap{font-size:1.15rem;font-weight:bold;color:var(--roxo);}
+  .abas{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:8px;}
+  .aba{padding:10px 12px;font-size:.92rem;}
+  /* ---- aba NUMEROS ---- */
+  .rolagem-num{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .grade-num{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;min-width:420px;}
+  .grade-num + .grade-num{margin-top:10px;}
+  .cn{background:var(--card);border-radius:8px;padding:9px 2px;text-align:center;font-weight:bold;
+    font-size:.95rem;color:#4A3B69;cursor:pointer;box-shadow:0 2px 0 #E8DEF8;}
+  .cn:active{transform:scale(.9);}
+  .cn.dez{background:#EDE7F6;color:#4527A0;}
+  .cn.falada{background:#C8E6C9;color:#1B5E20;}
+  .udc{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:9px;background:#FFF8E1;
+    border:3px solid #FFCC80;border-radius:14px;padding:8px 10px;}
+  .udc .rot-udc{font-size:.8rem;font-weight:bold;color:#E65100;min-width:82px;}
+  .udc .cn{font-size:.9rem;padding:7px 9px;background:#fff;}
+  /* ---- aba SILABAS DIFICEIS ---- */
+  .grade-dif{display:grid;grid-template-columns:minmax(112px,1.5fr) repeat(5,1fr);gap:3px;min-width:430px;}
+  .cd{border-radius:8px;padding:8px 2px;text-align:center;font-weight:bold;font-size:.95rem;
+    background:var(--card);color:#4A3B69;cursor:pointer;box-shadow:0 2px 0 #E8DEF8;}
+  .cd:active{transform:scale(.9);}
+  .cd.pal{background:#FFE0B2;color:#E65100;font-size:.82rem;text-align:left;padding-left:8px;line-height:1.2;}
+  .cd.vazio{background:transparent;box-shadow:none;cursor:default;color:#B39DDB;}
+  .cd.falada{background:#C8E6C9;color:#1B5E20;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -361,6 +390,7 @@
   <a href="index.html" style="align-self:flex-start;text-decoration:none;background:#EDE7F6;color:#7E57C2;font-weight:bold;font-size:1.1rem;padding:10px 18px;border-radius:16px;box-shadow:0 3px 0 #D1C4E9;font-family:inherit;">🏠 INÍCIO</a>
   <h1>📖 PORTUGUÊS</h1>
   <p class="sub">CA = CADERNO DE ATIVIDADES — NA ORDEM DA APOSTILA</p>
+  <div class="grade-menu">
   <button class="menu-btn m1" onclick="abrirJogo1()"><span class="emo">🍓</span><span><span class="pag">CA PÁG. 4</span>MONTE SEU SUCO MISTO</span><span class="done" id="d1"></span></button>
   <button class="menu-btn m2" onclick="abrirJogo2()"><span class="emo">📖</span><span><span class="pag">CA PÁG. 4</span>A RECEITA — PARTE 1</span><span class="done" id="d2"></span></button>
   <button class="menu-btn m3" onclick="abrirJogo3()"><span class="emo">🎨</span><span><span class="pag">CA PÁG. 5</span>PINTE A QUANTIDADE</span><span class="done" id="d3"></span></button>
@@ -382,6 +412,7 @@
   <button class="menu-btn m19" onclick="abrirJogo19()"><span class="emo">🧩</span><span><span class="pag">CA PÁG. 17</span>PALAVRAS COM H</span><span class="done" id="d19"></span></button>
   <button class="menu-btn m20" onclick="abrirJogo20()"><span class="emo">🖼️</span><span><span class="pag">CA PÁG. 18</span>CH, LH e NH</span><span class="done" id="d20"></span></button>
   <button class="menu-btn m21" onclick="abrirJogo21()"><span class="emo">🔎</span><span><span class="pag">CA PÁG. 19</span>UMA LETRA MUDA TUDO</span><span class="done" id="d21"></span></button>
+  </div>
 </div>
 
 <!-- J1 suco misto -->
@@ -598,17 +629,20 @@
 </div>
 
 <!-- ===== painel de apoio: silabário + alfabeto fônico ===== -->
-<button class="fab-apoio" onclick="abrirApoio()" title="Silabário e alfabeto">🔤</button>
+<button class="fab-apoio" onclick="abrirApoio()" title="Meu ajudante">🔤</button>
 <div class="painel" id="painel-apoio">
   <div class="painel-caixa">
     <div class="painel-topo">
       <button class="btn-voltar-ap" onclick="fecharApoio()">⬅️ VOLTAR</button>
-      <div class="abas">
-        <button class="aba ativa" id="aba-sil" onclick="trocarAba('sil')">SILABÁRIO</button>
-        <button class="aba" id="aba-fon" onclick="trocarAba('fon')">ALFABETO</button>
-        <button class="aba" id="aba-dou" onclick="trocarAba('dou')">DOURADO</button>
-        <button class="aba" id="aba-voz" onclick="trocarAba('voz')">VOZ</button>
-      </div>
+      <div class="titulo-ap">🧰 MEU AJUDANTE</div>
+    </div>
+    <div class="abas">
+      <button class="aba ativa" id="aba-sil" onclick="trocarAba('sil')">SILABÁRIO</button>
+      <button class="aba" id="aba-dif" onclick="trocarAba('dif')">DIFÍCEIS</button>
+      <button class="aba" id="aba-fon" onclick="trocarAba('fon')">ALFABETO</button>
+      <button class="aba" id="aba-num" onclick="trocarAba('num')">NÚMEROS</button>
+      <button class="aba" id="aba-dou" onclick="trocarAba('dou')">DOURADO</button>
+      <button class="aba" id="aba-voz" onclick="trocarAba('voz')">VOZ</button>
     </div>
     <div class="dica-ap" id="dica-ap">TOQUE EM UMA SÍLABA PARA OUVIR</div>
     <div id="corpo-apoio"></div>
@@ -1675,20 +1709,23 @@ function fecharApoio(){
   pararFala();
   document.getElementById('painel-apoio').classList.remove('aberto');}
 
+const ABAS_AP=['sil','dif','fon','num','dou','voz'];
+const DICAS_AP={sil:'TOQUE EM UMA SÍLABA PARA OUVIR',
+  dif:'SÍLABAS DIFÍCEIS • TOQUE PARA OUVIR',
+  fon:'TOQUE EM UMA LETRA PARA OUVIR O SOM',
+  num:'TOQUE EM UM NÚMERO PARA OUVIR',
+  dou:'MONTE O NÚMERO • TOQUE NA PEÇA PARA TIRAR',
+  voz:'TOQUE PARA OUVIR E ESCOLHER A VOZ'};
 function trocarAba(qual){
   const corpo=document.getElementById('corpo-apoio');
-  document.getElementById('aba-sil').classList.toggle('ativa',qual==='sil');
-  document.getElementById('aba-fon').classList.toggle('ativa',qual==='fon');
-  document.getElementById('aba-dou').classList.toggle('ativa',qual==='dou');
-  document.getElementById('aba-voz').classList.toggle('ativa',qual==='voz');
-  document.getElementById('dica-ap').textContent=
-    (qual==='sil') ? 'TOQUE EM UMA SÍLABA PARA OUVIR'
-  : (qual==='fon') ? 'TOQUE EM UMA LETRA PARA OUVIR O SOM'
-  : (qual==='dou') ? 'MONTE O NÚMERO • TOQUE NA PEÇA PARA TIRAR'
-  : 'TOQUE PARA OUVIR E ESCOLHER A VOZ';
+  ABAS_AP.forEach(a=>{const b=document.getElementById('aba-'+a);
+    if(b)b.classList.toggle('ativa',a===qual);});
+  document.getElementById('dica-ap').textContent=DICAS_AP[qual]||'';
   corpo.innerHTML='';
   if(qual==='dou'){montarOuro(corpo);return;}
   if(qual==='voz'){montarVozes(corpo);return;}
+  if(qual==='num'){montarNumeros(corpo);return;}
+  if(qual==='dif'){montarDificeis(corpo);return;}
   if(qual==='sil'){
     const g=document.createElement('div');g.className='grade-sil';
     const canto=document.createElement('div');canto.className='cs cab';canto.textContent='';g.appendChild(canto);
@@ -1777,6 +1814,95 @@ function proxJ19(){
   if(rod19>=PALAVRAS19.length)fimDeJogo(19);
   else montarJ19();}
 
+
+/* ===== aba NÚMEROS: sequência numérica 0 a 199 ===== */
+function numeroPorExtenso(n){
+  const u=['zero','um','dois','três','quatro','cinco','seis','sete','oito','nove'];
+  const d10=['dez','onze','doze','treze','catorze','quinze','dezesseis','dezessete','dezoito','dezenove'];
+  const dz=['','','vinte','trinta','quarenta','cinquenta','sessenta','setenta','oitenta','noventa'];
+  const ct=['','cento','duzentos','trezentos','quatrocentos','quinhentos','seiscentos','setecentos','oitocentos','novecentos'];
+  if(n===100)return 'cem';
+  if(n<10)return u[n];
+  if(n<20)return d10[n-10];
+  if(n<100){const a=Math.floor(n/10),b=n%10;return dz[a]+(b?' e '+u[b]:'');}
+  const c=Math.floor(n/100),r=n%100;
+  return ct[c]+(r?' e '+numeroPorExtenso(r):'');}
+
+function celulaNum(raiz,n){
+  const d=document.createElement('div');
+  d.className='cn'+((n%10===0)?' dez':'');
+  d.textContent=n;
+  d.onclick=()=>{falar(numeroPorExtenso(n));tocarSom(true);
+    raiz.querySelectorAll('.cn').forEach(x=>x.classList.remove('falada'));
+    d.classList.add('falada');};
+  return d;}
+
+function montarNumeros(corpo){
+  const wrap=document.createElement('div');wrap.className='rolagem-num';
+  [[0,99],[100,199]].forEach(par=>{
+    const g=document.createElement('div');g.className='grade-num';
+    for(let n=par[0];n<=par[1];n++)g.appendChild(celulaNum(corpo,n));
+    wrap.appendChild(g);});
+  corpo.appendChild(wrap);
+  const grupos=[['UNIDADES:',[0,1,2,3,4,5,6,7,8,9]],
+                ['DEZENAS:',[10,20,30,40,50,60,70,80,90]],
+                ['CENTENAS:',[100,200,300,400,500,600,700,800,900]]];
+  grupos.forEach(gp=>{
+    const l=document.createElement('div');l.className='udc';
+    const r=document.createElement('span');r.className='rot-udc';r.textContent=gp[0];
+    l.appendChild(r);
+    gp[1].forEach(n=>l.appendChild(celulaNum(corpo,n)));
+    corpo.appendChild(l);});}
+
+/* ===== aba DIFÍCEIS: silabário das dificuldades ortográficas ===== */
+const DIFICEIS=[
+ ['AQUÁRIO','🐠',['QUA','QUE','QUI','','']],
+ ['BRAÇO','💪',['BRA','BRE','BRI','BRO','BRU']],
+ ['CRAVO','🌹',['CRA','CRE','CRI','CRO','CRU']],
+ ['DRAGÃO','🐉',['DRA','DRE','DRI','DRO','DRU']],
+ ['FRALDA','👶',['FRA','FRE','FRI','FRO','FRU']],
+ ['GRAVATA','👔',['GRA','GRE','GRI','GRO','GRU']],
+ ['PRATO','🍽️',['PRA','PRE','PRI','PRO','PRU']],
+ ['TRATOR','🚜',['TRA','TRE','TRI','TRO','TRU']],
+ ['LIVRO','📖',['VRA','VRE','VRI','VRO','VRU']],
+ ['BLUSA','👚',['BLA','BLE','BLI','BLO','BLU']],
+ ['CLARA','🍳',['CLA','CLE','CLI','CLO','CLU']],
+ ['FLAUTA','🎶',['FLA','FLE','FLI','FLO','FLU']],
+ ['GLOBO','🌍',['GLA','GLE','GLI','GLO','GLU']],
+ ['PLACA','🚧',['PLA','PLE','PLI','PLO','PLU']],
+ ['ATLETA','🏃',['TLA','TLE','TLI','TLO','TLU']],
+ ['VLADIMIR','🧑',['VLA','VLE','VLI','VLO','VLU']],
+ ['CHAPÉU','🎩',['CHA','CHE','CHI','CHO','CHU']],
+ ['GALINHA','🐔',['NHA','NHE','NHI','NHO','NHU']],
+ ['COELHO','🐰',['LHA','LHE','LHI','LHO','LHU']],
+ ['FOGUETE','🚀',['GUA','GUE','GUI','','']],
+ ['ANJO','👼',['AN','EN','IN','ON','UN']],
+ ['ÁRVORE','🌳',['AR','ER','IR','OR','UR']],
+ ['ESCADA','🪜',['AS','ES','IS','OS','US']],
+ ['ALFACE','🥬',['AL','EL','IL','OL','UL']],
+ ['NUVENS','☁️',['ANS','ENS','INS','ONS','UNS']],
+ ['AMENDOIM','🥜',['AM','EM','IM','OM','UM']]
+];
+
+function montarDificeis(corpo){
+  const wrap=document.createElement('div');wrap.className='rolagem-num';
+  const g=document.createElement('div');g.className='grade-dif';
+  DIFICEIS.forEach(lin=>{
+    const p=document.createElement('div');p.className='cd pal';
+    p.textContent=lin[1]+' '+lin[0];
+    p.onclick=()=>{falar(lin[0]);tocarSom(true);
+      g.querySelectorAll('.cd').forEach(x=>x.classList.remove('falada'));
+      p.classList.add('falada');};
+    g.appendChild(p);
+    lin[2].forEach(s=>{
+      const d=document.createElement('div');
+      if(!s){d.className='cd vazio';d.textContent='—';}
+      else{d.className='cd';d.textContent=s;
+        d.onclick=()=>{falar(s.toLowerCase());tocarSom(true);
+          g.querySelectorAll('.cd').forEach(x=>x.classList.remove('falada'));
+          d.classList.add('falada');};}
+      g.appendChild(d);});});
+  wrap.appendChild(g);corpo.appendChild(wrap);}
 
 /* ===== material dourado do painel de apoio ===== */
 let OURO={c:0,d:0,u:0};
