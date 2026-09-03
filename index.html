@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Meus Jogos da Escola</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Meus Jogos">
+<meta name="theme-color" content="#7E57C2">
+<style>
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;font-family:'Comic Sans MS','Chalkboard SE','Segoe UI',sans-serif;color:#4A3B69;}
+  body{min-height:100vh;background:
+    radial-gradient(circle at 10% 5%, #FFECB3 0 90px, transparent 91px),
+    radial-gradient(circle at 92% 12%, #B3E5FC 0 70px, transparent 71px),
+    radial-gradient(circle at 88% 90%, #F8BBD0 0 80px, transparent 81px),
+    radial-gradient(circle at 8% 92%, #C8E6C9 0 60px, transparent 61px),
+    #FDF6FF;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+  h1{font-size:2.2rem;color:#7E57C2;text-align:center;margin:0 0 6px;letter-spacing:1px;}
+  .sub{color:#8E7CC3;font-size:1.1rem;margin:0 0 30px;text-align:center;}
+  a.materia{display:flex;align-items:center;gap:18px;width:100%;max-width:440px;text-decoration:none;
+    border-radius:26px;padding:22px 24px;margin:12px 0;font-size:1.5rem;font-weight:bold;color:#fff;
+    box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .1s;}
+  a.materia:active{transform:translateY(5px);box-shadow:0 1px 0 rgba(0,0,0,.18);}
+  a.materia .emo{font-size:2.8rem;}
+  .mat{background:#29B6F6;}
+  .por{background:#66BB6A;}
+  .estrela{font-size:2.6rem;margin-top:26px;animation:brilha 2.4s ease-in-out infinite;}
+  @keyframes brilha{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.18);opacity:1}}
+  @media (prefers-reduced-motion: reduce){.estrela{animation:none;}}
+</style>
+</head>
+<body>
+  <h1>🎒 MEUS JOGOS</h1>
+  <p class="sub">ESCOLHA UMA MATÉRIA</p>
+  <a class="materia mat" href="matematica.html"><span class="emo">🔢</span> MATEMÁTICA<br><small style="font-size:1rem;font-weight:normal">CA PÁG. 2-15 • MC PÁG. 14-15</small></a>
+  <a class="materia por" href="portugues.html"><span class="emo">📖</span> PORTUGUÊS<br><small style="font-size:1rem;font-weight:normal">CA PÁG. 4 A 19</small></a>
+  <div class="estrela">⭐</div>
+<script>
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+</script>
+</body>
+</html>

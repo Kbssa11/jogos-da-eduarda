@@ -1,0 +1,2079 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Português — Suco Enriquecido</title>
+<style>
+  :root{
+    --fundo:#FDF6FF; --roxo:#7E57C2; --verde:#43A047; --verde-claro:#E8F5E9;
+    --amarelo:#FFD54F; --laranja:#FF7043; --azul:#29B6F6; --rosa:#EC407A;
+    --card:#FFFFFF; --texto:#4A3B69;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;background:var(--fundo);font-family:'Comic Sans MS','Chalkboard SE','Segoe UI',sans-serif;color:var(--texto);}
+  body{min-height:100vh;background:
+    radial-gradient(circle at 10% 5%, #FFF9C4 0 90px, transparent 91px),
+    radial-gradient(circle at 92% 12%, #C8E6C9 0 70px, transparent 71px),
+    radial-gradient(circle at 88% 90%, #FFE0B2 0 80px, transparent 81px),
+    radial-gradient(circle at 8% 92%, #B3E5FC 0 60px, transparent 61px),
+    var(--fundo);}
+  .tela{display:none;max-width:560px;margin:0 auto;padding:16px 16px 40px;min-height:100vh;flex-direction:column;}
+  .tela.ativa{display:flex;}
+  h1{font-size:1.8rem;text-align:center;color:var(--verde);margin:8px 0 2px;letter-spacing:1px;}
+  .sub{text-align:center;font-size:1.05rem;margin:0 0 14px;color:#8E7CC3;}
+  .menu-btn{display:flex;align-items:center;gap:12px;width:100%;border:none;border-radius:22px;
+    padding:13px 16px;margin:7px 0;font-family:inherit;font-size:1.1rem;font-weight:bold;color:#fff;
+    cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.15);transition:transform .1s;text-align:left;}
+  .menu-btn:active{transform:translateY(4px);box-shadow:0 1px 0 rgba(0,0,0,.15);}
+  .menu-btn .emo{font-size:1.9rem;}
+  .menu-btn .done{margin-left:auto;font-size:1.4rem;}
+  .pag{display:inline-block;background:rgba(255,255,255,.3);border-radius:10px;padding:2px 8px;font-size:.8rem;margin-right:4px;}
+  .m1{background:#EC407A;} .m2{background:#29B6F6;} .m3{background:#FFA726;} .m4{background:#26A69A;}
+  .m5{background:#AB47BC;} .m6{background:#66BB6A;} .m7{background:#5C6BC0;} .m8{background:#EF5350;}
+  .m9{background:#8D6E63;} .m10{background:#F06292;}
+  .topo{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .voltar{border:none;background:#EDE7F6;color:var(--roxo);font-size:1.5rem;border-radius:16px;
+    width:56px;height:56px;cursor:pointer;box-shadow:0 3px 0 #D1C4E9;}
+  .falar{border:none;background:var(--amarelo);font-size:1.7rem;border-radius:16px;
+    width:64px;height:56px;cursor:pointer;box-shadow:0 3px 0 #F9A825;}
+  .falar:active,.voltar:active{transform:translateY(3px);box-shadow:none;}
+  .progresso{display:flex;gap:6px;justify-content:center;margin:4px 0 10px;font-size:1.4rem;min-height:1.8rem;flex-wrap:wrap;}
+  .pergunta{background:var(--card);border-radius:24px;padding:14px 16px;text-align:center;
+    font-size:1.4rem;font-weight:bold;box-shadow:0 4px 14px rgba(126,87,194,.15);margin-bottom:16px;line-height:1.35;}
+  .opcoes{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .opcao{flex:1;min-width:120px;max-width:230px;background:var(--card);border:5px solid #E8DEF8;border-radius:26px;
+    padding:14px 10px 12px;text-align:center;cursor:pointer;transition:transform .12s;box-shadow:0 5px 0 #E8DEF8;}
+  .opcao:active{transform:scale(.95);}
+  .opcao .emo{font-size:3.6rem;display:block;line-height:1.1;}
+  .opcao .nome{font-size:1.1rem;font-weight:bold;margin-top:6px;display:block;}
+  .opcao.certa{border-color:var(--verde);background:var(--verde-claro);box-shadow:0 5px 0 var(--verde);animation:pula .5s;}
+  .opcao.errada{animation:treme .4s;border-color:#EF9A9A;}
+  .opcao.sel{border-color:var(--rosa);background:#FCE4EC;box-shadow:0 5px 0 var(--rosa);}
+  @keyframes pula{0%{transform:scale(1)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+  @keyframes treme{0%,100%{transform:translateX(0)}25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+  .feedback{text-align:center;font-size:1.55rem;font-weight:bold;min-height:2.4rem;margin-top:14px;}
+  .feedback.certo{color:var(--verde);}
+  .feedback.tente{color:#FB8C00;}
+  .prox{display:none;margin:18px auto 0;border:none;background:var(--roxo);color:#fff;font-family:inherit;
+    font-size:1.4rem;font-weight:bold;padding:14px 34px;border-radius:20px;cursor:pointer;box-shadow:0 5px 0 #5E35B1;}
+  .prox.mostrar{display:block;}
+  .prox:active{transform:translateY(4px);box-shadow:none;}
+  .liqui{text-align:center;font-size:5rem;margin:6px 0;}
+  .copo-suco{width:110px;height:130px;margin:10px auto;border:6px solid #B39DDB;border-top-width:3px;
+    border-radius:8px 8px 22px 22px;position:relative;overflow:hidden;background:#F3E5F5;}
+  .suco-liquido{position:absolute;bottom:0;left:0;right:0;height:0;transition:height 1s, background .6s;}
+  .girando{animation:gira .35s linear infinite;}
+  @keyframes gira{0%{transform:rotate(-6deg)}50%{transform:rotate(6deg)}100%{transform:rotate(-6deg)}}
+  .pinta-linha{background:var(--card);border-radius:22px;padding:12px;margin:8px 0;box-shadow:0 4px 12px rgba(126,87,194,.12);}
+  .pinta-rotulo{font-weight:bold;font-size:1.2rem;display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .pinta-itens{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
+  .pinta-item{font-size:3rem;filter:grayscale(1) opacity(.45);cursor:pointer;transition:transform .12s, filter .2s;}
+  .pinta-item:active{transform:scale(.9);}
+  .pinta-item.pintado{filter:none;transform:scale(1.12);}
+  .pinta-linha.completa{border:4px solid var(--verde);background:var(--verde-claro);}
+  .pinta-linha.completa .pinta-rotulo::after{content:" ⭐";}
+  .palavra-r{display:flex;gap:6px;justify-content:center;margin:14px 0;flex-wrap:wrap;}
+  .letra{width:54px;height:62px;background:var(--card);border:4px solid #E8DEF8;border-radius:14px;
+    display:flex;align-items:center;justify-content:center;font-size:1.9rem;font-weight:bold;cursor:pointer;
+    box-shadow:0 4px 0 #E8DEF8;transition:transform .1s;}
+  .letra:active{transform:scale(.92);}
+  .letra.achou{background:var(--rosa);border-color:#C2185B;color:#fff;box-shadow:0 4px 0 #C2185B;animation:pula .5s;}
+  .letra.errada{animation:treme .4s;}
+  .letra.vogal{color:var(--azul);}
+  .silaba-alvo{display:flex;gap:10px;justify-content:center;margin:10px 0 18px;min-height:70px;}
+  .quadr{min-width:78px;height:66px;border:4px dashed #B39DDB;border-radius:14px;background:#F7F2FF;
+    display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:bold;color:var(--roxo);}
+  .quadr.cheio{border-style:solid;background:var(--verde-claro);border-color:var(--verde);color:var(--texto);animation:pula .4s;}
+  .silaba-ops{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .sil{border:none;background:var(--azul);color:#fff;font-family:inherit;font-size:1.5rem;font-weight:bold;
+    padding:14px 22px;border-radius:18px;cursor:pointer;box-shadow:0 5px 0 #0288D1;transition:transform .1s;}
+  .sil:active{transform:translateY(4px);box-shadow:none;}
+  .sil.usada{visibility:hidden;}
+  .sil.errada{animation:treme .4s;}
+  .palavras-grade{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .palavra-card{background:var(--card);border:5px solid #E8DEF8;border-radius:20px;padding:14px 18px;
+    font-size:1.35rem;font-weight:bold;cursor:pointer;box-shadow:0 5px 0 #E8DEF8;transition:transform .1s;letter-spacing:1px;}
+  .palavra-card:active{transform:scale(.94);}
+  .palavra-card.certa{border-color:var(--rosa);background:#FCE4EC;box-shadow:0 5px 0 var(--rosa);animation:pula .5s;cursor:default;}
+  .palavra-card.errada{animation:treme .4s;}
+  .palavra-card b{color:var(--rosa);}
+  .receita-card{background:#FFFDE7;border:5px solid var(--amarelo);border-radius:24px;padding:18px;margin-top:14px;
+    box-shadow:0 6px 16px rgba(0,0,0,.12);font-size:1.25rem;line-height:1.6;display:none;}
+  .receita-card.mostrar{display:block;}
+  .receita-card h3{margin:0 0 8px;color:#F57F17;text-align:center;font-size:1.4rem;}
+  .fim-card{background:var(--card);border-radius:28px;padding:30px 20px;text-align:center;
+    box-shadow:0 8px 24px rgba(126,87,194,.25);margin-top:30px;}
+  .fim-card .grande{font-size:4.5rem;}
+  .fim-card h2{color:var(--roxo);font-size:1.8rem;margin:10px 0;}
+
+  .m11{background:#FFA726;} .m12{background:#26A69A;}
+  .frase-box{background:var(--card);border-radius:22px;padding:18px 14px;margin:10px 0;
+    font-size:1.3rem;font-weight:bold;line-height:2;text-align:center;box-shadow:0 4px 14px rgba(126,87,194,.15);}
+  .lacuna{display:inline-flex;align-items:center;justify-content:center;min-width:96px;height:54px;
+    border:4px dashed #B39DDB;border-radius:14px;background:#F7F2FF;margin:0 4px;vertical-align:middle;
+    font-size:1.7rem;cursor:pointer;transition:transform .1s;}
+  .lacuna:active{transform:scale(.94);}
+  .lacuna.alvo{border-color:#F57F17;background:#FFE082;animation:pisca 1s infinite;}
+  .lacuna.cheia{border-style:solid;border-color:var(--verde);background:var(--verde-claro);
+    font-size:1.15rem;color:var(--texto);animation:pula .4s;}
+  @keyframes pisca{0%,100%{opacity:1}50%{opacity:.5}}
+  .troca-palavra{text-align:center;font-size:2.4rem;font-weight:bold;letter-spacing:3px;margin:10px 0;}
+  .troca-palavra .destaque{color:var(--rosa);background:#FCE4EC;border-radius:8px;padding:0 6px;}
+  .troca-palavra .nova{color:var(--verde);}
+  .seta-troca{text-align:center;font-size:2rem;margin:2px 0;}
+
+  .m13{background:#7E57C2;} .m14{background:#EF5350;}
+  .grupo-pal{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0;}
+  .pal-grupo{background:var(--card);border:5px solid #E8DEF8;border-radius:18px;padding:14px 16px;
+    font-size:1.2rem;font-weight:bold;cursor:pointer;box-shadow:0 5px 0 #E8DEF8;transition:transform .1s;letter-spacing:1px;}
+  .pal-grupo:active{transform:scale(.94);}
+  .pal-grupo.certa{border-color:var(--rosa);background:#FCE4EC;box-shadow:0 5px 0 var(--rosa);animation:pula .5s;}
+  .pal-grupo.errada{animation:treme .4s;}
+  .frase-linha{background:var(--card);border-radius:18px;padding:12px 14px;margin:8px 0;
+    box-shadow:0 4px 12px rgba(126,87,194,.12);display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;}
+  .frase-num{background:var(--roxo);color:#fff;border-radius:50%;width:32px;height:32px;
+    display:flex;align-items:center;justify-content:center;font-weight:bold;flex-shrink:0;}
+  .pal-cont{padding:7px 10px;border-radius:11px;background:#F3EFFA;font-weight:bold;font-size:1.05rem;
+    cursor:pointer;transition:transform .1s;}
+  .pal-cont:active{transform:scale(.9);}
+  .pal-cont.contada{background:#C8E6C9;color:#1B5E20;transform:scale(1.06);}
+  .contador-pal{text-align:center;font-size:2.8rem;font-weight:bold;color:var(--roxo);min-height:3.2rem;}
+  .monta-frase{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:64px;
+    background:#F7F2FF;border:4px dashed #B39DDB;border-radius:18px;padding:12px;margin:10px 0;align-items:center;}
+  .monta-frase:empty::before{content:"TOQUE NAS PALAVRAS NA ORDEM";color:#B39DDB;font-size:.95rem;}
+  .pal-posta{background:var(--verde-claro);border:3px solid var(--verde);border-radius:12px;padding:8px 12px;
+    font-weight:bold;font-size:1.15rem;animation:pula .4s;}
+  .pal-btn{border:none;background:var(--azul);color:#fff;font-family:inherit;font-size:1.2rem;font-weight:bold;
+    padding:13px 16px;border-radius:16px;cursor:pointer;box-shadow:0 5px 0 #0288D1;transition:transform .1s;position:relative;}
+  .pal-btn:active{transform:translateY(4px);box-shadow:none;}
+  .pal-btn.usada{visibility:hidden;}
+  .pal-btn.errada{animation:treme .4s;}
+  .pal-btn .ord{position:absolute;top:-10px;right:-8px;background:var(--amarelo);color:#5D4037;
+    border-radius:50%;width:26px;height:26px;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+
+  .m15{background:#6D4C41;} .m16{background:#00838F;}
+  .palco{position:relative;height:270px;border-radius:24px;overflow:hidden;margin:8px 0;
+    background:linear-gradient(180deg,#B3E5FC 0 58%,#C5E1A5 58% 100%);box-shadow:0 6px 18px rgba(0,0,0,.15);}
+  .palco.casa{background:linear-gradient(180deg,#FFE0B2 0 62%,#A1887F 62% 100%);}
+  .palco.noite{background:linear-gradient(180deg,#5C6BC0 0 58%,#7E57C2 58% 100%);}
+  .cenario{position:absolute;bottom:34%;font-size:2.4rem;opacity:.85;}
+  .ator{position:absolute;bottom:24%;font-size:4.2rem;transition:left .8s, transform .3s;}
+  .ator.bara{bottom:22%;left:16%;}
+  .ator.conv{bottom:22%;left:66%;}
+  .balao{position:absolute;top:10px;left:50%;transform:translateX(-50%);background:#fff;border:4px solid var(--roxo);
+    border-radius:20px;padding:10px 14px;font-size:1.05rem;font-weight:bold;max-width:88%;text-align:center;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);line-height:1.35;}
+  .balao::after{content:"";position:absolute;bottom:-16px;left:34px;border:9px solid transparent;border-top-color:var(--roxo);}
+  .pula-anim{animation:pulinho 1s ease-in-out infinite;}
+  @keyframes pulinho{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+  .balanca{animation:balanco 1.1s ease-in-out infinite;transform-origin:bottom center;}
+  @keyframes balanco{0%,100%{transform:rotate(-11deg)}50%{transform:rotate(11deg)}}
+  .brilha-anim{animation:brilho 1.2s ease-in-out infinite;}
+  @keyframes brilho{0%,100%{transform:scale(1);filter:none}50%{transform:scale(1.28);filter:drop-shadow(0 0 10px gold)}}
+  .treme-anim{animation:tremida .35s linear infinite;}
+  @keyframes tremida{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+  .entra{animation:entrando .8s ease-out;}
+  @keyframes entrando{from{transform:translateX(150px);opacity:0}to{transform:translateX(0);opacity:1}}
+  .notas{position:absolute;bottom:52%;left:52%;font-size:1.8rem;animation:subir 1.6s ease-out infinite;}
+  @keyframes subir{0%{transform:translateY(0);opacity:1}100%{transform:translateY(-58px);opacity:0}}
+  .ctrl-cena{display:flex;gap:10px;justify-content:center;margin:10px 0;flex-wrap:wrap;}
+  .btn-cena{border:none;background:var(--roxo);color:#fff;font-family:inherit;font-size:1.15rem;font-weight:bold;
+    padding:13px 20px;border-radius:18px;cursor:pointer;box-shadow:0 5px 0 #5E35B1;}
+  .btn-cena:active{transform:translateY(4px);box-shadow:none;}
+  .btn-cena.repetir{background:var(--amarelo);color:#5D4037;box-shadow:0 5px 0 #F9A825;}
+  .cena-num{text-align:center;font-weight:bold;color:#8E7CC3;margin-bottom:4px;}
+  .ord-lista{display:flex;flex-direction:column;gap:9px;}
+  .ord-item{background:var(--card);border:4px solid #E8DEF8;border-radius:16px;padding:13px 14px;
+    font-size:1.05rem;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #E8DEF8;display:flex;gap:10px;align-items:center;
+    text-align:left;line-height:1.3;}
+  .ord-item:active{transform:scale(.97);}
+  .ord-item .nord{background:#EDE7F6;color:var(--roxo);border-radius:50%;width:34px;height:34px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+  .ord-item.feita{border-color:var(--verde);background:var(--verde-claro);}
+  .ord-item.feita .nord{background:var(--verde);color:#fff;}
+  .ord-item.errada{animation:treme .4s;}
+  .letras-slot{display:flex;gap:6px;justify-content:center;margin:10px 0;flex-wrap:wrap;}
+  .ls{width:50px;height:58px;border:4px solid #B39DDB;border-radius:12px;background:#F7F2FF;
+    display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:bold;color:var(--roxo);}
+  .ls.dado{background:#EDE7F6;border-style:solid;}
+  .ls.vazio{border-style:dashed;}
+  .ls.ok{background:var(--verde-claro);border-color:var(--verde);color:var(--texto);animation:pula .4s;}
+
+  .m17{background:#AB47BC;} .m18{background:#43A047;}
+  .dialogo{background:var(--card);border-radius:20px;padding:14px 16px;margin:8px 0;
+    box-shadow:0 4px 14px rgba(126,87,194,.15);font-size:1.05rem;line-height:1.8;}
+  .dialogo .fala-b{color:var(--roxo);font-weight:bold;}
+  .dialogo .vazio{display:inline-block;min-width:110px;border-bottom:3px dashed #B39DDB;text-align:center;
+    font-weight:bold;color:#B39DDB;}
+  .dialogo .vazio.ok{border-bottom-style:solid;border-color:var(--verde);color:var(--verde);}
+  .silabas-linha{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0;}
+  .sil-op{border:none;background:var(--azul);color:#fff;font-family:inherit;font-size:1.25rem;font-weight:bold;
+    padding:12px 15px;border-radius:14px;cursor:pointer;box-shadow:0 4px 0 #0288D1;}
+  .sil-op:active{transform:translateY(3px);box-shadow:none;}
+  .sil-op.usada{visibility:hidden;}
+  .sil-op.errada{animation:treme .4s;}
+  .fig-alvo{text-align:center;font-size:4.6rem;margin:4px 0;}
+  .letras-pal{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:10px 0;}
+  .lp2{width:46px;height:56px;background:var(--card);border:4px solid #E8DEF8;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:bold;cursor:pointer;
+    box-shadow:0 4px 0 #E8DEF8;}
+  .lp2:active{transform:scale(.92);}
+  .lp2.achou{background:var(--rosa);border-color:#C2185B;color:#fff;box-shadow:0 4px 0 #C2185B;animation:pula .5s;}
+  .lp2.errada{animation:treme .4s;}
+  .lp2.silaba-ok{background:#FFF3E0;border-color:var(--laranja);box-shadow:0 4px 0 var(--laranja);}
+
+  /* ---- botão flutuante de apoio ---- */
+
+  .m19{background:#5E35B1;}
+  .caixa-pal{background:var(--card);border-radius:20px;padding:12px;margin:8px 0;
+    box-shadow:0 4px 12px rgba(126,87,194,.14);}
+  .destaque-h{color:var(--rosa);}
+
+  .copiar-box{background:#FFFDE7;border:5px solid var(--amarelo);border-radius:22px;padding:16px 12px;
+    margin:12px 0;text-align:center;box-shadow:0 5px 16px rgba(0,0,0,.12);}
+  .copiar-box .rot-cop{font-size:.95rem;font-weight:bold;color:#F57F17;letter-spacing:1px;}
+  .copiar-box .pal-cop{font-size:2.5rem;font-weight:bold;letter-spacing:5px;color:var(--texto);margin:8px 0 4px;
+    line-height:1.2;word-break:break-word;}
+  .copiar-box .sil-cop{font-size:1.15rem;font-weight:bold;color:#8E7CC3;letter-spacing:2px;}
+  .btn-avancar{display:none;margin:14px auto 0;border:none;background:var(--verde);color:#fff;
+    font-family:inherit;font-size:1.45rem;font-weight:bold;padding:16px 34px;border-radius:20px;
+    cursor:pointer;box-shadow:0 6px 0 #2E7D32;}
+  .btn-avancar.mostrar{display:block;}
+  .btn-avancar:active{transform:translateY(5px);box-shadow:none;}
+
+  .m20{background:#FB8C00;} .m21{background:#00897B;}
+  .fig-nome{text-align:center;background:var(--card);border-radius:20px;padding:14px;margin:8px 0;
+    box-shadow:0 4px 14px rgba(126,87,194,.15);}
+  .fig-nome .im{font-size:5rem;display:block;line-height:1.1;}
+  .fig-nome .cx-nome{margin:8px auto 0;min-height:48px;border:4px dashed #B39DDB;border-radius:14px;
+    background:#F7F2FF;max-width:300px;display:flex;align-items:center;justify-content:center;
+    font-size:1.5rem;font-weight:bold;color:#B39DDB;letter-spacing:2px;}
+  .fig-nome .cx-nome.ok{border-style:solid;border-color:var(--verde);background:var(--verde-claro);color:var(--texto);animation:pula .4s;}
+  .colunas-h{display:flex;gap:8px;justify-content:center;margin:10px 0;}
+  .col-h{flex:1;background:var(--card);border:4px solid #E8DEF8;border-radius:16px;padding:8px 4px;min-height:130px;}
+  .col-h.alvo{border-color:#F57F17;background:#FFF8E1;}
+  .col-h .tit-h{text-align:center;font-size:1.4rem;font-weight:bold;color:var(--rosa);margin-bottom:6px;}
+  .col-h .pal-h{background:#EDE7F6;border-radius:10px;padding:6px 4px;margin:4px 2px;font-size:.85rem;
+    font-weight:bold;text-align:center;animation:pula .4s;}
+  .par-linha{display:flex;gap:10px;align-items:center;justify-content:center;margin:9px 0;}
+  .par-fig{font-size:3.4rem;background:var(--card);border:4px solid #E8DEF8;border-radius:18px;
+    padding:6px 12px;box-shadow:0 4px 0 #E8DEF8;cursor:pointer;}
+  .par-fig:active{transform:scale(.93);}
+  .par-fig.sel{border-color:var(--rosa);background:#FCE4EC;}
+  .par-fig.ok{border-color:var(--verde);background:var(--verde-claro);}
+  .par-pal{background:var(--card);border:4px solid #E8DEF8;border-radius:14px;padding:11px 14px;
+    font-size:1.2rem;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #E8DEF8;}
+  .par-pal:active{transform:scale(.95);}
+  .par-pal.ok{border-color:var(--verde);background:var(--verde-claro);box-shadow:0 4px 0 var(--verde);}
+  .par-pal.errada{animation:treme .4s;}
+  .palavra-dedo{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:14px 0;}
+  .ld{width:44px;height:56px;background:var(--card);border:4px solid #E8DEF8;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:bold;cursor:pointer;
+    box-shadow:0 4px 0 #E8DEF8;}
+  .ld:active{transform:scale(.92);}
+  .ld.dedo{background:#FFE082;border-color:#F57F17;box-shadow:0 4px 0 #F57F17;animation:pula .5s;}
+  .ld.esq{background:#BBDEFB;border-color:#1976D2;}
+  .ld.dir{background:#C8E6C9;border-color:#388E3C;}
+  .ld.errada{animation:treme .4s;}
+  .fab-apoio{position:fixed;right:14px;bottom:14px;z-index:60;border:none;border-radius:50%;
+    width:64px;height:64px;background:var(--roxo);color:#fff;font-size:1.8rem;cursor:pointer;
+    box-shadow:0 5px 14px rgba(0,0,0,.3);font-family:inherit;}
+  .fab-apoio:active{transform:translateY(3px);}
+  .painel{display:none;position:fixed;inset:0;z-index:70;background:rgba(74,59,105,.55);
+    overflow-y:auto;padding:10px;}
+  .painel.aberto{display:block;}
+  .painel-caixa{background:#FDF6FF;border-radius:24px;max-width:600px;margin:0 auto;padding:14px 12px 26px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);}
+  .painel-topo{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-bottom:10px;}
+  .btn-voltar-ap{border:none;background:var(--verde);color:#fff;font-family:inherit;font-size:1.1rem;
+    font-weight:bold;padding:12px 18px;border-radius:16px;cursor:pointer;box-shadow:0 4px 0 #2E7D32;}
+  .btn-voltar-ap:active{transform:translateY(3px);box-shadow:none;}
+  .abas{display:flex;gap:8px;}
+  .aba{border:none;background:#EDE7F6;color:var(--roxo);font-family:inherit;font-size:1rem;font-weight:bold;
+    padding:11px 14px;border-radius:14px;cursor:pointer;box-shadow:0 4px 0 #D1C4E9;}
+  .aba.ativa{background:var(--roxo);color:#fff;box-shadow:0 4px 0 #4527A0;}
+  .aba:active{transform:translateY(3px);box-shadow:none;}
+  .grade-sil{display:grid;grid-template-columns:auto repeat(6,1fr);gap:3px;}
+  .cs{border-radius:8px;padding:7px 2px;text-align:center;font-weight:bold;font-size:.92rem;
+    background:var(--card);cursor:pointer;box-shadow:0 2px 0 #E8DEF8;}
+  .cs:active{transform:scale(.9);}
+  .cs.cab{background:#D1C4E9;color:#4527A0;cursor:default;box-shadow:none;font-size:1rem;}
+  .cs.letra{background:#FFE0B2;color:#E65100;cursor:pointer;font-size:1.05rem;}
+  .cs.falada{background:#C8E6C9;color:#1B5E20;}
+  .cs.vazio{background:transparent;box-shadow:none;cursor:default;color:#B39DDB;}
+  .grade-fon{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;}
+  .cf{background:var(--card);border-radius:14px;padding:9px 4px;text-align:center;cursor:pointer;
+    box-shadow:0 4px 0 #E8DEF8;}
+  .cf:active{transform:scale(.92);}
+  .cf .boca{font-size:1.7rem;display:block;line-height:1.1;}
+  .cf .letra-f{font-size:1.5rem;font-weight:bold;color:var(--roxo);display:block;}
+  .cf .ex{font-size:.62rem;color:#8E7CC3;display:block;}
+  .cf.falada{background:#C8E6C9;}
+
+  /* ---- material dourado ---- */
+  .mesa-ouro{background:#FFF8E1;border:4px solid #FFB300;border-radius:20px;padding:10px;
+    min-height:190px;display:flex;gap:14px;justify-content:center;align-items:flex-end;flex-wrap:wrap;}
+  .col-ouro{display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .col-ouro .rot{font-size:.78rem;font-weight:bold;color:#E65100;}
+  .pilha{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:170px;align-items:flex-end;}
+  .pc-placa{width:52px;height:52px;border:2px solid #E65100;border-radius:3px;cursor:pointer;
+    background:
+      repeating-linear-gradient(90deg,#FFB300 0 4px,#F57C00 4px 5px),
+      repeating-linear-gradient(180deg,transparent 0 4px,#F57C00 4px 5px);}
+  .pc-barra{width:13px;height:52px;border:2px solid #E65100;border-radius:3px;cursor:pointer;
+    background:repeating-linear-gradient(180deg,#FFB300 0 4px,#F57C00 4px 5px);}
+  .pc-cubo{width:13px;height:13px;border:2px solid #E65100;border-radius:3px;background:#FFB300;cursor:pointer;}
+  .pc-placa:active,.pc-barra:active,.pc-cubo:active{transform:scale(.88);}
+  .pc-nova{animation:pula .4s;}
+  .btns-ouro{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0;}
+  .b-ouro{border:none;background:#FFA000;color:#fff;font-family:inherit;font-size:1rem;font-weight:bold;
+    padding:12px 14px;border-radius:14px;cursor:pointer;box-shadow:0 4px 0 #E65100;}
+  .b-ouro:active{transform:translateY(3px);box-shadow:none;}
+  .b-ouro.limpar{background:#BDBDBD;box-shadow:0 4px 0 #757575;}
+  .b-ouro.trocar{background:var(--certo);box-shadow:0 4px 0 #2E7D32;animation:pulinho 1.1s infinite;}
+  .total-ouro{text-align:center;font-size:2.6rem;font-weight:bold;color:#E65100;margin:8px 0 2px;}
+  .conta-ouro{text-align:center;font-size:1.05rem;font-weight:bold;color:#8E7CC3;min-height:1.4rem;}
+
+  .lista-voz{display:flex;flex-direction:column;gap:8px;}
+  .item-voz{display:flex;align-items:center;gap:10px;background:var(--card);border:4px solid #E8DEF8;
+    border-radius:16px;padding:11px 12px;cursor:pointer;box-shadow:0 4px 0 #E8DEF8;}
+  .item-voz:active{transform:scale(.98);}
+  .item-voz.escolhida{border-color:var(--verde);background:#E8F5E9;box-shadow:0 4px 0 var(--verde);}
+  .item-voz .nome-voz{font-weight:bold;font-size:1.02rem;flex:1;text-align:left;line-height:1.25;}
+  .item-voz .selo{font-size:.68rem;background:#FFE0B2;color:#E65100;border-radius:8px;padding:2px 6px;font-weight:bold;}
+  .item-voz .play{font-size:1.5rem;}
+  .aviso-voz{background:#FFFDE7;border:3px solid var(--amarelo);border-radius:16px;padding:11px;
+    font-size:.85rem;line-height:1.45;color:#5D4037;margin-top:12px;}
+  .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
+  .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
+  .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
+  @keyframes cair{to{transform:translateY(110vh) rotate(540deg);}}
+  @media (prefers-reduced-motion: reduce){
+    .conf,.girando,.opcao.certa,.letra.achou,.quadr.cheio,.palavra-card.certa{animation:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- MENU -->
+<div class="tela ativa" id="tela-menu">
+  <a href="index.html" style="align-self:flex-start;text-decoration:none;background:#EDE7F6;color:#7E57C2;font-weight:bold;font-size:1.1rem;padding:10px 18px;border-radius:16px;box-shadow:0 3px 0 #D1C4E9;font-family:inherit;">🏠 INÍCIO</a>
+  <h1>📖 PORTUGUÊS</h1>
+  <p class="sub">CA = CADERNO DE ATIVIDADES — NA ORDEM DA APOSTILA</p>
+  <button class="menu-btn m1" onclick="abrirJogo1()"><span class="emo">🍓</span><span><span class="pag">CA PÁG. 4</span>MONTE SEU SUCO MISTO</span><span class="done" id="d1"></span></button>
+  <button class="menu-btn m2" onclick="abrirJogo2()"><span class="emo">📖</span><span><span class="pag">CA PÁG. 4</span>A RECEITA — PARTE 1</span><span class="done" id="d2"></span></button>
+  <button class="menu-btn m3" onclick="abrirJogo3()"><span class="emo">🎨</span><span><span class="pag">CA PÁG. 5</span>PINTE A QUANTIDADE</span><span class="done" id="d3"></span></button>
+  <button class="menu-btn m4" onclick="abrirJogo4()"><span class="emo">📖</span><span><span class="pag">CA PÁG. 5</span>A RECEITA — PARTE 2</span><span class="done" id="d4"></span></button>
+  <button class="menu-btn m5" onclick="abrirJogo5()"><span class="emo">🔎</span><span><span class="pag">CA PÁG. 5</span>ACHE A LETRA R</span><span class="done" id="d5"></span></button>
+  <button class="menu-btn m6" onclick="abrirJogo6()"><span class="emo">🧩</span><span><span class="pag">CA PÁG. 5</span>MONTE AS SÍLABAS</span><span class="done" id="d6"></span></button>
+  <button class="menu-btn m7" onclick="abrirJogo7()"><span class="emo">✨</span><span><span class="pag">CA PÁG. 6</span>TERMINA COM R</span><span class="done" id="d7"></span></button>
+  <button class="menu-btn m8" onclick="abrirJogo8()"><span class="emo">🥤</span><span><span class="pag">CA PÁG. 6</span>CRIE SUA RECEITA</span><span class="done" id="d8"></span></button>
+  <button class="menu-btn m9" onclick="abrirJogo9()"><span class="emo">🍹</span><span><span class="pag">CA PÁG. 7</span>CARDÁPIO DOS SUCOS</span><span class="done" id="d9"></span></button>
+  <button class="menu-btn m10" onclick="abrirJogo10()"><span class="emo">🍊</span><span><span class="pag">CA PÁG. 8</span>AS FRUTAS DA MARINA</span><span class="done" id="d10"></span></button>
+  <button class="menu-btn m11" onclick="abrirJogo11()"><span class="emo">🍽️</span><span><span class="pag">CA PÁG. 9</span>O ALMOÇO DA MARINA</span><span class="done" id="d11"></span></button>
+  <button class="menu-btn m12" onclick="abrirJogo12()"><span class="emo">🔤</span><span><span class="pag">CA PÁG. 9</span>BRINCANDO COM O R</span><span class="done" id="d12"></span></button>
+  <button class="menu-btn m13" onclick="abrirJogo13()"><span class="emo">🐭</span><span><span class="pag">CA PÁG. 10</span>O RATO E O GATO</span><span class="done" id="d13"></span></button>
+  <button class="menu-btn m14" onclick="abrirJogo14()"><span class="emo">🧱</span><span><span class="pag">CA PÁG. 11</span>MONTE AS FRASES</span><span class="done" id="d14"></span></button>
+  <button class="menu-btn m15" onclick="abrirJogo15()"><span class="emo">🎬</span><span><span class="pag">CA PÁG. 12-13</span>A DONA BARATINHA (HISTÓRIA)</span><span class="done" id="d15"></span></button>
+  <button class="menu-btn m16" onclick="abrirJogo16()"><span class="emo">❓</span><span><span class="pag">CA PÁG. 13-14</span>PERGUNTAS DA HISTÓRIA</span><span class="done" id="d16"></span></button>
+  <button class="menu-btn m17" onclick="abrirJogo17()"><span class="emo">💍</span><span><span class="pag">CA PÁG. 15</span>INVENTE UM PRETENDENTE</span><span class="done" id="d17"></span></button>
+  <button class="menu-btn m18" onclick="abrirJogo18()"><span class="emo">🔤</span><span><span class="pag">CA PÁG. 16</span>SÍLABAS E A LETRA H</span><span class="done" id="d18"></span></button>
+  <button class="menu-btn m19" onclick="abrirJogo19()"><span class="emo">🧩</span><span><span class="pag">CA PÁG. 17</span>PALAVRAS COM H</span><span class="done" id="d19"></span></button>
+  <button class="menu-btn m20" onclick="abrirJogo20()"><span class="emo">🖼️</span><span><span class="pag">CA PÁG. 18</span>CH, LH e NH</span><span class="done" id="d20"></span></button>
+  <button class="menu-btn m21" onclick="abrirJogo21()"><span class="emo">🔎</span><span><span class="pag">CA PÁG. 19</span>UMA LETRA MUDA TUDO</span><span class="done" id="d21"></span></button>
+</div>
+
+<!-- J1 suco misto -->
+<div class="tela" id="tela-j1">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta">ESCOLHA <b>2 FRUTAS</b> PARA O SEU SUCO MISTO!</div>
+  <div class="opcoes" id="frutas-j1"></div>
+  <div class="liqui" id="liqui">🫙</div>
+  <div class="copo-suco"><div class="suco-liquido" id="suco"></div></div>
+  <div class="feedback" id="fb-j1"></div>
+  <button class="prox" id="prox-j1" onclick="baterSuco()">BATER! 🌀</button>
+</div>
+
+<!-- J2 / J4 quiz -->
+<div class="tela" id="tela-quiz">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-quiz"></div>
+  <div class="pergunta" id="perg-quiz"></div>
+  <div class="opcoes" id="ops-quiz"></div>
+  <div class="feedback" id="fb-quiz"></div>
+  <button class="prox" id="prox-quiz" onclick="proxQuiz()">PRÓXIMA ➜</button>
+</div>
+
+<!-- J3 pintar -->
+<div class="tela" id="tela-j3">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta">TOQUE PARA PINTAR A QUANTIDADE DA RECEITA</div>
+  <div id="linhas-j3"></div>
+  <div class="feedback" id="fb-j3"></div>
+</div>
+
+<!-- J5 letra R -->
+<div class="tela" id="tela-j5">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j5"></div>
+  <div class="pergunta">TOQUE NA LETRA <b style="color:var(--rosa)">R</b> NO FINAL DA PALAVRA</div>
+  <div class="palavra-r" id="palavra-j5"></div>
+  <div class="feedback" id="fb-j5"></div>
+</div>
+
+<!-- J6 sílabas -->
+<div class="tela" id="tela-j6">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j6"></div>
+  <div class="pergunta" id="perg-j6"></div>
+  <div class="silaba-alvo" id="alvo-j6"></div>
+  <div class="silaba-ops" id="sils-j6"></div>
+  <div class="feedback" id="fb-j6"></div>
+</div>
+
+<!-- J7 termina com R (pág 6 C) -->
+<div class="tela" id="tela-j7">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j7"></div>
+  <div class="pergunta">TOQUE NAS PALAVRAS QUE <b>TERMINAM COM R</b></div>
+  <div class="palavras-grade" id="grade-j7"></div>
+  <div class="feedback" id="fb-j7"></div>
+</div>
+
+<!-- J8 crie sua receita (pág 6 nº4) -->
+<div class="tela" id="tela-j8">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta" id="perg-j8"></div>
+  <div class="opcoes" id="ops-j8"></div>
+  <div class="silaba-ops" id="modo-j8" style="margin-top:14px;"></div>
+  <div class="receita-card" id="card-j8"></div>
+  <div class="feedback" id="fb-j8"></div>
+  <button class="prox" id="prox-j8" onclick="etapaJ8()">CONTINUAR ➜</button>
+</div>
+
+<!-- J9 cardápio (pág 7 nº5) -->
+<div class="tela" id="tela-j9">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j9"></div>
+  <div class="pergunta" id="perg-j9"></div>
+  <div id="area-j9"></div>
+  <div class="feedback" id="fb-j9"></div>
+</div>
+
+<!-- J10 frutas da Marina (pág 8 nº6) -->
+<div class="tela" id="tela-j10">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j10"></div>
+  <div class="pergunta" id="perg-j10"></div>
+  <div id="area-j10"></div>
+  <div class="feedback" id="fb-j10"></div>
+</div>
+
+
+<!-- J11 almoço (pág 9, nº7) -->
+<div class="tela" id="tela-j11">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j11"></div>
+  <div class="pergunta" id="perg-j11"></div>
+  <div class="frase-box" id="frase-j11"></div>
+  <div class="silaba-ops" id="ops-j11"></div>
+  <div class="feedback" id="fb-j11"></div>
+</div>
+
+<!-- J12 brincando com o R (pág 9, nº8) -->
+<div class="tela" id="tela-j12">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j12"></div>
+  <div class="pergunta" id="perg-j12"></div>
+  <div id="area-j12"></div>
+  <div class="feedback" id="fb-j12"></div>
+</div>
+
+
+<!-- J13 (pág 10) -->
+<div class="tela" id="tela-j13">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j13"></div>
+  <div class="pergunta" id="perg-j13"></div>
+  <div id="area-j13"></div>
+  <div class="feedback" id="fb-j13"></div>
+</div>
+
+<!-- J14 (pág 11) -->
+<div class="tela" id="tela-j14">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j14"></div>
+  <div class="pergunta" id="perg-j14"></div>
+  <div class="monta-frase" id="montada-j14"></div>
+  <div class="silaba-ops" id="ops-j14"></div>
+  <div class="feedback" id="fb-j14"></div>
+</div>
+
+
+<!-- J15 animação -->
+<div class="tela" id="tela-j15">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="cena-num" id="cnum-j15"></div>
+  <div class="palco" id="palco-j15"></div>
+  <div class="ctrl-cena">
+    <button class="btn-cena repetir" onclick="repetirCena15()">▶️ DE NOVO</button>
+    <button class="btn-cena" onclick="proxCena15()">PRÓXIMA ➜</button>
+  </div>
+  <div class="feedback" id="fb-j15"></div>
+</div>
+
+<!-- J16 perguntas -->
+<div class="tela" id="tela-j16">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j16"></div>
+  <div class="pergunta" id="perg-j16"></div>
+  <div id="area-j16"></div>
+  <div class="feedback" id="fb-j16"></div>
+</div>
+
+
+<!-- J17 pág 15 -->
+<div class="tela" id="tela-j17">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j17"></div>
+  <div class="pergunta" id="perg-j17"></div>
+  <div class="palco" id="palco-j17" style="height:180px"></div>
+  <div id="area-j17"></div>
+  <div class="dialogo" id="dial-j17"></div>
+  <div class="feedback" id="fb-j17"></div>
+  <button class="prox" id="prox-j17" onclick="proxJ17()">CONTINUAR ➜</button>
+</div>
+
+<!-- J18 pág 16 -->
+<div class="tela" id="tela-j18">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j18"></div>
+  <div class="pergunta" id="perg-j18"></div>
+  <div id="area-j18"></div>
+  <div class="feedback" id="fb-j18"></div>
+</div>
+
+
+<!-- J19 pág 17 -->
+<div class="tela" id="tela-j19">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j19"></div>
+  <div class="pergunta" id="perg-j19"></div>
+  <div class="silaba-alvo" id="alvo-j19"></div>
+  <div class="silabas-linha" id="ops-j19"></div>
+  <div id="copiar-j19"></div>
+  <div class="feedback" id="fb-j19"></div>
+  <button class="btn-avancar" id="prox-j19" onclick="proxJ19()">PRÓXIMA PALAVRA ➜</button>
+</div>
+
+
+<!-- J20 pág 18 -->
+<div class="tela" id="tela-j20">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j20"></div>
+  <div class="pergunta" id="perg-j20"></div>
+  <div id="area-j20"></div>
+  <div class="feedback" id="fb-j20"></div>
+  <button class="btn-avancar" id="prox-j20" onclick="proxJ20()">CONTINUAR ➜</button>
+</div>
+
+<!-- J21 pág 19 -->
+<div class="tela" id="tela-j21">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j21"></div>
+  <div class="pergunta" id="perg-j21"></div>
+  <div id="area-j21"></div>
+  <div class="feedback" id="fb-j21"></div>
+  <button class="btn-avancar" id="prox-j21" onclick="proxJ21()">CONTINUAR ➜</button>
+</div>
+
+<!-- FIM -->
+<div class="tela" id="tela-fim">
+  <div class="fim-card">
+    <div class="grande">🌟🎉🌟</div>
+    <h2>VOCÊ CONSEGUIU!</h2>
+    <button class="prox mostrar" onclick="irMenu()">VOLTAR ➜</button>
+  </div>
+</div>
+
+<!-- ===== painel de apoio: silabário + alfabeto fônico ===== -->
+<button class="fab-apoio" onclick="abrirApoio()" title="Silabário e alfabeto">🔤</button>
+<div class="painel" id="painel-apoio">
+  <div class="painel-caixa">
+    <div class="painel-topo">
+      <button class="btn-voltar-ap" onclick="fecharApoio()">⬅️ VOLTAR</button>
+      <div class="abas">
+        <button class="aba ativa" id="aba-sil" onclick="trocarAba('sil')">SILABÁRIO</button>
+        <button class="aba" id="aba-fon" onclick="trocarAba('fon')">ALFABETO</button>
+        <button class="aba" id="aba-dou" onclick="trocarAba('dou')">DOURADO</button>
+        <button class="aba" id="aba-voz" onclick="trocarAba('voz')">VOZ</button>
+      </div>
+    </div>
+    <div class="dica-ap" id="dica-ap">TOQUE EM UMA SÍLABA PARA OUVIR</div>
+    <div id="corpo-apoio"></div>
+  </div>
+</div>
+
+<div class="festa" id="festa"></div>
+
+<script>
+let textoFala='';
+function mostrar(id){document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));
+  document.getElementById(id).classList.add('ativa');window.scrollTo(0,0);}
+function irMenu(){pararFala();mostrar('tela-menu');}
+function falar(t){try{pararFala();const u=new SpeechSynthesisUtterance(t);u.lang='pt-BR';u.rate=.9;u.pitch=1.0;
+  if(!VOZ_ESCOLHIDA)carregarVozes();
+  if(VOZ_ESCOLHIDA)u.voice=VOZ_ESCOLHIDA;   /* u.lang continua pt-BR */
+  speechSynthesis.speak(u);}catch(e){}}
+function pararFala(){try{speechSynthesis.cancel();}catch(e){}}
+function falarPergunta(){falar(textoFala);}
+function tocarSom(c){try{const ctx=window._actx||(window._actx=new (window.AudioContext||window.webkitAudioContext)());
+  const ns=c?[523,659,784,1046]:[220];
+  ns.forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.value=f;
+    o.connect(g);g.connect(ctx.destination);const t=ctx.currentTime+i*.13;
+    g.gain.setValueAtTime(.001,t);g.gain.exponentialRampToValueAtTime(.25,t+.02);
+    g.gain.exponentialRampToValueAtTime(.001,t+.24);o.start(t);o.stop(t+.26);});}catch(e){}}
+function confete(){const f=document.getElementById('festa');f.innerHTML='';
+  const es=['🌟','⭐','🎉','🍓','🍋','🍊','✨'];
+  for(let i=0;i<26;i++){const s=document.createElement('span');s.className='conf';
+    s.textContent=es[Math.floor(Math.random()*es.length)];
+    s.style.left=Math.random()*100+'vw';s.style.animationDuration=(1.6+Math.random()*1.6)+'s';
+    s.style.animationDelay=(Math.random()*.4)+'s';f.appendChild(s);}
+  setTimeout(()=>f.innerHTML='',3400);}
+function estrelas(el,f,t){let s='';for(let i=0;i<t;i++)s+=i<f?'⭐':'▫️';el.textContent=s;}
+const ELOGIOS=['MUITO BEM!','VOCÊ ACERTOU!','PARABÉNS!','QUE LEGAL!','ISSO MESMO!'];
+function elogio(){return ELOGIOS[Math.floor(Math.random()*ELOGIOS.length)];}
+function marcarFeito(n){document.getElementById('d'+n).textContent='⭐';}
+function fimDeJogo(n){marcarFeito(n);confete();tocarSom(true);falar('Você conseguiu! Parabéns!');mostrar('tela-fim');}
+function embaralhar(a){return a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]);}
+
+/* ===== J1 — suco misto (pág 4, F) ===== */
+const FRUTAS=[
+ {e:'🍓',n:'MORANGO',cor:'#F06292'},{e:'🍋',n:'LIMÃO',cor:'#DCE775'},
+ {e:'🍊',n:'LARANJA',cor:'#FFB74D'},{e:'🍇',n:'UVA',cor:'#BA68C8'},
+ {e:'🥭',n:'MANGA',cor:'#FFCA28'},{e:'🥝',n:'KIWI',cor:'#AED581'}
+];
+let escolhidas=[];
+function abrirJogo1(){escolhidas=[];mostrar('tela-j1');
+  document.getElementById('suco').style.height='0';
+  document.getElementById('fb-j1').textContent='';document.getElementById('fb-j1').className='feedback';
+  document.getElementById('prox-j1').classList.remove('mostrar');
+  document.getElementById('liqui').classList.remove('girando');document.getElementById('liqui').textContent='🫙';
+  const box=document.getElementById('frutas-j1');box.innerHTML='';
+  FRUTAS.forEach(f=>{const d=document.createElement('div');d.className='opcao';d.style.minWidth='95px';d.style.maxWidth='110px';
+    d.innerHTML='<span class="emo" style="font-size:3rem">'+f.e+'</span><span class="nome">'+f.n+'</span>';
+    d.onclick=()=>escolherFruta(d,f);box.appendChild(d);});
+  textoFala='Escolha duas frutas para o seu suco misto!';falar(textoFala);}
+function escolherFruta(el,f){
+  if(el.classList.contains('sel')){el.classList.remove('sel');escolhidas=escolhidas.filter(x=>x.n!==f.n);}
+  else{if(escolhidas.length>=2)return;el.classList.add('sel');escolhidas.push(f);falar(f.n);tocarSom(true);}
+  document.getElementById('prox-j1').classList.toggle('mostrar',escolhidas.length===2);}
+function baterSuco(){const liq=document.getElementById('liqui');liq.classList.add('girando');
+  falar('Batendo o suco de '+escolhidas[0].n+' com '+escolhidas[1].n+'!');
+  setTimeout(()=>{liq.classList.remove('girando');liq.textContent='🥤';
+    const s=document.getElementById('suco');
+    s.style.background='linear-gradient(180deg,'+escolhidas[0].cor+','+escolhidas[1].cor+')';
+    s.style.height='92%';
+    const fb=document.getElementById('fb-j1');fb.textContent='⭐ QUE DELÍCIA!';fb.className='feedback certo';
+    tocarSom(true);setTimeout(()=>fimDeJogo(1),1600);},1800);}
+
+/* ===== J2 e J4 — quiz da receita em duas partes (ordem da apostila) ===== */
+const QUIZ1=[
+ {perg:'A RECEITA NOS ENSINA A...',fala:'A receita nos ensina a quê?',
+  ops:[{e:'🥤',n:'FAZER O SUCO',ok:true},{e:'🛒',n:'COMPRAR COISAS',ok:false}]},
+ {perg:'QUAL FRUTA FAZ O SUCO?',fala:'Qual é a fruta utilizada para fazer o suco?',
+  ops:[{e:'🍋',n:'LIMÃO',ok:true},{e:'🍌',n:'BANANA',ok:false},{e:'🍎',n:'MAÇÃ',ok:false}]}
+];
+const QUIZ2=[
+ {perg:'OS INGREDIENTES PRECISAM SER...',fala:'Os ingredientes precisam ser batidos, misturados ou espremidos?',
+  ops:[{e:'🌀',n:'BATIDOS',ok:true},{e:'🥄',n:'MISTURADOS',ok:false},{e:'✊',n:'ESPREMIDOS',ok:false}]},
+ {perg:'POR QUE O SUCO É "ENRIQUECIDO"?',fala:'Por que a receita se chama suco enriquecido?',
+  ops:[{e:'🥬',n:'TEM COUVE',ok:true},{e:'💧',n:'TEM ÁGUA',ok:false}]}
+];
+let quizAtual=null,iq=0,quizNum=2;
+function abrirJogo2(){quizAtual=QUIZ1;quizNum=2;iq=0;mostrar('tela-quiz');montarQuiz();}
+function abrirJogo4(){quizAtual=QUIZ2;quizNum=4;iq=0;mostrar('tela-quiz');montarQuiz();}
+function montarQuiz(){const q=quizAtual[iq];
+  estrelas(document.getElementById('prog-quiz'),iq,quizAtual.length);
+  document.getElementById('perg-quiz').textContent=q.perg;
+  document.getElementById('fb-quiz').textContent='';document.getElementById('fb-quiz').className='feedback';
+  document.getElementById('prox-quiz').classList.remove('mostrar');
+  const box=document.getElementById('ops-quiz');box.innerHTML='';
+  q.ops.forEach(o=>{const d=document.createElement('div');d.className='opcao';
+    d.innerHTML='<span class="emo">'+o.e+'</span><span class="nome">'+o.n+'</span>';
+    d.onclick=()=>respQuiz(d,o.ok);box.appendChild(d);});
+  textoFala=q.fala;falar(q.fala);}
+function respQuiz(el,ok){const fb=document.getElementById('fb-quiz');
+  if(ok){el.classList.add('certa');fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+    tocarSom(true);falar(elogio());
+    document.querySelectorAll('#ops-quiz .opcao').forEach(o=>o.onclick=null);
+    document.getElementById('prox-quiz').classList.add('mostrar');
+  }else{el.classList.add('errada');fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+    tocarSom(false);falar('Tente de novo');setTimeout(()=>el.classList.remove('errada'),450);}}
+function proxQuiz(){iq++;if(iq>=quizAtual.length){fimDeJogo(quizNum);}else montarQuiz();}
+
+/* ===== J3 — pintar quantidade (pág 5, D) ===== */
+const J3=[
+ {emo:'🍋',nome:'LIMÃO',qtd:2,fala:'Pinte dois limões'},
+ {emo:'🥬',nome:'COUVE',qtd:2,fala:'Pinte duas folhas de couve'},
+ {emo:'🫗',nome:'ÁGUA',qtd:1,fala:'Pinte uma jarra de água'}
+];
+function abrirJogo3(){mostrar('tela-j3');
+  const box=document.getElementById('linhas-j3');box.innerHTML='';
+  document.getElementById('fb-j3').textContent='';document.getElementById('fb-j3').className='feedback';
+  J3.forEach((l,li)=>{const d=document.createElement('div');d.className='pinta-linha';d.id='linha'+li;
+    let it='';for(let k=0;k<5;k++)it+='<span class="pinta-item" onclick="pintar(this,'+li+')">'+l.emo+'</span>';
+    d.innerHTML='<div class="pinta-rotulo">'+l.nome+' — PINTE '+l.qtd+'</div><div class="pinta-itens">'+it+'</div>';
+    box.appendChild(d);});
+  textoFala='Toque para pintar a quantidade da receita. Dois limões, duas couves e uma jarra de água.';falar(textoFala);}
+function pintar(el,li){const linha=document.getElementById('linha'+li);
+  if(linha.classList.contains('completa'))return;
+  el.classList.toggle('pintado');
+  const p=linha.querySelectorAll('.pintado').length;
+  if(p===J3[li].qtd){linha.classList.add('completa');tocarSom(true);falar(elogio());
+    linha.querySelectorAll('.pinta-item:not(.pintado)').forEach(x=>x.style.opacity='.15');
+    if(document.querySelectorAll('.pinta-linha.completa').length===J3.length){
+      const fb=document.getElementById('fb-j3');fb.textContent='⭐ RECEITA COMPLETA!';fb.className='feedback certo';
+      setTimeout(()=>fimDeJogo(3),1200);}}
+  else if(p>J3[li].qtd){el.classList.remove('pintado');tocarSom(false);falar('Só '+J3[li].qtd+'!');}
+  else{tocarSom(true);falar(String(p));}}
+
+/* ===== J5 — letra R final (pág 5, 3A) ===== */
+const J5W=['AÇÚCAR','BATER','COAR','SERVIR'];
+let i5=0;
+function abrirJogo5(){i5=0;mostrar('tela-j5');montarJ5();}
+function montarJ5(){const w=J5W[i5];
+  estrelas(document.getElementById('prog-j5'),i5,J5W.length);
+  const box=document.getElementById('palavra-j5');box.innerHTML='';
+  document.getElementById('fb-j5').textContent='';document.getElementById('fb-j5').className='feedback';
+  [...w].forEach((ch,idx)=>{const d=document.createElement('div');d.className='letra';d.textContent=ch;
+    d.onclick=()=>respJ5(d,idx===w.length-1);box.appendChild(d);});
+  textoFala=w+'. Toque na letra érre no final da palavra.';falar(textoFala);}
+function respJ5(el,ok){const fb=document.getElementById('fb-j5');
+  if(ok){el.classList.add('achou');fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+    tocarSom(true);falar('Érre! '+elogio());
+    document.querySelectorAll('#palavra-j5 .letra').forEach(l=>l.onclick=null);
+    setTimeout(()=>{i5++;if(i5>=J5W.length){fimDeJogo(5);}else montarJ5();},1500);
+  }else{el.classList.add('errada');fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+    tocarSom(false);falar('Tente de novo');setTimeout(()=>el.classList.remove('errada'),450);}}
+
+/* ===== J6 — sílabas (pág 5, 3B) ===== */
+const J6=[
+ {palavra:'AÇÚCAR',sil:['A','ÇÚ','CAR']},{palavra:'BATER',sil:['BA','TER']},
+ {palavra:'COAR',sil:['CO','AR']},{palavra:'SERVIR',sil:['SER','VIR']}
+];
+let i6=0,pos6=0;
+function abrirJogo6(){i6=0;mostrar('tela-j6');montarJ6();}
+function montarJ6(){const q=J6[i6];pos6=0;
+  estrelas(document.getElementById('prog-j6'),i6,J6.length);
+  document.getElementById('perg-j6').textContent='MONTE A PALAVRA: '+q.palavra;
+  document.getElementById('fb-j6').textContent='';document.getElementById('fb-j6').className='feedback';
+  const alvo=document.getElementById('alvo-j6');alvo.innerHTML='';
+  q.sil.forEach(()=>{const d=document.createElement('div');d.className='quadr';d.textContent='?';alvo.appendChild(d);});
+  const ops=document.getElementById('sils-j6');ops.innerHTML='';
+  embaralhar([...q.sil]).forEach(s=>{const b=document.createElement('button');b.className='sil';b.textContent=s;
+    b.onclick=()=>respJ6(b,s);ops.appendChild(b);});
+  textoFala=q.palavra+'. Monte a palavra tocando nas sílabas na ordem.';falar(textoFala);}
+function respJ6(btn,s){const q=J6[i6],fb=document.getElementById('fb-j6');
+  if(s===q.sil[pos6]){btn.classList.add('usada');
+    const qd=document.querySelectorAll('#alvo-j6 .quadr')[pos6];qd.textContent=s;qd.classList.add('cheio');
+    tocarSom(true);falar(s);pos6++;
+    if(pos6>=q.sil.length){fb.textContent='⭐ '+q.palavra+'!';fb.className='feedback certo';
+      setTimeout(()=>falar(q.palavra+'! '+elogio()),500);
+      setTimeout(()=>{i6++;if(i6>=J6.length){fimDeJogo(6);}else montarJ6();},2000);}
+  }else{btn.classList.add('errada');fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+    tocarSom(false);falar('Tente de novo');setTimeout(()=>btn.classList.remove('errada'),450);}}
+
+/* ===== J7 — termina com R (pág 6, C) ===== */
+const J7=[{w:'FLOR',ok:true},{w:'MAR',ok:true},{w:'DOCE',ok:false},{w:'AMOR',ok:true},{w:'BOLA',ok:false},{w:'CÉU',ok:false}];
+let achadas7=0;
+function abrirJogo7(){achadas7=0;mostrar('tela-j7');
+  const g=document.getElementById('grade-j7');g.innerHTML='';
+  document.getElementById('fb-j7').textContent='';document.getElementById('fb-j7').className='feedback';
+  estrelas(document.getElementById('prog-j7'),0,3);
+  embaralhar([...J7]).forEach(o=>{const d=document.createElement('div');d.className='palavra-card';d.textContent=o.w;
+    d.onclick=()=>respJ7(d,o);g.appendChild(d);});
+  textoFala='Toque nas palavras que terminam com a letra érre. São três!';falar(textoFala);}
+function respJ7(el,o){const fb=document.getElementById('fb-j7');
+  if(el.classList.contains('certa'))return;
+  if(o.ok){achadas7++;
+    el.innerHTML=o.w.slice(0,-1)+'<b>R</b>';el.classList.add('certa');
+    tocarSom(true);falar(o.w+'! Termina com érre!');
+    estrelas(document.getElementById('prog-j7'),achadas7,3);
+    if(achadas7===3){fb.textContent='⭐ ACHOU TODAS!';fb.className='feedback certo';
+      setTimeout(()=>fimDeJogo(7),1200);}
+  }else{el.classList.add('errada');fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+    tocarSom(false);falar(o.w+' não termina com érre. Tente de novo');setTimeout(()=>el.classList.remove('errada'),450);}}
+
+/* ===== J8 — crie sua receita (pág 6, nº4) ===== */
+const EXTRAS=[{e:'💧',n:'ÁGUA'},{e:'🍬',n:'AÇÚCAR'},{e:'🧊',n:'GELO'}];
+const MODO=['BATER','COAR','SERVIR'];
+let etapa8=0,frutas8=[],extras8=[],pos8=0;
+function abrirJogo8(){etapa8=0;frutas8=[];extras8=[];pos8=0;mostrar('tela-j8');montarEtapa8();}
+function montarEtapa8(){
+  const perg=document.getElementById('perg-j8'),ops=document.getElementById('ops-j8'),
+        modo=document.getElementById('modo-j8'),card=document.getElementById('card-j8'),
+        fb=document.getElementById('fb-j8'),prox=document.getElementById('prox-j8');
+  ops.innerHTML='';modo.innerHTML='';fb.textContent='';fb.className='feedback';
+  card.classList.remove('mostrar');prox.classList.remove('mostrar');
+  if(etapa8===0){perg.innerHTML='SUA RECEITA! ESCOLHA ATÉ <b>2 FRUTAS</b>';
+    FRUTAS.forEach(f=>{const d=document.createElement('div');d.className='opcao';d.style.minWidth='95px';d.style.maxWidth='110px';
+      d.innerHTML='<span class="emo" style="font-size:3rem">'+f.e+'</span><span class="nome">'+f.n+'</span>';
+      d.onclick=()=>{if(d.classList.contains('sel')){d.classList.remove('sel');frutas8=frutas8.filter(x=>x.n!==f.n);}
+        else{if(frutas8.length>=2)return;d.classList.add('sel');frutas8.push(f);falar(f.n);tocarSom(true);}
+        prox.classList.toggle('mostrar',frutas8.length>=1);};
+      ops.appendChild(d);});
+    textoFala='Agora é a sua receita! Escolha até duas frutas.';falar(textoFala);}
+  else if(etapa8===1){perg.innerHTML='O QUE MAIS VAI NO SEU SUCO?';
+    EXTRAS.forEach(f=>{const d=document.createElement('div');d.className='opcao';d.style.minWidth='95px';d.style.maxWidth='120px';
+      d.innerHTML='<span class="emo" style="font-size:3rem">'+f.e+'</span><span class="nome">'+f.n+'</span>';
+      d.onclick=()=>{d.classList.toggle('sel');
+        if(d.classList.contains('sel')){extras8.push(f);falar(f.n);tocarSom(true);}
+        else extras8=extras8.filter(x=>x.n!==f.n);};
+      ops.appendChild(d);});
+    prox.classList.add('mostrar');
+    textoFala='O que mais vai no seu suco? Água, açúcar ou gelo?';falar(textoFala);}
+  else if(etapa8===2){perg.innerHTML='MODO DE FAZER: TOQUE NA ORDEM!<br><small style="font-size:1rem">1º BATER, 2º COAR, 3º SERVIR</small>';
+    embaralhar([...MODO]).forEach(m=>{const b=document.createElement('button');b.className='sil';b.textContent=m;
+      b.onclick=()=>{if(m===MODO[pos8]){b.classList.add('usada');tocarSom(true);falar(m);pos8++;
+          if(pos8>=3){montarCard8();}}
+        else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      modo.appendChild(b);});
+    textoFala='Modo de fazer! Toque na ordem: primeiro bater, depois coar, depois servir.';falar(textoFala);}}
+function montarCard8(){const card=document.getElementById('card-j8');
+  const nome='SUCO DE '+frutas8.map(f=>f.n).join(' COM ');
+  card.innerHTML='<h3>📜 '+nome+'</h3>'+
+    '<b>INGREDIENTES:</b><br>'+frutas8.map(f=>f.e+' '+f.n).join('<br>')+
+    (extras8.length?'<br>'+extras8.map(f=>f.e+' '+f.n).join('<br>'):'')+
+    '<br><b>MODO DE FAZER:</b><br>🌀 BATER, 🫗 COAR E 🥤 SERVIR!';
+  card.classList.add('mostrar');
+  falar('Sua receita: '+nome+'! Ingredientes: '+frutas8.map(f=>f.n).join(', ')+
+    (extras8.length?', '+extras8.map(f=>f.n).join(', '):'')+'. Modo de fazer: bater, coar e servir!');
+  confete();tocarSom(true);
+  const fb=document.getElementById('fb-j8');fb.textContent='⭐ QUE CAPRICHO!';fb.className='feedback certo';
+  setTimeout(()=>fimDeJogo(8),3500);}
+function etapaJ8(){etapa8++;montarEtapa8();}
+
+/* ===== J9 — cardápio dos sucos (pág 7, nº5 A-D) ===== */
+let fase9=0,pos9=0,achadas9=0;
+const J9C=[{w:'ACEROLA',ok:true},{w:'MARACUJÁ',ok:true},{w:'MORANGO',ok:true},{w:'JARRA',ok:true},
+           {w:'CAJU',ok:false},{w:'MELÃO',ok:false},{w:'UVA',ok:false},{w:'ABACAXI',ok:false}];
+function abrirJogo9(){fase9=0;mostrar('tela-j9');montarJ9();}
+function montarJ9(){const perg=document.getElementById('perg-j9'),area=document.getElementById('area-j9'),
+        fb=document.getElementById('fb-j9');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';
+  estrelas(document.getElementById('prog-j9'),fase9,4);
+  if(fase9===0){ /* A: começa e termina com a mesma vogal */
+    perg.innerHTML='QUAL FRUTA COMEÇA E TERMINA COM A MESMA VOGAL?';
+    const div=document.createElement('div');div.className='palavras-grade';
+    [{w:'ACEROLA',ok:true},{w:'CAJU',ok:false},{w:'MELÃO',ok:false}].forEach(o=>{
+      const d=document.createElement('div');d.className='palavra-card';
+      d.innerHTML='<b style="color:var(--azul)">'+o.w[0]+'</b>'+o.w.slice(1,-1)+'<b style="color:var(--azul)">'+o.w.slice(-1)+'</b>';
+      d.onclick=()=>{if(o.ok){d.classList.add('certa');tocarSom(true);falar('Acerola! Começa com A e termina com A!');
+          fb.textContent='⭐ '+elogio();fb.className='feedback certo';setTimeout(()=>{fase9=1;montarJ9();},1800);}
+        else{d.classList.add('errada');tocarSom(false);falar('Tente de novo');fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      div.appendChild(d);});
+    area.appendChild(div);
+    textoFala='Qual fruta começa e termina com a mesma vogal? Acerola, cajú ou melão?';falar(textoFala);}
+  else if(fase9===1){ /* B: letra entre E e O em ACEROLA */
+    perg.innerHTML='EM <b>ACEROLA</b>, QUAL LETRA ESTÁ ENTRE O <b style="color:var(--azul)">E</b> E O <b style="color:var(--azul)">O</b>?';
+    const div=document.createElement('div');div.className='palavra-r';
+    const w='ACEROLA';
+    [...w].forEach((ch,idx)=>{const d=document.createElement('div');d.className='letra'+('AEO'.includes(ch)?' vogal':'');
+      d.textContent=ch;
+      d.onclick=()=>{if(idx===3){d.classList.add('achou');tocarSom(true);falar('Érre! O érre está entre o E e o O!');
+          fb.textContent='⭐ É O R!';fb.className='feedback certo';
+          div.querySelectorAll('.letra').forEach(l=>l.onclick=null);
+          setTimeout(()=>{fase9=2;achadas9=0;montarJ9();},1800);}
+        else{d.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      div.appendChild(d);});
+    area.appendChild(div);
+    textoFala='Na palavra acerola, qual letra está entre as vogais E e O?';falar(textoFala);}
+  else if(fase9===2){ /* C: pinte palavras com R entre vogais */
+    perg.innerHTML='PINTE AS PALAVRAS COM <b style="color:var(--rosa)">R</b> ENTRE DUAS VOGAIS<br><small style="font-size:1rem">SÃO 4!</small>';
+    const div=document.createElement('div');div.className='palavras-grade';
+    embaralhar([...J9C]).forEach(o=>{const d=document.createElement('div');d.className='palavra-card';d.textContent=o.w;
+      d.onclick=()=>{if(d.classList.contains('certa'))return;
+        if(o.ok){achadas9++;
+          d.innerHTML=o.w.replace(/R+/,m=>'<b>'+m+'</b>');d.classList.add('certa');
+          tocarSom(true);falar(o.w+'!');
+          if(achadas9===4){fb.textContent='⭐ ACHOU TODAS!';fb.className='feedback certo';
+            setTimeout(()=>{fase9=3;pos9=0;montarJ9();},1500);}}
+        else{d.classList.add('errada');tocarSom(false);falar('Tente de novo');fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      div.appendChild(d);});
+    area.appendChild(div);
+    textoFala='Pinte as palavras que têm a letra érre entre duas vogais. São quatro!';falar(textoFala);}
+  else if(fase9===3){ /* D: JARRA — sílabas */
+    perg.innerHTML='<b>JARRA</b> TEM O R DOBRADO! MONTE AS SÍLABAS';
+    const alvo=document.createElement('div');alvo.className='silaba-alvo';
+    const sil=['JA','RRA'];
+    sil.forEach(()=>{const d=document.createElement('div');d.className='quadr';d.textContent='?';alvo.appendChild(d);});
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    embaralhar([...sil]).forEach(s=>{const b=document.createElement('button');b.className='sil';b.textContent=s;
+      b.onclick=()=>{if(s===sil[pos9]){b.classList.add('usada');
+          const qd=alvo.querySelectorAll('.quadr')[pos9];qd.textContent=s;qd.classList.add('cheio');
+          tocarSom(true);falar(s);pos9++;
+          if(pos9>=2){fb.textContent='⭐ JARRA!';fb.className='feedback certo';
+            setTimeout(()=>falar('Jarra! Com dois érres!'),500);
+            setTimeout(()=>fimDeJogo(9),2000);}}
+        else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(alvo);area.appendChild(ops);
+    textoFala='Jarra tem o érre dobrado! Monte a palavra: JA, RRA.';falar(textoFala);}}
+
+/* ===== J10 — frutas da Marina (pág 8, nº6 A-C) ===== */
+let fase10=0,achadas10=0;
+const RODADAS10=[
+ {titulo:'TOQUE NAS 2 QUE <b>COMEÇAM COM R</b>',fala:'Toque nas duas palavras que começam com a letra érre.',
+  ops:[{w:'ROSA',ok:true},{w:'RATO',ok:true},{w:'BOLA',ok:false},{w:'PATO',ok:false}],marca:'ini'},
+ {titulo:'TOQUE NAS 2 QUE <b>TERMINAM COM R</b>',fala:'Toque nas duas palavras que terminam com a letra érre.',
+  ops:[{w:'FLOR',ok:true},{w:'MAR',ok:true},{w:'CASA',ok:false},{w:'BOLO',ok:false}],marca:'fim'},
+ {titulo:'TOQUE NAS 2 COM <b>R ENTRE VOGAIS</b>',fala:'Toque nas duas palavras com érre entre vogais.',
+  ops:[{w:'ARARA',ok:true},{w:'PERA',ok:true},{w:'PRATO',ok:false},{w:'BRAÇO',ok:false}],marca:'meio'},
+ {titulo:'TOQUE NAS 2 COM <b>R ANTES DE CONSOANTE</b>',fala:'Toque nas duas palavras com érre entre uma vogal e uma consoante.',
+  ops:[{w:'PORTA',ok:true},{w:'CARTA',ok:true},{w:'ROSA',ok:false},{w:'PERA',ok:false}],marca:'meio'}
+];
+function abrirJogo10(){fase10=0;mostrar('tela-j10');montarJ10();}
+function montarJ10(){const perg=document.getElementById('perg-j10'),area=document.getElementById('area-j10'),
+        fb=document.getElementById('fb-j10');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';
+  estrelas(document.getElementById('prog-j10'),fase10,6);
+  if(fase10===0){ /* A: som do R diferente */
+    perg.innerHTML='FALE O NOME DAS FRUTAS!<br>QUAL TEM O SOM DO <b style="color:var(--rosa)">R</b> DIFERENTE (FORTE)?';
+    const div=document.createElement('div');div.className='opcoes';
+    [{e:'🫐',w:'AMORA',ok:false},{e:'🍊',w:'TANGERINA',ok:false},{e:'🍎',w:'ROMÃ',ok:true},{e:'🌰',w:'BURITI',ok:false}].forEach(o=>{
+      const d=document.createElement('div');d.className='opcao';d.style.minWidth='110px';d.style.maxWidth='125px';
+      d.innerHTML='<span class="emo" style="font-size:2.8rem">'+o.e+'</span><span class="nome">'+o.w+'</span>';
+      d.onclick=()=>{falar(o.w);
+        setTimeout(()=>{if(o.ok){d.classList.add('certa');tocarSom(true);falar('Romã! O érre no começo tem som forte! RRRomã!');
+            fb.textContent='⭐ ROMÃ!';fb.className='feedback certo';
+            setTimeout(()=>{fase10=1;montarJ10();},2500);}
+          else{d.classList.add('errada');tocarSom(false);
+            fb.textContent='ESSE R É FRAQUINHO... TENTE OUTRA 💪';fb.className='feedback tente';
+            setTimeout(()=>d.classList.remove('errada'),450);}},700);};
+      div.appendChild(d);});
+    area.appendChild(div);
+    textoFala='Toque em cada fruta para ouvir o nome. Qual tem o som do érre diferente, bem forte?';falar(textoFala);}
+  else if(fase10===1){ /* B: posição */
+    perg.innerHTML='EM <b>ROMÃ</b>, ONDE ESTÁ O <b style="color:var(--rosa)">R</b>?';
+    const div=document.createElement('div');div.className='opcoes';
+    [{e:'👉',w:'NO INÍCIO',ok:true},{e:'✋',w:'NO MEIO',ok:false},{e:'👈',w:'NO FINAL',ok:false}].forEach(o=>{
+      const d=document.createElement('div');d.className='opcao';d.style.minWidth='110px';d.style.maxWidth='140px';
+      d.innerHTML='<span class="emo" style="font-size:2.6rem">'+o.e+'</span><span class="nome">'+o.w+'</span>';
+      d.onclick=()=>{if(o.ok){d.classList.add('certa');tocarSom(true);falar('No início! Érre, o, eme, a til!');
+          fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+          setTimeout(()=>{fase10=2;achadas10=0;montarJ10();},1800);}
+        else{d.classList.add('errada');tocarSom(false);falar('Tente de novo');fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      div.appendChild(d);});
+    area.appendChild(div);
+    textoFala='Na palavra romã, onde está a letra érre? No início, no meio ou no final?';falar(textoFala);}
+  else{ /* C: 4 rodadas de 2 palavras */
+    const r=RODADAS10[fase10-2];
+    perg.innerHTML=r.titulo;
+    achadas10=0;
+    const div=document.createElement('div');div.className='palavras-grade';
+    embaralhar([...r.ops]).forEach(o=>{const d=document.createElement('div');d.className='palavra-card';d.textContent=o.w;
+      d.onclick=()=>{if(d.classList.contains('certa'))return;
+        if(o.ok){achadas10++;
+          let h=o.w;
+          if(r.marca==='ini')h='<b>R</b>'+o.w.slice(1);
+          else if(r.marca==='fim')h=o.w.slice(0,-1)+'<b>R</b>';
+          else h=o.w.replace('R','<b>R</b>');
+          d.innerHTML=h;d.classList.add('certa');tocarSom(true);falar(o.w+'!');
+          if(achadas10===2){fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+            setTimeout(()=>{fase10++;
+              if(fase10>=6){fimDeJogo(10);}else montarJ10();},1500);}}
+        else{d.classList.add('errada');tocarSom(false);falar('Tente de novo');fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      div.appendChild(d);});
+    area.appendChild(div);
+    textoFala=r.fala;falar(textoFala);}}
+
+/* ===== J11 — CA pág.9 nº7: o almoço da Marina ===== */
+const J11=[{emo:'🍚',palavra:'ARROZ'},{emo:'🍝',palavra:'MACARRÃO'},{emo:'🍖',palavra:'CARNE'}];
+let pos11=0;
+function abrirJogo11(){pos11=0;mostrar('tela-j11');montarJ11();}
+function montarJ11(){
+  const perg=document.getElementById('perg-j11'),fr=document.getElementById('frase-j11'),
+        ops=document.getElementById('ops-j11'),fb=document.getElementById('fb-j11');
+  fb.textContent='';fb.className='feedback';
+  estrelas(document.getElementById('prog-j11'),pos11,J11.length);
+  perg.innerHTML='TROQUE AS FIGURAS PELAS PALAVRAS!';
+  fr.innerHTML='MARINA ADORA COMER <span class="lacuna" id="lac0">'+J11[0].emo+'</span>, '+
+    '<span class="lacuna" id="lac1">'+J11[1].emo+'</span> E '+
+    '<span class="lacuna" id="lac2">'+J11[2].emo+'</span> NO ALMOÇO.';
+  for(let k=0;k<pos11;k++){const l=document.getElementById('lac'+k);
+    l.textContent=J11[k].palavra;l.className='lacuna cheia';}
+  if(pos11<J11.length)document.getElementById('lac'+pos11).classList.add('alvo');
+  ops.innerHTML='';
+  embaralhar([...J11]).forEach(o=>{const b=document.createElement('button');b.className='sil';b.textContent=o.palavra;
+    b.onclick=()=>{
+      if(o.palavra===J11[pos11].palavra){
+        const l=document.getElementById('lac'+pos11);
+        l.classList.remove('alvo');l.classList.add('cheia');l.textContent=o.palavra;
+        tocarSom(true);falar(o.palavra+'!');pos11++;
+        if(pos11>=J11.length){fb.textContent='⭐ FRASE COMPLETA!';fb.className='feedback certo';
+          setTimeout(()=>falar('Marina adora comer arroz, macarrão e carne no almoço!'),600);
+          setTimeout(()=>fimDeJogo(11),3600);}
+        else setTimeout(()=>montarJ11(),900);}
+      else{b.classList.add('errada');tocarSom(false);falar('Olhe a figura amarela');
+        fb.textContent='OLHE A FIGURA AMARELA 💪';fb.className='feedback tente';
+        setTimeout(()=>b.classList.remove('errada'),450);}};
+    ops.appendChild(b);});
+  textoFala='Troque as figuras pelas palavras. Qual palavra é a figura que está piscando?';falar(textoFala);}
+
+/* ===== J12 — CA pág.9 nº8: brincando com o R ===== */
+const TROCA12=[
+ {orig:'AMADA',pre:'AMA',dest:'D',pos_:'A',nova:'AMARRA',ops:['AMARRA','AMADA','AMARA'],fala:'Amada. Troque o dê por érre érre.'},
+ {orig:'TIO',pre:'',dest:'T',pos_:'IO',nova:'RIO',ops:['RIO','TIO','LIO'],fala:'Tio. Troque o tê por érre.'},
+ {orig:'MACACÃO',pre:'MACA',dest:'C',pos_:'ÃO',nova:'MACARRÃO',ops:['MACARRÃO','MACACÃO','MACARÃO'],fala:'Macacão. Troque o cê por érre érre.'},
+ {orig:'CASA',pre:'CA',dest:'S',pos_:'A',nova:'CARA',ops:['CARA','CASA','CARRA'],fala:'Casa. Troque o esse por érre.'}
+];
+const SOMA12=[{orig:'ERA',nova:'ERRA',sil:['ER','RA']},
+              {orig:'TORA',nova:'TORRA',sil:['TOR','RA']},
+              {orig:'MORO',nova:'MORRO',sil:['MOR','RO']}];
+let fase12=0,rod12=0,pos12=0;
+function abrirJogo12(){fase12=0;rod12=0;pos12=0;mostrar('tela-j12');montarJ12();}
+function montarJ12(){
+  const perg=document.getElementById('perg-j12'),area=document.getElementById('area-j12'),
+        fb=document.getElementById('fb-j12');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';
+  estrelas(document.getElementById('prog-j12'),fase12===0?rod12:4+rod12,7);
+
+  if(fase12===0){                       /* A) trocar a letra por R ou RR */
+    const t=TROCA12[rod12];
+    perg.innerHTML='TROQUE A LETRA <b style="color:var(--rosa)">'+t.dest+'</b> POR <b>R</b> OU <b>RR</b>';
+    const p=document.createElement('div');p.className='troca-palavra';
+    p.innerHTML=t.pre+'<span class="destaque">'+t.dest+'</span>'+t.pos_;
+    const seta=document.createElement('div');seta.className='seta-troca';seta.textContent='⬇️';
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    embaralhar([...t.ops]).forEach(v=>{const b=document.createElement('button');b.className='sil';b.textContent=v;
+      b.onclick=()=>{if(v===t.nova){p.innerHTML=t.pre+'<span class="nova">'+t.nova.slice(t.pre.length,t.nova.length-t.pos_.length)+'</span>'+t.pos_;
+          tocarSom(true);falar(t.nova+'! '+elogio());
+          fb.textContent='⭐ '+t.nova+'!';fb.className='feedback certo';
+          ops.querySelectorAll('.sil').forEach(x=>x.onclick=null);
+          rod12++;
+          if(rod12>=TROCA12.length){fase12=1;rod12=0;setTimeout(()=>montarJ12(),2000);}
+          else setTimeout(()=>montarJ12(),2000);}
+        else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(p);area.appendChild(seta);area.appendChild(ops);
+    textoFala=t.fala;falar(textoFala);}
+
+  else if(fase12===1){                  /* B) acrescentar um R */
+    const t=SOMA12[rod12];
+    perg.innerHTML='ACRESCENTE UM <b style="color:var(--rosa)">R</b> E FORME UMA PALAVRA NOVA';
+    const p=document.createElement('div');p.className='troca-palavra';p.textContent=t.orig;
+    const seta=document.createElement('div');seta.className='seta-troca';seta.textContent='⬇️ + R';
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    embaralhar([t.nova,t.orig,t.orig+'R']).forEach(v=>{const b=document.createElement('button');b.className='sil';b.textContent=v;
+      b.onclick=()=>{if(v===t.nova){p.innerHTML='<span class="nova">'+t.nova+'</span>';
+          tocarSom(true);falar(t.nova+'! '+elogio());
+          fb.textContent='⭐ '+t.nova+'!';fb.className='feedback certo';
+          ops.querySelectorAll('.sil').forEach(x=>x.onclick=null);
+          setTimeout(()=>{fase12=2;pos12=0;montarJ12();},2000);}
+        else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(p);area.appendChild(seta);area.appendChild(ops);
+    textoFala=t.orig+'. Acrescente um érre e forme uma palavra nova.';falar(textoFala);}
+
+  else{                                 /* separação de sílabas do RR */
+    const t=SOMA12[rod12];
+    perg.innerHTML='SEPARE AS SÍLABAS DE <b>'+t.nova+'</b><br><small style="font-size:1rem">O RR FICA SEPARADO!</small>';
+    const alvo=document.createElement('div');alvo.className='silaba-alvo';
+    t.sil.forEach(()=>{const d=document.createElement('div');d.className='quadr';d.textContent='?';alvo.appendChild(d);});
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    embaralhar([...t.sil]).forEach(sv=>{const b=document.createElement('button');b.className='sil';b.textContent=sv;
+      b.onclick=()=>{if(sv===t.sil[pos12]){b.classList.add('usada');
+          const qd=alvo.querySelectorAll('.quadr')[pos12];qd.textContent=sv;qd.classList.add('cheio');
+          tocarSom(true);falar(sv);pos12++;
+          if(pos12>=t.sil.length){fb.textContent='⭐ '+t.nova+'!';fb.className='feedback certo';
+            setTimeout(()=>falar(t.sil.join(', ')+'! '+t.nova+'!'),500);
+            rod12++;
+            if(rod12>=SOMA12.length)setTimeout(()=>fimDeJogo(12),2600);
+            else setTimeout(()=>{fase12=1;montarJ12();},2600);}}
+        else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(alvo);area.appendChild(ops);
+    textoFala='Separe as sílabas de '+t.nova+'. O érre érre fica separado!';falar(textoFala);}}
+
+
+/* ===== J13 — CA pág.10: a palavra intrusa e as frases do rato ===== */
+const FRASES13=[
+ {n:1,pal:['UM','RATO','ESTAVA','COM','FOME','E','SAIU','DA','TOCA'],
+  fala:'Um rato estava com fome e saiu da toca.'},
+ {n:2,pal:['O','GATO','VIU','O','RATO','E','SAIU','À','CAÇA','DELE'],
+  fala:'O gato viu o rato e saiu à caça dele.'},
+ {n:3,pal:['O','RATO','CORREU','CORREU','CORREU','SEM','PARAR'],
+  fala:'O rato correu, correu, correu sem parar.'}
+];
+const GRUPOS13=[
+ {pals:['TERRA','MACARRÃO','INTEIRA','CARRETA'],fora:'INTEIRA',
+  dica:'AS OUTRAS TÊM <b>RR</b>',fala:'Toque na palavra que não tem érre érre.'},
+ {pals:['VIVER','SABOREAR','ALIMENTAR','RESTAURANTE'],fora:'RESTAURANTE',
+  dica:'AS OUTRAS TERMINAM COM <b>R</b>',fala:'Toque na palavra que não termina com érre.'}
+];
+let fase13=0, rod13=0, contadas13=0;
+
+function abrirJogo13(){fase13=0;rod13=0;contadas13=0;mostrar('tela-j13');montarJ13();}
+
+function montarJ13(){
+  const perg=document.getElementById('perg-j13'),area=document.getElementById('area-j13'),
+        fb=document.getElementById('fb-j13');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';
+  estrelas(document.getElementById('prog-j13'),fase13,7);
+
+  if(fase13===0||fase13===1){                    /* 8C) a intrusa */
+    const g=GRUPOS13[fase13];
+    perg.innerHTML='TOQUE NA PALAVRA QUE <b>NÃO COMBINA</b><br><small style="font-size:1rem">'+g.dica+'</small>';
+    const box=document.createElement('div');box.className='grupo-pal';
+    embaralhar([...g.pals]).forEach(p=>{const d=document.createElement('div');d.className='pal-grupo';d.textContent=p;
+      d.onclick=()=>{if(p===g.fora){d.classList.add('certa');tocarSom(true);falar(p+'! '+elogio());
+          fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+          box.querySelectorAll('.pal-grupo').forEach(x=>x.onclick=null);
+          setTimeout(()=>{fase13++;montarJ13();},1800);}
+        else{d.classList.add('errada');tocarSom(false);falar('Essa combina. Tente de novo');
+          fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      box.appendChild(d);});
+    area.appendChild(box);
+    textoFala=g.fala;falar(textoFala);}
+
+  else if(fase13===2){                           /* 9A) quantas frases */
+    perg.innerHTML='QUANTAS FRASES A MARINA LEU?';
+    FRASES13.forEach(f=>{const l=document.createElement('div');l.className='frase-linha';
+      const n=document.createElement('span');n.className='frase-num';n.textContent=f.n;
+      l.appendChild(n);
+      const t=document.createElement('span');t.style.fontWeight='bold';t.textContent=f.pal.join(' ')+'.';
+      l.appendChild(t);
+      l.onclick=()=>falar(f.fala);
+      area.appendChild(l);});
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    embaralhar([3,2,4]).forEach(v=>{const b=document.createElement('button');b.className='sil';b.textContent=v;
+      b.onclick=()=>{if(v===3){tocarSom(true);falar('Três frases! '+elogio());
+          fb.textContent='⭐ 3 FRASES!';fb.className='feedback certo';
+          ops.querySelectorAll('.sil').forEach(x=>x.onclick=null);
+          setTimeout(()=>{fase13=3;rod13=0;contadas13=0;montarJ13();},1800);}
+        else{b.classList.add('errada');tocarSom(false);falar('Conte de novo');
+          fb.textContent='CONTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(ops);
+    textoFala='Quantas frases a Marina leu? Toque em cada frase para ouvir e depois escolha o número.';
+    falar(textoFala);}
+
+  else if(fase13===3||fase13===4||fase13===5){   /* 9B) contar palavras tocando */
+    const f=FRASES13[fase13-3];contadas13=0;
+    perg.innerHTML='CONTE AS PALAVRAS DA <b>FRASE '+f.n+'</b><br><small style="font-size:1rem">TOQUE EM CADA PALAVRA</small>';
+    const cont=document.createElement('div');cont.className='contador-pal';cont.id='cont13';cont.textContent='0';
+    const linha=document.createElement('div');linha.className='frase-linha';
+    f.pal.forEach(p=>{const sp=document.createElement('span');sp.className='pal-cont';sp.textContent=p;
+      sp.onclick=()=>{if(sp.classList.contains('contada'))return;
+        sp.classList.add('contada');contadas13++;
+        document.getElementById('cont13').textContent=contadas13;
+        tocarSom(true);falar(String(contadas13));
+        if(contadas13===f.pal.length){
+          fb.textContent='⭐ '+f.pal.length+' PALAVRAS!';fb.className='feedback certo';
+          setTimeout(()=>falar('A frase '+f.n+' tem '+f.pal.length+' palavras! '+elogio()),700);
+          setTimeout(()=>{fase13++;montarJ13();},3000);}};
+      linha.appendChild(sp);});
+    area.appendChild(cont);area.appendChild(linha);
+    textoFala='Conte as palavras da frase '+f.n+'. Toque em cada palavra.';falar(textoFala);}
+
+  else{                                          /* 9C+9D) qual tem mais / ponto final */
+    if(!area.dataset.etapa){
+      perg.innerHTML='QUAL FRASE TEM <b>MAIS PALAVRAS</b>?';
+      const ops=document.createElement('div');ops.className='silaba-ops';
+      FRASES13.forEach(f=>{const b=document.createElement('button');b.className='sil';
+        b.innerHTML='FRASE '+f.n+'<br><small style="font-size:.9rem">'+f.pal.length+' PALAVRAS</small>';
+        b.onclick=()=>{if(f.n===2){tocarSom(true);falar('Frase dois, com dez palavras! '+elogio());
+            fb.textContent='⭐ FRASE 2!';fb.className='feedback certo';
+            ops.querySelectorAll('.sil').forEach(x=>x.onclick=null);
+            setTimeout(()=>pontoFinal13(),2200);}
+          else{b.classList.add('errada');tocarSom(false);falar('Olhe o número maior');
+            fb.textContent='OLHE O NÚMERO MAIOR 💪';fb.className='feedback tente';
+            setTimeout(()=>b.classList.remove('errada'),450);}};
+        ops.appendChild(b);});
+      area.appendChild(ops);
+      textoFala='Qual frase tem mais palavras?';falar(textoFala);}}}
+
+function pontoFinal13(){
+  const perg=document.getElementById('perg-j13'),area=document.getElementById('area-j13'),
+        fb=document.getElementById('fb-j13');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';
+  perg.innerHTML='O <b style="color:var(--rosa);font-size:2rem">.</b> PONTO-FINAL SERVE PARA...';
+  const ops=document.createElement('div');ops.className='silaba-ops';
+  embaralhar([{t:'MOSTRAR QUE A FRASE TERMINOU',ok:true},{t:'MOSTRAR QUE A FRASE COMEÇOU',ok:false}])
+   .forEach(o=>{const b=document.createElement('button');b.className='sil';b.style.fontSize='1.05rem';b.textContent=o.t;
+    b.onclick=()=>{if(o.ok){tocarSom(true);falar('O ponto final mostra que a frase terminou! '+elogio());
+        fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+        ops.querySelectorAll('.sil').forEach(x=>x.onclick=null);
+        setTimeout(()=>fimDeJogo(13),2600);}
+      else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+        fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+        setTimeout(()=>b.classList.remove('errada'),450);}};
+    ops.appendChild(b);});
+  area.appendChild(ops);
+  textoFala='Para que serve o ponto final?';falar(textoFala);}
+
+/* ===== J14 — CA pág.11: monte as frases ===== */
+const MONTA14=[
+ {pal:['O','RATO','SUBIU','NO','SOFÁ'],numerada:true,
+  fala:'O rato subiu no sofá.'},
+ {pal:['O','GATO','PULOU','PARA','PEGAR','O','RATO'],numerada:true,
+  fala:'O gato pulou para pegar o rato.'},
+ {pal:['SERÁ','QUE','ELE','CONSEGUIU'],numerada:true,
+  fala:'Será que ele conseguiu?'},
+ {pal:['O','RATO','CORREU','RÁPIDO','DEMAIS'],numerada:false,
+  fala:'O rato correu rápido demais.'},
+ {pal:['O','BICHANO','CANSOU','E','DEIXOU','O','RATO','IR'],numerada:false,
+  fala:'O bichano cansou e deixou o rato ir.'}
+];
+let rod14=0,pos14=0;
+function abrirJogo14(){rod14=0;pos14=0;mostrar('tela-j14');montarJ14();}
+function montarJ14(){
+  const perg=document.getElementById('perg-j14'),mont=document.getElementById('montada-j14'),
+        ops=document.getElementById('ops-j14'),fb=document.getElementById('fb-j14');
+  const f=MONTA14[rod14];pos14=0;
+  mont.innerHTML='';ops.innerHTML='';fb.textContent='';fb.className='feedback';
+  estrelas(document.getElementById('prog-j14'),rod14,MONTA14.length);
+  perg.innerHTML=f.numerada?'MONTE A FRASE SEGUINDO OS <b>NÚMEROS</b>'
+                           :'AGORA <b>SEM OS NÚMEROS</b>!<br><small style="font-size:1rem">MONTE A FRASE</small>';
+  const embar=embaralhar(f.pal.map((p,i)=>({p:p,ord:i+1})));
+  embar.forEach(o=>{const b=document.createElement('button');b.className='pal-btn';
+    b.innerHTML=o.p+(f.numerada?'<span class="ord">'+o.ord+'</span>':'');
+    b.onclick=()=>{
+      if(o.ord===pos14+1){b.classList.add('usada');
+        const sp=document.createElement('span');sp.className='pal-posta';
+        sp.textContent=o.p+(pos14===f.pal.length-1?(f.pal[0]==='SERÁ'?'?':'.'):'');
+        mont.appendChild(sp);pos14++;tocarSom(true);falar(o.p);
+        if(pos14>=f.pal.length){
+          fb.textContent='⭐ FRASE PRONTA!';fb.className='feedback certo';
+          setTimeout(()=>falar(f.fala+' '+elogio()),600);
+          rod14++;
+          if(rod14>=MONTA14.length)setTimeout(()=>fimDeJogo(14),3400);
+          else setTimeout(()=>montarJ14(),3400);}}
+      else{b.classList.add('errada');tocarSom(false);
+        falar(f.numerada?'Procure o número '+(pos14+1):'Tente outra palavra');
+        fb.textContent=f.numerada?'PROCURE O NÚMERO '+(pos14+1)+' 💪':'TENTE OUTRA 💪';
+        fb.className='feedback tente';
+        setTimeout(()=>b.classList.remove('errada'),450);}};
+    ops.appendChild(b);});
+  textoFala=f.numerada?'Monte a frase tocando nas palavras na ordem dos números.'
+                      :'Agora sem os números! Monte a frase na ordem certa.';
+  falar(textoFala);}
+
+
+/* ===== J15 — CA pág.12-13: a história animada da Dona Baratinha ===== */
+const CENAS15=[
+ {fundo:'casa',cenario:[{e:'🚪',l:'6%',b:'34%'},{e:'🪟',l:'78%',b:'42%'}],
+  bara:{cls:'balanca'},extra:{e:'🧹',l:'27%',b:'22%',cls:'balanca',tam:'3.4rem'},
+  balao:'ERA UMA VEZ A DONA BARATINHA. ELA VARRIA A CASA...',
+  fala:'Era uma vez uma linda baratinha. Ela estava varrendo a casa.'},
+ {fundo:'casa',cenario:[{e:'🚪',l:'6%',b:'34%'}],bara:{cls:'pula-anim'},
+  extra:{e:'🪙',l:'52%',b:'26%',cls:'brilha-anim',tam:'3.2rem'},
+  balao:'OLHA! UMA MOEDA DE OURO! ✨',
+  fala:'Olha! Ela encontrou uma moeda de ouro!'},
+ {fundo:'casa',cenario:[{e:'🪟',l:'70%',b:'42%'}],bara:{cls:'pula-anim'},
+  extra:{e:'👗',l:'50%',b:'26%',cls:'brilha-anim',tam:'3.4rem'},
+  balao:'ELA COMPROU UM VESTIDO NOVO E FOI PARA A JANELA.',
+  fala:'Com a moeda, ela comprou um vestido novo e foi para a janela.'},
+ {fundo:'',cenario:[{e:'🌳',l:'80%',b:'34%'}],bara:{cls:'pula-anim'},
+  balao:'— QUEM QUER CASAR COMIGO,<br>QUE SOU RICA E BONITINHA?',
+  fala:'Quem quer casar comigo, que sou rica e bonitinha?'},
+ {fundo:'',cenario:[{e:'🌳',l:'86%',b:'34%'}],bara:{},conv:{e:'🐂',cls:'entra'},
+  notas:'🎵',balao:'— EU QUERO! EU SOU O BOI.<br>MUUU, MUUU, MUUU!',
+  fala:'Eu quero! Eu sou o boi. E ele cantou: muuu, muuu, muuu!'},
+ {fundo:'',cenario:[{e:'🌳',l:'86%',b:'34%'}],bara:{cls:'treme-anim'},conv:{e:'🐂'},
+  balao:'— VOCÊ CANTA MUITO MAL!<br>COM VOCÊ É QUE NÃO ME CASO!',
+  fala:'Você canta muito mal! Com você é que não me caso!'},
+ {fundo:'',cenario:[{e:'🌳',l:'86%',b:'34%'}],bara:{},conv:{e:'🐴',cls:'entra'},
+  notas:'🎵',balao:'— EU QUERO! EU SOU O CAVALO.<br>IHIIII!',
+  fala:'Eu quero! Eu sou o cavalo. E ele cantou: ihiiii!'},
+ {fundo:'',cenario:[{e:'🌳',l:'86%',b:'34%'}],bara:{},conv:{e:'🐶',cls:'entra'},
+  notas:'🎵',balao:'— EU QUERO! EU SOU O CACHORRO.<br>AU! AU! AU!',
+  fala:'Eu quero! Eu sou o cachorro. E ele cantou: au, au, au!'},
+ {fundo:'',cenario:[{e:'🌳',l:'86%',b:'34%'}],bara:{},conv:{e:'🐷',cls:'entra'},
+  notas:'🎵',balao:'— EU QUERO! EU SOU O PORCO.<br>RNHOC, RNHOC!',
+  fala:'Eu quero! Eu sou o porco. E ele cantou: rnhoc, rnhoc!'},
+ {fundo:'',cenario:[{e:'🌳',l:'86%',b:'34%'}],bara:{cls:'treme-anim'},conv:{e:'🐰'},
+  notas:'🎵',balao:'— EU QUERO! EU SOU O COELHO.<br>NHÉC! NHÉC! NHÉC!',
+  fala:'Eu quero! Eu sou o coelho. E ele cantou: nhéc, nhéc, nhéc!'},
+ {fundo:'',cenario:[{e:'🌳',l:'86%',b:'34%'}],bara:{cls:'treme-anim'},conv:{e:'🐰'},
+  balao:'— VOCÊ CANTA MUITO MAL!<br>COM VOCÊ É QUE NÃO ME CASO!',
+  fala:'Você canta muito mal! Com você é que não me caso!'},
+ {fundo:'',cenario:[{e:'🌳',l:'86%',b:'34%'}],bara:{cls:'pula-anim'},conv:{e:'🐭',cls:'entra pula-anim'},
+  notas:'🎶',balao:'— EU SOU O JOÃO RATÃO!<br>IH, IH, IH, IH!',
+  fala:'Até que chegou o João Ratão. E ele cantou baixinho: ih, ih, ih, ih!'},
+ {fundo:'',cenario:[{e:'🌸',l:'12%',b:'32%'},{e:'🌸',l:'84%',b:'32%'}],
+  bara:{cls:'pula-anim'},conv:{e:'🐭',cls:'pula-anim'},notas:'💕',
+  balao:'— QUE LINDO! COM VOCÊ EU ME CASO! 💍',
+  fala:'Que lindo! Com você eu me caso! E eles se casaram num belo domingo.'},
+ {fundo:'casa',cenario:[{e:'🔥',l:'56%',b:'22%'},{e:'🍲',l:'54%',b:'34%'}],
+  bara:{cls:''},conv:{e:'🐭',l:'40%'},
+  balao:'— JOÃO, NÃO MEXA NO CALDEIRÃO!<br>EU JÁ VOLTO.',
+  fala:'Num domingo, a baratinha saiu. E avisou: João, não mexa no caldeirão de feijão!'},
+ {fundo:'casa',cenario:[{e:'🔥',l:'58%',b:'20%'},{e:'🍲',l:'56%',b:'33%'}],
+  conv:{e:'🐭',l:'40%',cls:'treme-anim'},
+  balao:'MAS O JOÃO ERA GULOSO...<br>E CAIU DENTRO DO CALDEIRÃO! 😮',
+  fala:'Mas o João Ratão era muito guloso. Ele foi espiar o feijão e caiu dentro do caldeirão!'},
+ {fundo:'casa',cenario:[{e:'🍲',l:'62%',b:'33%'}],bara:{cls:'pula-anim'},
+  conv:{e:'🐭',l:'46%',cls:'pula-anim'},
+  balao:'A DONA BARATINHA CHEGOU E SALVOU O JOÃO!<br>COITADINHO! 💕',
+  fala:'A dona baratinha chegou correndo e tirou o João do caldeirão. Coitadinho do João Ratão! E fim da história!'}
+];
+let cena15=0;
+function abrirJogo15(){cena15=0;mostrar('tela-j15');montarCena15();}
+function montarCena15(){
+  const c=CENAS15[cena15],p=document.getElementById('palco-j15');
+  document.getElementById('cnum-j15').textContent='CENA '+(cena15+1)+' DE '+CENAS15.length;
+  p.className='palco '+(c.fundo||'');
+  let h='<div class="balao">'+c.balao+'</div>';
+  (c.cenario||[]).forEach(o=>{h+='<span class="cenario" style="left:'+o.l+';bottom:'+o.b+'">'+o.e+'</span>';});
+  if(c.bara)h+='<span class="ator bara '+(c.bara.cls||'')+'">🪳</span>';
+  if(c.conv)h+='<span class="ator conv '+(c.conv.cls||'')+'"'+(c.conv.l?' style="left:'+c.conv.l+'"':'')+'>'+c.conv.e+'</span>';
+  if(c.extra)h+='<span class="ator '+(c.extra.cls||'')+'" style="left:'+c.extra.l+';bottom:'+c.extra.b+';font-size:'+(c.extra.tam||'3rem')+'">'+c.extra.e+'</span>';
+  if(c.notas)h+='<span class="notas">'+c.notas+'</span>';
+  p.innerHTML=h;
+  textoFala=c.fala;falar(c.fala);
+  document.getElementById('fb-j15').textContent=(cena15===CENAS15.length-1)?'⭐ FIM DA HISTÓRIA!':'';
+  document.getElementById('fb-j15').className='feedback certo';}
+function repetirCena15(){falar(CENAS15[cena15].fala);}
+function proxCena15(){cena15++;
+  if(cena15>=CENAS15.length){confete();tocarSom(true);marcarFeito(15);
+    setTimeout(()=>{cena15=0;irMenu();},1800);}
+  else montarCena15();}
+
+/* ===== J16 — CA pág.13-14: perguntas da história ===== */
+const ORDEM16=[
+ {t:'QUEM QUER CASAR COMIGO, QUE SOU RICA E BONITINHA?'},
+ {t:'E QUEM É VOCÊ?'},
+ {t:'E VOCÊ SABE CANTAR PARA ME ALEGRAR?'},
+ {t:'VOCÊ CANTA MUITO MAL!'},
+ {t:'COM VOCÊ É QUE NÃO ME CASO!'}
+];
+const NOMES16=[
+ {e:'🐂',w:'BOI',dadas:[0]},{e:'🐴',w:'CAVALO',dadas:[0,3]},{e:'🐶',w:'CACHORRO',dadas:[0,4]},
+ {e:'🐷',w:'PORCO',dadas:[0]},{e:'🐰',w:'COELHO',dadas:[0,5]},{e:'🐴',w:'BURRO',dadas:[0]},
+ {e:'🐭',w:'RATÃO',dadas:[0]}
+];
+let fase16=0,pos16=0,rod16=0;
+function abrirJogo16(){fase16=0;pos16=0;rod16=0;mostrar('tela-j16');montarJ16();}
+function montarJ16(){
+  const perg=document.getElementById('perg-j16'),area=document.getElementById('area-j16'),
+        fb=document.getElementById('fb-j16');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';
+  estrelas(document.getElementById('prog-j16'),fase16,4);
+
+  if(fase16===0){                               /* pág 13 A) o que ela encontrou */
+    perg.innerHTML='O QUE A DONA BARATINHA ENCONTROU<br>ENQUANTO VARRIA A CASA?';
+    const box=document.createElement('div');box.className='opcoes';
+    embaralhar([{e:'🪙',n:'UMA MOEDA',ok:true},{e:'👗',n:'UM VESTIDO',ok:false},{e:'👠',n:'UM SAPATO',ok:false}])
+     .forEach(o=>{const d=document.createElement('div');d.className='opcao';d.style.minWidth='105px';d.style.maxWidth='125px';
+      d.innerHTML='<span class="emo" style="font-size:3rem">'+o.e+'</span><span class="nome">'+o.n+'</span>';
+      d.onclick=()=>{if(o.ok){d.classList.add('certa');tocarSom(true);falar('Uma moeda de ouro! '+elogio());
+          fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+          box.querySelectorAll('.opcao').forEach(x=>x.onclick=null);
+          setTimeout(()=>{fase16=1;pos16=0;montarJ16();},1900);}
+        else{d.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      box.appendChild(d);});
+    area.appendChild(box);
+    textoFala='O que a dona baratinha encontrou enquanto varria a casa?';falar(textoFala);}
+
+  else if(fase16===1){                          /* pág 14 B) ordem das frases */
+    perg.innerHTML='COLOQUE AS FRASES NA <b>ORDEM</b> DA HISTÓRIA';
+    const lista=document.createElement('div');lista.className='ord-lista';
+    embaralhar(ORDEM16.map((o,i)=>({t:o.t,ord:i}))).forEach(o=>{
+      const d=document.createElement('div');d.className='ord-item';
+      d.innerHTML='<span class="nord">?</span><span>'+o.t+'</span>';
+      d.onclick=()=>{if(d.classList.contains('feita'))return;
+        falar(o.t);
+        if(o.ord===pos16){d.classList.add('feita');d.querySelector('.nord').textContent=pos16+1;
+          tocarSom(true);pos16++;
+          if(pos16>=ORDEM16.length){fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+            setTimeout(()=>{fase16=2;rod16=0;montarJ16();},1900);}
+          else{fb.textContent='⭐ AGORA A PRÓXIMA!';fb.className='feedback certo';}}
+        else{d.classList.add('errada');tocarSom(false);
+          fb.textContent='ESSA VEM DEPOIS 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      lista.appendChild(d);});
+    area.appendChild(lista);
+    textoFala='Coloque as frases na ordem em que a dona baratinha falou. Toque em cada frase para ouvir.';
+    falar(textoFala);}
+
+  else if(fase16===2){                          /* pág 14 C) completar os nomes */
+    const a=NOMES16[rod16];
+    perg.innerHTML='COMPLETE O NOME DO ANIMAL';
+    const bicho=document.createElement('div');bicho.style.textAlign='center';bicho.style.fontSize='4.4rem';
+    bicho.textContent=a.e;area.appendChild(bicho);
+    const slots=document.createElement('div');slots.className='letras-slot';slots.id='slots16';
+    [...a.w].forEach((ch,i)=>{const d=document.createElement('div');
+      d.className='ls '+(a.dadas.includes(i)?'dado':'vazio');
+      d.textContent=a.dadas.includes(i)?ch:'';slots.appendChild(d);});
+    area.appendChild(slots);
+    const faltam=[...a.w].map((ch,i)=>({ch:ch,i:i})).filter(o=>!a.dadas.includes(o.i));
+    let idx=0;
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    const letras=embaralhar([...new Set(faltam.map(o=>o.ch))]);
+    letras.forEach(L=>{const b=document.createElement('button');b.className='sil';b.textContent=L;
+      b.onclick=()=>{const alvo=faltam[idx];
+        if(L===alvo.ch){const sl=slots.querySelectorAll('.ls')[alvo.i];
+          sl.textContent=L;sl.className='ls ok';idx++;tocarSom(true);falar(L);
+          if(idx>=faltam.length){fb.textContent='⭐ '+a.w+'!';fb.className='feedback certo';
+            setTimeout(()=>falar(a.w+'! '+elogio()),500);
+            rod16++;
+            if(rod16>=NOMES16.length)setTimeout(()=>{fase16=3;montarJ16();},2400);
+            else setTimeout(()=>montarJ16(),2400);}}
+        else{b.classList.add('errada');tocarSom(false);falar('Tente outra letra');
+          fb.textContent='TENTE OUTRA LETRA 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(ops);
+    textoFala='Complete o nome do animal. A palavra é '+a.w+'.';falar(textoFala);}
+
+  else{                                         /* pág 14 D+E) quem casou e por quê */
+    if(!area.dataset.fim){
+      perg.innerHTML='QUAL ANIMAL CASOU COM A DONA BARATINHA?';
+      const box=document.createElement('div');box.className='opcoes';
+      embaralhar([{e:'🐭',n:'JOÃO RATÃO',ok:true},{e:'🐂',n:'O BOI',ok:false},{e:'🐶',n:'O CACHORRO',ok:false}])
+       .forEach(o=>{const d=document.createElement('div');d.className='opcao';d.style.minWidth='105px';d.style.maxWidth='130px';
+        d.innerHTML='<span class="emo" style="font-size:3rem">'+o.e+'</span><span class="nome">'+o.n+'</span>';
+        d.onclick=()=>{if(o.ok){d.classList.add('certa');tocarSom(true);falar('O João Ratão! '+elogio());
+            fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+            box.querySelectorAll('.opcao').forEach(x=>x.onclick=null);
+            setTimeout(()=>porque16(),2000);}
+          else{d.classList.add('errada');tocarSom(false);falar('Tente de novo');
+            fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+            setTimeout(()=>d.classList.remove('errada'),450);}};
+        box.appendChild(d);});
+      area.appendChild(box);
+      textoFala='Qual animal conseguiu casar com a dona baratinha?';falar(textoFala);}}}
+
+function porque16(){
+  const perg=document.getElementById('perg-j16'),area=document.getElementById('area-j16'),
+        fb=document.getElementById('fb-j16');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';
+  perg.innerHTML='POR QUE OS OUTROS ANIMAIS<br>NÃO FORAM ESCOLHIDOS?';
+  const ops=document.createElement('div');ops.className='silaba-ops';
+  embaralhar([{t:'PORQUE NÃO SABIAM CANTAR BEM',ok:true},
+              {t:'PORQUE NÃO SABIAM COZINHAR',ok:false},
+              {t:'PORQUE NÃO SABIAM FALAR',ok:false}])
+   .forEach(o=>{const b=document.createElement('button');b.className='sil';b.style.fontSize='1.02rem';
+    b.style.padding='13px 14px';b.textContent=o.t;
+    b.onclick=()=>{if(o.ok){tocarSom(true);falar('Porque eles não sabiam cantar bem! '+elogio());
+        fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+        ops.querySelectorAll('.sil').forEach(x=>x.onclick=null);
+        setTimeout(()=>fimDeJogo(16),2600);}
+      else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+        fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+        setTimeout(()=>b.classList.remove('errada'),450);}};
+    ops.appendChild(b);});
+  area.appendChild(ops);
+  textoFala='Por que os outros animais não foram escolhidos?';falar(textoFala);}
+
+
+/* ===== J17 — CA pág.15: invente um pretendente ===== */
+const BICHOS17=[
+ {e:'🦁',n:'O LEÃO',canto:'ROAR, ROAR!',fala:'roar, roar!'},
+ {e:'🐔',n:'A GALINHA',canto:'CÓ, CÓ, CÓ!',fala:'có, có, có!'},
+ {e:'🐸',n:'O SAPO',canto:'CRÓ, CRÓ!',fala:'cró, cró!'},
+ {e:'🐮',n:'A VACA',canto:'MÚ, MÚÚ!',fala:'mú, múú!'},
+ {e:'🦆',n:'O PATO',canto:'QUÁ, QUÁ!',fala:'quá, quá!'},
+ {e:'🐝',n:'A ABELHA',canto:'ZUM, ZUM!',fala:'zum, zum!'}
+];
+let rod17=0, escolhido17=null, etapa17=0;
+
+function abrirJogo17(){rod17=0;escolhido17=null;etapa17=0;mostrar('tela-j17');montarJ17();}
+
+function montarJ17(){
+  const perg=document.getElementById('perg-j17'),area=document.getElementById('area-j17'),
+        dial=document.getElementById('dial-j17'),fb=document.getElementById('fb-j17'),
+        palco=document.getElementById('palco-j17'),prox=document.getElementById('prox-j17');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j17'),rod17,2);
+
+  if(etapa17===0){                       /* escolher o animal */
+    perg.innerHTML='QUEM MAIS QUER CASAR COM A<br>DONA BARATINHA? <b>ESCOLHA UM ANIMAL</b>';
+    palco.className='palco';
+    palco.innerHTML='<div class="balao">— QUEM QUER CASAR COMIGO,<br>QUE SOU RICA E BONITINHA?</div>'+
+      '<span class="cenario" style="left:84%;bottom:34%">🌳</span>'+
+      '<span class="ator bara pula-anim" style="font-size:3.4rem">🪳</span>';
+    dial.innerHTML='';
+    const box=document.createElement('div');box.className='opcoes';
+    BICHOS17.forEach(o=>{const d=document.createElement('div');d.className='opcao';
+      d.style.minWidth='96px';d.style.maxWidth='108px';
+      d.innerHTML='<span class="emo" style="font-size:2.8rem">'+o.e+'</span><span class="nome" style="font-size:.95rem">'+o.n+'</span>';
+      d.onclick=()=>{escolhido17=o;tocarSom(true);falar(o.n);
+        document.querySelectorAll('#area-j17 .opcao').forEach(x=>x.classList.remove('sel'));
+        d.classList.add('sel');prox.classList.add('mostrar');};
+      box.appendChild(d);});
+    area.appendChild(box);
+    textoFala='Quem mais quer casar com a dona baratinha? Escolha um animal.';falar(textoFala);}
+
+  else{                                  /* montar o diálogo */
+    perg.innerHTML='AGORA COMPLETE A CONVERSA!';
+    palco.className='palco';
+    palco.innerHTML='<div class="balao">— E QUEM É VOCÊ?</div>'+
+      '<span class="cenario" style="left:84%;bottom:34%">🌳</span>'+
+      '<span class="ator bara" style="font-size:3.4rem">🪳</span>'+
+      '<span class="ator conv entra" style="font-size:3.6rem">'+escolhido17.e+'</span>';
+    dial.innerHTML=
+      '<span class="fala-b">— QUEM QUER CASAR COMIGO, QUE SOU RICA E BONITINHA?</span><br>'+
+      '— EU QUERO!<br>'+
+      '<span class="fala-b">— E QUEM É VOCÊ?</span><br>'+
+      '— EU SOU <span class="vazio" id="v1">?</span>.<br>'+
+      '<span class="fala-b">— E VOCÊ SABE CANTAR PARA ME ALEGRAR?</span><br>'+
+      '— SIM, E MUITO BEM! <span class="vazio" id="v2">?</span>';
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    // 1º toque: o nome do animal; 2º toque: o canto dele
+    const alvo1=escolhido17.n, alvo2=escolhido17.canto;
+    let passo=0;
+    const cands=embaralhar([alvo1, alvo2,
+      BICHOS17.filter(b=>b!==escolhido17)[0].n,
+      BICHOS17.filter(b=>b!==escolhido17)[1].canto]);
+    cands.forEach(v=>{const b=document.createElement('button');b.className='sil';b.style.fontSize='1.05rem';
+      b.textContent=v;
+      b.onclick=()=>{const esperado=(passo===0)?alvo1:alvo2;
+        if(v===esperado){b.classList.add('usada');
+          const el=document.getElementById(passo===0?'v1':'v2');
+          el.textContent=v;el.classList.add('ok');
+          tocarSom(true);falar(v);passo++;
+          if(passo===2){
+            fb.textContent='⭐ SUA CONVERSA FICOU PRONTA!';fb.className='feedback certo';
+            setTimeout(()=>falar('Eu sou '+escolhido17.n+'. E eu canto assim: '+escolhido17.fala),700);
+            setTimeout(()=>{falar('Você canta muito mal! Com você é que não me caso!');
+              document.getElementById('palco-j17').querySelector('.balao').innerHTML=
+                '— VOCÊ CANTA MUITO MAL!<br>COM VOCÊ É QUE NÃO ME CASO!';},4200);
+            rod17++;
+            if(rod17>=2)setTimeout(()=>fimDeJogo(17),8000);
+            else setTimeout(()=>{etapa17=0;escolhido17=null;montarJ17();},8000);}
+          else{fb.textContent='⭐ AGORA O CANTO DELE!';fb.className='feedback certo';}}
+        else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(ops);
+    textoFala='Complete a conversa. Primeiro, quem é ele? Depois, como ele canta?';falar(textoFala);}}
+
+function proxJ17(){etapa17=1;montarJ17();}
+
+/* ===== J18 — CA pág.16: sílabas e a letra H ===== */
+const SILABAS18=[
+ {e:'🪳',palavra:'BARATINHA',sil:['BA','RA','TI','NHA'],extra:['PE','AR','NO']},
+ {e:'👗',palavra:'VESTIDO',sil:['VES','TI','DO'],extra:['MAR','GO','TO','SU']},
+ {e:'🍲',palavra:'CALDEIRÃO',sil:['CAL','DEI','RÃO'],extra:['BEI','GAL','MA','TÃO']}
+];
+const LETRAH=[{p:'BARATINHA',iH:7,sil:'NHA',ini:6},
+              {p:'COELHO',iH:4,sil:'LHO',ini:3},
+              {p:'CACHORRO',iH:3,sil:'CHOR',ini:2}];
+let fase18=0,rod18=0,pos18=0;
+
+function abrirJogo18(){fase18=0;rod18=0;pos18=0;mostrar('tela-j18');montarJ18();}
+
+function montarJ18(){
+  const perg=document.getElementById('perg-j18'),area=document.getElementById('area-j18'),
+        fb=document.getElementById('fb-j18');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';
+  estrelas(document.getElementById('prog-j18'),fase18===0?rod18:3+rod18,6);
+
+  if(fase18===0){                        /* nº3: montar com as sílabas necessárias */
+    const q=SILABAS18[rod18];pos18=0;
+    perg.innerHTML='MONTE O NOME DA FIGURA<br><small style="font-size:1rem">USE SÓ AS SÍLABAS NECESSÁRIAS</small>';
+    const fig=document.createElement('div');fig.className='fig-alvo';fig.textContent=q.e;
+    area.appendChild(fig);
+    const alvo=document.createElement('div');alvo.className='silaba-alvo';alvo.id='alvo18';
+    q.sil.forEach(()=>{const d=document.createElement('div');d.className='quadr';d.textContent='?';alvo.appendChild(d);});
+    area.appendChild(alvo);
+    const ops=document.createElement('div');ops.className='silabas-linha';
+    embaralhar([...q.sil,...q.extra]).forEach(sv=>{const b=document.createElement('button');
+      b.className='sil-op';b.textContent=sv;
+      b.onclick=()=>{if(sv===q.sil[pos18]){b.classList.add('usada');
+          const qd=alvo.querySelectorAll('.quadr')[pos18];qd.textContent=sv;qd.classList.add('cheio');
+          tocarSom(true);falar(sv);pos18++;
+          if(pos18>=q.sil.length){fb.textContent='⭐ '+q.palavra+'!';fb.className='feedback certo';
+            setTimeout(()=>falar(q.palavra+'! '+elogio()),500);
+            rod18++;
+            if(rod18>=SILABAS18.length)setTimeout(()=>{fase18=1;rod18=0;montarJ18();},2600);
+            else setTimeout(()=>montarJ18(),2600);}}
+        else{b.classList.add('errada');tocarSom(false);falar('Essa sílaba não é. Tente outra');
+          fb.textContent='TENTE OUTRA SÍLABA 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(ops);
+    textoFala='Monte o nome da figura usando só as sílabas necessárias.';falar(textoFala);}
+
+  else{                                  /* nº4: achar o H e a sílaba dele */
+    const q=LETRAH[rod18];
+    perg.innerHTML='TOQUE NA LETRA <b style="color:var(--rosa)">H</b> DA PALAVRA<br><small style="font-size:1rem">ELA APARECE NAS TRÊS PALAVRAS!</small>';
+    const linha=document.createElement('div');linha.className='letras-pal';
+    [...q.p].forEach((ch,i)=>{const d=document.createElement('div');d.className='lp2';d.textContent=ch;
+      d.onclick=()=>{
+        if(i===q.iH){
+          d.classList.add('achou');tocarSom(true);falar('Achou o agá!');
+          // destaca a sílaba onde o H mora
+          setTimeout(()=>{
+            for(let k=q.ini;k<q.ini+q.sil.length;k++){
+              const el=linha.querySelectorAll('.lp2')[k];
+              if(!el.classList.contains('achou'))el.classList.add('silaba-ok');}
+            falar('O agá mora na sílaba '+q.sil+'!');
+            fb.textContent='⭐ SÍLABA '+q.sil+'!';fb.className='feedback certo';},1200);
+          linha.querySelectorAll('.lp2').forEach(x=>x.onclick=null);
+          rod18++;
+          if(rod18>=LETRAH.length)setTimeout(()=>fimDeJogo(18),4200);
+          else setTimeout(()=>montarJ18(),4200);}
+        else{d.classList.add('errada');tocarSom(false);falar('Procure o agá');
+          fb.textContent='PROCURE O H 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      linha.appendChild(d);});
+    area.appendChild(linha);
+    textoFala=q.p+'. Toque na letra agá.';falar(textoFala);}}
+
+
+/* ===== painel de apoio: silabário e alfabeto fônico ===== */
+const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
+const SIL_VOG=['A','E','I','O','U','ÃO'];
+const SIL_ICONE={B:'⚽',C:'🐄',D:'🎲',F:'🔦',G:'🐈',H:'🚁',J:'🐊',K:'🚗',L:'✏️',M:'🧳',N:'👃',
+                 P:'🍞',Q:'🧀',R:'🐭',S:'☀️',T:'🐢',V:'🐮',W:'🌭',X:'☕',Y:'🧴',Z:'🦓'};
+const FONICO=[
+ {l:'A',ex:'ABELHA',boca:'😮'},{l:'B',ex:'BOLA',boca:'😗'},{l:'C',ex:'CASA',boca:'😬'},
+ {l:'D',ex:'DADO',boca:'😃'},{l:'E',ex:'ELEFANTE',boca:'😄'},{l:'F',ex:'FACA',boca:'😁'},
+ {l:'G',ex:'GATO',boca:'😃'},{l:'H',ex:'HELICÓPTERO',boca:'🤫'},{l:'I',ex:'ILHA',boca:'😁'},
+ {l:'J',ex:'JACARÉ',boca:'😙'},{l:'K',ex:'KIWI',boca:'😬'},{l:'L',ex:'LÁPIS',boca:'😛'},
+ {l:'M',ex:'MALA',boca:'😐'},{l:'N',ex:'NARIZ',boca:'😐'},{l:'O',ex:'OVO',boca:'😯'},
+ {l:'P',ex:'PATO',boca:'😗'},{l:'Q',ex:'QUEIJO',boca:'😗'},{l:'R',ex:'RATO',boca:'😝'},
+ {l:'S',ex:'SOL',boca:'😬'},{l:'T',ex:'TATU',boca:'😃'},{l:'U',ex:'UVA',boca:'😗'},
+ {l:'V',ex:'VACA',boca:'😁'},{l:'W',ex:'WAFFLE',boca:'😗'},{l:'X',ex:'XÍCARA',boca:'😙'},
+ {l:'Y',ex:'IOGURTE',boca:'😁'},{l:'Z',ex:'ZEBRA',boca:'😬'}
+];
+const SEM_SILABA={K:['ÃO'],Q:['U','ÃO'],W:['ÃO'],Y:['I','ÃO']};
+
+function silabaDe(letra,vogal){
+  if((SEM_SILABA[letra]||[]).includes(vogal))return null;
+  if(letra==='Q')return 'QU'+vogal;
+  return letra+vogal;}
+
+function abrirApoio(){
+  document.getElementById('painel-apoio').classList.add('aberto');
+  trocarAba('sil');}
+
+function fecharApoio(){
+  pararFala();
+  document.getElementById('painel-apoio').classList.remove('aberto');}
+
+function trocarAba(qual){
+  const corpo=document.getElementById('corpo-apoio');
+  document.getElementById('aba-sil').classList.toggle('ativa',qual==='sil');
+  document.getElementById('aba-fon').classList.toggle('ativa',qual==='fon');
+  document.getElementById('aba-dou').classList.toggle('ativa',qual==='dou');
+  document.getElementById('aba-voz').classList.toggle('ativa',qual==='voz');
+  document.getElementById('dica-ap').textContent=
+    (qual==='sil') ? 'TOQUE EM UMA SÍLABA PARA OUVIR'
+  : (qual==='fon') ? 'TOQUE EM UMA LETRA PARA OUVIR O SOM'
+  : (qual==='dou') ? 'MONTE O NÚMERO • TOQUE NA PEÇA PARA TIRAR'
+  : 'TOQUE PARA OUVIR E ESCOLHER A VOZ';
+  corpo.innerHTML='';
+  if(qual==='dou'){montarOuro(corpo);return;}
+  if(qual==='voz'){montarVozes(corpo);return;}
+  if(qual==='sil'){
+    const g=document.createElement('div');g.className='grade-sil';
+    const canto=document.createElement('div');canto.className='cs cab';canto.textContent='';g.appendChild(canto);
+    SIL_VOG.forEach(v=>{const d=document.createElement('div');d.className='cs cab';d.textContent=v;g.appendChild(d);});
+    SIL_LETRAS.forEach(L=>{
+      const cab=document.createElement('div');cab.className='cs letra';
+      cab.textContent=L+' '+(SIL_ICONE[L]||'');
+      cab.onclick=()=>{falar(L);tocarSom(true);};
+      g.appendChild(cab);
+      SIL_VOG.forEach(v=>{
+        const sil=silabaDe(L,v);
+        const d=document.createElement('div');
+        if(!sil){d.className='cs vazio';d.textContent='—';}
+        else{d.className='cs';d.textContent=sil;
+          d.onclick=()=>{falar(sil);tocarSom(true);
+            g.querySelectorAll('.cs').forEach(x=>x.classList.remove('falada'));
+            d.classList.add('falada');};}
+        g.appendChild(d);});});
+    corpo.appendChild(g);}
+  else{
+    const g=document.createElement('div');g.className='grade-fon';
+    FONICO.forEach(o=>{const d=document.createElement('div');d.className='cf';
+      d.innerHTML='<span class="boca">'+o.boca+'</span><span class="letra-f">'+o.l+
+                  '</span><span class="ex">'+o.ex+'</span>';
+      d.onclick=()=>{falar(o.l+', de '+o.ex);tocarSom(true);
+        g.querySelectorAll('.cf').forEach(x=>x.classList.remove('falada'));
+        d.classList.add('falada');};
+      g.appendChild(d);});
+    corpo.appendChild(g);}}
+
+
+/* ===== J19 — CA pág.17: palavras com H ===== */
+const PALAVRAS19=[
+ {p:'BONITINHA',sil:['BO','NI','TI','NHA'],emo:'🎀'},
+ {p:'VERMELHO', sil:['VER','ME','LHO'],   emo:'🔴'},
+ {p:'ABELHA',   sil:['A','BE','LHA'],     emo:'🐝'},
+ {p:'BARALHO',  sil:['BA','RA','LHO'],    emo:'🃏'},
+ {p:'BANHEIRA', sil:['BA','NHEI','RA'],   emo:'🛁'},
+ {p:'MANHOSO',  sil:['MA','NHO','SO'],    emo:'😽'},
+ {p:'ORELHA',   sil:['O','RE','LHA'],     emo:'👂'},
+ {p:'CHEIROSA', sil:['CHEI','RO','SA'],   emo:'🌸'},
+ {p:'CASINHA',  sil:['CA','SI','NHA'],    emo:'🏠'},
+ {p:'PATINHO',  sil:['PA','TI','NHO'],    emo:'🐤'}
+];
+let rod19=0,pos19=0;
+
+function abrirJogo19(){rod19=0;pos19=0;mostrar('tela-j19');montarJ19();}
+
+function montarJ19(){
+  const perg=document.getElementById('perg-j19'),alvo=document.getElementById('alvo-j19'),
+        ops=document.getElementById('ops-j19'),fb=document.getElementById('fb-j19');
+  const q=PALAVRAS19[rod19];pos19=0;
+  alvo.innerHTML='';ops.innerHTML='';fb.textContent='';fb.className='feedback';
+  document.getElementById('copiar-j19').innerHTML='';
+  document.getElementById('prox-j19').classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j19'),rod19,PALAVRAS19.length);
+  perg.innerHTML='<span style="font-size:2.6rem">'+q.emo+'</span><br>ORGANIZE AS SÍLABAS E DESCUBRA A PALAVRA';
+  q.sil.forEach(()=>{const d=document.createElement('div');d.className='quadr';d.textContent='?';alvo.appendChild(d);});
+  embaralhar([...q.sil]).forEach(sv=>{const b=document.createElement('button');b.className='sil-op';b.textContent=sv;
+    b.onclick=()=>{
+      if(sv===q.sil[pos19]){b.classList.add('usada');
+        const qd=alvo.querySelectorAll('.quadr')[pos19];qd.textContent=sv;qd.classList.add('cheio');
+        tocarSom(true);falar(sv);pos19++;
+        if(pos19>=q.sil.length){
+          fb.innerHTML='⭐ '+q.p.replace(/(NH|LH|CH)/,'<span class="destaque-h">$1</span>');
+          fb.className='feedback certo';
+          setTimeout(()=>falar(q.p+'! '+elogio()),500);
+          /* a palavra fica na tela até ela tocar em PRÓXIMA — dá tempo de copiar no caderno */
+          document.getElementById('copiar-j19').innerHTML=
+            '<div class="copiar-box"><div class="rot-cop">✏️ AGORA COPIE NO CADERNO</div>'+
+            '<div class="pal-cop">'+q.p+'</div>'+
+            '<div class="sil-cop">'+q.sil.join(' - ')+'</div></div>';
+          ops.querySelectorAll('.sil-op').forEach(x=>x.onclick=null);
+          document.getElementById('prox-j19').classList.add('mostrar');
+          document.getElementById('prox-j19').textContent=
+            (rod19>=PALAVRAS19.length-1)?'TERMINAR ⭐':'PRÓXIMA PALAVRA ➜';}}
+      else{b.classList.add('errada');tocarSom(false);falar('Tente outra sílaba');
+        fb.textContent='TENTE OUTRA SÍLABA 💪';fb.className='feedback tente';
+        setTimeout(()=>b.classList.remove('errada'),450);}};
+    ops.appendChild(b);});
+  textoFala='Organize as sílabas e descubra a palavra. Se precisar, use o botão do silabário.';
+  falar(textoFala);}
+
+function proxJ19(){
+  rod19++;
+  if(rod19>=PALAVRAS19.length)fimDeJogo(19);
+  else montarJ19();}
+
+
+/* ===== material dourado do painel de apoio ===== */
+let OURO={c:0,d:0,u:0};
+
+function desenhaOuro(novo){
+  const mesa=document.getElementById('mesa-ouro');
+  if(!mesa)return;
+  mesa.innerHTML='';
+  const cols=[['c','CENTENAS','pc-placa',100],['d','DEZENAS','pc-barra',10],['u','UNIDADES','pc-cubo',1]];
+  cols.forEach(([k,rot,cls])=>{
+    const col=document.createElement('div');col.className='col-ouro';
+    const pil=document.createElement('div');pil.className='pilha';
+    for(let i=0;i<OURO[k];i++){
+      const p=document.createElement('div');
+      p.className=cls+((novo===k&&i===OURO[k]-1)?' pc-nova':'');
+      p.onclick=()=>{if(OURO[k]>0){OURO[k]--;tocarSom(false);desenhaOuro();}};
+      pil.appendChild(p);}
+    const r=document.createElement('div');r.className='rot';r.textContent=rot+': '+OURO[k];
+    col.appendChild(pil);col.appendChild(r);mesa.appendChild(col);});
+
+  const total=OURO.c*100+OURO.d*10+OURO.u;
+  document.getElementById('total-ouro').textContent=total;
+  const partes=[];
+  if(OURO.c)partes.push(OURO.c*100);
+  if(OURO.d)partes.push(OURO.d*10);
+  if(OURO.u)partes.push(OURO.u);
+  document.getElementById('conta-ouro').textContent=partes.length>1?partes.join(' + ')+' = '+total:'';
+
+  const bt=document.getElementById('btn-trocar');
+  if(OURO.u>=10){bt.style.display='';bt.textContent='🔄 TROCAR 10 CUBINHOS POR 1 BARRA';
+    bt.onclick=()=>{OURO.u-=10;OURO.d++;tocarSom(true);
+      falar('Dez cubinhos viram uma barra de dez!');desenhaOuro('d');};}
+  else if(OURO.d>=10){bt.style.display='';bt.textContent='🔄 TROCAR 10 BARRAS POR 1 PLACA';
+    bt.onclick=()=>{OURO.d-=10;OURO.c++;tocarSom(true);
+      falar('Dez barras viram uma placa de cem!');desenhaOuro('c');};}
+  else bt.style.display='none';}
+
+function porOuro(k,valor){
+  const limite={c:9,d:19,u:19};
+  if(OURO[k]>=limite[k])return;
+  OURO[k]++;tocarSom(true);
+  const total=OURO.c*100+OURO.d*10+OURO.u;
+  falar(String(total));
+  desenhaOuro(k);}
+
+function limparOuro(){OURO={c:0,d:0,u:0};tocarSom(false);falar('Limpou!');desenhaOuro();}
+
+function montarOuro(corpo){
+  corpo.innerHTML=
+    '<div class="total-ouro" id="total-ouro">0</div>'+
+    '<div class="conta-ouro" id="conta-ouro"></div>'+
+    '<div class="mesa-ouro" id="mesa-ouro"></div>'+
+    '<div class="btns-ouro">'+
+      '<button class="b-ouro" onclick="porOuro(\'u\')">+ 1 CUBINHO</button>'+
+      '<button class="b-ouro" onclick="porOuro(\'d\')">+ 1 BARRA (10)</button>'+
+      '<button class="b-ouro" onclick="porOuro(\'c\')">+ 1 PLACA (100)</button>'+
+    '</div>'+
+    '<div class="btns-ouro">'+
+      '<button class="b-ouro trocar" id="btn-trocar" style="display:none"></button>'+
+      '<button class="b-ouro limpar" onclick="limparOuro()">🗑️ LIMPAR</button>'+
+    '</div>';
+  desenhaOuro();}
+
+
+/* ===== escolha da melhor voz disponível ===== */
+let VOZES=[], VOZ_ESCOLHIDA=null;
+
+/* nomes de vozes pt-BR boas, da melhor para a mais simples */
+const PREFERIDAS=['luciana','francisca','camila','joana','brasil','google','microsoft','maria','fernanda'];
+const MARCA_BOA=['premium','enhanced','neural','natural','siri','eloquence'];
+
+function carregarVozes(){
+  try{
+    const todas=speechSynthesis.getVoices()||[];
+    const lang=v=>(v.lang||'').toLowerCase().replace('_','-');
+    VOZES=todas.filter(v=>lang(v).startsWith('pt-br'));            /* só português do Brasil */
+    if(!VOZES.length)VOZES=todas.filter(v=>lang(v).startsWith('pt'));/* nenhuma pt-BR: aceita outra pt */
+    if(!VOZES.length)VOZES=[];                                      /* nem pt: usa a padrão do aparelho */
+    VOZES.sort((a,b)=>notaVoz(b)-notaVoz(a));
+    let salva=null;
+    try{salva=localStorage.getItem('vozEduarda');}catch(e){}
+    VOZ_ESCOLHIDA=(salva&&VOZES.find(v=>v.name===salva))||VOZES[0]||null;
+  }catch(e){}}
+
+function notaVoz(v){
+  const n=(v.name||'').toLowerCase(), l=(v.lang||'').toLowerCase().replace('_','-');
+  let nota=0;
+  if(l.startsWith('pt-br'))nota+=50;
+  MARCA_BOA.forEach(m=>{if(n.includes(m))nota+=25;});
+  PREFERIDAS.forEach((p,i)=>{if(n.includes(p))nota+=(PREFERIDAS.length-i)*3;});
+  if(v.localService)nota+=5;          /* funciona offline */
+  if(n.includes('compact'))nota-=20;  /* versão reduzida, mais robótica */
+  return nota;}
+
+function escolherVoz(nome){
+  const v=VOZES.find(x=>x.name===nome);
+  if(!v)return;
+  VOZ_ESCOLHIDA=v;
+  try{localStorage.setItem('vozEduarda',nome);}catch(e){}
+  falar('Oi! Agora eu vou falar assim com você.');
+  montarVozes(document.getElementById('corpo-apoio'));}
+
+function montarVozes(corpo){
+  carregarVozes();
+  corpo.innerHTML='';
+  const lista=document.createElement('div');lista.className='lista-voz';
+  if(!VOZES.length){
+    lista.innerHTML='<div class="aviso-voz">Este aparelho não tem nenhuma voz em '+
+      '<b>português do Brasil</b> instalada. O app vai usar a voz padrão do sistema. '+
+      'Instale a voz Luciana seguindo a dica abaixo.</div>';}
+  VOZES.slice(0,12).forEach(v=>{
+    const d=document.createElement('div');
+    d.className='item-voz'+((VOZ_ESCOLHIDA&&v.name===VOZ_ESCOLHIDA.name)?' escolhida':'');
+    const boa=MARCA_BOA.some(m=>(v.name||'').toLowerCase().includes(m));
+    d.innerHTML='<span class="play">🔊</span><span class="nome-voz">'+v.name+
+      '<br><span style="font-size:.72rem;color:#8E7CC3">'+(v.lang||'')+'</span></span>'+
+      (boa?'<span class="selo">MELHOR</span>':'');
+    d.onclick=()=>escolherVoz(v.name);
+    lista.appendChild(d);});
+  corpo.appendChild(lista);
+  const aviso=document.createElement('div');aviso.className='aviso-voz';
+  aviso.innerHTML='<b>Dica:</b> no iPad, baixe a voz <b>Luciana (Aprimorada)</b> em '+
+    'Ajustes → Acessibilidade → Conteúdo Falado → Vozes → Português (Brasil). '+
+    'Depois volte aqui e escolha ela na lista — fica bem mais natural.';
+  corpo.appendChild(aviso);}
+
+try{carregarVozes();speechSynthesis.onvoiceschanged=carregarVozes;}catch(e){}
+
+/* ===== J20 — CA pág.18: nomear figuras e separar CH, LH, NH ===== */
+const FIG20=[
+ {im:'🕷️',p:'ARANHA',g:'NH'},{im:'🌧️',p:'CHUVA',g:'CH'},{im:'🍂',p:'FOLHA',g:'LH'},
+ {im:'💅',p:'UNHA',g:'NH'},{im:'🏠',p:'TELHADO',g:'LH'},{im:'💵',p:'DINHEIRO',g:'NH'},
+ {im:'👒',p:'CHAPÉU',g:'CH'},{im:'🤡',p:'PALHAÇO',g:'LH'},{im:'🍫',p:'CHOCOLATE',g:'CH'}
+];
+let rod20=0, fase20=0, postas20={CH:[],LH:[],NH:[]};
+
+function abrirJogo20(){rod20=0;fase20=0;postas20={CH:[],LH:[],NH:[]};mostrar('tela-j20');montarJ20();}
+
+function montarJ20(){
+  const perg=document.getElementById('perg-j20'),area=document.getElementById('area-j20'),
+        fb=document.getElementById('fb-j20'),prox=document.getElementById('prox-j20');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j20'),fase20===0?rod20:9,10);
+
+  if(fase20===0){                       /* nomear a figura */
+    const q=FIG20[rod20];
+    perg.innerHTML='QUE FIGURA É ESTA?';
+    const cx=document.createElement('div');cx.className='fig-nome';
+    cx.innerHTML='<span class="im">'+q.im+'</span><div class="cx-nome" id="cx20">?</div>';
+    area.appendChild(cx);
+    const outras=FIG20.filter(f=>f.p!==q.p);
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    embaralhar([q.p,outras[rod20%outras.length].p,outras[(rod20+3)%outras.length].p]).forEach(v=>{
+      const b=document.createElement('button');b.className='sil';b.style.fontSize='1.05rem';b.textContent=v;
+      b.onclick=()=>{if(v===q.p){
+          const c=document.getElementById('cx20');c.textContent=v;c.classList.add('ok');
+          tocarSom(true);falar(v+'! '+elogio());
+          fb.innerHTML='⭐ '+v.replace(/(CH|LH|NH)/,'<span class="destaque-h">$1</span>');
+          fb.className='feedback certo';
+          ops.querySelectorAll('.sil').forEach(x=>x.onclick=null);
+          prox.classList.add('mostrar');
+          prox.textContent=(rod20>=FIG20.length-1)?'AGORA SEPARAR ➜':'PRÓXIMA FIGURA ➜';}
+        else{b.classList.add('errada');tocarSom(false);falar('Tente de novo');
+          fb.textContent='TENTE DE NOVO 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(ops);
+    textoFala='Que figura é esta? Escolha o nome certo.';falar(textoFala);}
+
+  else{                                  /* separar nas colunas CH / LH / NH */
+    const faltam=FIG20.filter(f=>!postas20[f.g].includes(f.p));
+    if(!faltam.length){fb.textContent='⭐ TUDO SEPARADO!';fb.className='feedback certo';
+      setTimeout(()=>fimDeJogo(20),2400);return;}
+    const q=faltam[0];
+    perg.innerHTML='<span style="font-size:2.6rem">'+q.im+'</span><br>ONDE MORA A PALAVRA <b>'+q.p+'</b>?';
+    const cols=document.createElement('div');cols.className='colunas-h';
+    ['CH','LH','NH'].forEach(g=>{const d=document.createElement('div');d.className='col-h';
+      d.innerHTML='<div class="tit-h">'+g+'</div>'+
+        postas20[g].map(p=>'<div class="pal-h">'+p+'</div>').join('');
+      d.onclick=()=>{if(g===q.g){postas20[g].push(q.p);tocarSom(true);
+          falar(q.p+', com '+g+'! '+elogio());
+          fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+          setTimeout(()=>montarJ20(),1500);}
+        else{d.classList.add('col-h');tocarSom(false);falar('Olhe as duas letrinhas da palavra');
+          fb.textContent='OLHE AS LETRAS 💪';fb.className='feedback tente';}};
+      cols.appendChild(d);});
+    area.appendChild(cols);
+    textoFala='Onde mora a palavra '+q.p+'? No cê agá, no éle agá ou no ene agá?';falar(textoFala);}}
+
+function proxJ20(){
+  rod20++;
+  if(rod20>=FIG20.length)fase20=1;
+  montarJ20();}
+
+/* ===== J21 — CA pág.19: uma letra muda tudo ===== */
+const PARES21=[
+ {im:'🌳',p:'GALHO'},{im:'🐓',p:'GALO'},{im:'😴',p:'SONO'},
+ {im:'🛏️',p:'CAMA'},{im:'💭',p:'SONHO'},{im:'🔥',p:'CHAMA'}
+];
+let fase21=0, achou21=0, sel21=null;
+
+function abrirJogo21(){fase21=0;achou21=0;sel21=null;mostrar('tela-j21');montarJ21();}
+
+function montarJ21(){
+  const perg=document.getElementById('perg-j21'),area=document.getElementById('area-j21'),
+        fb=document.getElementById('fb-j21'),prox=document.getElementById('prox-j21');
+  area.innerHTML='';fb.textContent='';fb.className='feedback';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j21'),fase21,4);
+
+  if(fase21===0){                        /* ligar palavra à imagem */
+    perg.innerHTML='UMA LETRINHA MUDA TUDO!<br><small style="font-size:1rem">TOQUE NA FIGURA E DEPOIS NA PALAVRA</small>';
+    achou21=0;sel21=null;
+    const figs=document.createElement('div');figs.className='par-linha';figs.style.flexWrap='wrap';
+    embaralhar([...PARES21]).forEach(o=>{const d=document.createElement('div');d.className='par-fig';
+      d.textContent=o.im;d.dataset.p=o.p;
+      d.onclick=()=>{if(d.classList.contains('ok'))return;
+        figs.querySelectorAll('.par-fig').forEach(x=>x.classList.remove('sel'));
+        d.classList.add('sel');sel21=o;tocarSom(true);};
+      figs.appendChild(d);});
+    const pals=document.createElement('div');pals.className='par-linha';pals.style.flexWrap='wrap';
+    embaralhar([...PARES21]).forEach(o=>{const b=document.createElement('div');b.className='par-pal';
+      b.textContent=o.p;
+      b.onclick=()=>{if(b.classList.contains('ok'))return;
+        if(!sel21){falar('Primeiro toque numa figura');return;}
+        if(sel21.p===o.p){b.classList.add('ok');
+          figs.querySelectorAll('.par-fig').forEach(x=>{if(x.dataset.p===o.p){x.classList.remove('sel');x.classList.add('ok');}});
+          achou21++;sel21=null;tocarSom(true);falar(o.p+'!');
+          if(achou21===PARES21.length){fb.textContent='⭐ '+elogio();fb.className='feedback certo';
+            prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}}
+        else{b.classList.add('errada');tocarSom(false);falar('Essa não. Olhe bem a figura');
+          fb.textContent='OLHE BEM A FIGURA 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      pals.appendChild(b);});
+    area.appendChild(figs);area.appendChild(pals);
+    textoFala='Uma letrinha muda tudo! Toque numa figura e depois na palavra dela.';falar(textoFala);}
+
+  else if(fase21===1){                   /* o dedo na segunda letra A */
+    perg.innerHTML='TOQUE NA <b>SEGUNDA LETRA A</b><br>DA PALAVRA BARATINHA';
+    const linha=document.createElement('div');linha.className='palavra-dedo';
+    [...'BARATINHA'].forEach((ch,i)=>{const d=document.createElement('div');d.className='ld';d.textContent=ch;
+      d.onclick=()=>{
+        if(i===3){d.classList.add('dedo');d.textContent='👆';tocarSom(true);
+          falar('Achou! O dedo está na segunda letra A.');
+          setTimeout(()=>{
+            linha.querySelectorAll('.ld').forEach((x,k)=>{
+              if(k<3)x.classList.add('esq');
+              if(k>3)x.classList.add('dir');});
+            falar('Olhe! À esquerda apareceu BAR. E à direita, TINHA.');
+            fb.innerHTML='⭐ <span style="color:#1976D2">BAR</span> + <span style="color:#388E3C">TINHA</span>';
+            fb.className='feedback certo';
+            prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';},1400);
+          linha.querySelectorAll('.ld').forEach(x=>x.onclick=null);}
+        else{d.classList.add('errada');tocarSom(false);falar('Essa não é a segunda letra A');
+          fb.textContent='PROCURE O SEGUNDO A 💪';fb.className='feedback tente';
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      linha.appendChild(d);});
+    area.appendChild(linha);
+    textoFala='Toque na segunda letra A da palavra baratinha.';falar(textoFala);}
+
+  else if(fase21===2){                   /* quais palavras apareceram */
+    perg.innerHTML='QUE DUAS PALAVRAS APARECERAM?<br><small style="font-size:1rem">TOQUE NAS DUAS CERTAS</small>';
+    let n=0;
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    embaralhar(['BAR','TINHA','BARA','RATO']).forEach(v=>{const b=document.createElement('button');
+      b.className='sil';b.textContent=v;
+      b.onclick=()=>{if(b.classList.contains('usada'))return;
+        if(v==='BAR'||v==='TINHA'){b.classList.add('usada');b.style.visibility='visible';
+          b.style.background='var(--verde)';b.style.boxShadow='0 5px 0 #2E7D32';
+          n++;tocarSom(true);falar(v+'!');
+          if(n===2){fb.textContent='⭐ BAR E TINHA!';fb.className='feedback certo';
+            prox.classList.add('mostrar');prox.textContent='ÚLTIMA ➜';}}
+        else{b.classList.add('errada');tocarSom(false);falar('Essa não apareceu');
+          fb.textContent='TENTE OUTRA 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(ops);
+    textoFala='Que duas palavras apareceram do lado do seu dedo?';falar(textoFala);}
+
+  else{                                  /* som inicial de TIJOLO */
+    perg.innerHTML='QUAL COMEÇA COM O MESMO SOM DE<br><b>🧱 TIJOLO</b>?';
+    const ops=document.createElement('div');ops.className='silaba-ops';
+    embaralhar(['TINHA','BAR']).forEach(v=>{const b=document.createElement('button');
+      b.className='sil';b.style.fontSize='1.3rem';b.textContent=v;
+      b.onclick=()=>{if(v==='TINHA'){tocarSom(true);
+          falar('TI-jolo, TI-nha! Começam com o mesmo som! '+elogio());
+          fb.textContent='⭐ TINHA!';fb.className='feedback certo';
+          ops.querySelectorAll('.sil').forEach(x=>x.onclick=null);
+          setTimeout(()=>fimDeJogo(21),3200);}
+        else{b.classList.add('errada');tocarSom(false);falar('Escute de novo: TI-jolo');
+          fb.textContent='ESCUTE: TI-JOLO 💪';fb.className='feedback tente';
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      ops.appendChild(b);});
+    area.appendChild(ops);
+    textoFala='Qual palavra começa com o mesmo som de tijolo?';falar(textoFala);}}
+
+function proxJ21(){fase21++;montarJ21();}
+
+</script>
+</body>
+</html>
