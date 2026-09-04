@@ -546,15 +546,15 @@ function fimResumo(n,titulo,blocos){
 
 /* ===== J1 — CA pág.2 nº1: os hábitos de higiene da Anita ===== */
 const HABITOS=[
- {e:'\U0001f6bf',n:'TOMAR BANHO TODOS OS DIAS'},
- {e:'\U0001f9fc',n:'LAVAR AS MÃOS'},
- {e:'\U0001faa5',n:'ESCOVAR OS DENTES APÓS AS REFEIÇÕES'},
+ {e:'🚿',n:'TOMAR BANHO TODOS OS DIAS'},
+ {e:'🧼',n:'LAVAR AS MÃOS'},
+ {e:'🪥',n:'ESCOVAR OS DENTES APÓS AS REFEIÇÕES'},
  {e:'\u270b',n:'CORTAR AS UNHAS'},
- {e:'\U0001f45f',n:'NÃO ANDAR DESCALÇO'},
- {e:'\U0001f488',n:'ESCOVAR O CABELO'},
- {e:'\U0001f442',n:'LIMPAR AS ORELHAS'},
- {e:'\U0001f6bd',n:'DAR DESCARGA APÓS USAR O VASO SANITÁRIO'},
- {e:'\U0001f927',n:'USAR LENÇO AO ASSOAR O NARIZ'}
+ {e:'👟',n:'NÃO ANDAR DESCALÇO'},
+ {e:'💈',n:'ESCOVAR O CABELO'},
+ {e:'👂',n:'LIMPAR AS ORELHAS'},
+ {e:'🚽',n:'DAR DESCARGA APÓS USAR O VASO SANITÁRIO'},
+ {e:'🤧',n:'USAR LENÇO AO ASSOAR O NARIZ'}
 ];
 let pint1=[];
 function abrirJogo1(){
@@ -591,7 +591,7 @@ function abrirJogo2(){
   mostrar('tela-j2');
   textoFala='Urbano disse à sua mãe que não queria lavar as mãos antes das refeições. Assinale a resposta que você daria a ele.';
   document.getElementById('perg-j2').innerHTML=
-    '\U0001f466 URBANO N\u00c3O QUER LAVAR AS M\u00c3OS ANTES DE COMER.<br>QUAL RESPOSTA VOC\u00ca DARIA A ELE?';
+    '👦 URBANO N\u00c3O QUER LAVAR AS M\u00c3OS ANTES DE COMER.<br>QUAL RESPOSTA VOC\u00ca DARIA A ELE?';
   document.getElementById('fb-j2').textContent='';
   const a=document.getElementById('ops-j2');a.innerHTML='';
   OPS2.forEach(o=>{
@@ -608,16 +608,16 @@ function respJ2(el,o){
     setTimeout(()=>fimDeJogo(2),2600);
   }else{
     el.style.borderColor='#EF9A9A';
-    fb.className='feedback tente';fb.textContent='TENTE DE NOVO \U0001f60a';
+    fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
     tocarSom(false);falar('Quase! Pense de novo.');}}
 
 /* ===== J3 — CA pág.3 nº3: o que eu uso no banho ===== */
 const BANHO=[
- {e:'\U0001f9fc',n:'SABONETE',ok:true},{e:'\U0001f9f4',n:'XAMPU',ok:true},
- {e:'\U0001f6bf',n:'CHUVEIRO',ok:true},{e:'\U0001f9fd',n:'ESPONJA',ok:true},
- {e:'\U0001f6c1',n:'BANHEIRA',ok:true},{e:'\U0001faa3',n:'TOALHA',ok:true},
- {e:'\u26bd',n:'BOLA',ok:false},{e:'\U0001f355',n:'PIZZA',ok:false},
- {e:'\U0001f4d6',n:'LIVRO',ok:false}
+ {e:'🧼',n:'SABONETE',ok:true},{e:'🧴',n:'XAMPU',ok:true},
+ {e:'🚿',n:'CHUVEIRO',ok:true},{e:'🧽',n:'ESPONJA',ok:true},
+ {e:'🛁',n:'BANHEIRA',ok:true},{e:'🪣',n:'TOALHA',ok:true},
+ {e:'\u26bd',n:'BOLA',ok:false},{e:'🍕',n:'PIZZA',ok:false},
+ {e:'📖',n:'LIVRO',ok:false}
 ];
 let esc3=[];
 function abrirJogo3(){
@@ -634,7 +634,7 @@ function abrirJogo3(){
   contaJ3();falar(textoFala);}
 function respJ3(el,o){
   const fb=document.getElementById('fb-j3');
-  if(!o.ok){fb.className='feedback tente';fb.textContent=o.n+' N\u00c3O \u00c9 DO BANHO \U0001f60a';
+  if(!o.ok){fb.className='feedback tente';fb.textContent=o.n+' N\u00c3O \u00c9 DO BANHO 😊';
     tocarSom(false);falar(o.n+' não é do banho. Tente outro.');return;}
   const j=esc3.indexOf(o.n);
   if(j>=0){esc3.splice(j,1);el.classList.remove('pintado');}
@@ -654,13 +654,13 @@ const RODADAS4=[
  {tit:'A) LOGO QUE ACORDA',
   perg:'LOGO QUE VOC\u00ca ACORDA, QUAIS S\u00c3O SEUS H\u00c1BITOS DE HIGIENE?',
   fala:'Logo que acorda, quais são seus principais hábitos de higiene? Assinale.',
-  ops:[{e:'\U0001f9fc',n:'LAVO O ROSTO'},{e:'\U0001f6bf',n:'TOMO BANHO'},
-       {e:'\U0001faa5',n:'ESCOVO OS DENTES'},{e:'\u270b',n:'CORTO AS UNHAS'}]},
+  ops:[{e:'🧼',n:'LAVO O ROSTO'},{e:'🚿',n:'TOMO BANHO'},
+       {e:'🪥',n:'ESCOVO OS DENTES'},{e:'\u270b',n:'CORTO AS UNHAS'}]},
  {tit:'B) DEPOIS DE SE ALIMENTAR EM CASA',
   perg:'E DEPOIS DE VOC\u00ca COMER EM CASA?<br>QUAIS S\u00c3O SEUS H\u00c1BITOS?',
   fala:'E depois de você se alimentar em casa? Assinale os seus hábitos.',
-  ops:[{e:'\U0001faa5',n:'ESCOVO OS DENTES'},{e:'\U0001f442',n:'LIMPO AS ORELHAS'},
-       {e:'\U0001f9f5',n:'USO FIO DENTAL'},{e:'\U0001f6bf',n:'TOMO BANHO'}]}
+  ops:[{e:'🪥',n:'ESCOVO OS DENTES'},{e:'👂',n:'LIMPO AS ORELHAS'},
+       {e:'🧵',n:'USO FIO DENTAL'},{e:'🚿',n:'TOMO BANHO'}]}
 ];
 let rod4=0,marc4=[[],[]];
 function abrirJogo4(){rod4=0;marc4=[[],[]];mostrar('tela-j4');montarJ4();}
@@ -668,7 +668,7 @@ function montarJ4(){
   const r=RODADAS4[rod4];
   estrelas(document.getElementById('prog-j4'),rod4,RODADAS4.length);
   textoFala=r.fala;
-  document.getElementById('perg-j4').innerHTML='\U0001f467 ANITA QUER SABER:<br>'+r.perg;
+  document.getElementById('perg-j4').innerHTML='👧 ANITA QUER SABER:<br>'+r.perg;
   const a=document.getElementById('area-j4');a.innerHTML='';
   r.ops.forEach(o=>{
     const d=document.createElement('div');d.className='hab';
