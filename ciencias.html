@@ -399,6 +399,22 @@
   .hab .nome{font-size:.95rem;font-weight:bold;display:block;margin-top:6px;line-height:1.25;}
   .hab.pintado{filter:none;background:#E0F2F1;border-color:#26A69A;box-shadow:0 5px 0 #00897B;animation:pula .4s;}
   .hab.pintado .nome{color:#00695C;}
+  .lista-quadros{display:flex;flex-direction:column;gap:0;width:100%;}
+  .op-quadro{display:flex;align-items:center;gap:14px;background:var(--card);border:5px solid #E8DEF8;
+    border-radius:22px;padding:14px 16px;margin:10px 0;cursor:pointer;box-shadow:0 5px 0 #E8DEF8;
+    font-size:1.12rem;font-weight:bold;text-align:left;line-height:1.35;color:var(--texto);
+    transition:transform .1s;font-family:inherit;}
+  .op-quadro:active{transform:translateY(4px);box-shadow:0 1px 0 #E8DEF8;}
+  .op-quadro .cx{flex:0 0 auto;width:48px;height:48px;border:5px solid #B39DDB;border-radius:14px;
+    background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.9rem;
+    color:#fff;line-height:1;}
+  .op-quadro.certa{border-color:var(--verde);background:var(--verde-claro);
+    box-shadow:0 5px 0 var(--verde);animation:pula .5s;}
+  .op-quadro.certa .cx{background:var(--verde);border-color:var(--verde);}
+  .op-quadro.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .op-quadro.errada .cx{border-color:#EF9A9A;background:#FFEBEE;}
+  .hab .ic{display:block;line-height:1;}
+  .hab .ic svg{width:58px;height:58px;display:block;margin:0 auto;}
   .contador{text-align:center;font-size:1.05rem;font-weight:bold;color:#00897B;margin:10px 0 0;}
   .resumo-card{background:var(--card);border-radius:28px;padding:24px 18px;text-align:center;
     box-shadow:0 8px 24px rgba(38,166,154,.25);margin-top:20px;}
@@ -437,7 +453,7 @@
   <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
     <button class="falar" onclick="falarPergunta()">🔊</button></div>
   <div class="pergunta" id="perg-j2"></div>
-  <div class="lista-itens" id="ops-j2"></div>
+  <div class="lista-quadros" id="ops-j2"></div>
   <div class="feedback" id="fb-j2"></div>
 </div>
 
@@ -595,27 +611,30 @@ function abrirJogo2(){
   document.getElementById('fb-j2').textContent='';
   const a=document.getElementById('ops-j2');a.innerHTML='';
   OPS2.forEach(o=>{
-    const d=document.createElement('div');d.className='item-lista';d.textContent=o.t;
+    const d=document.createElement('button');d.className='op-quadro';
+    d.innerHTML='<span class="cx"></span><span>'+o.t+'</span>';
     d.onclick=()=>respJ2(d,o);a.appendChild(d);});
   falar(textoFala);}
 function respJ2(el,o){
   const fb=document.getElementById('fb-j2');
   if(o.ok){
-    el.style.borderColor='#43A047';el.style.background='#E8F5E9';
+    el.classList.add('certa');el.querySelector('.cx').textContent='✔';
     fb.className='feedback certo';fb.textContent=elogio();
-    document.querySelectorAll('#ops-j2 .item-lista').forEach(x=>x.onclick=null);
+    document.querySelectorAll('#ops-j2 .op-quadro').forEach(x=>x.onclick=null);
     falar('Isso mesmo! Lavar as mãos evita a contaminação por micro-organismos e as doenças.');
     setTimeout(()=>fimDeJogo(2),2600);
   }else{
-    el.style.borderColor='#EF9A9A';
+    el.classList.add('errada');el.querySelector('.cx').textContent='✖';
     fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
-    tocarSom(false);falar('Quase! Pense de novo.');}}
+    tocarSom(false);falar('Quase! Pense de novo.');
+    setTimeout(()=>{el.classList.remove('errada');el.querySelector('.cx').textContent='';},900);}}
 
 /* ===== J3 — CA pág.3 nº3: o que eu uso no banho ===== */
+const TOALHA_SVG='<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="9" y="10" width="46" height="44" rx="9" fill="#4DD0E1"/><path d="M9 19h46v5H9zM9 30h46v5H9zM9 41h46v5H9z" fill="#FFFFFF"/><path d="M9 19c0-5 4-9 9-9h6v44h-6c-5 0-9-4-9-9z" fill="#26A69A"/><path d="M24 10h4v44h-4z" fill="#00897B" opacity=".35"/></svg>';
 const BANHO=[
  {e:'🧼',n:'SABONETE',ok:true},{e:'🧴',n:'XAMPU',ok:true},
  {e:'🚿',n:'CHUVEIRO',ok:true},{e:'🧽',n:'ESPONJA',ok:true},
- {e:'🛁',n:'BANHEIRA',ok:true},{e:'🪣',n:'TOALHA',ok:true},
+ {e:'🛁',n:'BANHEIRA',ok:true},{svg:TOALHA_SVG,n:'TOALHA',ok:true},
  {e:'\u26bd',n:'BOLA',ok:false},{e:'🍕',n:'PIZZA',ok:false},
  {e:'📖',n:'LIVRO',ok:false}
 ];
@@ -629,7 +648,8 @@ function abrirJogo3(){
   const a=document.getElementById('area-j3');a.innerHTML='';
   embaralhar(BANHO.slice()).forEach(o=>{
     const d=document.createElement('div');d.className='hab';
-    d.innerHTML='<span class="emo">'+o.e+'</span><span class="nome">'+o.n+'</span>';
+    d.innerHTML=(o.svg?'<span class="ic">'+o.svg+'</span>':'<span class="emo">'+o.e+'</span>')
+      +'<span class="nome">'+o.n+'</span>';
     d.onclick=()=>respJ3(d,o);a.appendChild(d);});
   contaJ3();falar(textoFala);}
 function respJ3(el,o){
