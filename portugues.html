@@ -374,6 +374,58 @@
   .cd.pal{background:#FFE0B2;color:#E65100;font-size:.82rem;text-align:left;padding-left:8px;line-height:1.2;}
   .cd.vazio{background:transparent;box-shadow:none;cursor:default;color:#B39DDB;}
   .cd.falada{background:#C8E6C9;color:#1B5E20;}
+  .m22{background:#EC407A;} .m23{background:#29B6F6;} .m24{background:#7E57C2;} .m25{background:#8D6E63;}
+  /* ---- palavra com letras (palavras escondidas) ---- */
+  .letras-p{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin:6px 0 10px;}
+  .lt{background:var(--card);border:4px solid #E8DEF8;border-radius:14px;width:52px;height:62px;
+    display:flex;align-items:center;justify-content:center;font-size:1.9rem;font-weight:bold;
+    color:var(--texto);box-shadow:0 4px 0 #E8DEF8;}
+  .lt.achada{background:#FFF176;border-color:#F9A825;color:#E65100;box-shadow:0 4px 0 #F9A825;animation:pula .45s;}
+  /* ---- sinais de pontuacao ---- */
+  .sinais{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:12px;}
+  .sn{border:none;background:var(--card);border:5px solid #E8DEF8;border-radius:22px;
+    width:96px;height:96px;font-family:inherit;font-size:3rem;font-weight:bold;color:var(--roxo);
+    cursor:pointer;box-shadow:0 5px 0 #E8DEF8;transition:transform .1s;}
+  .sn:active{transform:translateY(4px);box-shadow:none;}
+  .sn.certa{background:var(--verde-claro);border-color:var(--verde);color:#1B5E20;
+    box-shadow:0 5px 0 var(--verde);animation:pula .45s;}
+  .sn.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .sn.pintavel{filter:grayscale(1);} .sn.pintavel.certa{filter:none;}
+  .fala-dona{background:var(--card);border-radius:22px;padding:16px 18px;margin:4px 0;
+    font-size:1.25rem;font-weight:bold;line-height:1.5;color:var(--texto);box-shadow:0 5px 0 #EDE7F6;}
+  .fala-dona .tv{color:#7E57C2;font-size:1.5rem;}
+  .fala-dona .vazio{display:inline-block;min-width:44px;border-bottom:4px solid #B39DDB;}
+  /* ---- opcoes com quadradinho ---- */
+  .lista-quadros{display:flex;flex-direction:column;gap:0;width:100%;}
+  .op-quadro{display:flex;align-items:center;gap:14px;background:var(--card);border:5px solid #E8DEF8;
+    border-radius:22px;padding:14px 16px;margin:10px 0;cursor:pointer;box-shadow:0 5px 0 #E8DEF8;
+    font-size:1.12rem;font-weight:bold;text-align:left;line-height:1.35;color:var(--texto);
+    transition:transform .1s;font-family:inherit;}
+  .op-quadro:active{transform:translateY(4px);box-shadow:0 1px 0 #E8DEF8;}
+  .op-quadro .cx{flex:0 0 auto;width:48px;height:48px;border:5px solid #B39DDB;border-radius:14px;
+    background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.9rem;color:#fff;line-height:1;}
+  .op-quadro.certa{border-color:var(--verde);background:var(--verde-claro);box-shadow:0 5px 0 var(--verde);animation:pula .5s;}
+  .op-quadro.certa .cx{background:var(--verde);border-color:var(--verde);}
+  .op-quadro.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .op-quadro.errada .cx{border-color:#EF9A9A;background:#FFEBEE;}
+  /* ---- cenas da barata ---- */
+  .cenas-b{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:8px;}
+  .cena-b{background:var(--card);border:6px solid #E8DEF8;border-radius:24px;padding:16px 10px;text-align:center;
+    box-shadow:0 6px 0 #E8DEF8;}
+  .cena-b .balao{display:inline-block;background:#FFF9C4;border:3px solid #F9A825;border-radius:16px;
+    padding:6px 12px;font-size:1.05rem;font-weight:bold;color:#E65100;margin-bottom:8px;}
+  .cena-b .fig{font-size:4rem;display:block;line-height:1.15;}
+  .cena-b .leg{display:block;margin-top:6px;font-size:.9rem;font-weight:bold;color:#8E7CC3;}
+  .cena-b.destaque{border-color:#EC407A;box-shadow:0 6px 0 #C2185B;background:#FCE4EC;}
+  /* ---- resumo para copiar no caderno ---- */
+  .resumo-card{background:var(--card);border-radius:28px;padding:24px 18px;text-align:center;
+    box-shadow:0 8px 24px rgba(102,187,106,.25);margin-top:20px;}
+  .resumo-card h2{color:var(--verde);font-size:1.6rem;margin:10px 0 4px;}
+  .resumo-card .sub-r{color:#8E7CC3;font-size:1rem;font-weight:bold;margin-bottom:12px;}
+  .lista-resumo{display:flex;flex-direction:column;gap:8px;text-align:left;margin:0 auto;max-width:440px;}
+  .lin-resumo{background:var(--verde-claro);border:3px solid #A5D6A7;border-radius:16px;padding:10px 14px;
+    font-size:1.05rem;font-weight:bold;color:#1B5E20;}
+  .lin-resumo .tit-r{display:block;color:var(--verde);font-size:.85rem;margin-bottom:2px;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -412,6 +464,10 @@
   <button class="menu-btn m19" onclick="abrirJogo19()"><span class="emo">🧩</span><span><span class="pag">CA PÁG. 17</span>PALAVRAS COM H</span><span class="done" id="d19"></span></button>
   <button class="menu-btn m20" onclick="abrirJogo20()"><span class="emo">🖼️</span><span><span class="pag">CA PÁG. 18</span>CH, LH e NH</span><span class="done" id="d20"></span></button>
   <button class="menu-btn m21" onclick="abrirJogo21()"><span class="emo">🔎</span><span><span class="pag">CA PÁG. 19</span>UMA LETRA MUDA TUDO</span><span class="done" id="d21"></span></button>
+  <button class="menu-btn m22" onclick="abrirJogo22()"><span class="emo">🔎</span><span><span class="pag">CA PÁG. 20</span>PALAVRAS ESCONDIDAS</span><span class="done" id="d22"></span></button>
+  <button class="menu-btn m23" onclick="abrirJogo23()"><span class="emo">❓</span><span><span class="pag">CA PÁG. 20</span>OS SINAIS DE PONTUAÇÃO</span><span class="done" id="d23"></span></button>
+  <button class="menu-btn m24" onclick="abrirJogo24()"><span class="emo">➖</span><span><span class="pag">CA PÁG. 21</span>O TRAVESSÃO</span><span class="done" id="d24"></span></button>
+  <button class="menu-btn m25" onclick="abrirJogo25()"><span class="emo">🪳</span><span><span class="pag">CA PÁG. 21</span>OS DOIS SENTIDOS DE BARATA</span><span class="done" id="d25"></span></button>
   </div>
 </div>
 
@@ -617,6 +673,59 @@
   <div id="area-j21"></div>
   <div class="feedback" id="fb-j21"></div>
   <button class="btn-avancar" id="prox-j21" onclick="proxJ21()">CONTINUAR ➜</button>
+</div>
+
+
+<!-- J22 pág 20 nº11 -->
+<div class="tela" id="tela-j22">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j22"></div>
+  <div class="pergunta" id="perg-j22"></div>
+  <div class="letras-p" id="letras-j22"></div>
+  <div class="silaba-ops" id="ops-j22"></div>
+  <div class="feedback" id="fb-j22"></div>
+  <button class="prox" id="prox-j22" onclick="proxJ22()">PRÓXIMA ➜</button>
+</div>
+
+<!-- J23 pág 20 nº12 -->
+<div class="tela" id="tela-j23">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j23"></div>
+  <div class="pergunta" id="perg-j23"></div>
+  <div id="area-j23"></div>
+  <div class="feedback" id="fb-j23"></div>
+  <button class="prox" id="prox-j23" onclick="proxJ23()">PRÓXIMA ➜</button>
+</div>
+
+<!-- J24 pág 21 E/F -->
+<div class="tela" id="tela-j24">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j24"></div>
+  <div class="pergunta" id="perg-j24"></div>
+  <div id="area-j24"></div>
+  <div class="feedback" id="fb-j24"></div>
+  <button class="prox" id="prox-j24" onclick="proxJ24()">PRÓXIMA ➜</button>
+</div>
+
+<!-- J25 pág 21 nº13 -->
+<div class="tela" id="tela-j25">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j25"></div>
+  <div class="pergunta" id="perg-j25"></div>
+  <div id="area-j25"></div>
+  <div class="feedback" id="fb-j25"></div>
+  <button class="prox" id="prox-j25" onclick="proxJ25()">PRÓXIMA ➜</button>
+</div>
+
+<!-- RESUMO para copiar no caderno -->
+<div class="tela" id="tela-resumo">
+  <div class="resumo-card">
+    <div class="grande" style="font-size:4rem">🌟</div>
+    <h2 id="tit-resumo">VOCÊ CONSEGUIU!</h2>
+    <div class="sub-r">AGORA COPIE NO SEU CADERNO ✏️</div>
+    <div class="lista-resumo" id="lista-resumo"></div>
+    <button class="prox mostrar" onclick="irMenu()">VOLTAR ➜</button>
+  </div>
 </div>
 
 <!-- FIM -->
@@ -1677,6 +1786,246 @@ function montarJ18(){
     area.appendChild(linha);
     textoFala=q.p+'. Toque na letra agá.';falar(textoFala);}}
 
+
+
+/* ===== resumo para copiar no caderno ===== */
+function fimResumo(n,titulo,blocos){
+  marcarFeito(n);confete();tocarSom(true);
+  document.getElementById('tit-resumo').textContent=titulo;
+  const l=document.getElementById('lista-resumo');l.innerHTML='';
+  blocos.forEach(b=>{const d=document.createElement('div');d.className='lin-resumo';
+    d.innerHTML=(b.tit?'<span class="tit-r">'+b.tit+'</span>':'')+b.txt;l.appendChild(d);});
+  falar('Muito bem! Agora copie no seu caderno.');
+  mostrar('tela-resumo');}
+
+function opQuadro(area,texto,onClick){
+  const b=document.createElement('button');b.className='op-quadro';
+  b.innerHTML='<span class="cx"></span><span>'+texto+'</span>';
+  b.onclick=()=>onClick(b);area.appendChild(b);return b;}
+
+/* ===== J22 — CA pág.20 nº11: palavras escondidas ===== */
+const ESCOND=[
+ {p:'MOLHO',    e:'OLHO',  i:1, ops:['OLHO','MALA','MOLE']},
+ {p:'PALHAÇADA',e:'PALHA', i:0, ops:['PALHA','CALHA','PATO']},
+ {p:'COCHEIRO', e:'CHEIRO',i:2, ops:['CHEIRO','COELHO','CAIXA']},
+ {p:'CACHORRO', e:'CACHO', i:0, ops:['CACHO','CHUVA','CARRO']},
+ {p:'OVELHA',   e:'VELHA', i:1, ops:['VELHA','TELHA','OVO']},
+ {p:'CHAVEIRO', e:'CHAVE', i:0, ops:['CHAVE','VEIA','CHEIRO']}
+];
+let i22=0;
+function abrirJogo22(){i22=0;mostrar('tela-j22');montarJ22();}
+function montarJ22(){
+  const q=ESCOND[i22];
+  estrelas(document.getElementById('prog-j22'),i22,ESCOND.length);
+  document.getElementById('perg-j22').innerHTML=
+    'QUAL PALAVRA EST\u00c1 <b>ESCONDIDA</b> DENTRO DE<br><b>'+q.p+'</b>?';
+  const lz=document.getElementById('letras-j22');lz.innerHTML='';
+  [...q.p].forEach(c=>{const d=document.createElement('div');d.className='lt';d.textContent=c;lz.appendChild(d);});
+  const ops=document.getElementById('ops-j22');ops.innerHTML='';
+  document.getElementById('fb-j22').textContent='';
+  document.getElementById('prox-j22').classList.remove('mostrar');
+  embaralhar(q.ops.slice()).forEach(o=>{
+    const b=document.createElement('button');b.className='sil';b.style.fontSize='1.3rem';b.textContent=o;
+    b.onclick=()=>respJ22(b,o);ops.appendChild(b);});
+  textoFala='Qual palavra está escondida dentro de '+q.p+'?';falar(textoFala);}
+function respJ22(btn,o){
+  const q=ESCOND[i22],fb=document.getElementById('fb-j22');
+  if(o===q.e){
+    tocarSom(true);
+    const lt=document.querySelectorAll('#letras-j22 .lt');
+    for(let k=q.i;k<q.i+q.e.length;k++)lt[k].classList.add('achada');
+    fb.className='feedback certo';fb.textContent='⭐ '+q.e+'!';
+    document.querySelectorAll('#ops-j22 .sil').forEach(x=>x.onclick=null);
+    falar(q.p+'... '+q.e+'! '+elogio());
+    document.getElementById('prox-j22').classList.add('mostrar');
+    document.getElementById('prox-j22').textContent=(i22<ESCOND.length-1)?'PRÓXIMA ➜':'PRONTO ➜';
+  }else{
+    btn.classList.add('errada');tocarSom(false);
+    fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+    falar('Quase! Escute de novo: '+q.p);
+    setTimeout(()=>btn.classList.remove('errada'),450);}}
+function proxJ22(){
+  if(i22<ESCOND.length-1){i22++;montarJ22();return;}
+  fimResumo(22,'AS PALAVRAS ESCONDIDAS',
+    [{tit:'CA PÁG. 20 — ATIVIDADE 11',
+      txt:ESCOND.map(q=>q.p+' \u2192 <b>'+q.e+'</b>').join('<br>')}]);}
+
+/* ===== J23 — CA pág.20 nº12: os sinais de pontuação ===== */
+const FALAS23=[
+ {t:'QUEM QUER CASAR COMIGO, QUE SOU RICA E BONITINHA',s:'?'},
+ {t:'EU QUERO',s:'!'},
+ {t:'E QUEM É VOCÊ? — PERGUNTOU A DONA BARATINHA',s:'.'},
+ {t:'EU SOU O BOI',s:'.'}
+];
+const PERG23=['QUEM QUER BRINCAR COMIGO?','ONDE EST\u00c1 O MEU L\u00c1PIS?','VOC\u00ca QUER UM SUCO?'];
+let fase23=0,rod23=0,escolha23='';
+function abrirJogo23(){fase23=0;rod23=0;escolha23='';mostrar('tela-j23');montarJ23();}
+function montarJ23(){
+  const perg=document.getElementById('perg-j23'),area=document.getElementById('area-j23'),
+        fb=document.getElementById('fb-j23'),prox=document.getElementById('prox-j23');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  if(fase23===0){
+    const q=FALAS23[rod23];
+    estrelas(document.getElementById('prog-j23'),rod23,FALAS23.length);
+    perg.innerHTML='QUAL SINAL TERMINA ESTA FRASE?';
+    const d=document.createElement('div');d.className='fala-dona';
+    d.innerHTML='<span class="tv">—</span> '+q.t+' <span class="vazio">&nbsp;</span>';
+    area.appendChild(d);
+    const box=document.createElement('div');box.className='sinais';
+    ['.','!','?'].forEach(sg=>{
+      const b=document.createElement('button');b.className='sn';b.textContent=sg;
+      b.onclick=()=>{
+        if(sg===q.s){tocarSom(true);b.classList.add('certa');
+          d.innerHTML='<span class="tv">—</span> '+q.t+' <b>'+sg+'</b>';
+          box.querySelectorAll('.sn').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio()+'  CIRCULE O '+sg;
+          falar(sg==='?'?'Isso mesmo! Ponto de interrogação.':sg==='!'?'Isso mesmo! Ponto de exclamação.':'Isso mesmo! Ponto final.');
+          prox.classList.add('mostrar');prox.textContent='PRÓXIMA ➜';}
+        else{b.classList.add('errada');tocarSom(false);
+          fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+          falar('Quase! Pense de novo.');
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      box.appendChild(b);});
+    area.appendChild(box);
+    textoFala=q.t+'. Qual sinal termina esta frase?';falar(textoFala);return;}
+  if(fase23===1){
+    estrelas(document.getElementById('prog-j23'),FALAS23.length,FALAS23.length+2);
+    perg.innerHTML='POR QUE USAMOS O SINAL <b>?</b><br>E N\u00c3O O <b>!</b> OU O <b>.</b> ?';
+    const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+    const certa='PORQUE USAMOS O SINAL ? EM FRASES QUE INDICAM <b>PERGUNTA</b>.';
+    const errada='PORQUE USAMOS O SINAL ? EM FRASES QUE INDICAM UMA <b>AFIRMA\u00c7\u00c3O</b>.';
+    [ [certa,true],[errada,false] ].forEach(par=>{
+      opQuadro(box,par[0],b=>{
+        if(par[1]){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+          box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio();
+          falar('Isso mesmo! O ponto de interrogação indica pergunta.');
+          prox.classList.add('mostrar');prox.textContent='PRÓXIMA ➜';}
+        else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+          tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+          falar('Quase! Pense de novo.');
+          setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+    textoFala='Por que usamos o sinal de interrogação?';falar(textoFala);return;}
+  estrelas(document.getElementById('prog-j23'),FALAS23.length+1,FALAS23.length+2);
+  perg.innerHTML='AGORA <b>ESCOLHA UMA PERGUNTA</b> SUA<br>PARA ESCREVER COM O SINAL <b>?</b>';
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  PERG23.forEach(t=>{
+    opQuadro(box,t,b=>{
+      box.querySelectorAll('.op-quadro').forEach(x=>{x.classList.remove('certa');x.querySelector('.cx').textContent='';});
+      b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+      escolha23=t;tocarSom(true);falar(t);
+      prox.classList.add('mostrar');prox.textContent='PRONTO ➜';});});
+  textoFala='Escolha uma pergunta para escrever no seu caderno.';falar(textoFala);}
+function proxJ23(){
+  if(fase23===0){
+    if(rod23<FALAS23.length-1){rod23++;montarJ23();return;}
+    fase23=1;montarJ23();return;}
+  if(fase23===1){fase23=2;montarJ23();return;}
+  fimResumo(23,'OS SINAIS DA DONA BARATINHA',
+    [{tit:'CA PÁG. 20 — B) CIRCULE OS SINAIS',
+      txt:FALAS23.map(q=>'\u2014 '+q.t+' <b>'+q.s+'</b>').join('<br>')},
+     {tit:'C) POR QUE O SINAL ?',txt:'PORQUE INDICA <b>PERGUNTA</b>.'},
+     {tit:'D) ESCREVA UMA FRASE COM ?',txt:escolha23}]);}
+
+/* ===== J24 — CA pág.21 E/F: o travessão ===== */
+let fase24=0,frase24='';
+function abrirJogo24(){fase24=0;frase24='';mostrar('tela-j24');montarJ24();}
+function montarJ24(){
+  const perg=document.getElementById('perg-j24'),area=document.getElementById('area-j24'),
+        fb=document.getElementById('fb-j24'),prox=document.getElementById('prox-j24');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j24'),fase24,2);
+  if(fase24===0){
+    perg.innerHTML='TODA FALA COME\u00c7A COM UM SINAL.<br><b>PINTE</b> QUAL \u00c9 ESSE SINAL.';
+    const ex=document.createElement('div');ex.className='fala-dona';
+    ex.innerHTML='<span class="tv">—</span> EU QUERO!<br><span class="tv">—</span> EU SOU O BOI.';
+    area.appendChild(ex);
+    const box=document.createElement('div');box.className='sinais';
+    ['?','.','!','—'].forEach(sg=>{
+      const b=document.createElement('button');b.className='sn pintavel';b.textContent=sg;
+      b.onclick=()=>{
+        if(sg==='—'){tocarSom(true);b.classList.add('certa');
+          box.querySelectorAll('.sn').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio()+'  \u00c9 O TRAVESS\u00c3O';
+          falar('Isso mesmo! É o travessão. Ele mostra quem está falando.');
+          prox.classList.add('mostrar');prox.textContent='PRÓXIMA ➜';}
+        else{b.classList.add('errada');tocarSom(false);
+          fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+          falar('Quase! Olhe o sinal no começo da fala.');
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      box.appendChild(b);});
+    area.appendChild(box);
+    textoFala='Cada fala começa com um sinal de pontuação. Pinte qual é esse sinal.';falar(textoFala);return;}
+  perg.innerHTML='ESCOLHA <b>UMA FRASE COM TRAVESS\u00c3O</b><br>PARA COPIAR NO CADERNO.';
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  FALAS23.forEach(q=>{
+    const t='— '+q.t+q.s;
+    opQuadro(box,t,b=>{
+      box.querySelectorAll('.op-quadro').forEach(x=>{x.classList.remove('certa');x.querySelector('.cx').textContent='';});
+      b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+      frase24=t;tocarSom(true);falar(q.t);
+      prox.classList.add('mostrar');prox.textContent='PRONTO ➜';});});
+  textoFala='Escolha uma frase com travessão para copiar.';falar(textoFala);}
+function proxJ24(){
+  if(fase24===0){fase24=1;montarJ24();return;}
+  fimResumo(24,'O TRAVESS\u00c3O',
+    [{tit:'CA PÁG. 21 — E) PINTE O SINAL',txt:'O SINAL \u00c9 O <b>TRAVESS\u00c3O</b>  —'},
+     {tit:'F) COPIE UMA FRASE COM TRAVESSÃO',txt:frase24}]);}
+
+/* ===== J25 — CA pág.21 nº13: os dois sentidos de BARATA ===== */
+const CENAS_B=[
+ {fig:'🪳',balao:'UMA BARATA!',leg:'ANITA PERTO DA PORTA',certa:'B'},
+ {fig:'🧸',balao:'QUE BARATA!',leg:'ANITA NA LOJA',certa:'A'}
+];
+const FRASES_B={A:'ANITA COMPROU UMA BONECA BARATA.',B:'ANITA VIU UMA BARATA PERTO DA PORTA.'};
+let fase25=0;
+function abrirJogo25(){fase25=0;mostrar('tela-j25');montarJ25();}
+function montarJ25(){
+  const perg=document.getElementById('perg-j25'),area=document.getElementById('area-j25'),
+        fb=document.getElementById('fb-j25'),prox=document.getElementById('prox-j25');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j25'),fase25,3);
+  if(fase25<2){
+    const c=CENAS_B[fase25];
+    perg.innerHTML='QUAL FRASE COMBINA COM ESTA CENA?';
+    const wrap=document.createElement('div');wrap.className='cenas-b';
+    const d=document.createElement('div');d.className='cena-b destaque';
+    d.innerHTML='<span class="balao">'+c.balao+'</span><span class="fig">'+c.fig+
+                '</span><span class="leg">'+c.leg+'</span>';
+    wrap.appendChild(d);area.appendChild(wrap);
+    const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+    ['A','B'].forEach(k=>{
+      opQuadro(box,'<b>'+k+')</b> '+FRASES_B[k],b=>{
+        if(k===c.certa){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+          box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio();
+          falar(FRASES_B[k]+' '+elogio());
+          prox.classList.add('mostrar');prox.textContent='PRÓXIMA ➜';}
+        else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+          tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+          falar('Quase! Olhe bem a cena.');
+          setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+    textoFala='Qual frase combina com esta cena? '+c.balao;falar(textoFala);return;}
+  perg.innerHTML='EM QUAL FRASE A PALAVRA <b>BARATA</b><br>QUER DIZER <b>PRE\u00c7O BAIXO</b>?';
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  ['A','B'].forEach(k=>{
+    opQuadro(box,'NA FRASE <b>'+k+'</b> \u2014 '+FRASES_B[k],b=>{
+      if(k==='A'){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+        box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio();
+        falar('Isso mesmo! Uma boneca barata custa pouco dinheiro.');
+        prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+      else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+        tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+        falar('Essa barata é o bichinho. Pense na outra.');
+        setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+  textoFala='Em qual frase a palavra barata quer dizer preço baixo?';falar(textoFala);}
+function proxJ25(){
+  if(fase25<2){fase25++;montarJ25();return;}
+  fimResumo(25,'OS DOIS SENTIDOS DE BARATA',
+    [{tit:'CA PÁG. 21 — COPIE ABAIXO DE CADA CENA',
+      txt:'🪳 NA PORTA: '+FRASES_B.B+'<br>🧸 NA LOJA: '+FRASES_B.A},
+     {tit:'PREÇO BAIXO',txt:'NA FRASE <b>A</b>.'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
