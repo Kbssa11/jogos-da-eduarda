@@ -411,6 +411,62 @@
   .cd.pal{background:#FFE0B2;color:#E65100;font-size:.82rem;text-align:left;padding-left:8px;line-height:1.2;}
   .cd.vazio{background:transparent;box-shadow:none;cursor:default;color:#B39DDB;}
   .cd.falada{background:#C8E6C9;color:#1B5E20;}
+  .m20{background:#EC407A;} .m21{background:#5C6BC0;}
+  /* ---- combinacoes: palco da Fifi ---- */
+  .palco{background:var(--card);border:6px solid #F8BBD0;border-radius:26px;padding:12px;
+    text-align:center;box-shadow:0 6px 0 #F8BBD0;}
+  .palco svg{width:150px;height:180px;display:block;margin:0 auto;}
+  .rot-esc{text-align:center;font-size:1rem;font-weight:bold;color:#8E7CC3;margin:14px 0 6px;}
+  .fileira{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .chip{border:5px solid #E8DEF8;border-radius:20px;background:var(--card);padding:8px;cursor:pointer;
+    box-shadow:0 5px 0 #E8DEF8;transition:transform .1s;text-align:center;min-width:92px;}
+  .chip:active{transform:translateY(4px);box-shadow:none;}
+  .chip .amostra{display:block;width:56px;height:44px;border-radius:12px;margin:0 auto;}
+  .chip .lacinho{display:block;width:56px;height:44px;margin:0 auto;}
+  .chip .nm{display:block;margin-top:5px;font-size:.85rem;font-weight:bold;color:var(--texto);}
+  .chip.sel{border-color:var(--roxo);background:#F3E5F5;box-shadow:0 5px 0 #4527A0;}
+  .tabuleiro{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:10px;margin-top:14px;}
+  .slot{background:#F5F5F5;border:4px dashed #CE93D8;border-radius:18px;min-height:104px;
+    display:flex;align-items:center;justify-content:center;}
+  .slot svg{width:70px;height:88px;}
+  .slot.cheio{background:#E8F5E9;border-style:solid;border-color:var(--certo);animation:pula .45s;}
+  .placar{text-align:center;font-size:1.15rem;font-weight:bold;color:var(--roxo);margin:12px 0 0;}
+  /* ---- combinacoes do brinquedo ---- */
+  .grade-esc{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px;margin-top:8px;}
+  .cbx{background:#F5F5F5;border:5px solid #E0E0E0;border-radius:22px;padding:12px 6px;text-align:center;
+    cursor:pointer;box-shadow:0 5px 0 #E0E0E0;transition:transform .1s;}
+  .cbx:active{transform:scale(.95);}
+  .cbx svg{width:62px;height:62px;display:block;margin:0 auto;}
+  .cbx .bolha{display:block;width:56px;height:56px;border-radius:50%;margin:0 auto;}
+  .cbx .nm{display:block;margin-top:6px;font-size:.92rem;font-weight:bold;color:var(--texto);}
+  .cbx.sel{border-color:var(--roxo);background:#F3E5F5;box-shadow:0 5px 0 #4527A0;}
+  .grade-comb{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:10px;margin-top:10px;}
+  .cel-comb{background:var(--card);border:4px solid #E8DEF8;border-radius:18px;padding:8px 4px;text-align:center;
+    box-shadow:0 4px 0 #E8DEF8;}
+  .cel-comb svg{width:56px;height:56px;display:block;margin:0 auto;}
+  .cel-comb .nm{display:block;margin-top:4px;font-size:.72rem;font-weight:bold;color:#8E7CC3;line-height:1.2;}
+  /* ---- opcoes com quadradinho ---- */
+  .lista-quadros{display:flex;flex-direction:column;gap:0;width:100%;}
+  .op-quadro{display:flex;align-items:center;gap:14px;background:var(--card);border:5px solid #E8DEF8;
+    border-radius:22px;padding:14px 16px;margin:10px 0;cursor:pointer;box-shadow:0 5px 0 #E8DEF8;
+    font-size:1.15rem;font-weight:bold;text-align:left;line-height:1.35;color:var(--texto);
+    transition:transform .1s;font-family:inherit;}
+  .op-quadro:active{transform:translateY(4px);box-shadow:0 1px 0 #E8DEF8;}
+  .op-quadro .cx{flex:0 0 auto;width:48px;height:48px;border:5px solid #B39DDB;border-radius:14px;
+    background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.9rem;color:#fff;line-height:1;}
+  .op-quadro.certa{border-color:var(--verde);background:var(--verde-claro);box-shadow:0 5px 0 var(--verde);animation:pula .5s;}
+  .op-quadro.certa .cx{background:var(--verde);border-color:var(--verde);}
+  .op-quadro.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .op-quadro.errada .cx{border-color:#EF9A9A;background:#FFEBEE;}
+  /* ---- resumo ---- */
+  .resumo-card{background:var(--card);border-radius:28px;padding:24px 18px;text-align:center;
+    box-shadow:0 8px 24px rgba(126,87,194,.25);margin-top:20px;}
+  .resumo-card h2{color:var(--roxo);font-size:1.6rem;margin:10px 0 4px;}
+  .resumo-card .sub-r{color:#8E7CC3;font-size:1rem;font-weight:bold;margin-bottom:12px;}
+  .lista-resumo{display:flex;flex-direction:column;gap:8px;text-align:left;margin:0 auto;max-width:440px;}
+  .lin-resumo{background:#F3E5F5;border:3px solid #CE93D8;border-radius:16px;padding:10px 14px;
+    font-size:1.05rem;font-weight:bold;color:#4527A0;}
+  .lin-resumo .tit-r{display:block;color:var(--roxo);font-size:.85rem;margin-bottom:2px;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -449,6 +505,8 @@
   <button class="menu-btn m17" onclick="abrirJogo17()"><span class="emo">🔮</span><span><span class="pag">CA PÁG. 12</span>AS BOLINHAS DE GUDE</span><span class="done" id="d17"></span></button>
   <button class="menu-btn m18" onclick="abrirJogo18()"><span class="emo">🐶</span><span><span class="pag">CA PÁG. 14</span>A PESQUISA DA ANITA</span><span class="done" id="d18"></span></button>
   <button class="menu-btn m19" onclick="abrirJogo19()"><span class="emo">📊</span><span><span class="pag">CA PÁG. 15</span>O GRÁFICO DOS ANIMAIS</span><span class="done" id="d19"></span></button>
+  <button class="menu-btn m20" onclick="abrirJogo20()"><span class="emo">🐩</span><span><span class="pag">CA PÁG. 16</span>AS ROUPINHAS DA FIFI</span><span class="done" id="d20"></span></button>
+  <button class="menu-btn m21" onclick="abrirJogo21()"><span class="emo">🧸</span><span><span class="pag">CA PÁG. 17</span>MINHAS COMBINAÇÕES</span><span class="done" id="d21"></span></button>
   <button class="menu-btn m6" onclick="abrirJogo6()"><span class="emo">🏪</span><span><span class="pag">MC PÁG. 14</span>O SONHO DA FAMÍLIA</span><span class="done" id="d6"></span></button>
   <button class="menu-btn m7" onclick="abrirJogo7()"><span class="emo">🚲</span><span><span class="pag">MC PÁG. 15</span>A BICICLETA DA MARINA</span><span class="done" id="d7"></span></button>
   </div>
@@ -670,6 +728,38 @@
   <div id="area-j19"></div>
   <div class="feedback" id="fb-j19"></div>
   <button class="btn-avancar" id="prox-j19" onclick="proxJ19()">CONTINUAR ➜</button>
+</div>
+
+
+<!-- ================= J20: roupinhas da Fifi (CA pág.16) ================= -->
+<div class="tela" id="tela-j20">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta" id="perg-j20"></div>
+  <div id="area-j20"></div>
+  <div class="feedback" id="fb-j20"></div>
+  <button class="prox" id="prox-j20" onclick="proxJ20()">CONTINUAR ➜</button>
+</div>
+
+<!-- ================= J21: minhas combinações (CA pág.17) ================= -->
+<div class="tela" id="tela-j21">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j21"></div>
+  <div class="pergunta" id="perg-j21"></div>
+  <div id="area-j21"></div>
+  <div class="placar" id="cont-j21"></div>
+  <div class="feedback" id="fb-j21"></div>
+  <button class="prox" id="prox-j21" onclick="proxJ21()">CONTINUAR ➜</button>
+</div>
+
+<!-- ================= RESUMO ================= -->
+<div class="tela" id="tela-resumo">
+  <div class="resumo-card">
+    <div class="grande" style="font-size:4rem">🌟</div>
+    <h2 id="tit-resumo">VOCÊ CONSEGUIU!</h2>
+    <div class="sub-r">AGORA COPIE NO SEU CADERNO ✏️</div>
+    <div class="lista-resumo" id="lista-resumo"></div>
+    <button class="prox mostrar" onclick="irMenu()">VOLTAR ➜</button>
+  </div>
 </div>
 
 <!-- ================= FIM ================= -->
@@ -1727,6 +1817,234 @@ function montarJ17(){
   area.appendChild(ops);
   textoFala=q.fala;falar(textoFala);}
 
+
+
+/* ===== resumo para copiar no caderno ===== */
+function fimResumo(n,titulo,blocos){
+  marcarFeito(n);confete();tocarSom(true);
+  document.getElementById('tit-resumo').textContent=titulo;
+  const l=document.getElementById('lista-resumo');l.innerHTML='';
+  blocos.forEach(b=>{const d=document.createElement('div');d.className='lin-resumo';
+    d.innerHTML=(b.tit?'<span class="tit-r">'+b.tit+'</span>':'')+b.txt;l.appendChild(d);});
+  falar('Muito bem! Agora copie no seu caderno.');
+  mostrar('tela-resumo');}
+function opQuadro(area,texto,onClick){
+  const b=document.createElement('button');b.className='op-quadro';
+  b.innerHTML='<span class="cx"></span><span>'+texto+'</span>';
+  b.onclick=()=>onClick(b);area.appendChild(b);return b;}
+
+/* ===== desenhos ===== */
+function fifiSVG(cv,cl){
+  return '<svg viewBox="0 0 100 120" aria-hidden="true">'+
+  '<path d="M74 78 q14 -6 9 -21" stroke="#A1887F" stroke-width="7" fill="none" stroke-linecap="round"/>'+
+  '<rect x="30" y="92" width="11" height="21" rx="5" fill="#A1887F"/>'+
+  '<rect x="59" y="92" width="11" height="21" rx="5" fill="#A1887F"/>'+
+  '<ellipse cx="50" cy="80" rx="26" ry="22" fill="#BCAAA4"/>'+
+  '<path d="M27 70 L73 70 L81 101 L19 101 Z" fill="'+cv+'"/>'+
+  '<circle cx="50" cy="84" r="4" fill="#FFFFFF" opacity=".75"/>'+
+  '<circle cx="50" cy="42" r="24" fill="#BCAAA4"/>'+
+  '<ellipse cx="26" cy="44" rx="9" ry="17" fill="#A1887F"/>'+
+  '<ellipse cx="74" cy="44" rx="9" ry="17" fill="#A1887F"/>'+
+  '<ellipse cx="50" cy="52" rx="12" ry="9" fill="#EFEBE9"/>'+
+  '<circle cx="50" cy="47" r="4" fill="#4E342E"/>'+
+  '<circle cx="41" cy="36" r="3.4" fill="#4E342E"/>'+
+  '<circle cx="59" cy="36" r="3.4" fill="#4E342E"/>'+
+  '<g transform="translate(50,15)">'+
+   '<path d="M-3 0 L-17 -9 L-17 9 Z" fill="'+cl+'"/>'+
+   '<path d="M3 0 L17 -9 L17 9 Z" fill="'+cl+'"/>'+
+   '<circle cx="0" cy="0" r="5" fill="'+cl+'"/></g></svg>';}
+function lacoSVG(c){
+  return '<svg viewBox="0 0 60 46" class="lacinho" aria-hidden="true"><g transform="translate(30,23)">'+
+   '<path d="M-4 0 L-25 -13 L-25 13 Z" fill="'+c+'"/>'+
+   '<path d="M4 0 L25 -13 L25 13 Z" fill="'+c+'"/>'+
+   '<circle cx="0" cy="0" r="7" fill="'+c+'"/></g></svg>';}
+const BRINQ_SVG={
+ BOLA:c=>'<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="25" fill="'+c+'"/>'+
+   '<path d="M7 32h50M32 7v50" stroke="#FFFFFF" stroke-width="4" fill="none"/></svg>',
+ CARRINHO:c=>'<svg viewBox="0 0 64 64"><path d="M17 31 L23 17 H41 L48 31 Z" fill="'+c+'" opacity=".7"/>'+
+   '<rect x="5" y="30" width="54" height="17" rx="7" fill="'+c+'"/>'+
+   '<circle cx="19" cy="49" r="8" fill="#455A64"/><circle cx="45" cy="49" r="8" fill="#455A64"/></svg>',
+ URSINHO:c=>'<svg viewBox="0 0 64 64"><circle cx="19" cy="16" r="8" fill="'+c+'"/>'+
+   '<circle cx="45" cy="16" r="8" fill="'+c+'"/><circle cx="32" cy="24" r="16" fill="'+c+'"/>'+
+   '<ellipse cx="32" cy="48" rx="17" ry="14" fill="'+c+'"/>'+
+   '<circle cx="26" cy="21" r="2.6" fill="#3E2723"/><circle cx="38" cy="21" r="2.6" fill="#3E2723"/>'+
+   '<ellipse cx="32" cy="28" rx="6" ry="4.5" fill="#FFF8E1"/>'+
+   '<circle cx="32" cy="27" r="2" fill="#3E2723"/></svg>',
+ BALDE:c=>'<svg viewBox="0 0 64 64"><path d="M17 13 q15 -13 30 0" stroke="'+c+'" stroke-width="4" fill="none"/>'+
+   '<path d="M13 22 H51 L46 55 H18 Z" fill="'+c+'"/>'+
+   '<rect x="9" y="16" width="46" height="9" rx="4" fill="'+c+'" opacity=".75"/></svg>'
+};
+
+/* ===== J20 — CA pág.16: as roupinhas da Fifi ===== */
+const VESTIDOS=[{n:'ROSA',c:'#EC407A'},{n:'AMARELO',c:'#FDD835'},{n:'AZUL',c:'#42A5F5'}];
+const LACOS=[{n:'VERMELHO',c:'#E53935'},{n:'ROXO',c:'#8E24AA'}];
+let v20=0,l20=0,feitas20=[],fase20=0;
+function abrirJogo20(){v20=0;l20=0;feitas20=[];fase20=0;mostrar('tela-j20');montarJ20();}
+function montarJ20(){
+  const perg=document.getElementById('perg-j20'),area=document.getElementById('area-j20'),
+        fb=document.getElementById('fb-j20'),prox=document.getElementById('prox-j20');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  if(fase20===1){
+    perg.innerHTML='QUANTAS COMBINAÇÕES DIFERENTES<br>DE VESTIDOS E LACINHOS VOCÊ FEZ?';
+    const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+    [3,4,5,6,8].forEach(nm=>{
+      opQuadro(box,'<b>'+nm+'</b> COMBINAÇÕES',b=>{
+        if(nm===6){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+          box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio();
+          falar('Isso mesmo! Três vestidos e dois lacinhos dão seis combinações.');
+          prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+        else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+          tocarSom(false);fb.className='feedback tente';fb.textContent='CONTE O QUADRO DE NOVO 😊';
+          falar('Quase! Conte as Fifis do quadro.');
+          setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+    textoFala='Quantas combinações diferentes de vestidos e lacinhos você fez?';falar(textoFala);return;}
+
+  perg.innerHTML='🐩 A FIFI TEM <b>3 VESTIDOS</b> E <b>2 LACINHOS</b>.<br>MONTE <b>TODAS</b> AS COMBINAÇÕES!';
+  const palco=document.createElement('div');palco.className='palco';
+  palco.innerHTML=fifiSVG(VESTIDOS[v20].c,LACOS[l20].c);
+  area.appendChild(palco);
+
+  const r1=document.createElement('div');r1.className='rot-esc';r1.textContent='ESCOLHA O VESTIDO';
+  area.appendChild(r1);
+  const f1=document.createElement('div');f1.className='fileira';
+  VESTIDOS.forEach((v,k)=>{
+    const c=document.createElement('div');c.className='chip'+(k===v20?' sel':'');
+    c.innerHTML='<span class="amostra" style="background:'+v.c+'"></span><span class="nm">'+v.n+'</span>';
+    c.onclick=()=>{v20=k;tocarSom(true);falar('Vestido '+v.n.toLowerCase());montarJ20();};
+    f1.appendChild(c);});
+  area.appendChild(f1);
+
+  const r2=document.createElement('div');r2.className='rot-esc';r2.textContent='ESCOLHA O LACINHO';
+  area.appendChild(r2);
+  const f2=document.createElement('div');f2.className='fileira';
+  LACOS.forEach((l,k)=>{
+    const c=document.createElement('div');c.className='chip'+(k===l20?' sel':'');
+    c.innerHTML=lacoSVG(l.c)+'<span class="nm">'+l.n+'</span>';
+    c.onclick=()=>{l20=k;tocarSom(true);falar('Lacinho '+l.n.toLowerCase());montarJ20();};
+    f2.appendChild(c);});
+  area.appendChild(f2);
+
+  const bt=document.createElement('button');bt.className='prox mostrar';bt.textContent='VESTIR A FIFI ➜';
+  bt.onclick=vestirFifi;area.appendChild(bt);
+
+  const r3=document.createElement('div');r3.className='rot-esc';r3.textContent='AS COMBINAÇÕES QUE VOCÊ JÁ FEZ';
+  area.appendChild(r3);
+  const tab=document.createElement('div');tab.className='tabuleiro';
+  for(let k=0;k<6;k++){
+    const sl=document.createElement('div');sl.className='slot'+(feitas20[k]?' cheio':'');
+    if(feitas20[k])sl.innerHTML=fifiSVG(VESTIDOS[feitas20[k].v].c,LACOS[feitas20[k].l].c);
+    tab.appendChild(sl);}
+  area.appendChild(tab);
+  const pl=document.createElement('div');pl.className='placar';
+  pl.textContent=feitas20.length+' DE 6 COMBINAÇÕES';
+  area.appendChild(pl);
+  textoFala='A Fifi tem três vestidos e dois lacinhos. Monte todas as combinações possíveis.';
+  if(feitas20.length===0)falar(textoFala);}
+function vestirFifi(){
+  const fb=document.getElementById('fb-j20');
+  if(feitas20.some(x=>x.v===v20&&x.l===l20)){
+    tocarSom(false);fb.className='feedback tente';
+    fb.textContent='ESSA VOCÊ JÁ FEZ 😊';
+    falar('Essa combinação você já fez. Tente outra.');return;}
+  feitas20.push({v:v20,l:l20});
+  montarJ20();
+  const fb2=document.getElementById('fb-j20');
+  if(feitas20.length===6){
+    fb2.className='feedback certo';fb2.textContent='⭐ VOCÊ FEZ TODAS!';
+    falar('Você fez todas as seis combinações!');
+    const p=document.getElementById('prox-j20');
+    p.classList.add('mostrar');p.textContent='CONTINUAR ➜';
+  }else{
+    fb2.className='feedback certo';
+    fb2.textContent=elogio()+'  FALTAM '+(6-feitas20.length);
+    falar('Boa! Faltam '+(6-feitas20.length)+'.');}}
+function proxJ20(){
+  if(fase20===0){fase20=1;montarJ20();return;}
+  fimResumo(20,'AS COMBINAÇÕES DA FIFI',
+    [{tit:'CA PÁG. 16 — TODAS AS COMBINAÇÕES',
+      txt:feitas20.map(x=>'VESTIDO '+VESTIDOS[x.v].n+' + LACINHO '+LACOS[x.l].n).join('<br>')},
+     {tit:'QUANTAS COMBINAÇÕES?',txt:'<b>6</b> COMBINAÇÕES  (3 × 2)'}]);}
+
+/* ===== J21 — CA pág.17: minhas combinações ===== */
+const BRINQUEDOS=[{n:'BOLA'},{n:'CARRINHO'},{n:'URSINHO'},{n:'BALDE'}];
+const CORES=[{n:'VERMELHO',c:'#E53935'},{n:'AZUL',c:'#1E88E5'},{n:'AMARELO',c:'#FDD835'},
+             {n:'VERDE',c:'#43A047'},{n:'ROXO',c:'#8E24AA'},{n:'LARANJA',c:'#FB8C00'}];
+let fase21=0,bs21=[],cs21=[];
+function abrirJogo21(){fase21=0;bs21=[];cs21=[];mostrar('tela-j21');montarJ21();}
+function montarJ21(){
+  const perg=document.getElementById('perg-j21'),area=document.getElementById('area-j21'),
+        cont=document.getElementById('cont-j21'),fb=document.getElementById('fb-j21'),
+        prox=document.getElementById('prox-j21');
+  area.innerHTML='';fb.textContent='';cont.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j21'),fase21,4);
+  if(fase21===0){
+    perg.innerHTML='A) ESCOLHA <b>2 TIPOS DE BRINQUEDOS</b>.';
+    const g=document.createElement('div');g.className='grade-esc';
+    BRINQUEDOS.forEach(b=>{
+      const d=document.createElement('div');d.className='cbx'+(bs21.includes(b.n)?' sel':'');
+      d.innerHTML=BRINQ_SVG[b.n]('#9E9E9E')+'<span class="nm">'+b.n+'</span>';
+      d.onclick=()=>{
+        const k=bs21.indexOf(b.n);
+        if(k>=0)bs21.splice(k,1);
+        else{if(bs21.length>=2){falar('Você já escolheu dois. Toque para trocar.');return;}bs21.push(b.n);}
+        tocarSom(true);falar(b.n);montarJ21();};
+      g.appendChild(d);});
+    area.appendChild(g);
+    cont.textContent='ESCOLHIDOS: '+bs21.length+' DE 2';
+    if(bs21.length===2){prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+    textoFala='Escolha dois tipos de brinquedos.';falar(textoFala);return;}
+  if(fase21===1){
+    perg.innerHTML='B) ESCOLHA <b>4 CORES DIFERENTES</b>.';
+    const g=document.createElement('div');g.className='grade-esc';
+    CORES.forEach(o=>{
+      const d=document.createElement('div');d.className='cbx'+(cs21.some(x=>x.n===o.n)?' sel':'');
+      d.innerHTML='<span class="bolha" style="background:'+o.c+'"></span><span class="nm">'+o.n+'</span>';
+      d.onclick=()=>{
+        const k=cs21.findIndex(x=>x.n===o.n);
+        if(k>=0)cs21.splice(k,1);
+        else{if(cs21.length>=4){falar('Você já escolheu quatro cores. Toque para trocar.');return;}cs21.push(o);}
+        tocarSom(true);falar(o.n);montarJ21();};
+      g.appendChild(d);});
+    area.appendChild(g);
+    cont.textContent='ESCOLHIDAS: '+cs21.length+' DE 4';
+    if(cs21.length===4){prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+    textoFala='Escolha quatro cores diferentes.';falar(textoFala);return;}
+  if(fase21===2){
+    perg.innerHTML='C) ESTAS SÃO <b>TODAS</b> AS COMBINAÇÕES!<br>TOQUE EM UMA PARA OUVIR.';
+    const g=document.createElement('div');g.className='grade-comb';
+    bs21.forEach(bn=>cs21.forEach(co=>{
+      const d=document.createElement('div');d.className='cel-comb';
+      d.innerHTML=BRINQ_SVG[bn](co.c)+'<span class="nm">'+bn+'<br>'+co.n+'</span>';
+      d.onclick=()=>{tocarSom(true);falar(bn+' '+co.n.toLowerCase());};
+      g.appendChild(d);}));
+    area.appendChild(g);
+    cont.textContent=(bs21.length*cs21.length)+' COMBINAÇÕES DESENHADAS';
+    prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';
+    textoFala='Estas são todas as combinações possíveis entre os brinquedos e as cores.';falar(textoFala);return;}
+  perg.innerHTML='D) QUANTAS COMBINAÇÕES DIFERENTES<br>VOCÊ PÔDE FAZER?';
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  [3,4,5,6,8].forEach(nm=>{
+    opQuadro(box,'<b>'+nm+'</b> COMBINAÇÕES',b=>{
+      if(nm===8){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+        box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio();
+        falar('Isso mesmo! Dois brinquedos e quatro cores dão oito combinações.');
+        prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+      else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+        tocarSom(false);fb.className='feedback tente';fb.textContent='CONTE OS DESENHOS 😊';
+        falar('Quase! Conte os desenhos de novo.');
+        setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+  textoFala='Quantas combinações diferentes você pôde fazer?';falar(textoFala);}
+function proxJ21(){
+  if(fase21<3){fase21++;montarJ21();return;}
+  const linhas=[];
+  bs21.forEach(bn=>cs21.forEach(co=>linhas.push(bn+' '+co.n)));
+  fimResumo(21,'AS SUAS COMBINAÇÕES',
+    [{tit:'CA PÁG. 17 — A) BRINQUEDOS',txt:bs21.join('  •  ')},
+     {tit:'B) CORES',txt:cs21.map(c=>c.n).join('  •  ')},
+     {tit:'C) DESENHE ESTAS COMBINAÇÕES',txt:linhas.join('<br>')},
+     {tit:'D) QUANTAS COMBINAÇÕES?',txt:'<b>8</b> COMBINAÇÕES  (2 × 4)'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
