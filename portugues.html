@@ -430,6 +430,85 @@
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
   @keyframes cair{to{transform:translateY(110vh) rotate(540deg);}}
+  /* ---- CA pág.22: uma palavra, dois sentidos ---- */
+  .m26{background:#00ACC1;} .m27{background:#F4511E;} .m28{background:#3949AB;}
+  .dicas-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+  .dica-card{background:var(--card);border:5px solid #E8DEF8;border-radius:22px;padding:10px 8px 12px;text-align:center;
+    cursor:pointer;box-shadow:0 5px 0 #E8DEF8;font-family:inherit;color:var(--texto);}
+  .dica-card .letra-d{display:inline-flex;width:34px;height:34px;border-radius:50%;background:#212121;color:#fff;
+    align-items:center;justify-content:center;font-weight:bold;font-size:1.1rem;}
+  .dica-card .img-d{height:100px;display:flex;align-items:center;justify-content:center;font-size:4.2rem;margin:4px 0;}
+  .dica-card .img-d svg{height:100px;width:auto;max-width:100%;}
+  .dica-card .txt-d{font-size:.98rem;font-weight:bold;line-height:1.3;}
+  .dica-card.brilha{border-color:var(--verde);background:var(--verde-claro);box-shadow:0 5px 0 var(--verde);animation:pula .5s;}
+  .linha-caixas{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:6px 0 14px;}
+  .linha-caixas .art{font-size:1.6rem;font-weight:bold;margin-right:2px;}
+  .caixa-l{width:min(50px,11vw);height:58px;border:4px solid #7E57C2;border-radius:10px;background:#fff;display:flex;
+    align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#7E57C2;}
+  .caixa-l.prox-l{border-color:#EC407A;box-shadow:0 0 0 4px #F8BBD0;}
+  .caixa-l.ok{background:#E8F5E9;border-color:var(--verde);color:#1B5E20;animation:pula .4s;}
+  .fichas{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;}
+  .ficha{width:62px;height:62px;border:none;border-radius:16px;font-family:inherit;font-size:2rem;font-weight:bold;
+    color:#fff;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.2);}
+  .ficha:active{transform:translateY(4px);box-shadow:none;}
+  .ficha.usada{opacity:.15;pointer-events:none;}
+  .ficha.errada{animation:treme .4s;background:#EF9A9A !important;}
+  /* ---- CA pág.23: história em quadrinhos ---- */
+  .hq-quadro{position:relative;width:100%;aspect-ratio:4/3;border:5px solid #263238;border-radius:18px;overflow:hidden;
+    background:#B3E5FC;container-type:inline-size;box-shadow:0 8px 0 #263238;margin:4px 0 12px;}
+  .hq-quadro svg.hq-arte{position:absolute;inset:0;width:100%;height:100%;}
+  .hq-balao{position:absolute;background:#fff;border:3px solid #263238;border-radius:14cqw/10cqw;padding:1.6cqw 2.6cqw;
+    font-size:4.1cqw;font-weight:bold;line-height:1.2;text-align:center;color:#212121;cursor:pointer;
+    animation:balaoEntra .5s both;z-index:3;}
+  .hq-balao::after{content:"";position:absolute;bottom:-3.6cqw;border:1.9cqw solid transparent;border-top:2.4cqw solid #263238;}
+  .hq-balao::before{content:"";position:absolute;bottom:-2.3cqw;border:1.3cqw solid transparent;border-top:1.9cqw solid #fff;z-index:1;}
+  .hq-balao.r-esq::after{left:18%;} .hq-balao.r-esq::before{left:calc(18% + .6cqw);}
+  .hq-balao.r-dir::after{right:18%;} .hq-balao.r-dir::before{right:calc(18% + .6cqw);}
+  .hq-balao.r-meio::after{left:44%;} .hq-balao.r-meio::before{left:calc(44% + .6cqw);}
+  .hq-balao.falando{background:#FFF9C4;}
+  @keyframes balaoEntra{0%{transform:scale(0);opacity:0}70%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+  .hq-som{position:absolute;padding:2.6cqw 3.4cqw;font-size:4.6cqw;font-weight:900;color:#D50000;background:#FFEB3B;
+    clip-path:polygon(50% 0,60% 22%,82% 6%,76% 30%,100% 30%,82% 48%,100% 66%,76% 66%,84% 92%,60% 76%,50% 100%,40% 76%,16% 92%,24% 66%,0 66%,18% 48%,0 30%,24% 30%,18% 6%,40% 22%);
+    animation:somPula 1s ease-in-out infinite;z-index:4;letter-spacing:.3cqw;}
+  @keyframes somPula{0%,100%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(6deg) scale(1.15)}}
+  .hq-titulo{position:absolute;left:3%;top:3%;background:#FFEB3B;border:3px solid #263238;border-radius:3cqw;
+    padding:1cqw 3cqw;font-size:8.5cqw;font-weight:900;color:#D81B60;transform:rotate(-4deg);z-index:4;
+    text-shadow:.5cqw .5cqw 0 #fff;animation:balaoEntra .6s both;}
+  .hq-fim{position:absolute;right:3%;bottom:4%;background:#fff;border:3px solid #263238;padding:.8cqw 3cqw;
+    font-size:6cqw;font-weight:900;transform:rotate(-6deg);z-index:4;}
+  .hq-num{position:absolute;left:2%;bottom:2%;background:#263238;color:#fff;border-radius:50%;width:7cqw;height:7cqw;
+    display:flex;align-items:center;justify-content:center;font-size:4cqw;font-weight:bold;z-index:4;}
+  .hq-legenda{background:var(--card);border-radius:20px;padding:12px 14px;font-size:1.15rem;font-weight:bold;
+    line-height:1.4;text-align:center;box-shadow:0 4px 14px rgba(126,87,194,.15);}
+  .hq-nav{display:flex;gap:12px;justify-content:center;margin-top:14px;}
+  .hq-nav button{border:none;font-family:inherit;font-size:1.3rem;font-weight:bold;padding:14px 22px;border-radius:20px;
+    cursor:pointer;color:#fff;background:var(--roxo);box-shadow:0 5px 0 #5E35B1;}
+  .hq-nav button.sec{background:#EDE7F6;color:var(--roxo);box-shadow:0 5px 0 #D1C4E9;}
+  .hq-nav button:disabled{opacity:.35;}
+  .hq-nav button:active{transform:translateY(4px);box-shadow:none;}
+  .hq-pagina{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .hq-pagina .hq-quadro{margin:0;border-width:3px;box-shadow:none;border-radius:10px;}
+  .pula-kid{animation:kidPula 1.2s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom;}
+  @keyframes kidPula{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  .corre-kid{animation:kidCorre 2.4s linear infinite;}
+  @keyframes kidCorre{0%{transform:translateX(0)}100%{transform:translateX(60px)}}
+  .gira-sol{animation:giraSol 12s linear infinite;transform-box:fill-box;transform-origin:center;}
+  @keyframes giraSol{to{transform:rotate(360deg)}}
+  .voa{animation:voa 3s ease-in-out infinite;}
+  @keyframes voa{0%,100%{transform:translate(0,0)}50%{transform:translate(8px,-8px)}}
+  .ordem-hq{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .ordem-hq button{background:#fff;border:5px solid #E8DEF8;border-radius:20px;padding:8px 4px;font-family:inherit;
+    font-size:.95rem;font-weight:bold;color:var(--texto);cursor:pointer;box-shadow:0 5px 0 #E8DEF8;position:relative;}
+  .ordem-hq button .e{font-size:3rem;display:block;}
+  .ordem-hq button .n{position:absolute;top:-10px;left:-8px;background:var(--verde);color:#fff;border-radius:50%;
+    width:36px;height:36px;display:none;align-items:center;justify-content:center;font-size:1.3rem;}
+  .ordem-hq button.ok{border-color:var(--verde);background:var(--verde-claro);}
+  .ordem-hq button.ok .n{display:flex;}
+  .conte-passo{display:flex;gap:12px;align-items:center;background:#fff;border-radius:20px;padding:10px 12px;margin:8px 0;
+    border:4px solid #E8DEF8;cursor:pointer;font-size:1.1rem;font-weight:bold;text-align:left;}
+  .conte-passo .e{font-size:2.4rem;flex:0 0 auto;}
+  .conte-passo .ini{color:#EC407A;}
+  @media (prefers-reduced-motion: reduce){.hq-som,.pula-kid,.corre-kid,.gira-sol,.voa{animation:none;}}
   @media (prefers-reduced-motion: reduce){
     .conf,.girando,.opcao.certa,.letra.achou,.quadr.cheio,.palavra-card.certa{animation:none;}
   }
@@ -468,6 +547,9 @@
   <button class="menu-btn m23" onclick="abrirJogo23()"><span class="emo">❓</span><span><span class="pag">CA PÁG. 20</span>OS SINAIS DE PONTUAÇÃO</span><span class="done" id="d23"></span></button>
   <button class="menu-btn m24" onclick="abrirJogo24()"><span class="emo">➖</span><span><span class="pag">CA PÁG. 21</span>O TRAVESSÃO</span><span class="done" id="d24"></span></button>
   <button class="menu-btn m25" onclick="abrirJogo25()"><span class="emo">🪳</span><span><span class="pag">CA PÁG. 21</span>OS DOIS SENTIDOS DE BARATA</span><span class="done" id="d25"></span></button>
+  <button class="menu-btn m26" onclick="abrirJogo26()"><span class="emo">🧠</span><span><span class="pag">CA PÁG. 22</span>UMA PALAVRA, DOIS SENTIDOS</span><span class="done" id="d26"></span></button>
+  <button class="menu-btn m27" onclick="abrirJogo27()"><span class="emo">💬</span><span><span class="pag">CA PÁG. 23</span>GULOSA! (QUADRINHOS)</span><span class="done" id="d27"></span></button>
+  <button class="menu-btn m28" onclick="abrirJogo28()"><span class="emo">❓</span><span><span class="pag">CA PÁG. 23</span>PERGUNTAS DO GIBI</span><span class="done" id="d28"></span></button>
   </div>
 </div>
 
@@ -715,6 +797,37 @@
   <div id="area-j25"></div>
   <div class="feedback" id="fb-j25"></div>
   <button class="prox" id="prox-j25" onclick="proxJ25()">PRÓXIMA ➜</button>
+</div>
+
+<!-- J26 CA pág 22 nº14 -->
+<div class="tela" id="tela-j26">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j26"></div>
+  <div class="pergunta" id="perg-j26"></div>
+  <div id="area-j26"></div>
+  <div class="feedback" id="fb-j26"></div>
+  <button class="prox" id="prox-j26" onclick="proxJ26()">PRÓXIMA ➜</button>
+</div>
+
+<!-- J27 CA pág 23 nº15 — gibi animado -->
+<div class="tela" id="tela-j27">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j27"></div>
+  <div id="area-j27"></div>
+  <div class="hq-nav" id="nav-j27">
+    <button class="sec" id="ant-j27" onclick="navJ27(-1)">⬅️</button>
+    <button id="seg-j27" onclick="navJ27(1)">PRÓXIMO ➜</button>
+  </div>
+</div>
+
+<!-- J28 CA pág 23 nº15 A/B -->
+<div class="tela" id="tela-j28">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j28"></div>
+  <div class="pergunta" id="perg-j28"></div>
+  <div id="area-j28"></div>
+  <div class="feedback" id="fb-j28"></div>
+  <button class="prox" id="prox-j28" onclick="proxJ28()">PRÓXIMA ➜</button>
 </div>
 
 <!-- RESUMO para copiar no caderno -->
@@ -2026,6 +2139,367 @@ function proxJ25(){
     [{tit:'CA PÁG. 21 — COPIE ABAIXO DE CADA CENA',
       txt:'🪳 NA PORTA: '+FRASES_B.B+'<br>🧸 NA LOJA: '+FRASES_B.A},
      {tit:'PREÇO BAIXO',txt:'NA FRASE <b>A</b>.'}]);}
+
+/* ===== J26 — CA pág.22 nº14: uma palavra, dois sentidos ===== */
+const SETA_SVG=(x,y,r)=>'<g transform="translate('+x+','+y+') rotate('+(r||0)+')"><path d="M0,0 L-9,-14 L-3,-14 L-3,-34 L3,-34 L3,-14 L9,-14Z" fill="#D50000" stroke="#fff" stroke-width="2"/></g>';
+const FIG26={
+ braco:'<svg viewBox="0 0 120 90"><path d="M4,58 Q40,52 70,50 L92,44 Q104,40 110,46 Q114,52 104,54 L112,56 Q116,62 106,62 L92,62 Q74,66 44,70 Q20,72 4,74Z" fill="#FFCCBC" stroke="#8D6E63" stroke-width="3" stroke-linejoin="round"/><path d="M4,56 L24,54 L24,76 L4,76Z" fill="#42A5F5" stroke="#1E88E5" stroke-width="3"/><path d="M58,58 Q62,62 58,66" stroke="#8D6E63" stroke-width="2" fill="none"/></svg>',
+ sofa:'<svg viewBox="0 0 120 90"><rect x="22" y="22" width="76" height="34" rx="10" fill="#80CBC4" stroke="#00695C" stroke-width="3"/><rect x="24" y="48" width="72" height="18" rx="6" fill="#B2DFDB" stroke="#00695C" stroke-width="3"/><rect x="6" y="36" width="22" height="36" rx="9" fill="#26A69A" stroke="#00695C" stroke-width="3"/><rect x="92" y="36" width="22" height="36" rx="9" fill="#26A69A" stroke="#00695C" stroke-width="3"/><rect x="12" y="72" width="7" height="10" fill="#5D4037"/><rect x="101" y="72" width="7" height="10" fill="#5D4037"/>'+SETA_SVG(17,34,0)+'</svg>',
+ prego:'<svg viewBox="0 0 120 90"><path d="M22,74 L86,32" stroke="#78909C" stroke-width="7" stroke-linecap="round"/><path d="M22,74 L12,82 L26,72Z" fill="#546E7A"/><ellipse cx="89" cy="30" rx="6" ry="13" transform="rotate(-33 89 30)" fill="#90A4AE" stroke="#455A64" stroke-width="3"/>'+SETA_SVG(92,20,15)+'</svg>',
+ rosto:'<svg viewBox="0 0 120 90"><ellipse cx="60" cy="48" rx="30" ry="36" fill="#FFE0B2" stroke="#8D6E63" stroke-width="3"/><path d="M30,40 Q30,8 60,10 Q90,8 90,40 Q80,24 60,24 Q42,24 30,40Z" fill="#5D4037"/><circle cx="49" cy="46" r="4" fill="#263238"/><circle cx="71" cy="46" r="4" fill="#263238"/><path d="M60,50 L56,62 L62,62" stroke="#8D6E63" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M50,70 Q60,78 70,70" stroke="#C62828" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="30" cy="50" rx="4" ry="8" fill="#FFCCBC"/><ellipse cx="90" cy="50" rx="4" ry="8" fill="#FFCCBC"/></svg>',
+ metade:'<svg viewBox="0 0 120 90"><circle cx="38" cy="48" r="28" fill="#FB8C00" stroke="#E65100" stroke-width="3"/><circle cx="38" cy="48" r="23" fill="#FFE082"/><g stroke="#FB8C00" stroke-width="2.5"><line x1="38" y1="26" x2="38" y2="70"/><line x1="16" y1="48" x2="60" y2="48"/><line x1="22" y1="32" x2="54" y2="64"/><line x1="54" y1="32" x2="22" y2="64"/></g><circle cx="86" cy="48" r="28" fill="#FB8C00" stroke="#E65100" stroke-width="3"/><circle cx="86" cy="48" r="23" fill="#FFE082"/><g stroke="#FB8C00" stroke-width="2.5"><line x1="86" y1="26" x2="86" y2="70"/><line x1="64" y1="48" x2="108" y2="48"/><line x1="70" y1="32" x2="102" y2="64"/><line x1="102" y1="32" x2="70" y2="64"/></g></svg>'
+};
+const PAL26=[
+ {p:'BRAÇO',art:'É O',a:{t:'MEMBRO SUPERIOR DO CORPO HUMANO.',f:FIG26.braco},
+  b:{t:'SUPORTE PARA COTOVELO E ANTEBRAÇO NO SOFÁ.',f:FIG26.sofa},extra:['M','L'],
+  fala:'Braço! O braço do corpo e o braço do sofá.'},
+ {p:'VELA',art:'É A',a:{t:'CONJUNTO DE PANOS QUE MOVE UMA EMBARCAÇÃO.',f:'⛵'},
+  b:{t:'PEÇA COM PAVIO NO CENTRO PARA DAR LUZ.',f:'🕯️'},extra:['B','O'],
+  fala:'Vela! A vela do barco e a vela que dá luz.'},
+ {p:'CABEÇA',art:'É A',a:{t:'PARTE SUPERIOR DO PREGO.',f:FIG26.prego},
+  b:{t:'PARTE DO CORPO ONDE ESTÃO OS OLHOS E O NARIZ.',f:FIG26.rosto},extra:['T','U'],
+  fala:'Cabeça! A cabeça do prego e a nossa cabeça.'},
+ {p:'MEIA',art:'É A',a:{t:'PEÇA DO VESTUÁRIO QUE COBRE O PÉ E PARTE DA PERNA.',f:'🧦'},
+  b:{t:'O MESMO QUE METADE.',f:FIG26.metade},extra:['S','L'],
+  fala:'Meia! A meia do pé e meia laranja, que é a metade.'}
+];
+const CORES_FICHA=['#EC407A','#29B6F6','#FFA726','#66BB6A','#AB47BC','#26A69A','#5C6BC0','#EF5350'];
+let i26=0,pos26=0;
+function abrirJogo26(){i26=0;mostrar('tela-j26');montarJ26();}
+function montarJ26(){
+  const q=PAL26[i26],area=document.getElementById('area-j26'),fb=document.getElementById('fb-j26');
+  pos26=0;fb.textContent='';document.getElementById('prox-j26').classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j26'),i26,PAL26.length);
+  document.getElementById('perg-j26').innerHTML='QUAL PALAVRA SERVE PARA AS <b>DUAS DICAS</b>?';
+  area.innerHTML='';
+  const d=document.createElement('div');d.className='dicas-2';
+  [['A',q.a],['B',q.b]].forEach(([L,x])=>{
+    const c=document.createElement('button');c.className='dica-card';
+    c.innerHTML='<span class="letra-d">'+L+'</span><div class="img-d">'+x.f+'</div><div class="txt-d">'+x.t+'</div>';
+    c.onclick=()=>falar(L+'. '+x.t);d.appendChild(c);});
+  area.appendChild(d);
+  const lc=document.createElement('div');lc.className='linha-caixas';lc.id='cx-j26';
+  lc.innerHTML='<span class="art">'+q.art+'</span>'+[...q.p].map((_,k)=>'<span class="caixa-l'+(k===0?' prox-l':'')+'"></span>').join('')+'<span class="art">.</span>';
+  area.appendChild(lc);
+  const fi=document.createElement('div');fi.className='fichas';
+  embaralhar([...q.p,...q.extra]).forEach((L,k)=>{
+    const b=document.createElement('button');b.className='ficha';b.textContent=L;
+    b.style.background=CORES_FICHA[k%CORES_FICHA.length];
+    b.onclick=()=>letraJ26(b,L);fi.appendChild(b);});
+  area.appendChild(fi);
+  textoFala='Descubra a palavra. Dica A: '+q.a.t+' Dica B: '+q.b.t+' A palavra tem '+q.p.length+' letras.';
+  falar(textoFala);}
+function letraJ26(b,L){
+  const q=PAL26[i26],cx=document.querySelectorAll('#cx-j26 .caixa-l'),fb=document.getElementById('fb-j26');
+  if(pos26>=q.p.length)return;
+  if(L===q.p[pos26]){
+    cx[pos26].textContent=L;cx[pos26].classList.remove('prox-l');cx[pos26].classList.add('ok');
+    b.classList.add('usada');pos26++;tocarSom(true);falar(L==='Ç'?'cê cedilha':L);
+    if(pos26<q.p.length){cx[pos26].classList.add('prox-l');fb.textContent='';return;}
+    document.querySelectorAll('#area-j26 .dica-card').forEach(c=>c.classList.add('brilha'));
+    fb.className='feedback certo';fb.textContent=elogio()+' '+q.art+' '+q.p+'!';
+    confete();setTimeout(()=>falar(q.fala),500);
+    const p=document.getElementById('prox-j26');p.classList.add('mostrar');
+    p.textContent=i26<PAL26.length-1?'PRÓXIMA ➜':'PRONTO ➜';}
+  else{b.classList.add('errada');tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+    falar('Quase! Procure a letra que vem agora.');
+    setTimeout(()=>b.classList.remove('errada'),600);}}
+function proxJ26(){
+  if(i26<PAL26.length-1){i26++;montarJ26();return;}
+  fimResumo(26,'UMA PALAVRA, DOIS SENTIDOS',
+    PAL26.map((q,k)=>({tit:'CA PÁG. 22 — PALAVRA '+(k+1),txt:q.art+' <b>'+q.p+'</b>.'})));}
+
+/* ===== J27 — CA pág.23 nº15: gibi "GULOSA!" animado ===== */
+const ESC='#263238';
+const PERS={
+ menina:{pele:'#FFD9BF',cabelo:'#7B4A2B',estilo:'tiara',roupa:'#F06292',calca:'#5C6BC0',saia:1},
+ amigo1:{pele:'#FFE3CC',cabelo:'#E6701E',estilo:'curto',roupa:'#42A5F5',calca:'#6D4C41'},
+ amiga2:{pele:'#8D5A3B',cabelo:'#2B1B17',estilo:'coque',roupa:'#FFFFFF',calca:'#EF5350',saia:1},
+ amigo3:{pele:'#6B3F24',cabelo:'#1B1B1B',estilo:'cacho',roupa:'#66BB6A',calca:'#1E88E5'},
+ amiga4:{pele:'#A86B45',cabelo:'#3E2723',estilo:'cacho',roupa:'#FF7043',calca:'#8E24AA',saia:1,laco:1},
+ amigo5:{pele:'#FFE0C7',cabelo:'#795548',estilo:'bone',roupa:'#FFCA28',calca:'#455A64'},
+ amigo6:{pele:'#C68B5E',cabelo:'#212121',estilo:'curto',roupa:'#EF5350',calca:'#37474F'}
+};
+function itemHQ(t,x,y){
+  let s='<g transform="translate('+x+','+y+')">';
+  if(t==='pipoca'||t==='pipocaVazia'){
+    if(t==='pipoca')s+=[[-8,-12],[0,-16],[8,-12],[-4,-20],[5,-21]].map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="6" fill="#FFFDE7" stroke="#F9A825" stroke-width="1.5"/>').join('');
+    s+='<path d="M-11,-10 L11,-10 L8,15 L-8,15Z" fill="#fff" stroke="'+ESC+'" stroke-width="2"/><rect x="-6" y="-10" width="4" height="25" fill="#E53935"/><rect x="3" y="-10" width="4" height="25" fill="#E53935"/>';
+    if(t==='pipocaVazia')s+='<path d="M-11,-10 L-4,-6 L2,-11 L7,-6 L11,-10" fill="none" stroke="'+ESC+'" stroke-width="2"/>';}
+  else if(t==='doce'||t==='pratoVazio'){
+    s+='<ellipse cx="0" cy="6" rx="17" ry="5" fill="#fff" stroke="'+ESC+'" stroke-width="2"/>';
+    if(t==='doce')s+='<path d="M-11,4 L11,4 L11,-8 L-11,-4Z" fill="#8D6E63" stroke="'+ESC+'" stroke-width="1.5"/><path d="M-11,-4 L11,-8 L11,-12 Q0,-14 -11,-8Z" fill="#F8BBD0" stroke="'+ESC+'" stroke-width="1.5"/><circle cx="3" cy="-14" r="3.5" fill="#E53935"/>';
+    else s+='<circle cx="-4" cy="3" r="1.6" fill="#8D6E63"/><circle cx="3" cy="4" r="1.6" fill="#F48FB1"/><circle cx="7" cy="2" r="1.3" fill="#8D6E63"/>';}
+  else if(t==='bolo'){
+    s+='<path d="M-12,8 L12,8 L12,-6 L-12,0Z" fill="#FFB74D" stroke="'+ESC+'" stroke-width="1.5"/><path d="M-12,0 L12,-6 L12,-10 L-12,-4Z" fill="#FFF3E0" stroke="'+ESC+'" stroke-width="1.5"/><circle cx="-4" cy="4" r="1.5" fill="#EF6C00"/><circle cx="5" cy="2" r="1.5" fill="#EF6C00"/>';}
+  else if(t==='sorvete'){
+    s+='<path d="M-6,-2 L6,-2 L0,16Z" fill="#FFCC80" stroke="'+ESC+'" stroke-width="1.5"/><circle cx="0" cy="-7" r="8" fill="#F48FB1" stroke="'+ESC+'" stroke-width="1.5"/>';}
+  else if(t==='sanduiche'){
+    s+='<path d="M-12,2 Q0,-12 12,2Z" fill="#FFCC80" stroke="'+ESC+'" stroke-width="1.5"/><rect x="-13" y="2" width="26" height="3" fill="#7CB342"/><rect x="-12" y="5" width="24" height="3" fill="#E53935"/><path d="M-12,8 L12,8 L11,12 L-11,12Z" fill="#FFCC80" stroke="'+ESC+'" stroke-width="1.5"/>';}
+  return s+'</g>';}
+function kidHQ(p,o){
+  const d=o.dir||1,sc=o.s||1,cor=p.pele,C=p.cabelo,ex=o.expr||'feliz',br=o.braco||'baixo';
+  let g='';
+  const perna=p.calca||'#5C6BC0';
+  if(o.corre){
+    g+='<path d="M-6,-34 L-22,-8" stroke="'+cor+'" stroke-width="10" stroke-linecap="round"/><path d="M6,-34 L16,-4" stroke="'+cor+'" stroke-width="10" stroke-linecap="round"/>';
+    g+='<ellipse cx="-24" cy="-6" rx="9" ry="5" fill="'+ESC+'"/><ellipse cx="20" cy="-2" rx="9" ry="5" fill="'+ESC+'"/>';}
+  else{
+    g+='<rect x="-15" y="-36" width="11" height="32" rx="5" fill="'+(p.saia?cor:perna)+'" stroke="'+ESC+'" stroke-width="1.5"/><rect x="4" y="-36" width="11" height="32" rx="5" fill="'+(p.saia?cor:perna)+'" stroke="'+ESC+'" stroke-width="1.5"/>';
+    g+='<ellipse cx="-11" cy="-3" rx="10" ry="5" fill="'+ESC+'"/><ellipse cx="11" cy="-3" rx="10" ry="5" fill="'+ESC+'"/>';}
+  if(p.saia)g+='<path d="M-20,-50 L20,-50 L27,-28 L-27,-28Z" fill="'+perna+'" stroke="'+ESC+'" stroke-width="2" stroke-linejoin="round"/>';
+  else g+='<rect x="-18" y="-50" width="36" height="18" rx="4" fill="'+perna+'" stroke="'+ESC+'" stroke-width="2"/>';
+  /* braço de trás */
+  const tras=o.corre?'M-16,-70 L-30,-48':'M-16,-70 Q-24,-56 -24,-42';
+  g+='<path d="'+tras+'" stroke="'+cor+'" stroke-width="9" stroke-linecap="round" fill="none"/>';
+  g+='<rect x="-20" y="-80" width="40" height="36" rx="13" fill="'+p.roupa+'" stroke="'+ESC+'" stroke-width="2"/>';
+  if(p.roupa==='#FFFFFF')g+='<path d="M-8,-80 L0,-72 L8,-80" fill="none" stroke="#E53935" stroke-width="3"/>';
+  /* braço da frente */
+  const bf={baixo:'M16,-70 Q24,-56 24,-42',aponta:'M16,-70 Q34,-66 50,-64',palma:'M16,-70 Q30,-58 42,-60',
+    segura:'M16,-70 Q28,-56 34,-52',boca:'M16,-70 Q34,-66 18,-92',acena:'M16,-72 Q36,-92 34,-122',
+    queixo:'M16,-70 Q30,-66 10,-86',corre:'M16,-70 L34,-86'}[o.corre?'corre':br];
+  g+='<path d="'+bf+'" stroke="'+cor+'" stroke-width="9" stroke-linecap="round" fill="none"/>';
+  g+='<circle cx="-16" cy="-72" r="7" fill="'+p.roupa+'" stroke="'+ESC+'" stroke-width="1.5"/><circle cx="16" cy="-72" r="7" fill="'+p.roupa+'" stroke="'+ESC+'" stroke-width="1.5"/>';
+  if(br==='acena')g+='<g class="voa"><circle cx="34" cy="-126" r="7" fill="'+cor+'" stroke="'+ESC+'" stroke-width="1.5"/></g>';
+  /* cabelo de trás */
+  if(p.estilo==='tiara')g+='<path d="M-32,-110 Q-34,-150 0,-146 Q34,-150 32,-110 L33,-86 Q24,-80 18,-90 L-18,-90 Q-24,-80 -33,-86Z" fill="'+C+'" stroke="'+ESC+'" stroke-width="2"/>';
+  if(p.estilo==='cacho')for(let a=150;a<=390;a+=24){const r=a*Math.PI/180;
+    g+='<circle cx="'+(Math.cos(r)*30).toFixed(1)+'" cy="'+(-112+Math.sin(r)*30).toFixed(1)+'" r="11" fill="'+C+'"/>';}
+  if(p.estilo==='coque')g+='<circle cx="0" cy="-146" r="13" fill="'+C+'" stroke="'+ESC+'" stroke-width="2"/>';
+  /* cabeça */
+  g+='<rect x="-6" y="-86" width="12" height="8" fill="'+cor+'"/>';
+  g+='<circle cx="0" cy="-110" r="29" fill="'+cor+'" stroke="'+ESC+'" stroke-width="2"/>';
+  if(o.costas){
+    g+='<circle cx="0" cy="-110" r="30" fill="'+C+'" stroke="'+ESC+'" stroke-width="2"/>';
+    if(p.estilo==='bone')g+='<path d="M-31,-114 Q-30,-146 0,-146 Q30,-146 31,-114Z" fill="#1E88E5" stroke="'+ESC+'" stroke-width="2"/>';
+    if(p.laco)g+='<path d="M-10,-146 L0,-140 L-10,-134Z M10,-146 L0,-140 L10,-134Z" fill="#EC407A"/>';
+  } else {
+    g+='<circle cx="-29" cy="-108" r="5" fill="'+cor+'" stroke="'+ESC+'" stroke-width="1.5"/>';
+    /* rosto (olha para a frente = +x) */
+    const ox=5;
+    g+='<ellipse cx="'+(ox-15)+'" cy="-98" rx="5" ry="3" fill="#F48FB1" opacity=".7"/><ellipse cx="'+(ox+17)+'" cy="-98" rx="5" ry="3" fill="#F48FB1" opacity=".7"/>';
+    const olhoAberto=(x,r)=>'<circle cx="'+x+'" cy="-110" r="'+r+'" fill="#2D2A32"/><circle cx="'+(x+1.4)+'" cy="-111.6" r="1.3" fill="#fff"/>';
+    const olhoFechado=x=>'<path d="M'+(x-5)+',-109 Q'+x+',-115 '+(x+5)+',-109" stroke="#2D2A32" stroke-width="2.5" fill="none" stroke-linecap="round"/>';
+    if(ex==='come'||ex==='lingua')g+=olhoFechado(ox-8)+olhoFechado(ox+10);
+    else g+=olhoAberto(ox-8,ex==='surpreso'?5:4)+olhoAberto(ox+10,ex==='surpreso'?5:4);
+    const sob=(x1,y1,x2,y2)=>'<path d="M'+x1+','+y1+' L'+x2+','+y2+'" stroke="'+ESC+'" stroke-width="2.5" stroke-linecap="round"/>';
+    if(ex==='bravo')g+=sob(ox-14,-122,ox-3,-117)+sob(ox+16,-122,ox+5,-117);
+    else if(ex==='surpreso')g+=sob(ox-13,-123,ox-3,-125)+sob(ox+5,-125,ox+15,-123);
+    else if(ex==='duvida')g+=sob(ox-13,-119,ox-3,-119)+sob(ox+5,-124,ox+15,-121);
+    const bY=-96;
+    const boca={
+      feliz:'<path d="M'+(ox-6)+','+bY+' Q'+(ox+1)+','+(bY+8)+' '+(ox+8)+','+bY+'" stroke="#8E2436" stroke-width="2.5" fill="none" stroke-linecap="round"/>',
+      fala:'<ellipse cx="'+(ox+1)+'" cy="'+(bY+2)+'" rx="5" ry="4" fill="#8E2436"/><ellipse cx="'+(ox+1)+'" cy="'+(bY+4)+'" rx="3" ry="1.5" fill="#F06292"/>',
+      surpreso:'<ellipse cx="'+(ox+1)+'" cy="'+(bY+2)+'" rx="4" ry="5.5" fill="#8E2436"/>',
+      bravo:'<path d="M'+(ox-6)+','+(bY+4)+' Q'+(ox+1)+','+(bY-3)+' '+(ox+8)+','+(bY+4)+'" stroke="#8E2436" stroke-width="2.5" fill="none" stroke-linecap="round"/>',
+      come:'<circle cx="'+(ox-12)+'" cy="-99" r="6" fill="'+cor+'" stroke="'+ESC+'" stroke-width="1"/><circle cx="'+(ox+14)+'" cy="-99" r="6" fill="'+cor+'" stroke="'+ESC+'" stroke-width="1"/><path d="M'+(ox-5)+','+bY+' l3,-2 l3,2 l3,-2 l3,2" stroke="#8E2436" stroke-width="2.5" fill="none"/>',
+      lingua:'<path d="M'+(ox-7)+','+bY+' Q'+(ox+1)+','+(bY+9)+' '+(ox+9)+','+bY+'Z" fill="#8E2436"/><ellipse cx="'+(ox+6)+'" cy="'+(bY+5)+'" rx="4" ry="3.5" fill="#F06292"/>',
+      duvida:'<path d="M'+(ox-4)+','+(bY+2)+' L'+(ox+8)+','+bY+'" stroke="#8E2436" stroke-width="2.5" stroke-linecap="round"/>'
+    }[ex];
+    g+=boca;
+    /* cabelo da frente */
+    if(p.estilo==='tiara')g+='<path d="M-30,-112 Q-30,-142 0,-142 Q30,-142 30,-112 Q22,-128 2,-126 Q-18,-130 -30,-112Z" fill="'+C+'" stroke="'+ESC+'" stroke-width="2"/><path d="M-28,-120 Q0,-150 28,-120" stroke="#EC407A" stroke-width="6" fill="none" stroke-linecap="round"/>';
+    if(p.estilo==='coque')g+='<path d="M-30,-106 Q-32,-142 0,-140 Q32,-142 30,-106 Q26,-126 0,-128 Q-24,-126 -30,-106Z" fill="'+C+'" stroke="'+ESC+'" stroke-width="2"/>';
+    if(p.estilo==='curto')g+='<path d="M-30,-110 L-27,-134 L-17,-128 L-11,-145 L-1,-133 L9,-147 L15,-131 L26,-139 L30,-110 Q18,-126 0,-124 Q-16,-126 -30,-110Z" fill="'+C+'" stroke="'+ESC+'" stroke-width="2" stroke-linejoin="round"/>';
+    if(p.estilo==='cacho')for(let a=190;a<=350;a+=26){const r=a*Math.PI/180;
+      g+='<circle cx="'+(Math.cos(r)*27).toFixed(1)+'" cy="'+(-114+Math.sin(r)*25).toFixed(1)+'" r="9" fill="'+C+'"/>';}
+    if(p.laco)g+='<path d="M-24,-138 L-14,-132 L-24,-126Z M-4,-138 L-14,-132 L-4,-126Z" fill="#EC407A" stroke="'+ESC+'" stroke-width="1"/>';
+    if(p.estilo==='bone')g+='<path d="M-30,-112 Q-30,-146 0,-146 Q30,-146 30,-112Z" fill="#1E88E5" stroke="'+ESC+'" stroke-width="2"/><path d="M22,-114 L52,-112 Q50,-105 20,-107Z" fill="#1565C0" stroke="'+ESC+'" stroke-width="2"/><rect x="-30" y="-114" width="8" height="12" fill="'+C+'"/>';
+  }
+  /* item na mão */
+  if(o.item){const pos={segura:[36,-56],boca:[20,-94],palma:[44,-68],baixo:[26,-40],aponta:[52,-68]}[br]||[30,-52];
+    g+=itemHQ(o.item,pos[0],pos[1]);}
+  const cls=o.corre?'':' class="pula-kid"';
+  const inner='<g transform="scale('+(d*sc)+','+sc+')">'+g+'</g>';
+  return '<g transform="translate('+o.x+','+o.y+')"><g'+cls+'>'+inner+'</g></g>';}
+function cenarioHQ(n,op){
+  op=op||{};
+  let s='<defs><linearGradient id="ceu'+n+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#81D4FA"/><stop offset="1" stop-color="#E1F5FE"/></linearGradient></defs>';
+  s+='<rect width="320" height="240" fill="url(#ceu'+n+')"/>';
+  if(op.sol){s+='<g class="gira-sol" transform="translate('+op.sol+',38)">';
+    for(let a=0;a<360;a+=45)s+='<line x1="0" y1="-22" x2="0" y2="-30" stroke="#FFB300" stroke-width="4" stroke-linecap="round" transform="rotate('+a+')"/>';
+    s+='<circle r="16" fill="#FFD54F" stroke="#FFB300" stroke-width="3"/></g>';}
+  s+='<g fill="#fff" opacity=".9"><ellipse cx="'+(op.nuvem||70)+'" cy="30" rx="26" ry="10"/><ellipse cx="'+((op.nuvem||70)+18)+'" cy="24" rx="16" ry="10"/></g>';
+  s+='<ellipse cx="80" cy="200" rx="170" ry="60" fill="#AED581"/><ellipse cx="270" cy="205" rx="130" ry="50" fill="#9CCC65"/>';
+  (op.arvores||[]).forEach(x=>{
+    s+='<rect x="'+(x-8)+'" y="100" width="16" height="90" rx="4" fill="#8D6E63" stroke="'+ESC+'" stroke-width="2"/>';
+    s+='<g fill="#43A047" stroke="'+ESC+'" stroke-width="2"><circle cx="'+x+'" cy="84" r="36"/><circle cx="'+(x-28)+'" cy="104" r="24"/><circle cx="'+(x+28)+'" cy="104" r="24"/></g>';
+    s+='<circle cx="'+(x-10)+'" cy="76" r="4" fill="#E53935"/><circle cx="'+(x+14)+'" cy="92" r="4" fill="#E53935"/>';});
+  s+='<rect y="196" width="320" height="44" fill="#7CB342"/>';
+  s+='<path d="M0,196 Q160,186 320,196" fill="none" stroke="#558B2F" stroke-width="2"/>';
+  for(let x=12;x<320;x+=38)s+='<circle cx="'+x+'" cy="'+(214+(x%3)*6)+'" r="3.5" fill="'+['#FFEB3B','#F48FB1','#fff'][x%3]+'"/>';
+  if(op.borboleta)s+='<g class="voa" transform="translate('+op.borboleta+',70)"><ellipse cx="-5" cy="0" rx="6" ry="4" fill="#FF80AB"/><ellipse cx="5" cy="0" rx="6" ry="4" fill="#FF80AB"/><rect x="-1" y="-4" width="2" height="8" fill="'+ESC+'"/></g>';
+  return s;}
+const QUADROS=[
+ {arte:()=>cenarioHQ(1,{sol:270,arvores:[],nuvem:200})+kidHQ(PERS.menina,{x:92,y:228,dir:1,expr:'fala',braco:'aponta'})+kidHQ(PERS.amigo1,{x:228,y:228,dir:-1,expr:'come',braco:'boca',item:'pipoca'}),
+  titulo:'GULOSA!',
+  baloes:[{t:'OI, AMIGO. VOCÊ ME DÁ UM POUCO DA SUA PIPOCA?',l:3,tp:22,w:48,r:'r-esq'}],
+  sons:[{t:'CHOMP!',l:66,tp:24}],
+  narr:'GULOSA! A MENINA DE TIARA ENCONTROU UM AMIGO COMENDO PIPOCA.'},
+ {arte:()=>cenarioHQ(2,{arvores:[40],nuvem:230})+kidHQ(PERS.amigo1,{x:100,y:228,dir:1,expr:'surpreso',braco:'segura',item:'pipocaVazia'})+kidHQ(PERS.menina,{x:232,y:228,dir:-1,expr:'come',braco:'boca',item:'pipoca'}),
+  baloes:[{t:'ESSA MENINA É GULOSA!',l:4,tp:4,w:40,r:'r-dir'}],
+  sons:[{t:'CHOMP!',l:62,tp:18}],
+  narr:'ELA COMEU A PIPOCA DO AMIGO! O SAQUINHO FICOU VAZIO.'},
+ {arte:()=>cenarioHQ(3,{arvores:[50],nuvem:250})+kidHQ(PERS.menina,{x:112,y:228,dir:1,expr:'fala',braco:'palma'})+kidHQ(PERS.amiga2,{x:236,y:228,dir:-1,expr:'feliz',braco:'segura',item:'doce'}),
+  baloes:[{t:'OI, AMIGA. VOCÊ ME DÁ UM PEDAÇO DO SEU DOCE?',l:6,tp:3,w:50,r:'r-esq'},{t:'CLARO.',l:68,tp:22,w:24,r:'r-meio'}],
+  sons:[],
+  narr:'DEPOIS, ELA ENCONTROU UMA AMIGA COM UM DOCE.'},
+ {arte:()=>cenarioHQ(4,{arvores:[60],nuvem:250})+kidHQ(PERS.amiga2,{x:100,y:228,dir:1,expr:'bravo',braco:'segura',item:'pratoVazio'})+kidHQ(PERS.menina,{x:236,y:228,dir:-1,expr:'lingua',braco:'baixo'}),
+  baloes:[{t:'COMEU QUASE TODO MEU DOCE. GULOSA!',l:4,tp:4,w:48,r:'r-esq'}],
+  sons:[{t:'SLURP!',l:44,tp:40}],
+  narr:'A MENINA COMEU QUASE TODO O DOCE. A AMIGA FICOU BRAVA!'},
+ {arte:()=>cenarioHQ(5,{arvores:[270],nuvem:60})+kidHQ(PERS.menina,{x:92,y:228,dir:1,expr:'fala',braco:'palma'})+kidHQ(PERS.amigo3,{x:226,y:228,dir:-1,expr:'come',braco:'boca',item:'bolo'}),
+  baloes:[{t:'OI, AMIGO. ESSE BOLO DEVE ESTAR UMA DELÍCIA. ME DÁ UM PEDAÇO?',l:4,tp:3,w:52,r:'r-esq'}],
+  sons:[{t:'CHOMP!',l:66,tp:12},{t:'CHOMP!',l:40,tp:44}],
+  narr:'ENTÃO ELA VIU OUTRO AMIGO COMENDO BOLO.'},
+ {arte:()=>cenarioHQ(6,{arvores:[70,250],nuvem:160})+kidHQ(PERS.amigo3,{x:96,y:228,dir:1,expr:'surpreso',braco:'baixo'})+kidHQ(PERS.menina,{x:236,y:228,dir:-1,expr:'come',braco:'boca',item:'bolo'}),
+  baloes:[{t:'HUMMM... É BOLO DE LARANJA!',l:58,tp:3,w:38,r:'r-meio'}],
+  sons:[{t:'CHOMP!',l:4,tp:14},{t:'CHOMP!',l:52,tp:40}],
+  narr:'A MENINA COMEU O BOLO DO AMIGO. ELE FICOU ESPANTADO!'},
+ {arte:()=>cenarioHQ(7,{sol:280,arvores:[60,200],borboleta:130})+
+    kidHQ(PERS.amiga4,{x:150,y:196,dir:1,s:.62,expr:'feliz',braco:'segura',item:'sanduiche'})+
+    kidHQ(PERS.amigo5,{x:205,y:196,dir:-1,s:.62,expr:'feliz',braco:'segura',item:'sorvete'})+
+    kidHQ(PERS.amigo6,{x:258,y:196,dir:-1,s:.62,expr:'feliz',braco:'segura',item:'bolo'})+
+    kidHQ(PERS.menina,{x:62,y:238,dir:1,s:1.08,expr:'fala',braco:'acena'}),
+  baloes:[{t:'OI, AMIGOS!',l:3,tp:4,w:34,r:'r-dir'}],
+  sons:[],
+  narr:'MAIS TARDE, ELA VIU TRÊS AMIGOS COM LANCHES.'},
+ {arte:()=>cenarioHQ(8,{sol:250,arvores:[40],borboleta:120})+
+    '<g class="corre-kid">'+kidHQ(PERS.amiga4,{x:168,y:206,dir:1,s:.62,corre:1,costas:1})+
+    kidHQ(PERS.amigo5,{x:212,y:210,dir:1,s:.62,corre:1,costas:1})+
+    kidHQ(PERS.amigo6,{x:250,y:204,dir:1,s:.62,corre:1,costas:1})+
+    '<g stroke="#fff" stroke-width="3" stroke-linecap="round"><line x1="130" y1="160" x2="150" y2="160"/><line x1="126" y1="172" x2="150" y2="172"/><line x1="134" y1="184" x2="150" y2="184"/></g></g>'+
+    kidHQ(PERS.menina,{x:74,y:236,dir:1,s:1.05,expr:'duvida',braco:'queixo'})+
+    '<text x="96" y="70" font-size="44" font-weight="900" fill="#FF7043" stroke="'+ESC+'" stroke-width="2" font-family="Comic Sans MS,sans-serif">?</text>',
+  baloes:[],sons:[],fim:1,
+  narr:'MAS OS AMIGOS SAÍRAM CORRENDO! A MENINA FICOU SEM ENTENDER. FIM.'}
+];
+function quadroHTML(k,animar){
+  const q=QUADROS[k];
+  let h='<div class="hq-quadro"><svg class="hq-arte" viewBox="0 0 320 240" preserveAspectRatio="xMidYMid slice">'+q.arte()+'</svg>';
+  if(q.titulo)h+='<div class="hq-titulo">'+q.titulo+'</div>';
+  q.baloes.forEach((b,j)=>{h+='<div class="hq-balao '+b.r+'" data-t="'+b.t+'" style="left:'+b.l+'%;top:'+(b.tp+(q.titulo?0:0))+'%;width:'+b.w+'%;animation-delay:'+(animar?(.4+j*1.2):0)+'s">'+b.t+'</div>';});
+  q.sons.forEach((s,j)=>{h+='<div class="hq-som" style="left:'+s.l+'%;top:'+s.tp+'%;animation-delay:'+(j*.3)+'s">'+s.t+'</div>';});
+  if(q.fim)h+='<div class="hq-fim">FIM</div>';
+  h+='<div class="hq-num">'+(k+1)+'</div></div>';
+  return h;}
+let q27=0;
+function abrirJogo27(){q27=0;mostrar('tela-j27');montarJ27();}
+function falaQuadro(k){
+  const q=QUADROS[k];let t=q.narr+' ';
+  if(q.titulo)t=q.narr.replace('GULOSA! ','')+' ';
+  q.baloes.forEach(b=>t+=' '+b.t);
+  q.sons.forEach(s=>t+=' '+s.t.replace('!',''));
+  return (q.titulo?'Gulosa! ':'')+t;}
+function montarJ27(){
+  const area=document.getElementById('area-j27'),prog=document.getElementById('prog-j27');
+  document.getElementById('nav-j27').hidden=false;
+  if(q27>=QUADROS.length){ /* página inteira */
+    prog.textContent='📖 A PÁGINA INTEIRA';
+    area.innerHTML='<div class="hq-legenda" style="margin-bottom:10px">ESTA É A HISTÓRIA COMPLETA, IGUAL AO LIVRO. TOQUE NUM QUADRINHO PARA VER DE NOVO.</div><div class="hq-pagina">'+
+      QUADROS.map((_,k)=>'<div onclick="q27='+k+';montarJ27()">'+quadroHTML(k,false)+'</div>').join('')+'</div>';
+    document.getElementById('ant-j27').disabled=false;
+    document.getElementById('seg-j27').textContent='TERMINEI ✔';
+    textoFala='Esta é a história completa. Agora vamos responder as perguntas.';falar(textoFala);return;}
+  estrelas(prog,q27+1,QUADROS.length);
+  area.innerHTML=quadroHTML(q27,true)+'<div class="hq-legenda">📖 '+QUADROS[q27].narr+'</div>';
+  area.querySelectorAll('.hq-balao').forEach(b=>b.onclick=()=>{
+    area.querySelectorAll('.hq-balao').forEach(x=>x.classList.remove('falando'));
+    b.classList.add('falando');falar(b.dataset.t);});
+  document.getElementById('ant-j27').disabled=q27===0;
+  document.getElementById('seg-j27').textContent=q27<QUADROS.length-1?'PRÓXIMO ➜':'VER TUDO ➜';
+  textoFala=falaQuadro(q27);falar(textoFala);}
+function navJ27(d){
+  if(q27>=QUADROS.length&&d>0){
+    fimResumo(27,'GULOSA! (HISTÓRIA EM QUADRINHOS)',[
+      {tit:'CA PÁG. 23 — VOCÊ LEU O GIBI',txt:'👧 A MENINA PEDIU <b>PIPOCA</b>, <b>DOCE</b> E <b>BOLO</b>.'},
+      {tit:'O QUE ACONTECEU',txt:'ELA COMEU QUASE TUDO. OS AMIGOS DISSERAM: <b>GULOSA!</b>'},
+      {tit:'AGORA',txt:'JOGUE <b>PERGUNTAS DO GIBI</b> ❓'}]);return;}
+  q27=Math.max(0,q27+d);montarJ27();}
+
+/* ===== J28 — CA pág.23 nº15 A/B: perguntas do gibi ===== */
+const PERG28=[
+ {p:'A) ESSE TEXTO É:',f:'Esse texto é: uma receita, uma história em quadrinhos, ou um poema?',
+  ops:['UMA RECEITA.','UMA HISTÓRIA EM QUADRINHOS.','UM POEMA.'],c:1,livro:1,
+  ok:'Isso! Tem quadrinhos, desenhos e balões de fala. É uma história em quadrinhos, um gibi!',
+  dica:'Lembre: a história tem desenhos em quadrinhos e balões de fala.'},
+ {p:'O QUE A MENINA PEDIU PRIMEIRO?',f:'O que a menina pediu primeiro?',
+  ops:['🍰 BOLO','🍿 PIPOCA','🥤 SUCO'],c:1,q:0,
+  ok:'Isso! Primeiro ela pediu pipoca.',dica:'Veja o primeiro quadrinho.'},
+ {p:'O QUE A MENINA FEZ COM O DOCE DA AMIGA?',f:'O que a menina fez com o doce da amiga?',
+  ops:['COMEU QUASE TODO O DOCE.','DEVOLVEU O DOCE.','JOGOU O DOCE NO LIXO.'],c:0,q:3,
+  ok:'Isso! Ela comeu quase todo o doce.',dica:'Veja o que a amiga falou brava.'},
+ {p:'O BOLO ERA DE QUÊ?',f:'O bolo era de quê?',
+  ops:['🍫 CHOCOLATE','🍓 MORANGO','🍊 LARANJA'],c:2,q:5,
+  ok:'Isso! Era bolo de laranja. Hummm!',dica:'Leia o balão da menina: é bolo de...'},
+ {p:'POR QUE CHAMARAM A MENINA DE <b>GULOSA</b>?',f:'Por que chamaram a menina de gulosa?',
+  ops:['PORQUE ELA COMIA QUASE TUDO DOS AMIGOS.','PORQUE ELA DIVIDIA O LANCHE.','PORQUE ELA NÃO QUERIA COMER.'],c:0,
+  ok:'Isso! Ela pedia um pouquinho e comia quase tudo.',dica:'Pense: o que ela fazia com a comida dos amigos?'},
+ {p:'POR QUE OS AMIGOS SAÍRAM CORRENDO NO FINAL?',f:'Por que os amigos saíram correndo no final?',
+  ops:['PORQUE VIRAM UMA BARATA.','PARA A MENINA NÃO COMER O LANCHE DELES.','PORQUE COMEÇOU A CHOVER.'],c:1,q:7,
+  ok:'Isso! Eles correram para ela não comer o lanche deles.',dica:'Eles estavam com lanches na mão. O que a menina fazia com os lanches?'},
+ {tipo:'ordem'},
+ {tipo:'conte'}
+];
+const ORDEM28=[{e:'🍿',t:'PIPOCA'},{e:'🍰',t:'DOCE'},{e:'🍊',t:'BOLO DE LARANJA'}];
+let i28=0,ord28=0;
+function abrirJogo28(){i28=0;mostrar('tela-j28');montarJ28();}
+function montarJ28(){
+  const q=PERG28[i28],area=document.getElementById('area-j28'),fb=document.getElementById('fb-j28'),
+        perg=document.getElementById('perg-j28'),prox=document.getElementById('prox-j28');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');prox.textContent='PRÓXIMA ➜';
+  estrelas(document.getElementById('prog-j28'),i28,PERG28.length);
+  if(q.tipo==='ordem'){
+    ord28=0;perg.innerHTML='TOQUE NA ORDEM EM QUE A MENINA<br>PEDIU AS COMIDAS: <b>1, 2, 3</b>';
+    const box=document.createElement('div');box.className='ordem-hq';
+    embaralhar(ORDEM28.map((x,k)=>({...x,k}))).forEach(x=>{
+      const b=document.createElement('button');
+      b.innerHTML='<span class="n">'+(x.k+1)+'</span><span class="e">'+x.e+'</span>'+x.t;
+      b.onclick=()=>{
+        if(b.classList.contains('ok'))return;
+        if(x.k===ord28){b.classList.add('ok');ord28++;tocarSom(true);falar(ord28+'. '+x.t);
+          if(ord28===3){fb.className='feedback certo';fb.textContent=elogio();
+            setTimeout(()=>falar('Muito bem! Pipoca, doce e bolo de laranja.'),900);prox.classList.add('mostrar');}}
+        else{b.classList.add('errada');b.style.animation='treme .4s';tocarSom(false);
+          fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';falar('Quase! O que ela pediu antes?');
+          setTimeout(()=>{b.style.animation='';},450);}};
+      box.appendChild(b);});
+    area.appendChild(box);
+    textoFala='Toque na ordem em que a menina pediu as comidas. Um, dois, três.';falar(textoFala);return;}
+  if(q.tipo==='conte'){
+    perg.innerHTML='B) VOCÊ ENTENDEU A HISTÓRIA?<br>CONTE-A, COM SUAS PALAVRAS,<br>A ALGUÉM DA SUA FAMÍLIA 🗣️';
+    const passos=[
+      {e:'🍿',ini:'PRIMEIRO,',t:'A MENINA PEDIU PIPOCA PARA UM AMIGO E COMEU TUDO.'},
+      {e:'🍰',ini:'DEPOIS,',t:'ELA PEDIU UM PEDAÇO DO DOCE DA AMIGA E COMEU QUASE TODO.'},
+      {e:'🍊',ini:'ENTÃO,',t:'ELA COMEU O BOLO DE LARANJA DE OUTRO AMIGO.'},
+      {e:'🏃',ini:'NO FINAL,',t:'OS AMIGOS SAÍRAM CORRENDO COM SEUS LANCHES.'}];
+    const dica=document.createElement('div');dica.className='hq-legenda';dica.style.marginBottom='6px';
+    dica.textContent='TOQUE EM CADA PARTE PARA OUVIR. DEPOIS CONTE DO SEU JEITO!';area.appendChild(dica);
+    passos.forEach(p=>{const d=document.createElement('div');d.className='conte-passo';
+      d.innerHTML='<span class="e">'+p.e+'</span><span><span class="ini">'+p.ini+'</span> '+p.t+'</span>';
+      d.onclick=()=>falar(p.ini+' '+p.t);area.appendChild(d);});
+    const b=document.createElement('button');b.className='prox mostrar';b.style.background='#43A047';b.style.boxShadow='0 5px 0 #2E7D32';
+    b.textContent='EU CONTEI! ⭐';b.onclick=()=>{b.remove();proxJ28();};area.appendChild(b);
+    textoFala='Você entendeu a história? Conte com suas palavras para alguém da sua família. Toque em cada parte para ouvir.';
+    falar(textoFala);return;}
+  perg.innerHTML=q.p+(q.livro?'<br><small style="color:#8E7CC3">MARQUE O QUADRINHO, COMO NO LIVRO</small>':'');
+  if(q.q!==undefined){const mini=document.createElement('div');mini.style.maxWidth='300px';mini.style.margin='0 auto';
+    mini.innerHTML=quadroHTML(q.q,false);area.appendChild(mini);}
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  q.ops.forEach((t,k)=>{
+    opQuadro(box,t,b=>{
+      if(k===q.c){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent=q.livro?'X':'✔';
+        box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio();falar(q.ok);prox.classList.add('mostrar');}
+      else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';tocarSom(false);
+        fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';falar('Quase! '+q.dica);
+        setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+  textoFala=q.f;falar(textoFala);}
+function proxJ28(){
+  if(i28<PERG28.length-1){i28++;montarJ28();return;}
+  fimResumo(28,'PERGUNTAS DO GIBI',[
+    {tit:'CA PÁG. 23 — A) ESSE TEXTO É',txt:'☒ <b>UMA HISTÓRIA EM QUADRINHOS.</b><br><small>(MARQUE UM X NO 2º QUADRADINHO)</small>'},
+    {tit:'B) CONTE A HISTÓRIA',txt:'🗣️ CONTE PARA ALGUÉM DA FAMÍLIA: PIPOCA ➜ DOCE ➜ BOLO ➜ OS AMIGOS CORRERAM.'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
