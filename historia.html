@@ -463,6 +463,18 @@
   .esc-op .nome{display:block;margin-top:6px;font-size:.98rem;font-weight:bold;line-height:1.25;}
   .esc-op.pintada{filter:none;background:#F3E5F5;border-color:#AB47BC;box-shadow:0 5px 0 #6A1B9A;animation:pula .4s;}
   .esc-op.pintada .nome{color:#6A1B9A;}
+  .h4c{background:#FB8C00;} .h5c{background:#43A047;} .h6c{background:#5C6BC0;}
+  .fotao{background:var(--card);border:6px solid #CE93D8;border-radius:26px;padding:10px;
+    box-shadow:0 6px 0 #CE93D8;max-width:440px;margin:0 auto;}
+  .fotao svg{width:100%;height:auto;display:block;border-radius:16px;}
+  .grade-pinte{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:12px;}
+  .cartao-p{background:#F5F5F5;border:5px solid #E0E0E0;border-radius:24px;padding:16px 10px;text-align:center;
+    cursor:pointer;box-shadow:0 5px 0 #E0E0E0;transition:transform .1s;filter:grayscale(1);
+    font-size:1.1rem;font-weight:bold;color:#616161;font-family:inherit;}
+  .cartao-p:active{transform:scale(.96);}
+  .cartao-p.pintado{filter:none;background:#FFF3E0;border-color:#FB8C00;box-shadow:0 5px 0 #E65100;
+    color:#E65100;animation:pula .45s;}
+  .cartao-p.errada{animation:treme .4s;border-color:#EF9A9A;}
   .contador{text-align:center;font-size:1.05rem;font-weight:bold;color:#6A1B9A;margin:10px 0 0;}
   .resumo-card{background:var(--card);border-radius:28px;padding:24px 18px;text-align:center;
     box-shadow:0 8px 24px rgba(171,71,188,.25);margin-top:20px;}
@@ -484,6 +496,9 @@
   <button class="menu-btn h1c" onclick="abrirJogo1()"><span class="emo">🎉</span><span><span class="pag">CA PÁG. 2</span>FESTA DA ESCOLA OU DA FAMÍLIA?</span><span class="done" id="d1"></span></button>
   <button class="menu-btn h2c" onclick="abrirJogo2()"><span class="emo">🎂</span><span><span class="pag">CA PÁG. 3</span>MINHA FESTA EM FAMÍLIA</span><span class="done" id="d2"></span></button>
   <button class="menu-btn h3c" onclick="abrirJogo3()"><span class="emo">🏫</span><span><span class="pag">CA PÁG. 3</span>UM EVENTO DA MINHA ESCOLA</span><span class="done" id="d3"></span></button>
+  <button class="menu-btn h4c" onclick="abrirJogo4()"><span class="emo">🌽</span><span><span class="pag">CA PÁG. 4</span>QUE FESTA É ESSA?</span><span class="done" id="d4"></span></button>
+  <button class="menu-btn h5c" onclick="abrirJogo5()"><span class="emo">🌳</span><span><span class="pag">CA PÁG. 5</span>O DIA DA ÁRVORE</span><span class="done" id="d5"></span></button>
+  <button class="menu-btn h6c" onclick="abrirJogo6()"><span class="emo">🧑‍🏫</span><span><span class="pag">CA PÁG. 5</span>O DIA DO PROFESSOR</span><span class="done" id="d6"></span></button>
   </div>
 </div>
 
@@ -517,6 +532,40 @@
   <div class="escolhas" id="area-j3"></div>
   <div class="contador" id="cont-j3"></div>
   <button class="prox" id="prox-j3" onclick="fimJ3()">PRONTO ➜</button>
+</div>
+
+
+<div class="tela" id="tela-j4">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j4"></div>
+  <div class="pergunta" id="perg-j4"></div>
+  <div id="area-j4"></div>
+  <div class="contador" id="cont-j4"></div>
+  <div class="feedback" id="fb-j4"></div>
+  <button class="prox" id="prox-j4" onclick="proxJ4()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j5">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j5"></div>
+  <div class="pergunta" id="perg-j5"></div>
+  <div id="area-j5"></div>
+  <div class="contador" id="cont-j5"></div>
+  <div class="feedback" id="fb-j5"></div>
+  <button class="prox" id="prox-j5" onclick="proxJ5()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j6">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j6"></div>
+  <div class="pergunta" id="perg-j6"></div>
+  <div id="area-j6"></div>
+  <div class="contador" id="cont-j6"></div>
+  <div class="feedback" id="fb-j6"></div>
+  <button class="prox" id="prox-j6" onclick="proxJ6()">CONTINUAR ➜</button>
 </div>
 
 <div class="tela" id="tela-resumo">
@@ -696,6 +745,193 @@ function fimJ3(){
   fimResumo(3,'O EVENTO DA SUA ESCOLA',
     [{tit:'CA PÁG. 3 — DESENHE E NOMEIE O EVENTO',
       txt:esc3.fig+' NOME DO EVENTO: <b>'+esc3.n+'</b>'}]);}
+
+
+function opQuadro(area,texto,onClick){
+  const b=document.createElement('button');b.className='op-quadro';
+  b.innerHTML='<span class="cx"></span><span>'+texto+'</span>';
+  b.onclick=()=>onClick(b);area.appendChild(b);return b;}
+
+/* ===== desenhos ===== */
+function cenaJuninaSVG(){
+  const cores=['#E53935','#FDD835','#43A047','#1E88E5','#8E24AA','#FB8C00'];
+  let band='';
+  for(let k=0;k<11;k++){
+    const x=14+k*26, c=cores[k%6];
+    band+='<path d="M'+x+' 22 L'+(x+22)+' 22 L'+(x+11)+' 46 Z" fill="'+c+'"/>';}
+  let band2='';
+  for(let k=0;k<11;k++){
+    const x=14+k*26, c=cores[(k+3)%6];
+    band2+='<path d="M'+x+' 54 L'+(x+22)+' 54 L'+(x+11)+' 76 Z" fill="'+c+'" opacity=".85"/>';}
+  return '<svg viewBox="0 0 300 190" aria-hidden="true">'+
+   '<rect width="300" height="190" rx="14" fill="#FFF8E1"/>'+
+   '<path d="M6 20 Q150 6 294 20" stroke="#8D6E63" stroke-width="3" fill="none"/>'+band+
+   '<path d="M6 52 Q150 38 294 52" stroke="#8D6E63" stroke-width="3" fill="none"/>'+band2+
+   '<rect x="0" y="150" width="300" height="40" fill="#D7CCC8"/>'+
+   '<ellipse cx="150" cy="150" rx="150" ry="10" fill="#EFEBE9"/>'+
+   '<g transform="translate(40,96)"><path d="M0 44 L10 8 L20 44 Z" fill="#8D6E63"/>'+
+    '<path d="M-8 44 L6 12 L16 44 Z" fill="#A1887F"/>'+
+    '<path d="M4 14 q8 -16 12 0 q6 -10 4 8 q-10 10 -18 0 z" fill="#FF7043"/>'+
+    '<path d="M6 16 q6 -10 8 0 q4 -6 2 6 q-7 6 -12 0 z" fill="#FFCA28"/></g>'+
+   '<text x="112" y="146" font-size="62">🤠</text>'+
+   '<text x="178" y="146" font-size="62">💃</text>'+
+   '<text x="252" y="140" font-size="34">🌽</text>'+
+   '</svg>';}
+function cenaArvoreSVG(){
+  return '<svg viewBox="0 0 300 175" aria-hidden="true">'+
+   '<rect width="300" height="175" rx="14" fill="#E3F2FD"/>'+
+   '<rect x="0" y="118" width="300" height="57" fill="#A1887F"/>'+
+   '<ellipse cx="150" cy="118" rx="150" ry="12" fill="#8D6E63"/>'+
+   '<circle cx="255" cy="36" r="20" fill="#FFD54F"/>'+
+   '<g transform="translate(140,54)">'+
+    '<rect x="6" y="34" width="8" height="34" fill="#795548"/>'+
+    '<circle cx="10" cy="24" r="20" fill="#66BB6A"/>'+
+    '<circle cx="-4" cy="34" r="13" fill="#43A047"/>'+
+    '<circle cx="24" cy="34" r="13" fill="#43A047"/></g>'+
+   '<ellipse cx="150" cy="122" rx="34" ry="9" fill="#6D4C41"/>'+
+   '<text x="52" y="120" font-size="52">👦</text>'+
+   '<text x="196" y="120" font-size="52">👧</text>'+
+   '</svg>';}
+
+/* ===== J4 — CA pág.4 nº4: que festa é essa? ===== */
+const FESTAS4=['FESTA DA FAMÍLIA.','FESTA JUNINA.','SARAU MUSICAL.',
+               'MOSTRA CULTURAL.','GINCANA.','CARNAVAL.'];
+const COISAS4=[{t:'BANDEIRINHAS.',ok:true},{t:'LIVROS.',ok:false},
+               {t:'PIPOCA.',ok:true},{t:'ARROZ-DOCE.',ok:true},
+               {t:'DESFILE DE FANTASIA.',ok:false},{t:'MÚSICA.',ok:true}];
+let fase4=0,achadas4=[];
+function abrirJogo4(){fase4=0;achadas4=[];mostrar('tela-j4');montarJ4();}
+function montarJ4(){
+  const perg=document.getElementById('perg-j4'),area=document.getElementById('area-j4'),
+        fb=document.getElementById('fb-j4'),prox=document.getElementById('prox-j4'),
+        cont=document.getElementById('cont-j4');
+  area.innerHTML='';fb.textContent='';cont.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j4'),fase4,3);
+  if(fase4===0){
+    perg.innerHTML='NA ESCOLA DA ANITA HÁ MUITAS FESTAS!<br>OLHE A FOTO E <b>PINTE</b> QUAL É ESTA.';
+    const f=document.createElement('div');f.className='fotao';f.innerHTML=cenaJuninaSVG();
+    area.appendChild(f);
+    const g=document.createElement('div');g.className='grade-pinte';
+    FESTAS4.forEach(t=>{
+      const b=document.createElement('button');b.className='cartao-p';b.textContent=t;
+      b.onclick=()=>{
+        if(t==='FESTA JUNINA.'){tocarSom(true);b.classList.add('pintado');
+          g.querySelectorAll('.cartao-p').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio();
+          falar('Isso mesmo! É a festa junina.');
+          prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+        else{b.classList.add('errada');tocarSom(false);
+          fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+          falar('Quase! Olhe as bandeirinhas e a fogueira.');
+          setTimeout(()=>b.classList.remove('errada'),450);}};
+      g.appendChild(b);});
+    area.appendChild(g);
+    textoFala='Veja a imagem. Pinte a comemoração ou o evento que a imagem retrata.';falar(textoFala);return;}
+  if(fase4===1){
+    perg.innerHTML='NA <b>FESTA JUNINA</b>, É COMUM ENCONTRARMOS...<br>MARQUE <b>TODOS</b> OS QUE COMBINAM.';
+    const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+    COISAS4.forEach(o=>{
+      const b=opQuadro(box,o.t,bt=>{
+        if(o.ok){
+          if(achadas4.includes(o.t))return;
+          achadas4.push(o.t);tocarSom(true);
+          bt.classList.add('certa');bt.querySelector('.cx').textContent='✔';bt.onclick=null;
+          falar(o.t.replace('.',''));
+          document.getElementById('cont-j4').textContent='VOCÊ ACHOU '+achadas4.length+' DE 4';
+          if(achadas4.length===4){
+            fb.className='feedback certo';fb.textContent='⭐ VOCÊ ACHOU TODOS!';
+            falar('Muito bem! Você achou todos.');
+            box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+            prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+          else{fb.className='feedback certo';fb.textContent=elogio();}}
+        else{bt.classList.add('errada');bt.querySelector('.cx').textContent='✖';
+          tocarSom(false);fb.className='feedback tente';
+          fb.textContent='ESSE NÃO É DA FESTA JUNINA 😊';
+          falar(o.t.replace('.','')+' não é da festa junina.');
+          setTimeout(()=>{bt.classList.remove('errada');bt.querySelector('.cx').textContent='';},900);}});
+      if(achadas4.includes(o.t)){b.classList.add('certa');b.querySelector('.cx').textContent='✔';b.onclick=null;}});
+    cont.textContent='VOCÊ ACHOU '+achadas4.length+' DE 4';
+    textoFala='Nesse evento, é comum encontrarmos o quê? Marque todos os que combinam.';falar(textoFala);return;}
+  perg.innerHTML='QUEM COSTUMA PARTICIPAR DESSE EVENTO NA ESCOLA?';
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  [['SOMENTE OS ALUNOS.',false],
+   ['SOMENTE OS PROFISSIONAIS DA ESCOLA E OS ALUNOS.',false],
+   ['ALUNOS, PAIS, FUNCIONÁRIOS E DEMAIS MEMBROS DA <b>COMUNIDADE</b>.',true]].forEach(par=>{
+    opQuadro(box,par[0],b=>{
+      if(par[1]){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+        box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio();
+        falar('Isso mesmo! A festa junina reúne toda a comunidade da escola.');
+        prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+      else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+        tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+        falar('Quase! Pense em quem vai na festa junina da escola.');
+        setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+  textoFala='Quem costuma participar desse evento na escola?';falar(textoFala);}
+function proxJ4(){
+  if(fase4<2){fase4++;montarJ4();return;}
+  fimResumo(4,'A FESTA DA FOTO',
+    [{tit:'CA PÁG. 4 — A) PINTE A COMEMORAÇÃO',txt:'<b>FESTA JUNINA</b>'},
+     {tit:'B) NESSE EVENTO ENCONTRAMOS',
+      txt:COISAS4.filter(o=>o.ok).map(o=>'✔ '+o.t.replace('.','')).join('<br>')},
+     {tit:'C) QUEM PARTICIPA',
+      txt:'ALUNOS, PAIS, FUNCIONÁRIOS E DEMAIS MEMBROS DA <b>COMUNIDADE</b>'}]);}
+
+/* ===== J5 — CA pág.5 nº5: o dia da árvore ===== */
+function abrirJogo5(){mostrar('tela-j5');montarJ5();}
+function montarJ5(){
+  const perg=document.getElementById('perg-j5'),area=document.getElementById('area-j5'),
+        fb=document.getElementById('fb-j5'),prox=document.getElementById('prox-j5');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  document.getElementById('prog-j5').textContent='';
+  document.getElementById('cont-j5').textContent='';
+  perg.innerHTML='👧 EM SETEMBRO, A TURMA DA EMÍLIA<br><b>PLANTOU ÁRVORES</b> NO DIA DA ÁRVORE.<br>POR QUE ISSO ACONTECE NA ESCOLA?';
+  const f=document.createElement('div');f.className='fotao';f.innerHTML=cenaArvoreSVG();area.appendChild(f);
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  [['PORQUE PLANTAR ÁRVORES É UMA TAREFA DOS ALUNOS.',false],
+   ['PORQUE PLANTAR ÁRVORES REPRESENTA UM <b>CUIDADO COM O MEIO AMBIENTE</b>.',true],
+   ['PORQUE PLANTAR ÁRVORES FAZ PARTE DO CALENDÁRIO DE TODA ESCOLA.',false]].forEach(par=>{
+    opQuadro(box,par[0],b=>{
+      if(par[1]){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+        box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio();
+        falar('Isso mesmo! Plantar árvores é um cuidado com o meio ambiente.');
+        prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+      else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+        tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+        falar('Quase! Pense no que as árvores fazem pela natureza.');
+        setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+  textoFala='Por que você imagina que esse tipo de evento acontece na escola de Emília?';falar(textoFala);}
+function proxJ5(){
+  fimResumo(5,'O DIA DA ÁRVORE',
+    [{tit:'CA PÁG. 5 — POR QUE ESSE EVENTO ACONTECE?',
+      txt:'PORQUE PLANTAR ÁRVORES REPRESENTA UM <b>CUIDADO QUE DEVEMOS TER COM O MEIO AMBIENTE</b>.'}]);}
+
+/* ===== J6 — CA pág.5 nº6: o dia do professor ===== */
+const IDEIAS6=[
+ {fig:'💌',n:'FAZER UM CARTÃO'},{fig:'🎨',n:'FAZER UM DESENHO'},
+ {fig:'🎵',n:'CANTAR UMA MÚSICA'},{fig:'🎂',n:'FAZER UMA FESTA SURPRESA'},
+ {fig:'💐',n:'DAR UMA FLOR'},{fig:'📝',n:'ESCREVER UMA CARTA'}
+];
+let esc6=null;
+function abrirJogo6(){
+  esc6=null;mostrar('tela-j6');
+  document.getElementById('prog-j6').textContent='';
+  document.getElementById('fb-j6').textContent='';
+  textoFala='Em outubro há uma comemoração muito importante: o Dia do Professor. Como esse dia pode ser comemorado em sua escola? Escolha a sua sugestão.';
+  document.getElementById('perg-j6').innerHTML=
+    '🧑‍🏫 EM OUTUBRO É O <b>DIA DO PROFESSOR</b>.<br>ESCOLHA A SUA <b>SUGESTÃO</b> PARA COMEMORAR.';
+  montarEscolha('j6',IDEIAS6,o=>{esc6=o;contaJ6();});
+  contaJ6();falar(textoFala);}
+function contaJ6(){
+  document.getElementById('cont-j6').textContent=esc6?('VOCÊ ESCOLHEU: '+esc6.n):'TOQUE NA SUA SUGESTÃO';
+  const p=document.getElementById('prox-j6');
+  p.classList.toggle('mostrar',!!esc6);p.textContent='PRONTO ➜';}
+function proxJ6(){
+  if(!esc6)return;
+  fimResumo(6,'A SUA IDEIA PARA O DIA DO PROFESSOR',
+    [{tit:'CA PÁG. 5 — ESCREVA OU DESENHE SUA SUGESTÃO',
+      txt:esc6.fig+' <b>'+esc6.n+'</b>'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
