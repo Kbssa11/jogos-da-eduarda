@@ -467,6 +467,34 @@
   .lin-resumo{background:#F3E5F5;border:3px solid #CE93D8;border-radius:16px;padding:10px 14px;
     font-size:1.05rem;font-weight:bold;color:#4527A0;}
   .lin-resumo .tit-r{display:block;color:var(--roxo);font-size:.85rem;margin-bottom:2px;}
+  .m22{background:#26A69A;} .m23{background:#42A5F5;} .m24{background:#AB47BC;}
+  .m25{background:#FF7043;} .m26{background:#66BB6A;} .m27{background:#5C6BC0;} .m28{background:#EC407A;}
+  .vitrine{display:flex;gap:18px;justify-content:center;align-items:flex-end;flex-wrap:wrap;margin-top:8px;}
+  .pecab{background:var(--card);border:5px solid #E8DEF8;border-radius:22px;padding:10px 8px;cursor:pointer;
+    box-shadow:0 5px 0 #E8DEF8;transition:transform .1s;text-align:center;}
+  .pecab:active{transform:translateY(4px);box-shadow:none;}
+  .pecab.naoclica{cursor:default;}
+  .pecab svg{display:block;margin:0 auto;}
+  .pecab .rot{display:block;margin-top:6px;font-size:.95rem;font-weight:bold;color:var(--texto);}
+  .pecab.circulada{border-color:#E53935;background:#FFEBEE;box-shadow:0 5px 0 #C62828;animation:pula .5s;}
+  .pecab.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .pecab.pintada{border-color:var(--certo);background:#E8F5E9;box-shadow:0 5px 0 #2E7D32;}
+  .fila-mini{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px;}
+  .fila-mini svg{width:34px;height:44px;}
+  .grade-itens{display:grid;grid-template-columns:repeat(auto-fit,minmax(78px,1fr));gap:10px;margin-top:10px;}
+  .item-tap{background:var(--card);border:4px solid #E8DEF8;border-radius:16px;padding:6px 2px;text-align:center;
+    cursor:pointer;box-shadow:0 4px 0 #E8DEF8;transition:transform .1s;}
+  .item-tap:active{transform:scale(.94);}
+  .item-tap.pintada{border-color:var(--certo);background:#E8F5E9;box-shadow:0 4px 0 #2E7D32;animation:pula .4s;}
+  .item-tap svg{display:block;margin:0 auto;}
+  .item-tap .rot{display:block;font-size:.7rem;font-weight:bold;color:#8E7CC3;margin-top:2px;}
+  .balao-fala{background:var(--card);border:4px solid #B39DDB;border-radius:22px;padding:14px 16px;
+    font-size:1.12rem;font-weight:bold;line-height:1.4;color:var(--texto);max-width:520px;margin:0 auto;
+    box-shadow:0 5px 0 #D1C4E9;text-align:center;}
+  .quem-fala{text-align:center;font-size:1.3rem;font-weight:bold;color:var(--roxo);margin-top:10px;}
+  .quem-fala .carinha{font-size:3rem;display:block;line-height:1.1;}
+  .aviso-dica{background:#FFF8E1;border:3px solid #FFCC80;border-radius:16px;padding:10px 12px;
+    font-size:.98rem;font-weight:bold;color:#E65100;text-align:center;margin-top:12px;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -507,6 +535,13 @@
   <button class="menu-btn m19" onclick="abrirJogo19()"><span class="emo">📊</span><span><span class="pag">CA PÁG. 15</span>O GRÁFICO DOS ANIMAIS</span><span class="done" id="d19"></span></button>
   <button class="menu-btn m20" onclick="abrirJogo20()"><span class="emo">🐩</span><span><span class="pag">CA PÁG. 16</span>AS ROUPINHAS DA FIFI</span><span class="done" id="d20"></span></button>
   <button class="menu-btn m21" onclick="abrirJogo21()"><span class="emo">🧸</span><span><span class="pag">CA PÁG. 17</span>MINHAS COMBINAÇÕES</span><span class="done" id="d21"></span></button>
+  <button class="menu-btn m22" onclick="abrirJogo22()"><span class="emo">🧴</span><span><span class="pag">CA PÁG. 18</span>AS DUAS GARRAFAS</span><span class="done" id="d22"></span></button>
+  <button class="menu-btn m23" onclick="abrirJogo23()"><span class="emo">🥛</span><span><span class="pag">CA PÁG. 18</span>O COPO QUE CABE MAIS</span><span class="done" id="d23"></span></button>
+  <button class="menu-btn m24" onclick="abrirJogo24()"><span class="emo">🫗</span><span><span class="pag">CA PÁG. 18</span>AS JARRAS E OS 18 COPOS</span><span class="done" id="d24"></span></button>
+  <button class="menu-btn m25" onclick="abrirJogo25()"><span class="emo">🍾</span><span><span class="pag">CA PÁG. 18-19</span>AS GARRAFAS E OS 12 COPOS</span><span class="done" id="d25"></span></button>
+  <button class="menu-btn m26" onclick="abrirJogo26()"><span class="emo">🧃</span><span><span class="pag">CA PÁG. 19</span>O COPO DE CADA CRIANÇA</span><span class="done" id="d26"></span></button>
+  <button class="menu-btn m27" onclick="abrirJogo27()"><span class="emo">🐠</span><span><span class="pag">CA PÁG. 20</span>O AQUÁRIO DO URBANO</span><span class="done" id="d27"></span></button>
+  <button class="menu-btn m28" onclick="abrirJogo28()"><span class="emo">🥧</span><span><span class="pag">CA PÁG. 20</span>AS TORTAS E OS POTES</span><span class="done" id="d28"></span></button>
   <button class="menu-btn m6" onclick="abrirJogo6()"><span class="emo">🏪</span><span><span class="pag">MC PÁG. 14</span>O SONHO DA FAMÍLIA</span><span class="done" id="d6"></span></button>
   <button class="menu-btn m7" onclick="abrirJogo7()"><span class="emo">🚲</span><span><span class="pag">MC PÁG. 15</span>A BICICLETA DA MARINA</span><span class="done" id="d7"></span></button>
   </div>
@@ -760,6 +795,77 @@
     <div class="lista-resumo" id="lista-resumo"></div>
     <button class="prox mostrar" onclick="irMenu()">VOLTAR ➜</button>
   </div>
+</div>
+
+
+<div class="tela" id="tela-j22">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j22"></div>
+  <div class="pergunta" id="perg-j22"></div>
+  <div id="area-j22"></div>
+  <div class="placar" id="cont-j22"></div>
+  <div class="feedback" id="fb-j22"></div>
+  <button class="prox" id="prox-j22" onclick="proxJ22()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j23">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j23"></div>
+  <div class="pergunta" id="perg-j23"></div>
+  <div id="area-j23"></div>
+  <div class="placar" id="cont-j23"></div>
+  <div class="feedback" id="fb-j23"></div>
+  <button class="prox" id="prox-j23" onclick="proxJ23()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j24">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j24"></div>
+  <div class="pergunta" id="perg-j24"></div>
+  <div id="area-j24"></div>
+  <div class="placar" id="cont-j24"></div>
+  <div class="feedback" id="fb-j24"></div>
+  <button class="prox" id="prox-j24" onclick="proxJ24()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j25">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j25"></div>
+  <div class="pergunta" id="perg-j25"></div>
+  <div id="area-j25"></div>
+  <div class="placar" id="cont-j25"></div>
+  <div class="feedback" id="fb-j25"></div>
+  <button class="prox" id="prox-j25" onclick="proxJ25()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j26">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j26"></div>
+  <div class="pergunta" id="perg-j26"></div>
+  <div id="area-j26"></div>
+  <div class="placar" id="cont-j26"></div>
+  <div class="feedback" id="fb-j26"></div>
+  <button class="prox" id="prox-j26" onclick="proxJ26()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j27">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j27"></div>
+  <div class="pergunta" id="perg-j27"></div>
+  <div id="area-j27"></div>
+  <div class="placar" id="cont-j27"></div>
+  <div class="feedback" id="fb-j27"></div>
+  <button class="prox" id="prox-j27" onclick="proxJ27()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j28">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j28"></div>
+  <div class="pergunta" id="perg-j28"></div>
+  <div id="area-j28"></div>
+  <div class="placar" id="cont-j28"></div>
+  <div class="feedback" id="fb-j28"></div>
+  <button class="prox" id="prox-j28" onclick="proxJ28()">CONTINUAR ➜</button>
 </div>
 
 <!-- ================= FIM ================= -->
@@ -2045,6 +2151,431 @@ function proxJ21(){
      {tit:'B) CORES',txt:cs21.map(c=>c.n).join('  •  ')},
      {tit:'C) DESENHE ESTAS COMBINAÇÕES',txt:linhas.join('<br>')},
      {tit:'D) QUANTAS COMBINAÇÕES?',txt:'<b>8</b> COMBINAÇÕES  (2 × 4)'}]);}
+
+
+/* ===== desenhos das medidas (págs. 18-20) ===== */
+function garrafaSVG(larga,nivel,alt){
+  const H=alt||150,w=larga?46:26,x=50-w/2,cy=32,ch=H-40;
+  const ah=ch*nivel, ay=cy+ch-ah;
+  return '<svg viewBox="0 0 100 '+H+'" width="'+(larga?78:58)+'" height="'+(H*0.78)+'">'+
+   '<rect x="42" y="4" width="16" height="9" rx="3" fill="#1565C0"/>'+
+   '<rect x="44" y="12" width="12" height="20" fill="#E1F5FE" stroke="#4FC3F7" stroke-width="3"/>'+
+   '<rect x="'+x+'" y="'+cy+'" width="'+w+'" height="'+ch+'" rx="10" fill="#E1F5FE" stroke="#4FC3F7" stroke-width="3"/>'+
+   (nivel>0?'<rect x="'+(x+3)+'" y="'+(ay)+'" width="'+(w-6)+'" height="'+(ah-3)+'" rx="7" fill="#29B6F6"/>':'')+
+   '</svg>';}
+function copoSVG(h,wTop,wBot,nivel,larguraPx){
+  const TOP=8,BOT=TOP+h,cx=50;
+  const yN=BOT-h*nivel, wN=wBot+(wTop-wBot)*nivel;
+  const g='M'+(cx-wTop/2)+' '+TOP+' L'+(cx+wTop/2)+' '+TOP+' L'+(cx+wBot/2)+' '+BOT+' L'+(cx-wBot/2)+' '+BOT+' Z';
+  const a='M'+(cx-wN/2)+' '+yN+' L'+(cx+wN/2)+' '+yN+' L'+(cx+wBot/2-2)+' '+(BOT-3)+' L'+(cx-wBot/2+2)+' '+(BOT-3)+' Z';
+  return '<svg viewBox="0 0 100 '+(BOT+10)+'" width="'+(larguraPx||70)+'" height="'+((BOT+10)*(larguraPx||70)/100)+'">'+
+   '<path d="'+g+'" fill="#E3F2FD" stroke="#42A5F5" stroke-width="3" stroke-linejoin="round"/>'+
+   (nivel>0?'<path d="'+a+'" fill="#29B6F6"/>':'')+
+   '<path d="'+g+'" fill="none" stroke="#42A5F5" stroke-width="3" stroke-linejoin="round"/></svg>';}
+function jarraSVG(cheia,px){
+  return '<svg viewBox="0 0 100 120" width="'+(px||72)+'" height="'+((px||72)*1.2)+'">'+
+   '<path d="M70 42 q22 6 22 22 q0 16 -22 20" fill="none" stroke="'+(cheia?'#1565C0':'#B0BEC5')+'" stroke-width="7"/>'+
+   '<path d="M22 28 h48 l6 10 v62 q0 8 -8 8 h-44 q-8 0 -8 -8 v-62 z" fill="'+(cheia?'#29B6F6':'#ECEFF1')+'" stroke="'+(cheia?'#1565C0':'#B0BEC5')+'" stroke-width="3"/>'+
+   '<path d="M70 28 l14 -6 l2 8 l-10 6 z" fill="'+(cheia?'#29B6F6':'#ECEFF1')+'" stroke="'+(cheia?'#1565C0':'#B0BEC5')+'" stroke-width="3"/>'+
+   '</svg>';}
+function baldeSVG(px){
+  return '<svg viewBox="0 0 64 64" width="'+(px||64)+'" height="'+(px||64)+'">'+
+   '<path d="M16 14 q16 -14 32 0" stroke="#78909C" stroke-width="4" fill="none"/>'+
+   '<path d="M12 20 H52 L46 56 H18 Z" fill="#90A4AE" stroke="#546E7A" stroke-width="3"/>'+
+   '<path d="M15 26 H49 L45 53 H19 Z" fill="#29B6F6"/></svg>';}
+function aquarioSVG(n){
+  const H=120,TOP=10,BOT=TOP+H,ah=H*(n/4),ay=BOT-ah;
+  let marcas='';
+  for(let k=1;k<=4;k++){const y=BOT-H*(k/4);
+    marcas+='<line x1="164" y1="'+y+'" x2="176" y2="'+y+'" stroke="#546E7A" stroke-width="3"/>';}
+  return '<svg viewBox="0 0 180 145" width="270" height="215">'+
+   '<rect x="8" y="'+TOP+'" width="156" height="'+H+'" rx="6" fill="#E3F2FD" stroke="#546E7A" stroke-width="5"/>'+
+   (n>0?'<rect x="12" y="'+ay+'" width="148" height="'+(ah-3)+'" rx="4" fill="#29B6F6" opacity=".85"/>':'')+
+   marcas+'</svg>';}
+function formaSVG(cortada,px){
+  let fatias='';
+  if(cortada){
+    fatias+='<line x1="50" y1="14" x2="50" y2="52" stroke="#8D6E63" stroke-width="3"/>';
+    fatias+='<line x1="12" y1="33" x2="88" y2="33" stroke="#8D6E63" stroke-width="3"/>';
+    fatias+='<line x1="31" y1="14" x2="31" y2="52" stroke="#8D6E63" stroke-width="3"/>';
+    fatias+='<line x1="69" y1="14" x2="69" y2="52" stroke="#8D6E63" stroke-width="3"/>';}
+  return '<svg viewBox="0 0 100 64" width="'+(px||106)+'" height="'+((px||106)*0.64)+'">'+
+   '<rect x="6" y="8" width="88" height="50" rx="8" fill="#FFE0B2" stroke="#8D6E63" stroke-width="4"/>'+
+   '<rect x="12" y="14" width="76" height="38" rx="5" fill="#FFCC80"/>'+fatias+'</svg>';}
+function poteSVG(px){
+  return '<svg viewBox="0 0 64 64" width="'+(px||50)+'" height="'+(px||50)+'">'+
+   '<rect x="18" y="6" width="28" height="8" rx="3" fill="#90A4AE"/>'+
+   '<path d="M16 16 H48 V52 q0 6 -6 6 H22 q-6 0 -6 -6 Z" fill="#E1F5FE" stroke="#78909C" stroke-width="3"/>'+
+   '</svg>';}
+function pedacoSVG(px){
+  return '<svg viewBox="0 0 40 40" width="'+(px||26)+'" height="'+(px||26)+'">'+
+   '<path d="M20 4 L36 34 H4 Z" fill="#FFB74D" stroke="#E65100" stroke-width="3" stroke-linejoin="round"/></svg>';}
+
+/* ===== J22 — CA pág.18 nº1: as duas garrafas ===== */
+let fase22=0;
+function abrirJogo22(){fase22=0;mostrar('tela-j22');montarJ22();}
+function montarJ22(){
+  const perg=document.getElementById('perg-j22'),area=document.getElementById('area-j22'),
+        fb=document.getElementById('fb-j22'),prox=document.getElementById('prox-j22'),
+        cont=document.getElementById('cont-j22');
+  area.innerHTML='';fb.textContent='';cont.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j22'),fase22,2);
+  if(fase22===0){
+    perg.innerHTML='RITA ENCHEU DUAS GARRAFAS COM ÁGUA.<br>EM QUAL CABE <b>MAIS LÍQUIDO</b>? TOQUE NELA.';
+    const v=document.createElement('div');v.className='vitrine';
+    [{l:false,n:'GARRAFA FINA'},{l:true,n:'GARRAFA LARGA'}].forEach(g=>{
+      const d=document.createElement('div');d.className='pecab';
+      d.innerHTML=garrafaSVG(g.l,0.9)+'<span class="rot">'+g.n+'</span>';
+      d.onclick=()=>{
+        if(g.l){tocarSom(true);d.classList.add('circulada');
+          v.querySelectorAll('.pecab').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio()+'  CIRCULE ESSA!';
+          falar('Isso mesmo! Na garrafa mais larga cabe mais líquido.');
+          prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+        else{d.classList.add('errada');tocarSom(false);
+          fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+          falar('Quase! Olhe a largura das garrafas.');
+          setTimeout(()=>d.classList.remove('errada'),450);}};
+      v.appendChild(d);});
+    area.appendChild(v);
+    const dica=document.createElement('div');dica.className='aviso-dica';
+    dica.textContent='AS DUAS TÊM A MESMA ALTURA. OLHE BEM!';
+    area.appendChild(dica);
+    textoFala='Rita encheu duas garrafas com água. Em qual delas cabe mais líquido?';falar(textoFala);return;}
+  perg.innerHTML='O QUE AJUDOU VOCÊ A DESCOBRIR?';
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  [['A ALTURA DAS GARRAFAS.',false],['A LARGURA DAS GARRAFAS.',true]].forEach(par=>{
+    opQuadro(box,par[0],b=>{
+      if(par[1]){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+        box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio();
+        falar('Isso mesmo! As duas têm a mesma altura, mas uma é mais larga.');
+        prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+      else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+        tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+        falar('As duas garrafas têm a mesma altura. Pense de novo.');
+        setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+  textoFala='O que contribuiu para que você descobrisse a resposta?';falar(textoFala);}
+function proxJ22(){
+  if(fase22===0){fase22=1;montarJ22();return;}
+  fimResumo(22,'AS DUAS GARRAFAS',
+    [{tit:'CA PÁG. 18 — A) CIRCULE',txt:'A <b>GARRAFA MAIS LARGA</b>'},
+     {tit:'B) O QUE AJUDOU?',txt:'A <b>LARGURA</b> DAS GARRAFAS'}]);}
+
+/* ===== J23 — CA pág.18 nº2: o copo que cabe mais ===== */
+let nivel23=0;
+function abrirJogo23(){nivel23=0;mostrar('tela-j23');montarJ23();}
+function montarJ23(){
+  const perg=document.getElementById('perg-j23'),area=document.getElementById('area-j23'),
+        fb=document.getElementById('fb-j23'),prox=document.getElementById('prox-j23');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  document.getElementById('prog-j23').textContent='';
+  perg.innerHTML='RITA PEGOU DOIS COPOS DIFERENTES.<br>EM QUAL CABE <b>MAIS ÁGUA</b>?<br>TOQUE NELE PARA <b>DESENHAR A ÁGUA</b>.';
+  const v=document.createElement('div');v.className='vitrine';
+  const copos=[{g:true,h:84,wt:52,wb:38,n:'COPO GRANDE'},{g:false,h:50,wt:36,wb:28,n:'COPO PEQUENO'}];
+  copos.forEach(c=>{
+    const d=document.createElement('div');d.className='pecab';
+    d.innerHTML=copoSVG(c.h,c.wt,c.wb,c.g?nivel23:0,c.g?84:60)+'<span class="rot">'+c.n+'</span>';
+    d.onclick=()=>{
+      if(c.g){
+        if(nivel23>=0.9){return;}
+        tocarSom(true);nivel23=0.9;montarJ23();
+        const f=document.getElementById('fb-j23');
+        f.className='feedback certo';f.textContent=elogio()+'  ÁGUA DESENHADA!';
+        falar('Isso mesmo! No copo grande cabe mais água.');
+        const p=document.getElementById('prox-j23');
+        p.classList.add('mostrar');p.textContent='PRONTO ➜';}
+      else{d.classList.add('errada');tocarSom(false);
+        fb.className='feedback tente';fb.textContent='NESSE CABE MENOS 😊';
+        falar('Nesse copo cabe menos água. Tente o outro.');
+        setTimeout(()=>d.classList.remove('errada'),450);}};
+    v.appendChild(d);});
+  area.appendChild(v);
+  if(nivel23>0){
+    const f=document.getElementById('fb-j23');
+    f.className='feedback certo';f.textContent=elogio()+'  ÁGUA DESENHADA!';
+    const p=document.getElementById('prox-j23');p.classList.add('mostrar');p.textContent='PRONTO ➜';}
+  textoFala='Rita pegou dois copos de tamanhos diferentes. Em qual deles caberá mais água?';
+  if(nivel23===0)falar(textoFala);}
+function proxJ23(){
+  fimResumo(23,'O COPO QUE CABE MAIS',
+    [{tit:'CA PÁG. 18 — DESENHE A ÁGUA',txt:'NO <b>COPO GRANDE</b>'}]);}
+
+/* ===== J24 — CA pág.18 nº3: as jarras e os 18 copos ===== */
+let pintadas24=[],fase24=0;
+function abrirJogo24(){pintadas24=[];fase24=0;mostrar('tela-j24');montarJ24();}
+function montarJ24(){
+  const perg=document.getElementById('perg-j24'),area=document.getElementById('area-j24'),
+        fb=document.getElementById('fb-j24'),prox=document.getElementById('prox-j24'),
+        cont=document.getElementById('cont-j24');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  document.getElementById('prog-j24').textContent='';
+  perg.innerHTML='<b>1 JARRA = 6 COPOS GRANDES.</b><br>QUANTAS JARRAS PARA ENCHER <b>18 COPOS</b>?<br><b>PINTE</b> AS JARRAS.';
+  const ref=document.createElement('div');ref.className='aviso-dica';
+  ref.innerHTML='CONTE OS 18 COPOS ABAIXO EM GRUPOS DE 6';
+  area.appendChild(ref);
+  const fila=document.createElement('div');fila.className='fila-mini';
+  for(let k=0;k<18;k++)fila.innerHTML+=copoSVG(50,36,28,0.85,34);
+  area.appendChild(fila);
+  const v=document.createElement('div');v.className='vitrine';
+  for(let k=0;k<5;k++){
+    const d=document.createElement('div');d.className='pecab'+(pintadas24.includes(k)?' pintada':'');
+    d.innerHTML=jarraSVG(pintadas24.includes(k),72);
+    d.onclick=()=>{
+      const i=pintadas24.indexOf(k);
+      if(i>=0)pintadas24.splice(i,1);else pintadas24.push(k);
+      tocarSom(true);montarJ24();};
+    v.appendChild(d);}
+  area.appendChild(v);
+  cont.textContent='VOCÊ PINTOU '+pintadas24.length+(pintadas24.length===1?' JARRA':' JARRAS');
+  if(pintadas24.length>0){
+    const bt=document.createElement('button');bt.className='prox mostrar';bt.textContent='PRONTO ➜';
+    bt.onclick=conferirJ24;area.appendChild(bt);}
+  textoFala='São necessários 6 copos grandes para encher uma jarra. Pinte quantas jarras são necessárias para encher 18 copos.';
+  if(pintadas24.length===0)falar(textoFala);}
+function conferirJ24(){
+  const fb=document.getElementById('fb-j24');
+  if(pintadas24.length===3){
+    tocarSom(true);fb.className='feedback certo';fb.textContent=elogio();
+    falar('Isso mesmo! Seis mais seis mais seis dá dezoito. São três jarras.');
+    fimResumo(24,'AS JARRAS E OS 18 COPOS',
+      [{tit:'CA PÁG. 18 — PINTE AS JARRAS',txt:'<b>3 JARRAS</b>  (6 + 6 + 6 = 18)'}]);
+  }else{
+    tocarSom(false);fb.className='feedback tente';
+    fb.textContent='CONTE DE NOVO 😊';
+    falar('Quase! Cada jarra enche seis copos. Conte de seis em seis até dezoito.');}}
+function proxJ24(){}
+
+/* ===== J25 — CA pág.18 nº4 + pág.19 nº5: as garrafas e os 12 copos ===== */
+let cheios25=0,garr25=0,fase25=0;
+function abrirJogo25(){cheios25=0;garr25=0;fase25=0;mostrar('tela-j25');montarJ25();}
+function montarJ25(){
+  const perg=document.getElementById('perg-j25'),area=document.getElementById('area-j25'),
+        fb=document.getElementById('fb-j25'),prox=document.getElementById('prox-j25'),
+        cont=document.getElementById('cont-j25');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j25'),fase25,3);
+  if(fase25===0){
+    perg.innerHTML='<b>1 GARRAFA ENCHE 4 COPOS.</b><br>QUANTAS GARRAFAS PARA ENCHER <b>12 COPOS</b>?<br>DESCUBRA DO SEU JEITO!';
+    const v=document.createElement('div');v.className='vitrine';
+    for(let k=0;k<garr25;k++){const d=document.createElement('div');d.className='pecab naoclica';
+      d.innerHTML=garrafaSVG(false,0,150)+'<span class="rot">USADA</span>';v.appendChild(d);}
+    const nova=document.createElement('div');nova.className='pecab';
+    nova.innerHTML=garrafaSVG(false,0.9,150)+'<span class="rot">TOQUE PARA USAR</span>';
+    nova.onclick=()=>{
+      if(cheios25>=12)return;
+      garr25++;cheios25=Math.min(12,cheios25+4);tocarSom(true);
+      falar('Mais quatro copos cheios!');montarJ25();};
+    v.appendChild(nova);
+    area.appendChild(v);
+    const g=document.createElement('div');g.className='grade-itens';
+    for(let k=0;k<12;k++){
+      const d=document.createElement('div');d.className='item-tap naoclica';
+      d.innerHTML=copoSVG(52,38,30,k<cheios25?0.85:0,58);
+      g.appendChild(d);}
+    area.appendChild(g);
+    cont.textContent=cheios25+' DE 12 COPOS CHEIOS  •  '+garr25+(garr25===1?' GARRAFA':' GARRAFAS');
+    if(cheios25>=12){
+      fb.className='feedback certo';fb.textContent='⭐ VOCÊ USOU '+garr25+' GARRAFAS!';
+      falar('Pronto! Você encheu os doze copos com três garrafas.');
+      prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+    textoFala='Se uma garrafa enche quatro copos, quantas garrafas são necessárias para encher doze copos?';
+    if(garr25===0)falar(textoFala);return;}
+  if(fase25===1){
+    perg.innerHTML='ENTÃO, QUANTAS GARRAFAS SÃO NECESSÁRIAS<br>PARA ENCHER <b>12 COPOS</b>?';
+    const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+    [2,3,4].forEach(nm=>{
+      opQuadro(box,'<b>'+nm+'</b> GARRAFAS',b=>{
+        if(nm===3){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+          box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio();
+          falar('Isso mesmo! Quatro mais quatro mais quatro dá doze.');
+          prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+        else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+          tocarSom(false);fb.className='feedback tente';fb.textContent='CONTE DE NOVO 😊';
+          falar('Quase! Conte de quatro em quatro.');
+          setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+    textoFala='Quantas garrafas são necessárias para encher doze copos?';falar(textoFala);return;}
+  perg.innerHTML='PELA SUA RESPOSTA, PODEMOS DIZER QUE:';
+  const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+  [['COM CERTEZA, É POSSÍVEL ENCHER 12 COPOS COM <b>MENOS DE 3</b> GARRAFAS.',false],
+   ['É <b>IMPOSSÍVEL</b> ENCHER 12 COPOS COM MENOS DE 3 GARRAFAS.',true],
+   ['<b>TALVEZ</b> SEJA POSSÍVEL ENCHER 12 COPOS COM 3 GARRAFAS.',false]].forEach(par=>{
+    opQuadro(box,par[0],b=>{
+      if(par[1]){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+        box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio();
+        falar('Isso mesmo! Com duas garrafas dá só oito copos. Três é o mínimo.');
+        prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+      else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+        tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+        falar('Quase! Duas garrafas enchem só oito copos.');
+        setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+  textoFala='De acordo com a sua resposta, podemos dizer que...';falar(textoFala);}
+function proxJ25(){
+  if(fase25<2){fase25++;montarJ25();return;}
+  fimResumo(25,'AS GARRAFAS E OS 12 COPOS',
+    [{tit:'CA PÁG. 18 — ATIVIDADE 4',txt:'<b>3 GARRAFAS</b>  (4 + 4 + 4 = 12)'},
+     {tit:'CA PÁG. 19 — ATIVIDADE 5',txt:'É <b>IMPOSSÍVEL</b> ENCHER 12 COPOS COM MENOS DE 3 GARRAFAS.'}]);}
+
+/* ===== J26 — CA pág.19 nº6: o copo de cada criança ===== */
+const CRIANCAS=[
+ {nome:'ANITA',carinha:'👧',fala:'O MEU COPO É AQUELE EM QUE CABE <b>MENOS SUCO</b>.',
+  dito:'O meu copo é aquele em que cabe menos suco.',copo:'P'},
+ {nome:'OTÁVIO',carinha:'👦',fala:'O MEU COPO É AQUELE EM QUE CABE <b>MAIS SUCO DO QUE NO COPO DE ANITA</b> E <b>MENOS DO QUE NO COPO DE EMÍLIA</b>.',
+  dito:'O meu copo é aquele em que cabe mais suco do que no copo de Anita e menos do que no copo de Emília.',copo:'M'},
+ {nome:'EMÍLIA',carinha:'🧒',fala:'O MEU COPO É AQUELE EM QUE CABE <b>MAIS SUCO</b>.',
+  dito:'O meu copo é aquele em que cabe mais suco.',copo:'G'}
+];
+const COPOS26={P:{h:44,wt:32,wb:26,n:'COPO PEQUENO',px:56},
+               M:{h:62,wt:40,wb:32,n:'COPO MÉDIO',px:70},
+               G:{h:84,wt:52,wb:40,n:'COPO GRANDE',px:86}};
+let i26=0,donos26={};
+function abrirJogo26(){i26=0;donos26={};mostrar('tela-j26');montarJ26();}
+function montarJ26(){
+  const c=CRIANCAS[i26];
+  const perg=document.getElementById('perg-j26'),area=document.getElementById('area-j26'),
+        fb=document.getElementById('fb-j26'),prox=document.getElementById('prox-j26'),
+        cont=document.getElementById('cont-j26');
+  area.innerHTML='';fb.textContent='';cont.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j26'),i26,CRIANCAS.length);
+  perg.innerHTML='LIGUE A CRIANÇA AO <b>COPO CERTO</b>.';
+  const b=document.createElement('div');b.className='balao-fala';b.innerHTML=c.fala;area.appendChild(b);
+  const q=document.createElement('div');q.className='quem-fala';
+  q.innerHTML='<span class="carinha">'+c.carinha+'</span>'+c.nome;area.appendChild(q);
+  const v=document.createElement('div');v.className='vitrine';
+  ['P','M','G'].forEach(k=>{
+    const co=COPOS26[k],dono=donos26[k];
+    const d=document.createElement('div');d.className='pecab'+(dono?' pintada':'');
+    d.innerHTML=copoSVG(co.h,co.wt,co.wb,0.8,co.px)+'<span class="rot">'+(dono||co.n)+'</span>';
+    if(!dono)d.onclick=()=>{
+      if(k===c.copo){tocarSom(true);donos26[k]=c.nome;
+        fb.className='feedback certo';fb.textContent=elogio();
+        falar('Isso mesmo! Esse é o copo de '+c.nome.toLowerCase()+'.');
+        montarJ26();
+        document.getElementById('fb-j26').className='feedback certo';
+        document.getElementById('fb-j26').textContent=elogio();
+        const p=document.getElementById('prox-j26');
+        p.classList.add('mostrar');p.textContent=(i26<CRIANCAS.length-1)?'PRÓXIMA ➜':'PRONTO ➜';}
+      else{d.classList.add('errada');tocarSom(false);
+        fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+        falar('Quase! Escute a fala de novo.');
+        setTimeout(()=>d.classList.remove('errada'),450);}};
+    v.appendChild(d);});
+  area.appendChild(v);
+  textoFala=c.dito;
+  if(!Object.values(donos26).includes(c.nome))falar(textoFala);}
+function proxJ26(){
+  if(i26<CRIANCAS.length-1){i26++;montarJ26();return;}
+  fimResumo(26,'O COPO DE CADA CRIANÇA',
+    [{tit:'CA PÁG. 19 — LIGUE CADA CRIANÇA AO SEU COPO',
+      txt:CRIANCAS.map(c=>c.carinha+' '+c.nome+' → <b>'+COPOS26[c.copo].n+'</b>').join('<br>')}]);}
+
+/* ===== J27 — CA pág.20 nº7: o aquário do Urbano ===== */
+let niv27=1,fase27=0;
+function abrirJogo27(){niv27=1;fase27=0;mostrar('tela-j27');montarJ27();}
+function montarJ27(){
+  const perg=document.getElementById('perg-j27'),area=document.getElementById('area-j27'),
+        fb=document.getElementById('fb-j27'),prox=document.getElementById('prox-j27'),
+        cont=document.getElementById('cont-j27');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j27'),fase27,2);
+  if(fase27===1){
+    perg.innerHTML='QUANTOS BALDES <b>AINDA FALTAVAM</b><br>PARA ENCHER O AQUÁRIO?';
+    const box=document.createElement('div');box.className='lista-quadros';area.appendChild(box);
+    [1,2,3,4].forEach(nm=>{
+      opQuadro(box,'<b>'+nm+'</b> BALDES',b=>{
+        if(nm===3){tocarSom(true);b.classList.add('certa');b.querySelector('.cx').textContent='✔';
+          box.querySelectorAll('.op-quadro').forEach(x=>x.onclick=null);
+          fb.className='feedback certo';fb.textContent=elogio();
+          falar('Isso mesmo! Faltavam mais três baldes.');
+          prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+        else{b.classList.add('errada');b.querySelector('.cx').textContent='✖';
+          tocarSom(false);fb.className='feedback tente';fb.textContent='CONTE OS BALDES 😊';
+          falar('Quase! Conte quantos baldes você despejou.');
+          setTimeout(()=>{b.classList.remove('errada');b.querySelector('.cx').textContent='';},900);}});});
+    textoFala='Quantos baldes ainda eram necessários para encher o aquário?';falar(textoFala);return;}
+  perg.innerHTML='🐠 URBANO COLOCOU <b>1 BALDE</b> DE ÁGUA.<br>DESPEJE BALDES ATÉ <b>ENCHER O AQUÁRIO</b>.';
+  const wrap=document.createElement('div');wrap.style.textAlign='center';
+  wrap.innerHTML=aquarioSVG(niv27);area.appendChild(wrap);
+  const v=document.createElement('div');v.className='vitrine';
+  const bal=document.createElement('div');bal.className='pecab';
+  bal.innerHTML=baldeSVG(72)+'<span class="rot">DESPEJAR UM BALDE</span>';
+  bal.onclick=()=>{
+    if(niv27>=4)return;
+    niv27++;tocarSom(true);falar('Mais um balde!');montarJ27();};
+  v.appendChild(bal);area.appendChild(v);
+  cont.textContent=niv27+' DE 4 BALDES  •  VOCÊ DESPEJOU '+(niv27-1);
+  if(niv27>=4){
+    fb.className='feedback certo';fb.textContent='⭐ AQUÁRIO CHEIO!';
+    falar('Aquário cheio! Você despejou mais três baldes.');
+    prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+  textoFala='Urbano colocou um balde de água no aquário. Quantos baldes ainda são necessários para enchê-lo?';
+  if(niv27===1)falar(textoFala);}
+function proxJ27(){
+  if(fase27===0){fase27=1;montarJ27();return;}
+  fimResumo(27,'O AQUÁRIO DO URBANO',
+    [{tit:'CA PÁG. 20 — QUANTOS BALDES AINDA FALTAM?',
+      txt:'<b>3 BALDES</b>  (1 já estava + 3 = 4)'}]);}
+
+/* ===== J28 — CA pág.20 nº8: as tortas e os potes ===== */
+let cortadas28=[],potes28=[],fase28=0;
+function abrirJogo28(){cortadas28=[];potes28=[];fase28=0;mostrar('tela-j28');montarJ28();}
+function montarJ28(){
+  const perg=document.getElementById('perg-j28'),area=document.getElementById('area-j28'),
+        fb=document.getElementById('fb-j28'),prox=document.getElementById('prox-j28'),
+        cont=document.getElementById('cont-j28');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j28'),fase28,2);
+  if(fase28===0){
+    perg.innerHTML='A MÃE DE MARINA VAI FAZER <b>3 TORTAS</b>.<br>CADA TORTA DÁ <b>8 PEDAÇOS</b>.<br>TOQUE EM CADA FORMA PARA <b>CORTAR</b>.';
+    const v=document.createElement('div');v.className='vitrine';
+    for(let k=0;k<3;k++){
+      const d=document.createElement('div');d.className='pecab'+(cortadas28.includes(k)?' pintada':'');
+      d.innerHTML=formaSVG(cortadas28.includes(k),110)+
+        '<span class="rot">'+(cortadas28.includes(k)?'8 PEDAÇOS':'TOQUE PARA CORTAR')+'</span>';
+      if(!cortadas28.includes(k))d.onclick=()=>{
+        cortadas28.push(k);tocarSom(true);falar('Oito pedaços!');montarJ28();};
+      v.appendChild(d);}
+    area.appendChild(v);
+    cont.textContent=(cortadas28.length*8)+' PEDAÇOS  ('+cortadas28.length+' DE 3 TORTAS)';
+    if(cortadas28.length===3){
+      fb.className='feedback certo';fb.textContent='⭐ 24 PEDAÇOS AO TODO!';
+      falar('Muito bem! Oito mais oito mais oito dá vinte e quatro pedaços.');
+      prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+    textoFala='Cada torta dará oito pedaços. Toque em cada forma para cortar.';
+    if(cortadas28.length===0)falar(textoFala);return;}
+  perg.innerHTML='EM CADA POTE CABEM <b>4 PEDAÇOS</b>.<br>QUANTOS POTES PARA GUARDAR OS <b>24 PEDAÇOS</b>?<br><b>CIRCULE</b> OS POTES.';
+  const g=document.createElement('div');g.className='grade-itens';
+  for(let k=0;k<8;k++){
+    const d=document.createElement('div');d.className='item-tap'+(potes28.includes(k)?' pintada':'');
+    d.innerHTML=poteSVG(50)+'<span class="rot">'+(potes28.includes(k)?'4 PEDAÇOS':'—')+'</span>';
+    d.onclick=()=>{
+      const i=potes28.indexOf(k);
+      if(i>=0)potes28.splice(i,1);else potes28.push(k);
+      tocarSom(true);montarJ28();};
+    g.appendChild(d);}
+  area.appendChild(g);
+  cont.textContent=(potes28.length*4)+' DE 24 PEDAÇOS GUARDADOS  •  '+potes28.length+
+    (potes28.length===1?' POTE':' POTES');
+  if(potes28.length>0){
+    const bt=document.createElement('button');bt.className='prox mostrar';bt.textContent='PRONTO ➜';
+    bt.onclick=conferirJ28;area.appendChild(bt);}
+  textoFala='Em cada pote cabem apenas quatro pedaços. Quantos potes são necessários para guardar os vinte e quatro pedaços?';
+  if(potes28.length===0)falar(textoFala);}
+function conferirJ28(){
+  const fb=document.getElementById('fb-j28');
+  if(potes28.length===6){
+    tocarSom(true);fb.className='feedback certo';fb.textContent=elogio();
+    falar('Isso mesmo! Seis potes guardam os vinte e quatro pedaços.');
+    fimResumo(28,'AS TORTAS E OS POTES',
+      [{tit:'CA PÁG. 20 — A) PEDAÇOS DAS 3 TORTAS',txt:'<b>24 PEDAÇOS</b>  (8 + 8 + 8)'},
+       {tit:'B) CIRCULE OS POTES',txt:'<b>6 POTES</b>  (4 + 4 + 4 + 4 + 4 + 4 = 24)'}]);
+  }else{
+    tocarSom(false);fb.className='feedback tente';fb.textContent='CONTE DE NOVO 😊';
+    falar('Quase! Cada pote guarda quatro pedaços. Conte de quatro em quatro até vinte e quatro.');}}
+function proxJ28(){
+  if(fase28===0){fase28=1;montarJ28();return;}}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
