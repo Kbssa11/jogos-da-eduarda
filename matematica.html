@@ -2724,7 +2724,7 @@ function gradeEls(n,tipo,sep,riscados){
 function opcoesNum(area,certo,aoAcertar,fbId,distrat){
   const set=new Set([certo]);
   (distrat||[certo-1,certo+1,certo-2,certo+2]).forEach(d=>{if(d>0&&set.size<3)set.add(d);});
-  const lista=embaralhar([...set]);
+  const lista=embaralhar8([...set]);
   const box=document.createElement('div');box.className='num-ops';
   lista.forEach(v=>{
     const b=document.createElement('button');b.className='num-op';b.textContent=v;
@@ -2924,7 +2924,7 @@ function montarJ33(){
     textoFala=S.a+' menos '+S.b+', quanto é?';falar(textoFala);return;}
   perg.innerHTML='QUAL DESENHO REPRESENTA<br><b>'+S.a+' − '+S.b+' = '+S.r+'</b>?';
   const g=document.createElement('div');g.className='desenhos';
-  embaralhar(SUBS.slice()).forEach(d=>{
+  embaralhar8(SUBS.slice()).forEach(d=>{
     const c=document.createElement('div');c.className='des-card';
     c.innerHTML=miniDesenho(d);
     c.onclick=()=>{
