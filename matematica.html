@@ -495,6 +495,56 @@
   .quem-fala .carinha{font-size:3rem;display:block;line-height:1.1;}
   .aviso-dica{background:#FFF8E1;border:3px solid #FFCC80;border-radius:16px;padding:10px 12px;
     font-size:.98rem;font-weight:bold;color:#E65100;text-align:center;margin-top:12px;}
+  .m29{background:#00897B;} .m30{background:#F4511E;} .m31{background:#C62828;}
+  .m32{background:#1E88E5;} .m33{background:#6D4C41;} .m34{background:#8E24AA;}
+  /* ---- cadeia de calculos ---- */
+  .cadeia{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin:8px 0 4px;}
+  .cx-num{min-width:58px;height:54px;border-radius:14px;background:var(--card);border:4px solid #E8DEF8;
+    display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:bold;
+    color:var(--texto);box-shadow:0 4px 0 #E8DEF8;}
+  .cx-num.vazio{border-style:dashed;border-color:#B39DDB;color:#D1C4E9;}
+  .cx-num.agora{border-color:#FFA000;background:#FFF8E1;box-shadow:0 4px 0 #EF6C00;animation:pulinho 1.1s infinite;}
+  .cx-num.ok{border-color:var(--certo);background:#E8F5E9;box-shadow:0 4px 0 #2E7D32;}
+  .op-seta{font-size:1.15rem;font-weight:bold;color:var(--roxo);padding:0 2px;white-space:nowrap;}
+  .op-seta.menos{color:#C62828;} .op-seta.mais{color:#2E7D32;}
+  /* ---- material de contagem ---- */
+  .pontos{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;max-width:430px;margin:10px auto 0;}
+  .pt{width:26px;height:26px;border-radius:50%;background:#42A5F5;box-shadow:0 2px 0 #1565C0;}
+  .pt.tira{background:#EF9A9A;box-shadow:0 2px 0 #C62828;opacity:.55;text-align:center;
+    color:#B71C1C;font-weight:bold;font-size:1rem;line-height:26px;}
+  .pt.nova{background:#81C784;box-shadow:0 2px 0 #2E7D32;animation:pula .4s;}
+  /* ---- opcoes de numero ---- */
+  .num-ops{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+  .num-op{border:none;background:var(--card);border:5px solid #E8DEF8;border-radius:22px;
+    min-width:92px;height:82px;font-family:inherit;font-size:2.1rem;font-weight:bold;color:var(--texto);
+    cursor:pointer;box-shadow:0 5px 0 #E8DEF8;transition:transform .1s;}
+  .num-op:active{transform:translateY(4px);box-shadow:none;}
+  .num-op.certa{background:var(--verde-claro);border-color:var(--certo);color:#1B5E20;
+    box-shadow:0 5px 0 var(--certo);animation:pula .45s;}
+  .num-op.errada{border-color:#EF9A9A;animation:treme .4s;}
+  /* ---- conjuntos de itens ---- */
+  .conj{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:460px;margin:10px auto 0;}
+  .conj.sep{border:4px dashed #7E57C2;border-radius:20px;padding:10px;background:#F3E5F5;}
+  .el{width:46px;height:46px;display:flex;align-items:center;justify-content:center;
+    border-radius:14px;cursor:pointer;transition:transform .1s;}
+  .el svg{width:40px;height:40px;display:block;}
+  .el.naoclica{cursor:default;}
+  .el:active{transform:scale(.9);}
+  .el.riscado{opacity:.35;filter:grayscale(1);}
+  .el.marcado{background:#F3E5F5;border:4px dashed #7E57C2;animation:pula .35s;}
+  .caixa-lado{background:#FFF8E1;border:4px solid #FFCC80;border-radius:20px;padding:10px;margin-top:12px;}
+  .caixa-lado .tit-cx{display:block;text-align:center;font-size:.92rem;font-weight:bold;color:#E65100;margin-bottom:6px;}
+  .desenhos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:10px;}
+  .des-card{background:var(--card);border:5px solid #E8DEF8;border-radius:22px;padding:10px 6px;
+    cursor:pointer;box-shadow:0 5px 0 #E8DEF8;transition:transform .1s;}
+  .des-card:active{transform:translateY(4px);box-shadow:none;}
+  .des-card.certa{border-color:var(--certo);background:#E8F5E9;box-shadow:0 5px 0 var(--certo);animation:pula .45s;}
+  .des-card.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .des-card .mini{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;}
+  .des-card .mini svg{width:22px;height:22px;}
+  .des-card .mini .grupo{border:3px dashed #7E57C2;border-radius:12px;padding:3px;display:flex;
+    flex-wrap:wrap;gap:3px;justify-content:center;background:#F3E5F5;}
+  .conta-grande{text-align:center;font-size:2.2rem;font-weight:bold;color:var(--roxo);margin:14px 0 0;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -542,6 +592,12 @@
   <button class="menu-btn m26" onclick="abrirJogo26()"><span class="emo">🧃</span><span><span class="pag">CA PÁG. 19</span>O COPO DE CADA CRIANÇA</span><span class="done" id="d26"></span></button>
   <button class="menu-btn m27" onclick="abrirJogo27()"><span class="emo">🐠</span><span><span class="pag">CA PÁG. 20</span>O AQUÁRIO DO URBANO</span><span class="done" id="d27"></span></button>
   <button class="menu-btn m28" onclick="abrirJogo28()"><span class="emo">🥧</span><span><span class="pag">CA PÁG. 20</span>AS TORTAS E OS POTES</span><span class="done" id="d28"></span></button>
+  <button class="menu-btn m29" onclick="abrirJogo29()"><span class="emo">🎯</span><span><span class="pag">CA PÁG. 21</span>AS MÁQUINAS DE CALCULAR</span><span class="done" id="d29"></span></button>
+  <button class="menu-btn m30" onclick="abrirJogo30()"><span class="emo">🥚</span><span><span class="pag">CA PÁG. 21-22</span>OS OVOS DA JULIANA</span><span class="done" id="d30"></span></button>
+  <button class="menu-btn m31" onclick="abrirJogo31()"><span class="emo">🍎</span><span><span class="pag">CA PÁG. 22</span>AS MAÇÃS DO LANCHE</span><span class="done" id="d31"></span></button>
+  <button class="menu-btn m32" onclick="abrirJogo32()"><span class="emo">⚽</span><span><span class="pag">CA PÁG. 23</span>AS FIGURINHAS DO OTÁVIO</span><span class="done" id="d32"></span></button>
+  <button class="menu-btn m33" onclick="abrirJogo33()"><span class="emo">➖</span><span><span class="pag">CA PÁG. 23</span>SUBTRAÇÕES E DESENHOS</span><span class="done" id="d33"></span></button>
+  <button class="menu-btn m34" onclick="abrirJogo34()"><span class="emo">✏️</span><span><span class="pag">CA PÁG. 23</span>O MEU CONJUNTO DE 15</span><span class="done" id="d34"></span></button>
   <button class="menu-btn m6" onclick="abrirJogo6()"><span class="emo">🏪</span><span><span class="pag">MC PÁG. 14</span>O SONHO DA FAMÍLIA</span><span class="done" id="d6"></span></button>
   <button class="menu-btn m7" onclick="abrirJogo7()"><span class="emo">🚲</span><span><span class="pag">MC PÁG. 15</span>A BICICLETA DA MARINA</span><span class="done" id="d7"></span></button>
   </div>
@@ -866,6 +922,67 @@
   <div class="placar" id="cont-j28"></div>
   <div class="feedback" id="fb-j28"></div>
   <button class="prox" id="prox-j28" onclick="proxJ28()">CONTINUAR ➜</button>
+</div>
+
+
+<div class="tela" id="tela-j29">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j29"></div>
+  <div class="pergunta" id="perg-j29"></div>
+  <div id="area-j29"></div>
+  <div class="placar" id="cont-j29"></div>
+  <div class="feedback" id="fb-j29"></div>
+  <button class="prox" id="prox-j29" onclick="proxJ29()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j30">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j30"></div>
+  <div class="pergunta" id="perg-j30"></div>
+  <div id="area-j30"></div>
+  <div class="placar" id="cont-j30"></div>
+  <div class="feedback" id="fb-j30"></div>
+  <button class="prox" id="prox-j30" onclick="proxJ30()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j31">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j31"></div>
+  <div class="pergunta" id="perg-j31"></div>
+  <div id="area-j31"></div>
+  <div class="placar" id="cont-j31"></div>
+  <div class="feedback" id="fb-j31"></div>
+  <button class="prox" id="prox-j31" onclick="proxJ31()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j32">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j32"></div>
+  <div class="pergunta" id="perg-j32"></div>
+  <div id="area-j32"></div>
+  <div class="placar" id="cont-j32"></div>
+  <div class="feedback" id="fb-j32"></div>
+  <button class="prox" id="prox-j32" onclick="proxJ32()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j33">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j33"></div>
+  <div class="pergunta" id="perg-j33"></div>
+  <div id="area-j33"></div>
+  <div class="placar" id="cont-j33"></div>
+  <div class="feedback" id="fb-j33"></div>
+  <button class="prox" id="prox-j33" onclick="proxJ33()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j34">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button><button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j34"></div>
+  <div class="pergunta" id="perg-j34"></div>
+  <div id="area-j34"></div>
+  <div class="placar" id="cont-j34"></div>
+  <div class="feedback" id="fb-j34"></div>
+  <button class="prox" id="prox-j34" onclick="proxJ34()">CONTINUAR ➜</button>
 </div>
 
 <!-- ================= FIM ================= -->
@@ -2576,6 +2693,312 @@ function conferirJ28(){
     falar('Quase! Cada pote guarda quatro pedaços. Conte de quatro em quatro até vinte e quatro.');}}
 function proxJ28(){
   if(fase28===0){fase28=1;montarJ28();return;}}
+
+
+/* ===== desenhos da subtração (págs. 21-23) ===== */
+const EL_SVG={
+ FLOR:'<svg viewBox="0 0 40 40"><g fill="#EC407A"><ellipse cx="20" cy="9" rx="6" ry="8"/><ellipse cx="20" cy="31" rx="6" ry="8"/><ellipse cx="9" cy="20" rx="8" ry="6"/><ellipse cx="31" cy="20" rx="8" ry="6"/></g><circle cx="20" cy="20" r="6" fill="#FDD835"/></svg>',
+ ESTRELA:'<svg viewBox="0 0 40 40"><path d="M20 3 L25 15 L38 16 L28 24 L31 37 L20 30 L9 37 L12 24 L2 16 L15 15 Z" fill="#FFB300" stroke="#EF6C00" stroke-width="2" stroke-linejoin="round"/></svg>',
+ LUA:'<svg viewBox="0 0 40 40"><path d="M27 4 a17 17 0 1 0 0 32 a13 13 0 0 1 0 -32z" fill="#7E57C2"/></svg>',
+ CORACAO:'<svg viewBox="0 0 40 40"><path d="M20 35 C4 24 3 13 10 9 C15 6 20 10 20 13 C20 10 25 6 30 9 C37 13 36 24 20 35 Z" fill="#E53935"/></svg>',
+ MACA:'<svg viewBox="0 0 40 40"><path d="M20 10 C13 6 5 11 6 21 C7 31 14 37 20 34 C26 37 33 31 34 21 C35 11 27 6 20 10 Z" fill="#E53935"/><rect x="19" y="4" width="3" height="8" rx="1.5" fill="#6D4C41"/><path d="M22 7 q7 -4 8 1 q-6 3 -8 -1z" fill="#43A047"/></svg>'
+};
+function ovoSVG(quebrado){
+  if(quebrado)return '<svg viewBox="0 0 40 40"><path d="M20 4 C11 4 7 16 8 24 L32 24 C33 16 29 4 20 4 Z" fill="#FFF8E1" stroke="#BCAAA4" stroke-width="2"/><path d="M8 24 L12 30 L16 24 L20 30 L24 24 L28 30 L32 24" fill="none" stroke="#BCAAA4" stroke-width="2.5" stroke-linejoin="round"/><circle cx="20" cy="32" r="5" fill="#FFCA28"/></svg>';
+  return '<svg viewBox="0 0 40 40"><ellipse cx="20" cy="22" rx="12" ry="16" fill="#FFF8E1" stroke="#BCAAA4" stroke-width="2"/><ellipse cx="16" cy="16" rx="3.5" ry="5" fill="#FFFFFF" opacity=".8"/></svg>';}
+function figurinhaSVG(){
+  return '<svg viewBox="0 0 40 40"><rect x="6" y="4" width="28" height="32" rx="4" fill="#E3F2FD" stroke="#1565C0" stroke-width="2"/><circle cx="20" cy="17" r="8" fill="#FFFFFF" stroke="#37474F" stroke-width="2"/><path d="M20 11 L24 14 L22 19 H18 L16 14 Z" fill="#37474F"/><rect x="10" y="29" width="20" height="3" rx="1.5" fill="#90CAF9"/></svg>';}
+function notaSVG(valor,cor){
+  return '<svg viewBox="0 0 110 56" width="120" height="61"><rect x="3" y="3" width="104" height="50" rx="7" fill="'+cor+'" stroke="#37474F" stroke-width="3"/>'+
+   '<circle cx="30" cy="28" r="14" fill="#FFFFFF" opacity=".35"/>'+
+   '<text x="66" y="37" font-size="26" font-weight="bold" fill="#FFFFFF" text-anchor="middle" font-family="sans-serif">'+valor+'</text>'+
+   '<text x="14" y="49" font-size="9" fill="#FFFFFF" font-family="sans-serif">REAIS</text></svg>';}
+
+function gradeEls(n,tipo,sep,riscados){
+  let h='';
+  for(let k=0;k<n;k++){
+    const cls='el naoclica'+((riscados&&k<riscados)?' riscado':'');
+    h+='<span class="'+cls+'">'+EL_SVG[tipo]+'</span>';}
+  return h;}
+
+function opcoesNum(area,certo,aoAcertar,fbId,distrat){
+  const set=new Set([certo]);
+  (distrat||[certo-1,certo+1,certo-2,certo+2]).forEach(d=>{if(d>0&&set.size<3)set.add(d);});
+  const lista=embaralhar([...set]);
+  const box=document.createElement('div');box.className='num-ops';
+  lista.forEach(v=>{
+    const b=document.createElement('button');b.className='num-op';b.textContent=v;
+    b.onclick=()=>{
+      const fb=document.getElementById(fbId);
+      if(v===certo){tocarSom(true);b.classList.add('certa');
+        box.querySelectorAll('.num-op').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio()+'  ESCREVA '+certo;
+        aoAcertar(b);}
+      else{b.classList.add('errada');tocarSom(false);
+        fb.className='feedback tente';fb.textContent='CONTE DE NOVO 😊';
+        falar('Quase! Conte de novo.');
+        setTimeout(()=>b.classList.remove('errada'),450);}};
+    box.appendChild(b);});
+  area.appendChild(box);return box;}
+
+/* ===== J29 — CA pág.21 nº1: as máquinas de calcular ===== */
+const CADEIAS=[
+ {ini:21,passos:[{op:'-',n:4,r:17},{op:'+',n:2,r:19},{op:'-',n:3,r:16},{op:'+',n:4,r:20}]},
+ {ini:12,passos:[{op:'+',n:4,r:16},{op:'-',n:3,r:13},{op:'+',n:2,r:15},{op:'-',n:4,r:11}]}
+];
+let cad29=0,pas29=0;
+function abrirJogo29(){cad29=0;pas29=0;mostrar('tela-j29');montarJ29();}
+function montarJ29(){
+  const C=CADEIAS[cad29],P=C.passos[pas29];
+  const perg=document.getElementById('perg-j29'),area=document.getElementById('area-j29'),
+        fb=document.getElementById('fb-j29'),prox=document.getElementById('prox-j29'),
+        cont=document.getElementById('cont-j29');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j29'),cad29*4+pas29,8);
+  const atual=pas29===0?C.ini:C.passos[pas29-1].r;
+  perg.innerHTML='FAÇA O CÁLCULO E COMPLETE:<br><b>'+atual+' '+(P.op==='-'?'−':'+')+' '+P.n+' = ?</b>';
+  const cd=document.createElement('div');cd.className='cadeia';
+  let h='<div class="cx-num ok">'+C.ini+'</div>';
+  C.passos.forEach((x,k)=>{
+    h+='<span class="op-seta '+(x.op==='-'?'menos':'mais')+'">'+(x.op==='-'?'−':'+')+x.n+' ➜</span>';
+    h+='<div class="cx-num '+(k<pas29?'ok':(k===pas29?'agora vazio':'vazio'))+'">'+
+       (k<pas29?x.r:'?')+'</div>';});
+  cd.innerHTML=h;area.appendChild(cd);
+  const pts=document.createElement('div');pts.className='pontos';
+  let ph='';
+  if(P.op==='-'){
+    for(let k=0;k<atual;k++)ph+='<span class="pt'+(k>=atual-P.n?' tira':'')+'">'+(k>=atual-P.n?'✕':'')+'</span>';
+  }else{
+    for(let k=0;k<atual;k++)ph+='<span class="pt"></span>';
+    for(let k=0;k<P.n;k++)ph+='<span class="pt nova"></span>';}
+  pts.innerHTML=ph;area.appendChild(pts);
+  cont.textContent=P.op==='-'?('TIRE '+P.n+' BOLINHAS E CONTE AS QUE SOBRAM'):('JUNTE '+P.n+' BOLINHAS E CONTE TODAS');
+  opcoesNum(area,P.r,()=>{
+    falar(atual+(P.op==='-'?' menos ':' mais ')+P.n+' é igual a '+P.r);
+    prox.classList.add('mostrar');
+    prox.textContent=(cad29===1&&pas29===3)?'PRONTO ➜':'PRÓXIMA ➜';},'fb-j29');
+  textoFala=atual+(P.op==='-'?' menos ':' mais ')+P.n+', quanto é?';falar(textoFala);}
+function proxJ29(){
+  if(pas29<3){pas29++;montarJ29();return;}
+  if(cad29===0){cad29=1;pas29=0;montarJ29();return;}
+  fimResumo(29,'AS MÁQUINAS DE CALCULAR',
+    CADEIAS.map((C,i)=>({tit:'CA PÁG. 21 — CADEIA '+(i+1),
+      txt:C.ini+' '+C.passos.map(x=>(x.op==='-'?'−':'+')+x.n+' ➜ <b>'+x.r+'</b>').join(' &nbsp; ')})));}
+
+/* ===== J30 — CA pág.21-22 nº2 A: os ovos da Juliana ===== */
+let fase30=0;
+function abrirJogo30(){fase30=0;mostrar('tela-j30');montarJ30();}
+function montarJ30(){
+  const perg=document.getElementById('perg-j30'),area=document.getElementById('area-j30'),
+        fb=document.getElementById('fb-j30'),prox=document.getElementById('prox-j30'),
+        cont=document.getElementById('cont-j30');
+  area.innerHTML='';fb.textContent='';cont.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j30'),fase30,2);
+  if(fase30===0){
+    perg.innerHTML='👩 JULIANA COMPROU OS OVOS.<br>PAGOU COM <b>20 REAIS</b> E RECEBEU <b>4 REAIS</b> DE TROCO.<br>QUANTO CUSTARAM OS OVOS?';
+    const v=document.createElement('div');v.className='vitrine';
+    const a=document.createElement('div');a.className='pecab naoclica';
+    a.innerHTML=notaSVG(20,'#43A047')+'<span class="rot">ELA PAGOU</span>';
+    const b=document.createElement('div');b.className='pecab naoclica';
+    b.innerHTML=notaSVG(4,'#42A5F5')+'<span class="rot">VOLTOU DE TROCO</span>';
+    v.appendChild(a);v.appendChild(b);area.appendChild(v);
+    cont.textContent='20 − 4 = ?';
+    opcoesNum(area,16,()=>{
+      falar('Isso mesmo! Vinte menos quatro é dezesseis. Os ovos custaram dezesseis reais.');
+      prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';},'fb-j30',[14,16,24]);
+    textoFala='Juliana pagou com uma nota de vinte reais e recebeu quatro reais de troco. Quanto custaram os ovos?';
+    falar(textoFala);return;}
+  perg.innerHTML='🥚 NO CAMINHO DE CASA, OS OVOS CAÍRAM!<br><b>3 SE QUEBRARAM</b>.<br>QUANTOS FICARAM <b>INTEIROS</b>?';
+  const g=document.createElement('div');g.className='conj';
+  let h='';
+  for(let k=0;k<12;k++)h+='<span class="el naoclica">'+ovoSVG(k>=9)+'</span>';
+  g.innerHTML=h;area.appendChild(g);
+  cont.textContent='ERAM 12 OVOS  •  12 − 3 = ?';
+  opcoesNum(area,9,()=>{
+    falar('Isso mesmo! Doze menos três é nove. Ficaram nove ovos inteiros.');
+    prox.classList.add('mostrar');prox.textContent='PRONTO ➜';},'fb-j30',[8,9,10]);
+  textoFala='Dos doze ovos, três se quebraram. Quantos ficaram inteiros?';falar(textoFala);}
+function proxJ30(){
+  if(fase30===0){fase30=1;montarJ30();return;}
+  fimResumo(30,'OS OVOS DA JULIANA',
+    [{tit:'CA PÁG. 21 — QUANTO CUSTARAM OS OVOS?',txt:'<b>16 REAIS</b>  (20 − 4 = 16)'},
+     {tit:'CA PÁG. 22 — QUANTOS FICARAM INTEIROS?',txt:'<b>9 OVOS</b>  (12 − 3 = 9)'}]);}
+
+/* ===== J31 — CA pág.22 nº2 B: as maçãs do lanche ===== */
+let fase31=0;
+function abrirJogo31(){fase31=0;mostrar('tela-j31');montarJ31();}
+function montarJ31(){
+  const perg=document.getElementById('perg-j31'),area=document.getElementById('area-j31'),
+        fb=document.getElementById('fb-j31'),prox=document.getElementById('prox-j31'),
+        cont=document.getElementById('cont-j31');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j31'),fase31,2);
+  if(fase31===0){
+    perg.innerHTML='🍎 NO LANCHE FORAM SERVIDAS <b>24 MAÇÃS</b>.<br><b>11 ALUNOS</b> QUISERAM A FRUTA.<br>QUANTAS MAÇÃS SOBRARAM?';
+    const g=document.createElement('div');g.className='conj';
+    g.innerHTML=gradeEls(24,'MACA',false,11);
+    area.appendChild(g);
+    cont.textContent='24 MAÇÃS  •  24 − 11 = ?';
+    opcoesNum(area,13,()=>{
+      falar('Isso mesmo! Vinte e quatro menos onze é treze.');
+      prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';},'fb-j31',[12,13,14]);
+    textoFala='Foram servidas vinte e quatro maçãs e onze alunos quiseram a fruta. Quantas maçãs sobraram?';
+    falar(textoFala);return;}
+  perg.innerHTML='À TARDE, AS <b>13 MAÇÃS</b> QUE SOBRARAM<br>FORAM OFERECIDAS. SÓ <b>5</b> QUISERAM.<br>QUANTAS AINDA SOBRARAM?';
+  const g=document.createElement('div');g.className='conj';
+  g.innerHTML=gradeEls(13,'MACA',false,5);
+  area.appendChild(g);
+  cont.textContent='13 MAÇÃS  •  13 − 5 = ?';
+  opcoesNum(area,8,()=>{
+    falar('Isso mesmo! Treze menos cinco é oito.');
+    prox.classList.add('mostrar');prox.textContent='PRONTO ➜';},'fb-j31',[7,8,9]);
+  textoFala='Das treze maçãs que sobraram, cinco foram comidas. Quantas ainda sobraram?';falar(textoFala);}
+function proxJ31(){
+  if(fase31===0){fase31=1;montarJ31();return;}
+  fimResumo(31,'AS MAÇÃS DO LANCHE',
+    [{tit:'CA PÁG. 22 — QUANTOS ALUNOS NÃO COMERAM MAÇÃ?',txt:'<b>13</b>  (24 − 11 = 13)'},
+     {tit:'QUANTAS MAÇÃS AINDA SOBRARAM?',txt:'<b>8 MAÇÃS</b>  (13 − 5 = 8)'}]);}
+
+/* ===== J32 — CA pág.23 nº2 C: as figurinhas do Otávio ===== */
+let sep32=false;
+function abrirJogo32(){sep32=false;mostrar('tela-j32');montarJ32();}
+function montarJ32(){
+  const perg=document.getElementById('perg-j32'),area=document.getElementById('area-j32'),
+        fb=document.getElementById('fb-j32'),prox=document.getElementById('prox-j32'),
+        cont=document.getElementById('cont-j32');
+  area.innerHTML='';fb.textContent='';prox.classList.remove('mostrar');
+  document.getElementById('prog-j32').textContent='';
+  perg.innerHTML='⚽ OTÁVIO TEM <b>18 FIGURINHAS</b>.<br>ELE SEPAROU <b>8</b> PARA O URBANO.<br>QUANTAS FICARAM COM OTÁVIO?';
+  const g=document.createElement('div');g.className='conj';
+  let h='';
+  for(let k=0;k<(sep32?10:18);k++)h+='<span class="el naoclica">'+figurinhaSVG()+'</span>';
+  g.innerHTML=h;area.appendChild(g);
+  if(!sep32){
+    const bt=document.createElement('button');bt.className='prox mostrar';
+    bt.textContent='SEPARAR 8 PARA O URBANO ➜';
+    bt.onclick=()=>{sep32=true;tocarSom(true);falar('Otávio separou oito figurinhas para o Urbano.');montarJ32();};
+    area.appendChild(bt);
+    cont.textContent='OTÁVIO TEM 18 FIGURINHAS';
+  }else{
+    const cx=document.createElement('div');cx.className='caixa-lado';
+    let h2='<span class="tit-cx">FORAM PARA O URBANO</span><div class="conj">';
+    for(let k=0;k<8;k++)h2+='<span class="el naoclica">'+figurinhaSVG()+'</span>';
+    cx.innerHTML=h2+'</div>';area.appendChild(cx);
+    cont.textContent='18 − 8 = ?';
+    opcoesNum(area,10,()=>{
+      falar('Isso mesmo! Dezoito menos oito é dez.');
+      prox.classList.add('mostrar');prox.textContent='PRONTO ➜';},'fb-j32',[8,10,12]);}
+  textoFala='Otávio possui uma coleção de dezoito figurinhas. Ele separou oito para Urbano. Quantas figurinhas ficaram com Otávio?';
+  if(!sep32)falar(textoFala);}
+function proxJ32(){
+  fimResumo(32,'AS FIGURINHAS DO OTÁVIO',
+    [{tit:'CA PÁG. 23 — QUANTAS FICARAM COM OTÁVIO?',txt:'<b>10 FIGURINHAS</b>  (18 − 8 = 10)'}]);}
+
+/* ===== J33 — CA pág.23 nº3: subtrações e desenhos ===== */
+const SUBS=[{a:16,b:8,r:8,tipo:'FLOR'},{a:20,b:5,r:15,tipo:'ESTRELA'},{a:12,b:3,r:9,tipo:'LUA'}];
+let fase33=0,i33=0;
+function miniDesenho(s){
+  let dentro='';
+  for(let k=0;k<s.b;k++)dentro+=EL_SVG[s.tipo];
+  let fora='';
+  for(let k=0;k<s.a-s.b;k++)fora+=EL_SVG[s.tipo];
+  return '<div class="mini">'+fora+'<span class="grupo">'+dentro+'</span></div>';}
+function abrirJogo33(){fase33=0;i33=0;mostrar('tela-j33');montarJ33();}
+function montarJ33(){
+  const perg=document.getElementById('perg-j33'),area=document.getElementById('area-j33'),
+        fb=document.getElementById('fb-j33'),prox=document.getElementById('prox-j33'),
+        cont=document.getElementById('cont-j33');
+  area.innerHTML='';fb.textContent='';cont.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j33'),fase33*3+i33,6);
+  const S=SUBS[i33];
+  if(fase33===0){
+    perg.innerHTML='RESOLVA A SUBTRAÇÃO:<br><b>'+S.a+' − '+S.b+' = ?</b>';
+    const pts=document.createElement('div');pts.className='pontos';
+    let ph='';
+    for(let k=0;k<S.a;k++)ph+='<span class="pt'+(k>=S.a-S.b?' tira':'')+'">'+(k>=S.a-S.b?'✕':'')+'</span>';
+    pts.innerHTML=ph;area.appendChild(pts);
+    cont.textContent='TIRE '+S.b+' E CONTE AS QUE SOBRAM';
+    opcoesNum(area,S.r,()=>{
+      falar(S.a+' menos '+S.b+' é igual a '+S.r);
+      prox.classList.add('mostrar');prox.textContent=(i33<2)?'PRÓXIMA ➜':'CONTINUAR ➜';},'fb-j33');
+    textoFala=S.a+' menos '+S.b+', quanto é?';falar(textoFala);return;}
+  perg.innerHTML='QUAL DESENHO REPRESENTA<br><b>'+S.a+' − '+S.b+' = '+S.r+'</b>?';
+  const g=document.createElement('div');g.className='desenhos';
+  embaralhar(SUBS.slice()).forEach(d=>{
+    const c=document.createElement('div');c.className='des-card';
+    c.innerHTML=miniDesenho(d);
+    c.onclick=()=>{
+      if(d.tipo===S.tipo){tocarSom(true);c.classList.add('certa');
+        g.querySelectorAll('.des-card').forEach(x=>x.onclick=null);
+        fb.className='feedback certo';fb.textContent=elogio();
+        falar('Isso mesmo! Esse desenho tem '+d.a+' e separa '+d.b+'.');
+        prox.classList.add('mostrar');prox.textContent=(i33<2)?'PRÓXIMA ➜':'PRONTO ➜';}
+      else{c.classList.add('errada');tocarSom(false);
+        fb.className='feedback tente';fb.textContent='CONTE OS DESENHOS 😊';
+        falar('Quase! Conte quantos tem no desenho.');
+        setTimeout(()=>c.classList.remove('errada'),450);}};
+    g.appendChild(c);});
+  area.appendChild(g);
+  cont.textContent='LIGUE A SUBTRAÇÃO AO DESENHO';
+  textoFala='Qual desenho representa '+S.a+' menos '+S.b+'?';falar(textoFala);}
+function proxJ33(){
+  if(i33<2){i33++;montarJ33();return;}
+  if(fase33===0){fase33=1;i33=0;montarJ33();return;}
+  fimResumo(33,'SUBTRAÇÕES E DESENHOS',
+    [{tit:'CA PÁG. 23 — A) RESOLVA',
+      txt:SUBS.map(x=>x.a+' − '+x.b+' = <b>'+x.r+'</b>').join('<br>')},
+     {tit:'B) LIGUE AO DESENHO',
+      txt:'16 − 8 → AS FLORES<br>20 − 5 → AS ESTRELAS<br>12 − 3 → AS LUAS'}]);}
+
+/* ===== J34 — CA pág.23 nº4: o meu conjunto de 15 ===== */
+const TIPOS34=[{k:'FLOR',n:'FLORES'},{k:'ESTRELA',n:'ESTRELAS'},{k:'LUA',n:'LUAS'},{k:'CORACAO',n:'CORAÇÕES'}];
+let tipo34=null,marc34=[],fase34=0;
+function abrirJogo34(){tipo34=null;marc34=[];fase34=0;mostrar('tela-j34');montarJ34();}
+function montarJ34(){
+  const perg=document.getElementById('perg-j34'),area=document.getElementById('area-j34'),
+        fb=document.getElementById('fb-j34'),prox=document.getElementById('prox-j34'),
+        cont=document.getElementById('cont-j34');
+  area.innerHTML='';fb.textContent='';cont.textContent='';prox.classList.remove('mostrar');
+  estrelas(document.getElementById('prog-j34'),fase34,2);
+  if(fase34===0){
+    perg.innerHTML='A) ESCOLHA O QUE VOCÊ QUER <b>DESENHAR</b><br>NO SEU CONJUNTO DE <b>15</b>.';
+    const g=document.createElement('div');g.className='grade-esc';
+    TIPOS34.forEach(t=>{
+      const d=document.createElement('div');d.className='cbx'+(tipo34===t.k?' sel':'');
+      d.innerHTML=EL_SVG[t.k]+'<span class="nm">'+t.n+'</span>';
+      d.onclick=()=>{tipo34=t.k;tocarSom(true);falar(t.n);montarJ34();};
+      g.appendChild(d);});
+    area.appendChild(g);
+    if(tipo34){prox.classList.add('mostrar');prox.textContent='CONTINUAR ➜';}
+    textoFala='Escolha o que você quer desenhar no seu conjunto de quinze elementos.';falar(textoFala);return;}
+  perg.innerHTML='TOQUE PARA <b>SEPARAR</b> ALGUNS,<br>CONTORNANDO-OS COM UMA LINHA.';
+  const g=document.createElement('div');g.className='conj';
+  for(let k=0;k<15;k++){
+    const d=document.createElement('span');
+    d.className='el'+(marc34.includes(k)?' marcado':'');
+    d.innerHTML=EL_SVG[tipo34];
+    d.onclick=()=>{
+      const i=marc34.indexOf(k);
+      if(i>=0)marc34.splice(i,1);else marc34.push(k);
+      tocarSom(true);montarJ34();};
+    g.appendChild(d);}
+  area.appendChild(g);
+  const n=marc34.length;
+  cont.textContent=n===0?'TOQUE NOS QUE VOCÊ QUER SEPARAR':('VOCÊ SEPAROU '+n);
+  if(n>0&&n<15){
+    const c=document.createElement('div');c.className='conta-grande';
+    c.innerHTML='15 − '+n+' = <b>'+(15-n)+'</b>';area.appendChild(c);
+    prox.classList.add('mostrar');prox.textContent='PRONTO ➜';}
+  textoFala='Desenhe um conjunto de quinze elementos e separe alguns deles contornando com uma linha.';
+  if(n===0)falar(textoFala);}
+function proxJ34(){
+  if(fase34===0){fase34=1;montarJ34();return;}
+  const n=marc34.length,t=TIPOS34.find(x=>x.k===tipo34);
+  falar('Muito bem! Quinze menos '+n+' é igual a '+(15-n)+'.');
+  fimResumo(34,'O SEU CONJUNTO DE 15',
+    [{tit:'CA PÁG. 23 — A) DESENHE 15 E SEPARE ALGUNS',
+      txt:'15 '+t.n+', COM <b>'+n+'</b> SEPARADO'+(n===1?'':'S')},
+     {tit:'B) ESCREVA A SUBTRAÇÃO',txt:'<b>15 − '+n+' = '+(15-n)+'</b>'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
