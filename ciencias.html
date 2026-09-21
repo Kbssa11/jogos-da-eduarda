@@ -380,6 +380,28 @@
   .cd.pal{background:#FFE0B2;color:#E65100;font-size:.82rem;text-align:left;padding-left:8px;line-height:1.2;}
   .cd.vazio{background:transparent;box-shadow:none;cursor:default;color:#B39DDB;}
   .cd.falada{background:#C8E6C9;color:#1B5E20;}
+  .vf-frase{background:var(--card);border:5px solid #B2DFDB;border-radius:22px;padding:16px 18px;
+    font-size:1.15rem;font-weight:bold;line-height:1.35;margin:8px 0;color:var(--texto);}
+  .vf-frase .letra-it{display:block;color:#00897B;font-size:.95rem;margin-bottom:4px;}
+  .vf-botoes{display:flex;gap:18px;justify-content:center;margin-top:16px;}
+  .btn-vf{width:118px;height:118px;border-radius:28px;border:6px solid #B39DDB;background:#fff;
+    font-family:inherit;font-size:3.2rem;font-weight:bold;color:#7E57C2;cursor:pointer;
+    box-shadow:0 6px 0 #D1C4E9;transition:transform .1s;line-height:1;}
+  .btn-vf:active{transform:translateY(4px);box-shadow:0 2px 0 #D1C4E9;}
+  .btn-vf .rot{display:block;font-size:.8rem;color:#8E7CC3;margin-top:2px;}
+  .btn-vf.certa{background:var(--verde-claro);border-color:var(--verde);color:var(--verde);
+    box-shadow:0 6px 0 var(--verde);animation:pula .5s;}
+  .btn-vf.certa .rot{color:var(--verde);}
+  .btn-vf.errada{border-color:#EF9A9A;background:#FFEBEE;animation:treme .4s;}
+  .balao{position:relative;background:#FFF8E1;border:5px solid #FFD54F;border-radius:26px;
+    padding:14px 18px;font-size:1.15rem;font-weight:bold;color:#6D4C41;margin:10px 0 24px;line-height:1.35;}
+  .balao:after{content:'';position:absolute;left:38px;bottom:-22px;width:0;height:0;
+    border:11px solid transparent;border-top-color:#FFD54F;}
+  .balao .quem{display:block;font-size:.92rem;color:#F57C00;margin-bottom:4px;}
+  .dentes{display:flex;gap:12px;justify-content:center;margin:4px 0 12px;flex-wrap:wrap;}
+  .dente{text-align:center;}
+  .dente svg{width:86px;height:82px;display:block;}
+  .dente .rot{display:block;font-size:.8rem;font-weight:bold;color:#00897B;margin-top:2px;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -391,6 +413,7 @@
 <style>
   h1{color:#00897B !important;}
   .c1{background:#26A69A;} .c2{background:#42A5F5;} .c3{background:#7E57C2;} .c4{background:#EC407A;}
+  .c5{background:#FF7043;} .c6{background:#26C6DA;} .c7{background:#8D6E63;}
   .habitos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:8px;}
   .hab{background:#F5F5F5;border:5px solid #E0E0E0;border-radius:22px;padding:14px 8px;text-align:center;
     cursor:pointer;box-shadow:0 5px 0 #E0E0E0;transition:transform .1s;filter:grayscale(1);}
@@ -437,6 +460,9 @@
   <button class="menu-btn c2" onclick="abrirJogo2()"><span class="emo">🦠</span><span><span class="pag">CA PÁG. 3</span>A RESPOSTA PARA O URBANO</span><span class="done" id="d2"></span></button>
   <button class="menu-btn c3" onclick="abrirJogo3()"><span class="emo">🚿</span><span><span class="pag">CA PÁG. 3</span>O QUE USO NO BANHO</span><span class="done" id="d3"></span></button>
   <button class="menu-btn c4" onclick="abrirJogo4()"><span class="emo">✅</span><span><span class="pag">CA PÁG. 3</span>ANITA QUER SABER DE VOCÊ</span><span class="done" id="d4"></span></button>
+  <button class="menu-btn c5" onclick="abrirJogo5()"><span class="emo">🪥</span><span><span class="pag">CA PÁG. 4</span>VERDADEIRO OU FALSO</span><span class="done" id="d5"></span></button>
+  <button class="menu-btn c6" onclick="abrirJogo6()"><span class="emo">💬</span><span><span class="pag">CA PÁG. 5</span>AS DÚVIDAS DA TURMA</span><span class="done" id="d6"></span></button>
+  <button class="menu-btn c7" onclick="abrirJogo7()"><span class="emo">🦠</span><span><span class="pag">CA PÁG. 5</span>O DENTE COM CÁRIE</span><span class="done" id="d7"></span></button>
   </div>
 </div>
 
@@ -475,6 +501,37 @@
   <div class="habitos" id="area-j4"></div>
   <div class="contador" id="cont-j4"></div>
   <button class="prox" id="prox-j4" onclick="proxJ4()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j5">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j5"></div>
+  <div class="pergunta" id="perg-j5"></div>
+  <div class="vf-frase" id="frase-j5"></div>
+  <div class="vf-botoes" id="ops-j5"></div>
+  <div class="feedback" id="fb-j5"></div>
+  <button class="prox" id="prox-j5" onclick="proxJ5()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j6">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j6"></div>
+  <div class="pergunta" id="perg-j6"></div>
+  <div class="balao" id="balao-j6"></div>
+  <div class="lista-quadros" id="ops-j6"></div>
+  <div class="feedback" id="fb-j6"></div>
+  <button class="prox" id="prox-j6" onclick="proxJ6()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j7">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta" id="perg-j7"></div>
+  <div class="dentes" id="dentes-j7"></div>
+  <div class="lista-quadros" id="ops-j7"></div>
+  <div class="feedback" id="fb-j7"></div>
 </div>
 
 <div class="tela" id="tela-resumo">
@@ -711,6 +768,175 @@ function proxJ4(){
   if(rod4<RODADAS4.length-1){rod4++;montarJ4();return;}
   fimResumo(4,'O QUE VOC\u00ca MARCOU',
     RODADAS4.map((r,i)=>({tit:r.tit,txt:marc4[i].join('<br>')||'\u2014'})));}
+
+/* ===== J5 — CA pág.4 nº1: verdadeiro ou falso (higiene bucal) ===== */
+const FRASES5=[
+ {l:'A)',t:'DEVEMOS ESCOVAR OS DENTES SOMENTE AO ACORDAR.',v:false,
+  fala:'Devemos escovar os dentes somente ao acordar.',
+  exp:'Falso! Escovamos os dentes depois de cada refei\u00e7\u00e3o e antes de dormir.'},
+ {l:'B)',t:'A ESCOVA DE DENTES \u00c9 O PRINCIPAL INSTRUMENTO PARA UMA BOA HIGIENE BUCAL.',v:true,
+  fala:'A escova de dentes \u00e9 o principal instrumento para uma boa higiene bucal.',
+  exp:'Verdadeiro! A escova \u00e9 o principal instrumento da higiene bucal.'},
+ {l:'C)',t:'N\u00c3O \u00c9 PRECISO USAR O FIO DENTAL AP\u00d3S A ESCOVA\u00c7\u00c3O.',v:false,
+  fala:'N\u00e3o \u00e9 preciso usar o fio dental ap\u00f3s a escova\u00e7\u00e3o.',
+  exp:'Falso! O fio dental limpa entre os dentes, onde a escova n\u00e3o alcan\u00e7a.'},
+ {l:'D)',t:'A C\u00c1RIE PODE DESTRUIR OS DENTES.',v:true,
+  fala:'A c\u00e1rie pode destruir os dentes.',
+  exp:'Verdadeiro! A c\u00e1rie estraga e pode destruir o dente.'},
+ {l:'E)',t:'O PROFISSIONAL QUE CUIDA DOS NOSSOS DENTES \u00c9 O DENTISTA.',v:true,
+  fala:'O profissional que cuida dos nossos dentes \u00e9 o dentista.',
+  exp:'Verdadeiro! Quem cuida dos nossos dentes \u00e9 o dentista.'},
+ {l:'F)',t:'O FIO DENTAL DEVE SER USADO APENAS UMA VEZ POR SEMANA.',v:false,
+  fala:'O fio dental deve ser usado apenas uma vez por semana.',
+  exp:'Falso! O fio dental deve ser usado todos os dias, ap\u00f3s a escova\u00e7\u00e3o.'}
+];
+let it5=0;
+function abrirJogo5(){it5=0;mostrar('tela-j5');montarJ5();}
+function montarJ5(){
+  const f=FRASES5[it5];
+  estrelas(document.getElementById('prog-j5'),it5,FRASES5.length);
+  document.getElementById('perg-j5').innerHTML='\ud83e\udea5 ESTA FRASE \u00c9 <b>V</b>ERDADEIRA OU <b>F</b>ALSA?';
+  document.getElementById('frase-j5').innerHTML='<span class="letra-it">'+f.l+'</span>'+f.t;
+  textoFala=f.fala+' Isto \u00e9 verdadeiro ou falso?';
+  document.getElementById('fb-j5').textContent='';
+  document.getElementById('prox-j5').classList.remove('mostrar');
+  const a=document.getElementById('ops-j5');a.innerHTML='';
+  [['V','VERDADEIRO',true],['F','FALSO',false]].forEach(o=>{
+    const b=document.createElement('button');b.className='btn-vf';
+    b.innerHTML=o[0]+'<span class="rot">'+o[1]+'</span>';
+    b.onclick=()=>respJ5(b,o[2]);a.appendChild(b);});
+  falar(textoFala);}
+function respJ5(el,escolha){
+  const f=FRASES5[it5],fb=document.getElementById('fb-j5');
+  if(escolha===f.v){
+    el.classList.add('certa');
+    document.querySelectorAll('#ops-j5 .btn-vf').forEach(x=>x.onclick=null);
+    fb.className='feedback certo';fb.textContent=elogio();
+    tocarSom(true);falar(f.exp);
+    const b=document.getElementById('prox-j5');
+    b.textContent=(it5<FRASES5.length-1)?'CONTINUAR \u279c':'PRONTO \u279c';
+    b.classList.add('mostrar');
+  }else{
+    el.classList.add('errada');
+    fb.className='feedback tente';fb.textContent='TENTE DE NOVO \ud83d\ude0a';
+    tocarSom(false);falar('Quase! Pense de novo.');
+    setTimeout(()=>el.classList.remove('errada'),900);}}
+function proxJ5(){
+  if(it5<FRASES5.length-1){it5++;montarJ5();return;}
+  fimResumo(5,'CA P\u00c1G. 4 \u2014 N\u00ba 1',
+    FRASES5.map(f=>({tit:f.l+' '+f.t,txt:f.v?'V \u2014 VERDADEIRO':'F \u2014 FALSO'})));}
+
+/* ===== J6 — CA pág.5 nº2: as dúvidas da turma de Anita ===== */
+const DUVIDAS6=[
+ {quem:'\ud83d\udc66 URBANO PERGUNTA:',
+  p:'POR QUE DEVO USAR FIO DENTAL?',
+  fala:'Por que devo usar fio dental?',
+  ops:[{t:'PORQUE ELE LIMPA ENTRE OS DENTES, ONDE A ESCOVA N\u00c3O ALCAN\u00c7A.',ok:true},
+       {t:'PORQUE ELE DEIXA A ESCOVA MAIS BONITA.',ok:false},
+       {t:'N\u00c3O PRECISO USAR FIO DENTAL.',ok:false}],
+  resp:'PORQUE O FIO DENTAL LIMPA ENTRE OS DENTES, ONDE A ESCOVA N\u00c3O ALCAN\u00c7A.'},
+ {quem:'\ud83d\udc67 LARA PERGUNTA:',
+  p:'DEVEMOS ESCOVAR S\u00d3 OS DENTES?',
+  fala:'Devemos escovar s\u00f3 os dentes?',
+  ops:[{t:'SIM, S\u00d3 OS DENTES.',ok:false},
+       {t:'N\u00c3O. DEVEMOS ESCOVAR TAMB\u00c9M A L\u00cdNGUA, A GENGIVA E O C\u00c9U DA BOCA.',ok:true},
+       {t:'N\u00c3O PRECISA ESCOVAR NADA.',ok:false}],
+  resp:'N\u00c3O. AL\u00c9M DOS DENTES, DEVEMOS ESCOVAR A L\u00cdNGUA, A GENGIVA E O C\u00c9U DA BOCA.'},
+ {quem:'\ud83d\udc66 TOM PERGUNTA:',
+  p:'POSSO ESCOVAR OS DENTES S\u00d3 UMA VEZ POR DIA?',
+  fala:'Posso escovar os dentes s\u00f3 uma vez por dia?',
+  ops:[{t:'SIM, UMA VEZ POR DIA BASTA.',ok:false},
+       {t:'S\u00d3 QUANDO OS DENTES ESTIVEREM SUJOS.',ok:false},
+       {t:'N\u00c3O. DEVEMOS ESCOVAR AP\u00d3S CADA REFEI\u00c7\u00c3O E ANTES DE DORMIR.',ok:true}],
+  resp:'N\u00c3O. DEVEMOS ESCOVAR OS DENTES AP\u00d3S CADA REFEI\u00c7\u00c3O E ANTES DE DORMIR.'}
+];
+let it6=0;
+function abrirJogo6(){it6=0;mostrar('tela-j6');montarJ6();}
+function montarJ6(){
+  const d=DUVIDAS6[it6];
+  estrelas(document.getElementById('prog-j6'),it6,DUVIDAS6.length);
+  document.getElementById('perg-j6').innerHTML='AJUDE A TURMA DE ANITA!<br>ESCOLHA A RESPOSTA CERTA PARA O BAL\u00c3O.';
+  document.getElementById('balao-j6').innerHTML='<span class="quem">'+d.quem+'</span>'+d.p;
+  textoFala=d.fala;
+  document.getElementById('fb-j6').textContent='';
+  document.getElementById('prox-j6').classList.remove('mostrar');
+  const a=document.getElementById('ops-j6');a.innerHTML='';
+  d.ops.forEach(o=>{
+    const b=document.createElement('button');b.className='op-quadro';
+    b.innerHTML='<span class="cx"></span><span>'+o.t+'</span>';
+    b.onclick=()=>respJ6(b,o);a.appendChild(b);});
+  falar(d.fala);}
+function respJ6(el,o){
+  const fb=document.getElementById('fb-j6');
+  if(o.ok){
+    el.classList.add('certa');el.querySelector('.cx').textContent='\u2714';
+    document.querySelectorAll('#ops-j6 .op-quadro').forEach(x=>x.onclick=null);
+    fb.className='feedback certo';fb.textContent=elogio();
+    tocarSom(true);falar(DUVIDAS6[it6].resp);
+    const b=document.getElementById('prox-j6');
+    b.textContent=(it6<DUVIDAS6.length-1)?'CONTINUAR \u279c':'PRONTO \u279c';
+    b.classList.add('mostrar');
+  }else{
+    el.classList.add('errada');el.querySelector('.cx').textContent='\u2716';
+    fb.className='feedback tente';fb.textContent='TENTE DE NOVO \ud83d\ude0a';
+    tocarSom(false);falar('Quase! Pense de novo.');
+    setTimeout(()=>{el.classList.remove('errada');el.querySelector('.cx').textContent='';},900);}}
+function proxJ6(){
+  if(it6<DUVIDAS6.length-1){it6++;montarJ6();return;}
+  fimResumo(6,'CA P\u00c1G. 5 \u2014 N\u00ba 2',
+    DUVIDAS6.map(d=>({tit:d.p,txt:d.resp})));}
+
+/* ===== J7 — CA pág.5 nº3: o dente com cárie ===== */
+function svgDente(comCarie){
+  return '<svg viewBox="0 0 64 62" xmlns="http://www.w3.org/2000/svg">'+
+    '<path d="M9 16 C9 6 18 2 27 6 C30 7.5 34 7.5 37 6 C46 2 55 6 55 16 '+
+    'C55 26 49 32 46 44 C44 53 37 55 35.5 46 L33 32 C32.5 29.5 31.5 29.5 31 32 '+
+    'L28.5 46 C27 55 20 53 18 44 C15 32 9 26 9 16 Z" '+
+    'fill="#FFFFFF" stroke="#90A4AE" stroke-width="3" stroke-linejoin="round"/>'+
+    '<path d="M16 15 C16 10 21 8 25 10" fill="none" stroke="#E0E0E0" stroke-width="4" stroke-linecap="round"/>'+
+    (comCarie?
+      '<ellipse cx="38" cy="22" rx="8" ry="7" fill="#6D4C41"/>'+
+      '<ellipse cx="35" cy="33" rx="4" ry="3.5" fill="#8D6E63"/>'+
+      '<circle cx="24" cy="24" r="1.8" fill="#5D4037"/><circle cx="32" cy="22" r="1.8" fill="#5D4037"/>'+
+      '<path d="M23 31 Q28 27 33 31" fill="none" stroke="#5D4037" stroke-width="2.4" stroke-linecap="round"/>'
+      :
+      '<circle cx="25" cy="23" r="1.8" fill="#78909C"/><circle cx="37" cy="23" r="1.8" fill="#78909C"/>'+
+      '<path d="M24 30 Q31 36 38 30" fill="none" stroke="#78909C" stroke-width="2.4" stroke-linecap="round"/>')+
+    '</svg>';}
+const OPS7=[
+ {t:'ESCOVAR OS DENTES',ok:false},
+ {t:'COMER DOCES E FRUTAS',ok:false},
+ {t:'M\u00c1 HIGIENIZA\u00c7\u00c3O BUCAL',ok:true}
+];
+function abrirJogo7(){
+  mostrar('tela-j7');
+  textoFala='Um dos dentes est\u00e1 com c\u00e1rie. Marque a atitude que pode ter causado a c\u00e1rie.';
+  document.getElementById('perg-j7').innerHTML='\ud83e\uddb7 UM DESTES DENTES EST\u00c1 COM C\u00c1RIE.<br>MARQUE A ATITUDE QUE PODE TER CAUSADO A C\u00c1RIE.';
+  const dd=document.getElementById('dentes-j7');
+  dd.innerHTML='<div class="dente">'+svgDente(false)+'<span class="rot">SAUD\u00c1VEL</span></div>'+
+               '<div class="dente">'+svgDente(true)+'<span class="rot">COM C\u00c1RIE</span></div>'+
+               '<div class="dente">'+svgDente(false)+'<span class="rot">SAUD\u00c1VEL</span></div>';
+  document.getElementById('fb-j7').textContent='';
+  const a=document.getElementById('ops-j7');a.innerHTML='';
+  OPS7.forEach(o=>{
+    const b=document.createElement('button');b.className='op-quadro';
+    b.innerHTML='<span class="cx"></span><span>'+o.t+'</span>';
+    b.onclick=()=>respJ7(b,o);a.appendChild(b);});
+  falar(textoFala);}
+function respJ7(el,o){
+  const fb=document.getElementById('fb-j7');
+  if(o.ok){
+    el.classList.add('certa');el.querySelector('.cx').textContent='\u2716';
+    document.querySelectorAll('#ops-j7 .op-quadro').forEach(x=>x.onclick=null);
+    fb.className='feedback certo';fb.textContent=elogio();
+    tocarSom(true);
+    falar('Isso mesmo! A m\u00e1 higieniza\u00e7\u00e3o bucal pode causar a c\u00e1rie.');
+    setTimeout(()=>fimDeJogo(7),2800);
+  }else{
+    el.classList.add('errada');el.querySelector('.cx').textContent='\u2716';
+    fb.className='feedback tente';fb.textContent='TENTE DE NOVO \ud83d\ude0a';
+    tocarSom(false);falar('Quase! Pense de novo.');
+    setTimeout(()=>{el.classList.remove('errada');el.querySelector('.cx').textContent='';},900);}}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
