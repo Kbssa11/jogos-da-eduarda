@@ -402,6 +402,34 @@
   .dente{text-align:center;}
   .dente svg{width:86px;height:82px;display:block;}
   .dente .rot{display:block;font-size:.8rem;font-weight:bold;color:#00897B;margin-top:2px;}
+  .parlenda{background:var(--card);border:5px solid #FFD54F;border-radius:24px;padding:16px 14px;
+    margin:8px 0;line-height:2.2;font-size:1.18rem;font-weight:bold;color:#5D4037;text-align:center;}
+  .pal-parl{display:inline-block;padding:2px 7px;border-radius:12px;cursor:pointer;
+    border:3px solid transparent;transition:transform .1s;}
+  .pal-parl.pintada{background:#FFE082;border-color:#FFA000;color:#E65100;animation:pula .4s;}
+  .pal-parl.errou{animation:treme .4s;}
+  .fonte-parl{display:block;font-size:.85rem;font-weight:normal;color:#8D6E63;margin-top:8px;}
+  .hab.errou{animation:treme .4s;border-color:#EF9A9A;}
+  .ligar-figs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0 14px;}
+  .lig-fig{background:#F5F5F5;border:5px solid #E0E0E0;border-radius:20px;padding:10px 6px;width:112px;
+    text-align:center;cursor:pointer;box-shadow:0 5px 0 #E0E0E0;transition:transform .1s;}
+  .lig-fig .emo{font-size:2.6rem;display:block;line-height:1.1;}
+  .lig-fig .ic svg{width:52px;height:52px;display:block;margin:0 auto;}
+  .lig-fig .nome{font-size:.85rem;font-weight:bold;display:block;margin-top:4px;}
+  .lig-fig.sel{border-color:#FFA000;background:#FFF8E1;box-shadow:0 5px 0 #FFA000;animation:pulinho .7s infinite;}
+  .lig-fig.ok{border-color:var(--verde);background:var(--verde-claro);box-shadow:0 5px 0 var(--verde);
+    cursor:default;opacity:.7;}
+  .ligar-grupos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;}
+  .lig-grupo{background:var(--card);border:5px solid #B39DDB;border-radius:18px;padding:12px 10px;
+    font-size:1rem;font-weight:bold;font-family:inherit;color:var(--texto);cursor:pointer;
+    box-shadow:0 5px 0 #D1C4E9;line-height:1.25;text-align:center;}
+  .lig-grupo.ok{border-color:var(--verde);background:var(--verde-claro);box-shadow:0 5px 0 var(--verde);}
+  .lig-grupo.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .lig-grupo .achou{display:block;font-size:.88rem;color:#00897B;margin-top:5px;}
+  .menina-lanche{display:flex;align-items:center;gap:12px;background:#FFF3E0;border:5px solid #FFCC80;
+    border-radius:24px;padding:12px 16px;margin:8px 0;font-size:1.05rem;font-weight:bold;color:#E65100;
+    line-height:1.3;text-align:left;}
+  .menina-lanche .car{font-size:3rem;line-height:1;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -414,6 +442,7 @@
   h1{color:#00897B !important;}
   .c1{background:#26A69A;} .c2{background:#42A5F5;} .c3{background:#7E57C2;} .c4{background:#EC407A;}
   .c5{background:#FF7043;} .c6{background:#26C6DA;} .c7{background:#8D6E63;}
+  .c8{background:#FFA726;} .c9{background:#66BB6A;} .c10{background:#5C6BC0;} .c11{background:#EF5350;} .c12{background:#AB47BC;}
   .habitos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:8px;}
   .hab{background:#F5F5F5;border:5px solid #E0E0E0;border-radius:22px;padding:14px 8px;text-align:center;
     cursor:pointer;box-shadow:0 5px 0 #E0E0E0;transition:transform .1s;filter:grayscale(1);}
@@ -463,6 +492,11 @@
   <button class="menu-btn c5" onclick="abrirJogo5()"><span class="emo">🪥</span><span><span class="pag">CA PÁG. 4</span>VERDADEIRO OU FALSO</span><span class="done" id="d5"></span></button>
   <button class="menu-btn c6" onclick="abrirJogo6()"><span class="emo">💬</span><span><span class="pag">CA PÁG. 5</span>AS DÚVIDAS DA TURMA</span><span class="done" id="d6"></span></button>
   <button class="menu-btn c7" onclick="abrirJogo7()"><span class="emo">🦠</span><span><span class="pag">CA PÁG. 5</span>O DENTE COM CÁRIE</span><span class="done" id="d7"></span></button>
+  <button class="menu-btn c8" onclick="abrirJogo8()"><span class="emo">🍚</span><span><span class="pag">CA PÁG. 6</span>A PARLENDA DOS ALIMENTOS</span><span class="done" id="d8"></span></button>
+  <button class="menu-btn c9" onclick="abrirJogo9()"><span class="emo">🍽️</span><span><span class="pag">CA PÁG. 6</span>AS PERGUNTAS DA PARLENDA</span><span class="done" id="d9"></span></button>
+  <button class="menu-btn c10" onclick="abrirJogo10()"><span class="emo">🔗</span><span><span class="pag">CA PÁG. 7</span>OS GRUPOS ALIMENTARES</span><span class="done" id="d10"></span></button>
+  <button class="menu-btn c11" onclick="abrirJogo11()"><span class="emo">🍎</span><span><span class="pag">CA PÁG. 7</span>ISSO É SAUDÁVEL?</span><span class="done" id="d11"></span></button>
+  <button class="menu-btn c12" onclick="abrirJogo12()"><span class="emo">🎒</span><span><span class="pag">CA PÁG. 7</span>O LANCHE DA EMÍLIA</span><span class="done" id="d12"></span></button>
   </div>
 </div>
 
@@ -532,6 +566,59 @@
   <div class="dentes" id="dentes-j7"></div>
   <div class="lista-quadros" id="ops-j7"></div>
   <div class="feedback" id="fb-j7"></div>
+</div>
+
+<div class="tela" id="tela-j8">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta" id="perg-j8"></div>
+  <div class="parlenda" id="parl-j8"></div>
+  <div class="contador" id="cont-j8"></div>
+  <button class="prox" id="prox-j8" onclick="fimJ8()">PRONTO ➜</button>
+</div>
+
+<div class="tela" id="tela-j9">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j9"></div>
+  <div class="pergunta" id="perg-j9"></div>
+  <div class="habitos" id="area-j9"></div>
+  <div class="feedback" id="fb-j9"></div>
+  <div class="contador" id="cont-j9"></div>
+  <button class="prox" id="prox-j9" onclick="proxJ9()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j10">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta" id="perg-j10"></div>
+  <div class="ligar-figs" id="figs-j10"></div>
+  <div class="ligar-grupos" id="grupos-j10"></div>
+  <div class="feedback" id="fb-j10"></div>
+  <div class="contador" id="cont-j10"></div>
+</div>
+
+<div class="tela" id="tela-j11">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j11"></div>
+  <div class="pergunta" id="perg-j11"></div>
+  <div class="lista-quadros" id="ops-j11"></div>
+  <div class="habitos" id="area-j11"></div>
+  <div class="feedback" id="fb-j11"></div>
+  <div class="contador" id="cont-j11"></div>
+  <button class="prox" id="prox-j11" onclick="proxJ11()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-j12">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta" id="perg-j12"></div>
+  <div class="menina-lanche"><span class="car">👧</span><span>EMÍLIA ESTÁ NO RECREIO E NÃO SABE O QUE COMER.<br>ESCOLHA 3 ALIMENTOS SAUDÁVEIS PARA O LANCHE DELA.</span></div>
+  <div class="habitos" id="area-j12"></div>
+  <div class="feedback" id="fb-j12"></div>
+  <div class="contador" id="cont-j12"></div>
+  <button class="prox" id="prox-j12" onclick="fimJ12()">PRONTO ➜</button>
 </div>
 
 <div class="tela" id="tela-resumo">
@@ -937,6 +1024,295 @@ function respJ7(el,o){
     fb.className='feedback tente';fb.textContent='TENTE DE NOVO \ud83d\ude0a';
     tocarSom(false);falar('Quase! Pense de novo.');
     setTimeout(()=>{el.classList.remove('errada');el.querySelector('.cx').textContent='';},900);}}
+
+/* ===== J8 a J12 — CA págs. 6 e 7: EU CUIDO DA MINHA ALIMENTAÇÃO ===== */
+function svgFeijao(){
+  return '<svg viewBox="0 0 60 56" xmlns="http://www.w3.org/2000/svg">'+
+   '<ellipse cx="19" cy="20" rx="13" ry="9" transform="rotate(-28 19 20)" fill="#A1887F" stroke="#5D4037" stroke-width="2.5"/>'+
+   '<ellipse cx="40" cy="26" rx="13" ry="9" transform="rotate(18 40 26)" fill="#8D6E63" stroke="#5D4037" stroke-width="2.5"/>'+
+   '<ellipse cx="28" cy="40" rx="13" ry="9" transform="rotate(-8 28 40)" fill="#795548" stroke="#5D4037" stroke-width="2.5"/>'+
+   '<path d="M14 19 q5 -3 10 0" fill="none" stroke="#5D4037" stroke-width="2"/>'+
+   '<path d="M35 26 q5 -3 10 0" fill="none" stroke="#3E2723" stroke-width="2"/>'+
+   '<path d="M23 40 q5 -3 10 0" fill="none" stroke="#3E2723" stroke-width="2"/></svg>';}
+function faceItem(o){
+  return (o.ic?'<span class="ic">'+o.ic+'</span>':'<span class="emo">'+o.e+'</span>')+
+         '<span class="nome">'+o.n+'</span>';}
+
+/* ----- J8 — CA pág.6 nº1 A: pinte os alimentos da parlenda ----- */
+const PARLENDA=[
+ ['UM,','DOIS,'],
+ ['FEIJÃO*','COM','ARROZ.*'],
+ ['TRÊS,','QUATRO,'],
+ ['FEIJÃO*','NO','PRATO.'],
+ ['CINCO,','SEIS,'],
+ ['FALAR','INGLÊS.'],
+ ['SETE,','OITO,'],
+ ['COMER','BISCOITO.*'],
+ ['NOVE,','DEZ,'],
+ ['COMER','PASTÉIS!*']
+];
+let pint8=0;
+const TOTAL8=5;
+function abrirJogo8(){
+  pint8=0;mostrar('tela-j8');
+  textoFala='Pinte o nome de todos os alimentos que aparecem na parlenda.';
+  document.getElementById('perg-j8').innerHTML='\ud83c\udf5a PINTE O NOME DE TODOS OS ALIMENTOS<br>QUE APARECEM NA PARLENDA.';
+  const p=document.getElementById('parl-j8');p.innerHTML='';
+  PARLENDA.forEach(linha=>{
+    const div=document.createElement('div');
+    linha.forEach(tok=>{
+      const comida=tok.slice(-1)==='*';
+      const txt=comida?tok.slice(0,-1):tok;
+      const sp=document.createElement('span');
+      sp.className='pal-parl';sp.textContent=txt;
+      sp.onclick=()=>clicaJ8(sp,comida,txt);
+      div.appendChild(sp);div.appendChild(document.createTextNode(' '));});
+    p.appendChild(div);});
+  const f=document.createElement('span');f.className='fonte-parl';
+  f.textContent='(DA TRADIÇÃO POPULAR.)';p.appendChild(f);
+  document.getElementById('prox-j8').classList.remove('mostrar');
+  contaJ8();falar('Um, dois, feijão com arroz. Três, quatro, feijão no prato. Cinco, seis, falar inglês. Sete, oito, comer biscoito. Nove, dez, comer pastéis! Agora pinte o nome de todos os alimentos.');}
+function clicaJ8(el,comida,txt){
+  if(el.classList.contains('pintada'))return;
+  if(comida){
+    el.classList.add('pintada');pint8++;tocarSom(true);
+    falar(txt.replace(/[.,!]/g,''));contaJ8();
+    if(pint8>=TOTAL8){
+      document.getElementById('prox-j8').classList.add('mostrar');
+      falar('Muito bem! Você achou todos os alimentos.');}
+  }else{
+    el.classList.add('errou');tocarSom(false);
+    falar('Esse não é um alimento. Tente de novo.');
+    setTimeout(()=>el.classList.remove('errou'),500);}}
+function contaJ8(){
+  document.getElementById('cont-j8').textContent='ALIMENTOS PINTADOS: '+pint8+' DE '+TOTAL8;}
+function fimJ8(){
+  fimResumo(8,'CA PÁG. 6 — Nº 1, A',
+   [{tit:'ALIMENTOS DA PARLENDA',txt:'FEIJÃO • ARROZ • BISCOITO • PASTÉIS'}]);}
+
+/* ----- J9 — CA pág.6 nº1 B, C, D, E e F ----- */
+const A4=[{e:'\ud83c\udf5a',n:'ARROZ'},{ic:svgFeijao(),n:'FEIJÃO'},
+          {e:'\ud83c\udf6a',n:'BISCOITO'},{e:'\ud83e\udd5f',n:'PASTEL'}];
+const RODADAS9=[
+ {tit:'B)',perg:'QUAIS DESSES ALIMENTOS COSTUMAM SER CONSUMIDOS NO ALMOÇO E NO JANTAR?',
+  fala:'Quais desses alimentos costumam ser consumidos no almoço e no jantar? Marque os dois.',
+  ops:A4,tipo:'certas',certas:['ARROZ','FEIJÃO'],
+  resp:'ARROZ E FEIJÃO'},
+ {tit:'C)',perg:'E COMO LANCHE DA MANHÃ OU DA TARDE?',
+  fala:'E como lanche da manhã ou da tarde? Marque os dois.',
+  ops:A4,tipo:'certas',certas:['BISCOITO','PASTEL'],
+  resp:'BISCOITO E PASTEL'},
+ {tit:'D)',perg:'DOS ALIMENTOS DA PARLENDA, DE QUAL VOCÊ MAIS GOSTA?',
+  fala:'Dos alimentos que aparecem na parlenda, de qual você mais gosta? Escolha um.',
+  ops:A4,tipo:'livre',n:1},
+ {tit:'E)',perg:'QUAIS ALIMENTOS DA PARLENDA SÃO GRÃOS?',
+  fala:'Quais alimentos da parlenda são grãos? Marque os dois.',
+  ops:A4,tipo:'certas',certas:['ARROZ','FEIJÃO'],
+  resp:'ARROZ E FEIJÃO'},
+ {tit:'F)',perg:'O ARROZ E O FEIJÃO SÃO COMIDOS JUNTO COM OUTROS ALIMENTOS.<br>ESCOLHA DOIS DELES.',
+  fala:'Geralmente o arroz e o feijão são consumidos junto com outros alimentos. Escolha o nome de dois deles.',
+  ops:[{e:'\ud83e\udd69',n:'CARNE'},{e:'\ud83c\udf57',n:'FRANGO'},{e:'\ud83e\udd5a',n:'OVO'},
+       {e:'\ud83e\udd57',n:'SALADA'},{e:'\ud83e\udd54',n:'BATATA'},{e:'\ud83e\udd55',n:'LEGUMES'}],
+  tipo:'livre',n:2}
+];
+let rod9=0,marc9=[];
+function abrirJogo9(){rod9=0;marc9=RODADAS9.map(()=>[]);mostrar('tela-j9');montarJ9();}
+function montarJ9(){
+  const r=RODADAS9[rod9];
+  estrelas(document.getElementById('prog-j9'),rod9,RODADAS9.length);
+  textoFala=r.fala;
+  document.getElementById('perg-j9').innerHTML='<span style="display:block;color:#00897B;font-size:.95rem">'+r.tit+'</span>'+r.perg;
+  document.getElementById('fb-j9').textContent='';
+  document.getElementById('prox-j9').classList.remove('mostrar');
+  const a=document.getElementById('area-j9');a.innerHTML='';
+  r.ops.forEach(o=>{
+    const d=document.createElement('div');d.className='hab';
+    d.innerHTML=faceItem(o);
+    d.onclick=()=>clicaJ9(d,o);a.appendChild(d);});
+  contaJ9();falar(r.fala);}
+function clicaJ9(el,o){
+  const r=RODADAS9[rod9],m=marc9[rod9];
+  if(r.tipo==='certas'){
+    if(m.includes(o.n))return;
+    if(r.certas.includes(o.n)){
+      m.push(o.n);el.classList.add('pintado');tocarSom(true);falar(o.n);
+    }else{
+      el.classList.add('errou');tocarSom(false);falar('Esse não. Tente de novo.');
+      document.getElementById('fb-j9').className='feedback tente';
+      document.getElementById('fb-j9').textContent='TENTE DE NOVO \ud83d\ude0a';
+      setTimeout(()=>{el.classList.remove('errou');},600);return;}
+  }else{
+    const i=m.indexOf(o.n);
+    if(i>=0){m.splice(i,1);el.classList.remove('pintado');}
+    else{if(m.length>=r.n){falar('Você já escolheu. Para trocar, toque no que já marcou.');return;}
+      m.push(o.n);el.classList.add('pintado');tocarSom(true);falar(o.n);}}
+  document.getElementById('fb-j9').textContent='';
+  contaJ9();}
+function contaJ9(){
+  const r=RODADAS9[rod9],m=marc9[rod9];
+  const alvo=(r.tipo==='certas')?r.certas.length:r.n;
+  document.getElementById('cont-j9').textContent='MARQUE '+alvo+' — VOCÊ MARCOU '+m.length;
+  const b=document.getElementById('prox-j9');
+  const pronto=(m.length>=alvo);
+  b.classList.toggle('mostrar',pronto);
+  b.textContent=(rod9<RODADAS9.length-1)?'CONTINUAR ➜':'PRONTO ➜';
+  if(pronto&&r.tipo==='certas'){
+    const fb=document.getElementById('fb-j9');fb.className='feedback certo';fb.textContent=elogio();}}
+function proxJ9(){
+  if(rod9<RODADAS9.length-1){rod9++;montarJ9();return;}
+  fimResumo(9,'CA PÁG. 6 — Nº 1',
+   RODADAS9.map((r,i)=>({tit:r.tit+' '+r.perg.replace(/<br>/g,' '),
+     txt:(r.tipo==='certas'?r.resp:(marc9[i].join(' E ')||'—'))})));}
+
+/* ----- J10 — CA pág.7 nº1 G: ligar ao grupo alimentar ----- */
+const FIG10=[{e:'\ud83c\udf6a',n:'BISCOITO',g:0},{e:'\ud83c\udf5a',n:'ARROZ',g:1},
+             {ic:svgFeijao(),n:'FEIJÃO',g:4},{e:'\ud83e\udd5f',n:'PASTEL',g:0}];
+const GRUPOS10=['DOCES, ÓLEOS E GORDURAS','CEREAIS, PÃES E MASSAS',
+                'LEITE E DERIVADOS','FRUTAS, LEGUMES E VERDURAS','CARNE, OVOS E LEGUMINOSAS'];
+let sel10=null,fei10=0;
+function abrirJogo10(){
+  sel10=null;fei10=0;mostrar('tela-j10');
+  textoFala='Veja as imagens dos alimentos da parlenda. Toque em um alimento e depois no grupo alimentar a que ele pertence.';
+  document.getElementById('perg-j10').innerHTML='\ud83d\udd17 TOQUE NUM ALIMENTO E DEPOIS NO GRUPO<br>ALIMENTAR A QUE ELE PERTENCE.';
+  document.getElementById('fb-j10').textContent='';
+  const f=document.getElementById('figs-j10');f.innerHTML='';
+  FIG10.forEach((o,i)=>{
+    const d=document.createElement('div');d.className='lig-fig';d.id='f10-'+i;
+    d.innerHTML=faceItem(o);
+    d.onclick=()=>{if(d.classList.contains('ok'))return;
+      document.querySelectorAll('#figs-j10 .lig-fig').forEach(x=>x.classList.remove('sel'));
+      d.classList.add('sel');sel10=i;falar(o.n);};
+    f.appendChild(d);});
+  const g=document.getElementById('grupos-j10');g.innerHTML='';
+  GRUPOS10.forEach((t,i)=>{
+    const b=document.createElement('button');b.className='lig-grupo';b.id='g10-'+i;
+    b.innerHTML='<span class="rot-g">'+t+'</span>';
+    b.onclick=()=>clicaG10(b,i);g.appendChild(b);});
+  contaJ10();falar(textoFala);}
+function clicaG10(el,i){
+  if(sel10===null){falar('Primeiro toque num alimento.');
+    const fb=document.getElementById('fb-j10');fb.className='feedback tente';
+    fb.textContent='TOQUE PRIMEIRO NUM ALIMENTO \ud83d\udc46';return;}
+  const o=FIG10[sel10],fd=document.getElementById('f10-'+sel10);
+  const fb=document.getElementById('fb-j10');
+  if(o.g===i){
+    fd.classList.remove('sel');fd.classList.add('ok');
+    el.classList.add('ok');
+    const marca=document.createElement('span');marca.className='achou';
+    marca.textContent='✔ '+o.n;el.appendChild(marca);
+    sel10=null;fei10++;tocarSom(true);
+    fb.className='feedback certo';fb.textContent=elogio();
+    falar(o.n+' pertence ao grupo '+GRUPOS10[i]+'.');
+    contaJ10();
+    if(fei10>=FIG10.length)setTimeout(()=>fimDeJogo(10),2600);
+  }else{
+    el.classList.add('errada');tocarSom(false);
+    fb.className='feedback tente';fb.textContent='TENTE DE NOVO \ud83d\ude0a';
+    falar('Esse não é o grupo. Tente de novo.');
+    setTimeout(()=>el.classList.remove('errada'),700);}}
+function contaJ10(){
+  document.getElementById('cont-j10').textContent='LIGADOS: '+fei10+' DE '+FIG10.length;}
+
+/* ----- J11 — CA pág.7 nº1 H e I ----- */
+const HORT11=[{e:'\ud83c\udf4e',n:'MAÇÃ'},{e:'\ud83c\udf4c',n:'BANANA'},{e:'\ud83c\udf4a',n:'LARANJA'},
+ {e:'\ud83c\udf49',n:'MELANCIA'},{e:'\ud83c\udf47',n:'UVA'},{e:'\ud83e\udd55',n:'CENOURA'},
+ {e:'\ud83c\udf45',n:'TOMATE'},{e:'\ud83e\udd6c',n:'ALFACE'},{e:'\ud83e\udd66',n:'BRÓCOLIS'},{e:'\ud83e\udd52',n:'PEPINO'}];
+let rod11=0,marc11=[];
+function abrirJogo11(){rod11=0;marc11=[];mostrar('tela-j11');montarJ11();}
+function montarJ11(){
+  estrelas(document.getElementById('prog-j11'),rod11,2);
+  document.getElementById('fb-j11').textContent='';
+  document.getElementById('prox-j11').classList.remove('mostrar');
+  const ops=document.getElementById('ops-j11'),area=document.getElementById('area-j11');
+  ops.innerHTML='';area.innerHTML='';
+  if(rod11===0){
+    textoFala='Se uma pessoa comer somente esses alimentos ao longo do dia, a alimentação dela será saudável?';
+    document.getElementById('perg-j11').innerHTML='<span style="display:block;color:#00897B;font-size:.95rem">H)</span>'+
+      'SE UMA PESSOA COMER SOMENTE ARROZ, FEIJÃO, BISCOITO E PASTEL AO LONGO DO DIA,<br>A ALIMENTAÇÃO DELA SERÁ SAUDÁVEL?';
+    [['SIM.',false],['NÃO.',true]].forEach(o=>{
+      const b=document.createElement('button');b.className='op-quadro';
+      b.innerHTML='<span class="cx"></span><span>'+o[0]+'</span>';
+      b.onclick=()=>respJ11(b,o[1]);ops.appendChild(b);});
+    document.getElementById('cont-j11').textContent='MARQUE A RESPOSTA CERTA';
+  }else{
+    textoFala='Pense nos alimentos que você come no dia a dia. Quais deles são do grupo frutas, legumes e verduras? Escolha dois.';
+    document.getElementById('perg-j11').innerHTML='<span style="display:block;color:#00897B;font-size:.95rem">I)</span>'+
+      'PENSE NOS ALIMENTOS QUE VOCÊ COME NO DIA A DIA.<br>ESCOLHA DOIS DO GRUPO <b>FRUTAS, LEGUMES E VERDURAS</b>.';
+    HORT11.forEach(o=>{
+      const d=document.createElement('div');d.className='hab';
+      d.innerHTML=faceItem(o);
+      d.onclick=()=>{
+        const i=marc11.indexOf(o.n);
+        if(i>=0){marc11.splice(i,1);d.classList.remove('pintado');}
+        else{if(marc11.length>=2){falar('Você já escolheu dois. Para trocar, toque no que já marcou.');return;}
+          marc11.push(o.n);d.classList.add('pintado');tocarSom(true);falar(o.n);}
+        contaJ11();};
+      area.appendChild(d);});
+    contaJ11();}
+  falar(textoFala);}
+function respJ11(el,ok){
+  const fb=document.getElementById('fb-j11');
+  if(ok){
+    el.classList.add('certa');el.querySelector('.cx').textContent='✔';
+    document.querySelectorAll('#ops-j11 .op-quadro').forEach(x=>x.onclick=null);
+    fb.className='feedback certo';fb.textContent=elogio();tocarSom(true);
+    falar('Isso mesmo! Não é saudável, porque faltam frutas, legumes, verduras e leite.');
+    const b=document.getElementById('prox-j11');b.textContent='CONTINUAR ➜';b.classList.add('mostrar');
+  }else{
+    el.classList.add('errada');el.querySelector('.cx').textContent='✖';
+    fb.className='feedback tente';fb.textContent='TENTE DE NOVO \ud83d\ude0a';
+    tocarSom(false);falar('Quase! Pense de novo.');
+    setTimeout(()=>{el.classList.remove('errada');el.querySelector('.cx').textContent='';},900);}}
+function contaJ11(){
+  document.getElementById('cont-j11').textContent='ESCOLHA 2 — VOCÊ ESCOLHEU '+marc11.length;
+  const b=document.getElementById('prox-j11');
+  b.textContent='PRONTO ➜';
+  b.classList.toggle('mostrar',marc11.length>=2);}
+function proxJ11(){
+  if(rod11===0){rod11=1;montarJ11();return;}
+  fimResumo(11,'CA PÁG. 7 — Nº 1',
+   [{tit:'H) A ALIMENTAÇÃO SERÁ SAUDÁVEL?',txt:'NÃO'},
+    {tit:'I) FRUTAS, LEGUMES E VERDURAS QUE EU COMO',txt:marc11.join(' • ')||'—'}]);}
+
+/* ----- J12 — CA pág.7 nº2: o lanche saudável da Emília ----- */
+const LANCHE12=[
+ {e:'\ud83c\udf4e',n:'MAÇÃ',ok:true},{e:'\ud83e\udd64',n:'REFRIGERANTE',ok:false},
+ {e:'\ud83e\udd6a',n:'SANDUÍCHE NATURAL',ok:true},{e:'\ud83c\udf6c',n:'BALA',ok:false},
+ {e:'\ud83e\udd5b',n:'LEITE',ok:true},{e:'\ud83c\udf5f',n:'BATATA FRITA',ok:false},
+ {e:'\ud83c\udf4c',n:'BANANA',ok:true},{e:'\ud83c\udf6b',n:'CHOCOLATE',ok:false},
+ {e:'\ud83e\uddc3',n:'SUCO DE FRUTA',ok:true},{e:'\ud83e\udd55',n:'CENOURA',ok:true}
+];
+let marc12=[];
+function abrirJogo12(){
+  marc12=[];mostrar('tela-j12');
+  textoFala='Na hora do recreio, Emília fica em dúvida quanto ao que deve comer. Escolha três alimentos saudáveis para ela lanchar.';
+  document.getElementById('perg-j12').innerHTML='\ud83c\udf92 ESCOLHA ALIMENTOS SAUDÁVEIS<br>PARA O LANCHE DA EMÍLIA.';
+  document.getElementById('fb-j12').textContent='';
+  document.getElementById('prox-j12').classList.remove('mostrar');
+  const a=document.getElementById('area-j12');a.innerHTML='';
+  LANCHE12.forEach(o=>{
+    const d=document.createElement('div');d.className='hab';
+    d.innerHTML=faceItem(o);
+    d.onclick=()=>clicaJ12(d,o);a.appendChild(d);});
+  contaJ12();falar(textoFala);}
+function clicaJ12(el,o){
+  const fb=document.getElementById('fb-j12');
+  if(!o.ok){
+    el.classList.add('errou');tocarSom(false);
+    fb.className='feedback tente';fb.textContent='ESSE NÃO É SAUDÁVEL \ud83d\ude0a';
+    falar('Esse alimento não é saudável para o lanche. Escolha outro.');
+    setTimeout(()=>el.classList.remove('errou'),700);return;}
+  const i=marc12.indexOf(o.n);
+  if(i>=0){marc12.splice(i,1);el.classList.remove('pintado');}
+  else{if(marc12.length>=3){falar('Você já escolheu três. Para trocar, toque no que já marcou.');return;}
+    marc12.push(o.n);el.classList.add('pintado');tocarSom(true);falar(o.n);}
+  fb.textContent='';contaJ12();}
+function contaJ12(){
+  document.getElementById('cont-j12').textContent='ESCOLHA 3 — VOCÊ ESCOLHEU '+marc12.length;
+  document.getElementById('prox-j12').classList.toggle('mostrar',marc12.length>=3);}
+function fimJ12(){
+  fimResumo(12,'CA PÁG. 7 — Nº 2',
+   [{tit:'DESENHE ESTES ALIMENTOS NO LANCHE DA EMÍLIA',txt:marc12.join(' • ')||'—'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
