@@ -430,6 +430,22 @@
     border-radius:24px;padding:12px 16px;margin:8px 0;font-size:1.05rem;font-weight:bold;color:#E65100;
     line-height:1.3;text-align:left;}
   .menina-lanche .car{font-size:3rem;line-height:1;}
+  .bandeja{background:#ECEFF1;border:6px solid #90A4AE;border-radius:24px;padding:12px;margin:8px 0;}
+  .bandeja .habitos{margin-top:0;}
+  .item-grande{background:var(--card);border:6px solid #B2DFDB;border-radius:26px;padding:18px;
+    text-align:center;margin:10px 0;}
+  .item-grande .emo{font-size:4.6rem;display:block;line-height:1.1;}
+  .item-grande .ic svg{width:96px;height:96px;display:block;margin:0 auto;}
+  .item-grande .nome{display:block;font-size:1.4rem;font-weight:bold;margin-top:6px;color:var(--texto);}
+  .clas-botoes{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+  .btn-clas{flex:1 1 180px;max-width:250px;border-radius:24px;border:6px solid #B39DDB;background:#fff;
+    font-family:inherit;font-size:1.15rem;font-weight:bold;color:#5E35B1;cursor:pointer;padding:18px 12px;
+    box-shadow:0 6px 0 #D1C4E9;transition:transform .1s;line-height:1.25;}
+  .btn-clas .ico{display:block;font-size:2.2rem;line-height:1.1;margin-bottom:4px;}
+  .btn-clas:active{transform:translateY(4px);box-shadow:0 2px 0 #D1C4E9;}
+  .btn-clas.certa{background:var(--verde-claro);border-color:var(--verde);color:var(--verde);
+    box-shadow:0 6px 0 var(--verde);animation:pula .5s;}
+  .btn-clas.errada{border-color:#EF9A9A;background:#FFEBEE;animation:treme .4s;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -443,6 +459,7 @@
   .c1{background:#26A69A;} .c2{background:#42A5F5;} .c3{background:#7E57C2;} .c4{background:#EC407A;}
   .c5{background:#FF7043;} .c6{background:#26C6DA;} .c7{background:#8D6E63;}
   .c8{background:#FFA726;} .c9{background:#66BB6A;} .c10{background:#5C6BC0;} .c11{background:#EF5350;} .c12{background:#AB47BC;}
+  .c13{background:#00897B;} .c14{background:#F06292;}
   .habitos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:8px;}
   .hab{background:#F5F5F5;border:5px solid #E0E0E0;border-radius:22px;padding:14px 8px;text-align:center;
     cursor:pointer;box-shadow:0 5px 0 #E0E0E0;transition:transform .1s;filter:grayscale(1);}
@@ -497,6 +514,8 @@
   <button class="menu-btn c10" onclick="abrirJogo10()"><span class="emo">🔗</span><span><span class="pag">CA PÁG. 7</span>OS GRUPOS ALIMENTARES</span><span class="done" id="d10"></span></button>
   <button class="menu-btn c11" onclick="abrirJogo11()"><span class="emo">🍎</span><span><span class="pag">CA PÁG. 7</span>ISSO É SAUDÁVEL?</span><span class="done" id="d11"></span></button>
   <button class="menu-btn c12" onclick="abrirJogo12()"><span class="emo">🎒</span><span><span class="pag">CA PÁG. 7</span>O LANCHE DA EMÍLIA</span><span class="done" id="d12"></span></button>
+  <button class="menu-btn c13" onclick="abrirJogo13()"><span class="emo">🍱</span><span><span class="pag">CA PÁG. 8</span>O ALMOÇO NA ESCOLA</span><span class="done" id="d13"></span></button>
+  <button class="menu-btn c14" onclick="abrirJogo14()"><span class="emo">🔍</span><span><span class="pag">CA PÁG. 8</span>SAUDÁVEL OU NÃO?</span><span class="done" id="d14"></span></button>
   </div>
 </div>
 
@@ -619,6 +638,27 @@
   <div class="feedback" id="fb-j12"></div>
   <div class="contador" id="cont-j12"></div>
   <button class="prox" id="prox-j12" onclick="fimJ12()">PRONTO ➜</button>
+</div>
+
+<div class="tela" id="tela-j13">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta" id="perg-j13"></div>
+  <div class="bandeja"><div class="habitos" id="area-j13"></div></div>
+  <div class="feedback" id="fb-j13"></div>
+  <div class="contador" id="cont-j13"></div>
+  <button class="prox" id="prox-j13" onclick="fimJ13()">PRONTO ➜</button>
+</div>
+
+<div class="tela" id="tela-j14">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-j14"></div>
+  <div class="pergunta" id="perg-j14"></div>
+  <div class="item-grande" id="item-j14"></div>
+  <div class="clas-botoes" id="ops-j14"></div>
+  <div class="feedback" id="fb-j14"></div>
+  <button class="prox" id="prox-j14" onclick="proxJ14()">CONTINUAR ➜</button>
 </div>
 
 <div class="tela" id="tela-resumo">
@@ -1313,6 +1353,97 @@ function contaJ12(){
 function fimJ12(){
   fimResumo(12,'CA PÁG. 7 — Nº 2',
    [{tit:'DESENHE ESTES ALIMENTOS NO LANCHE DA EMÍLIA',txt:marc12.join(' • ')||'—'}]);}
+
+/* ===== J13 e J14 — CA pág. 8 ===== */
+/* ----- J13 — nº3: o almoço na escola ----- */
+const BANDEJA13=[
+ {e:'\ud83c\udf5a',n:'ARROZ',ok:true},{ic:svgFeijao(),n:'FEIJÃO',ok:true},
+ {e:'\ud83e\udd57',n:'SALADA',ok:true},{e:'\ud83c\udf5f',n:'BATATA FRITA',ok:false},
+ {e:'\ud83e\udd69',n:'CARNE',ok:true},{e:'\ud83c\udf54',n:'HAMBÚRGUER',ok:false},
+ {e:'\ud83e\udd5f',n:'PASTEL',ok:false},{e:'\ud83c\udf55',n:'PIZZA',ok:false}
+];
+let marc13=[];
+const ALVO13=4;
+function abrirJogo13(){
+  marc13=[];mostrar('tela-j13');
+  textoFala='Anita e os amigos vão almoçar na escola. Veja os alimentos da bandeja e escolha quais eles devem comer para ter uma alimentação saudável.';
+  document.getElementById('perg-j13').innerHTML='\ud83c\udf71 ANITA E OS AMIGOS VÃO ALMOÇAR NA ESCOLA.<br>ESCOLHA O QUE ELES DEVEM COMER PARA TER UMA ALIMENTAÇÃO SAUDÁVEL.';
+  document.getElementById('fb-j13').textContent='';
+  document.getElementById('prox-j13').classList.remove('mostrar');
+  const a=document.getElementById('area-j13');a.innerHTML='';
+  BANDEJA13.forEach(o=>{
+    const d=document.createElement('div');d.className='hab';
+    d.innerHTML=faceItem(o);
+    d.onclick=()=>clicaJ13(d,o);a.appendChild(d);});
+  contaJ13();falar(textoFala);}
+function clicaJ13(el,o){
+  const fb=document.getElementById('fb-j13');
+  if(!o.ok){
+    el.classList.add('errou');tocarSom(false);
+    fb.className='feedback tente';fb.textContent='ESSE NÃO É SAUDÁVEL \ud83d\ude0a';
+    falar(o.n+' não é um alimento saudável. Escolha outro.');
+    setTimeout(()=>el.classList.remove('errou'),700);return;}
+  const i=marc13.indexOf(o.n);
+  if(i>=0){marc13.splice(i,1);el.classList.remove('pintado');}
+  else{marc13.push(o.n);el.classList.add('pintado');tocarSom(true);falar(o.n);}
+  fb.textContent='';contaJ13();}
+function contaJ13(){
+  document.getElementById('cont-j13').textContent='VOCÊ ESCOLHEU '+marc13.length+' DE '+ALVO13;
+  const b=document.getElementById('prox-j13');
+  const pronto=(marc13.length>=ALVO13);
+  b.classList.toggle('mostrar',pronto);
+  if(pronto){const fb=document.getElementById('fb-j13');fb.className='feedback certo';fb.textContent=elogio();}}
+function fimJ13(){
+  fimResumo(13,'CA PÁG. 8 — Nº 3',
+   [{tit:'ALIMENTOS QUE EU ESCOLHI',txt:marc13.join(' • ')||'—'}]);}
+
+/* ----- J14 — nº4: saudável ou não saudável ----- */
+const PESQ14=[
+ {e:'\ud83c\udf4e',n:'MAÇÃ',ok:true},
+ {e:'\ud83e\udd64',n:'REFRIGERANTE',ok:false},
+ {e:'\ud83e\udd5a',n:'OVO',ok:true},
+ {e:'\ud83c\udf6c',n:'BALA',ok:false},
+ {ic:svgFeijao(),n:'FEIJÃO',ok:true},
+ {e:'\ud83c\udf2d',n:'CACHORRO-QUENTE',ok:false},
+ {e:'\ud83e\udd5b',n:'LEITE',ok:true},
+ {e:'\ud83c\udf6a',n:'BOLACHA RECHEADA',ok:false}
+];
+let it14=0;
+function abrirJogo14(){it14=0;mostrar('tela-j14');montarJ14();}
+function montarJ14(){
+  const o=PESQ14[it14];
+  estrelas(document.getElementById('prog-j14'),it14,PESQ14.length);
+  document.getElementById('perg-j14').innerHTML='\ud83d\udd0d ESTE ALIMENTO É SAUDÁVEL<br>OU NÃO SAUDÁVEL?';
+  textoFala=o.n+' é um alimento saudável ou não saudável?';
+  document.getElementById('item-j14').innerHTML=faceItem(o);
+  document.getElementById('fb-j14').textContent='';
+  document.getElementById('prox-j14').classList.remove('mostrar');
+  const a=document.getElementById('ops-j14');a.innerHTML='';
+  [['\ud83d\udc4d','SAUDÁVEL',true],['\ud83d\udc4e','NÃO SAUDÁVEL',false]].forEach(b=>{
+    const el=document.createElement('button');el.className='btn-clas';
+    el.innerHTML='<span class="ico">'+b[0]+'</span>'+b[1];
+    el.onclick=()=>respJ14(el,b[2]);a.appendChild(el);});
+  falar(textoFala);}
+function respJ14(el,escolha){
+  const o=PESQ14[it14],fb=document.getElementById('fb-j14');
+  if(escolha===o.ok){
+    el.classList.add('certa');
+    document.querySelectorAll('#ops-j14 .btn-clas').forEach(x=>x.onclick=null);
+    fb.className='feedback certo';fb.textContent=elogio();tocarSom(true);
+    falar(o.n+(o.ok?' é um alimento saudável.':' não é um alimento saudável.'));
+    const b=document.getElementById('prox-j14');
+    b.textContent=(it14<PESQ14.length-1)?'CONTINUAR ➜':'PRONTO ➜';
+    b.classList.add('mostrar');
+  }else{
+    el.classList.add('errada');
+    fb.className='feedback tente';fb.textContent='TENTE DE NOVO \ud83d\ude0a';
+    tocarSom(false);falar('Quase! Pense de novo.');
+    setTimeout(()=>el.classList.remove('errada'),900);}}
+function proxJ14(){
+  if(it14<PESQ14.length-1){it14++;montarJ14();return;}
+  fimResumo(14,'CA PÁG. 8 — Nº 4',
+   [{tit:'SAUDÁVEIS',txt:PESQ14.filter(o=>o.ok).map(o=>o.n).join(' • ')},
+    {tit:'NÃO SAUDÁVEIS',txt:PESQ14.filter(o=>!o.ok).map(o=>o.n).join(' • ')}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
