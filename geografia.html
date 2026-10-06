@@ -380,6 +380,54 @@
   .cd.pal{background:#FFE0B2;color:#E65100;font-size:.82rem;text-align:left;padding-left:8px;line-height:1.2;}
   .cd.vazio{background:transparent;box-shadow:none;cursor:default;color:#B39DDB;}
   .cd.falada{background:#C8E6C9;color:#1B5E20;}
+  .lista-quadros{display:flex;flex-direction:column;gap:0;width:100%;}
+  .op-quadro{display:flex;align-items:center;gap:14px;background:var(--card);border:5px solid #FFE0B2;
+    border-radius:22px;padding:14px 16px;margin:10px 0;cursor:pointer;box-shadow:0 5px 0 #FFE0B2;
+    font-size:1.12rem;font-weight:bold;text-align:left;line-height:1.35;color:var(--texto);
+    transition:transform .1s;font-family:inherit;}
+  .op-quadro:active{transform:translateY(4px);box-shadow:0 1px 0 #FFE0B2;}
+  .op-quadro .cx{flex:0 0 auto;width:48px;height:48px;border:5px solid #FFB74D;border-radius:14px;
+    background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.9rem;
+    color:#fff;line-height:1;}
+  .op-quadro.certa{border-color:var(--verde);background:var(--verde-claro);
+    box-shadow:0 5px 0 var(--verde);animation:pula .5s;}
+  .op-quadro.certa .cx{background:var(--verde);border-color:var(--verde);}
+  .op-quadro.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .op-quadro.errada .cx{border-color:#EF9A9A;background:#FFEBEE;}
+  .itens{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px;margin-top:8px;}
+  .item{background:#F5F5F5;border:5px solid #E0E0E0;border-radius:22px;padding:14px 8px;text-align:center;
+    cursor:pointer;box-shadow:0 5px 0 #E0E0E0;transition:transform .1s;filter:grayscale(1);}
+  .item:active{transform:scale(.95);}
+  .item .emo{font-size:2.9rem;display:block;line-height:1.15;}
+  .item .nome{font-size:.95rem;font-weight:bold;display:block;margin-top:6px;line-height:1.25;}
+  .item.pintado{filter:none;background:#FFF3E0;border-color:#FB8C00;box-shadow:0 5px 0 #E65100;animation:pula .4s;}
+  .item.pintado .nome{color:#E65100;}
+  .item.errou{animation:treme .4s;border-color:#EF9A9A;}
+  .item.sol{filter:none;background:#FFF8E1;border-color:#FFB300;box-shadow:0 5px 0 #FF8F00;}
+  .item.sol .nome{color:#E65100;}
+  .item.chuva{filter:none;background:#E3F2FD;border-color:#1E88E5;box-shadow:0 5px 0 #1565C0;}
+  .item.chuva .nome{color:#0D47A1;}
+  .figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:8px;}
+  .fig-op{background:#F5F5F5;border:6px solid #E0E0E0;border-radius:24px;padding:10px;cursor:pointer;
+    box-shadow:0 6px 0 #E0E0E0;transition:transform .1s;text-align:center;}
+  .fig-op:active{transform:scale(.97);}
+  .fig-op svg{width:100%;height:auto;display:block;border-radius:14px;}
+  .fig-op .emo-g{font-size:4.4rem;display:block;line-height:1.15;}
+  .fig-op .rot{display:block;margin-top:6px;font-size:1.05rem;font-weight:bold;color:#616161;}
+  .fig-op .cx{display:inline-flex;width:40px;height:40px;border:5px solid #FFB74D;border-radius:12px;
+    background:#fff;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;margin-top:6px;}
+  .fig-op.certa{border-color:var(--verde);background:var(--verde-claro);box-shadow:0 6px 0 var(--verde);animation:pula .45s;}
+  .fig-op.certa .rot{color:#2E7D32;}
+  .fig-op.certa .cx{background:var(--verde);border-color:var(--verde);}
+  .fig-op.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .sel-cor{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:12px;}
+  .btn-cor{flex:1 1 150px;max-width:220px;border:none;border-radius:24px;padding:16px 10px;cursor:pointer;
+    font-family:inherit;font-size:1.2rem;font-weight:bold;color:#fff;transition:transform .1s;line-height:1.2;}
+  .btn-cor .ico{font-size:2.4rem;display:block;line-height:1.1;}
+  .btn-sol{background:#FFB300;box-shadow:0 6px 0 #EF6C00;}
+  .btn-chuva{background:#1E88E5;box-shadow:0 6px 0 #0D47A1;}
+  .btn-cor:active{transform:translateY(5px);box-shadow:none;}
+  .btn-cor.errada{animation:treme .4s;}
   .dica-ap{text-align:center;color:#8E7CC3;font-size:.9rem;margin:8px 0 10px;font-weight:bold;}
   .festa{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:50;}
   .conf{position:absolute;top:-30px;font-size:1.8rem;animation:cair linear forwards;}
@@ -391,6 +439,10 @@
 <style>
   h1{color:#E65100 !important;}
   .g1{background:#FB8C00;} .g2{background:#5C6BC0;}
+  .g3{background:#29B6F6;} .g4{background:#66BB6A;} .g5{background:#AB47BC;} .g6{background:#EF5350;}
+  .g7{background:#26A69A;} .g8{background:#8D6E63;} .g9{background:#EC407A;} .g10{background:#42A5F5;}
+  .g11{background:#FF7043;} .g12{background:#9CCC65;} .g13{background:#7E57C2;} .g14{background:#00897B;}
+  .g15{background:#D4A017;} .g16{background:#5D4037;}
   .cenas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:10px;}
   .cena-op{background:#F5F5F5;border:6px solid #E0E0E0;border-radius:24px;padding:10px;cursor:pointer;
     box-shadow:0 6px 0 #E0E0E0;filter:grayscale(1);transition:transform .1s;text-align:center;}
@@ -429,6 +481,20 @@
   <div class="grade-menu">
   <button class="menu-btn g1" onclick="abrirJogo1()"><span class="emo">🌇</span><span><span class="pag">CA PÁG. 2</span>QUANDO EU FAÇO A LIÇÃO</span><span class="done" id="d1"></span></button>
   <button class="menu-btn g2" onclick="abrirJogo2()"><span class="emo">🌞</span><span><span class="pag">CA PÁG. 2</span>É DIA OU É NOITE?</span><span class="done" id="d2"></span></button>
+  <button class="menu-btn g3" onclick="abrirJogo3()"><span class="emo">☁️</span><span><span class="pag">CA PÁG. 3</span>SOL OU CHUVA?</span><span class="done" id="d3"></span></button>
+  <button class="menu-btn g4" onclick="abrirJogo4()"><span class="emo">🎨</span><span><span class="pag">CA PÁG. 4</span>DIA DE SOL, DIA DE CHUVA</span><span class="done" id="d4"></span></button>
+  <button class="menu-btn g5" onclick="abrirJogo5()"><span class="emo">🛒</span><span><span class="pag">CA PÁG. 4</span>AMARELO OU AZUL?</span><span class="done" id="d5"></span></button>
+  <button class="menu-btn g6" onclick="abrirJogo6()"><span class="emo">🌡️</span><span><span class="pag">CA PÁG. 5</span>CALOR OU FRIO?</span><span class="done" id="d6"></span></button>
+  <button class="menu-btn g7" onclick="abrirJogo7()"><span class="emo">🧥</span><span><span class="pag">CA PÁG. 5</span>COMO EU ME VISTO NO FRIO</span><span class="done" id="d7"></span></button>
+  <button class="menu-btn g8" onclick="abrirJogo8()"><span class="emo">🏞️</span><span><span class="pag">CA PÁG. 6</span>DIA QUENTE, DIA FRIO E A PAISAGEM</span><span class="done" id="d8"></span></button>
+  <button class="menu-btn g9" onclick="abrirJogo9()"><span class="emo">🌼</span><span><span class="pag">CA PÁG. 7</span>QUE ESTAÇÃO DO ANO SOU EU?</span><span class="done" id="d9"></span></button>
+  <button class="menu-btn g10" onclick="abrirJogo10()"><span class="emo">🌊</span><span><span class="pag">CA PÁG. 7</span>O RIO CHEIO E O RIO SECO</span><span class="done" id="d10"></span></button>
+  <button class="menu-btn g11" onclick="abrirJogo11()"><span class="emo">🍲</span><span><span class="pag">CA PÁG. 8</span>O QUE A EMÍLIA DEVE COMER</span><span class="done" id="d11"></span></button>
+  <button class="menu-btn g12" onclick="abrirJogo12()"><span class="emo">🍇</span><span><span class="pag">CA PÁG. 8</span>AS FRUTAS</span><span class="done" id="d12"></span></button>
+  <button class="menu-btn g13" onclick="abrirJogo13()"><span class="emo">🔎</span><span><span class="pag">CA PÁG. 8</span>OS ALIMENTOS DA ÉPOCA</span><span class="done" id="d13"></span></button>
+  <button class="menu-btn g14" onclick="abrirJogo14()"><span class="emo">🧣</span><span><span class="pag">CA PÁG. 9</span>A MALA DA MARINA</span><span class="done" id="d14"></span></button>
+  <button class="menu-btn g15" onclick="abrirJogo15()"><span class="emo">👕</span><span><span class="pag">CA PÁG. 9</span>ROUPAS DE VERÃO E DE INVERNO</span><span class="done" id="d15"></span></button>
+  <button class="menu-btn g16" onclick="abrirJogo16()"><span class="emo">🧍</span><span><span class="pag">CA PÁG. 10</span>VESTINDO OS PERSONAGENS</span><span class="done" id="d16"></span></button>
   </div>
 </div>
 
@@ -453,6 +519,20 @@
   </div>
   <div class="feedback" id="fb-j2"></div>
   <button class="prox" id="prox-j2" onclick="proxJ2()">PRÓXIMA ➜</button>
+</div>
+
+<div class="tela" id="tela-rod">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-rod"></div>
+  <div class="pergunta" id="perg-rod"></div>
+  <div class="figs" id="figs-rod"></div>
+  <div class="itens" id="itens-rod"></div>
+  <div class="lista-quadros" id="quadros-rod"></div>
+  <div class="sel-cor" id="cores-rod"></div>
+  <div class="feedback" id="fb-rod"></div>
+  <div class="contador" id="cont-rod"></div>
+  <button class="prox" id="prox-rod" onclick="proxRod()">CONTINUAR ➜</button>
 </div>
 
 <div class="tela" id="tela-resumo">
@@ -610,6 +690,489 @@ function proxJ2(){
   fimResumo(2,'AS RESPOSTAS DA EMÍLIA',
     [{tit:'CA PÁG. 2 — ESCREVA D OU N',
       txt:DN.map(q=>q.r+' \u2014 '+q.f).join('<br>')}]);}
+
+/* ================= MOTOR DE RODADAS (CA págs. 3 a 10) ================= */
+let JG=null,rI=0,MAR=[],selCor=null;
+const AREAS=['figs-rod','itens-rod','quadros-rod','cores-rod'];
+function abrirRodadas(n,titulo,rodadas){
+  JG={n:n,titulo:titulo,rodadas:rodadas};rI=0;MAR=rodadas.map(()=>[]);
+  mostrar('tela-rod');montarRod();}
+function limparRod(){
+  AREAS.forEach(id=>{const e=document.getElementById(id);e.innerHTML='';e.style.display='none';});
+  document.getElementById('fb-rod').textContent='';
+  document.getElementById('cont-rod').textContent='';
+  document.getElementById('prox-rod').classList.remove('mostrar');}
+function areaOn(id){document.getElementById(id).style.display='';return document.getElementById(id);}
+function fbRod(cls,txt){const f=document.getElementById('fb-rod');f.className='feedback '+cls;f.textContent=txt;}
+function liberaProx(){
+  const b=document.getElementById('prox-rod');
+  b.textContent=(rI<JG.rodadas.length-1)?'CONTINUAR ➜':'PRONTO ➜';
+  b.classList.add('mostrar');}
+function montarRod(){
+  const r=JG.rodadas[rI];selCor=null;
+  estrelas(document.getElementById('prog-rod'),rI,JG.rodadas.length);
+  limparRod();
+  document.getElementById('perg-rod').innerHTML=
+    (r.tit?'<span style="display:block;color:#E65100;font-size:.95rem">'+r.tit+'</span>':'')+r.perg;
+  textoFala=r.fala;
+  if(r.ilustra){const f=areaOn('figs-rod');
+    f.innerHTML='<div class="fig-op" style="cursor:default;box-shadow:none;filter:none">'+r.ilustra+'</div>';}
+  if(r.tipo==='figs'){
+    const f=areaOn('figs-rod');
+    r.figs.forEach(o=>{
+      const d=document.createElement('div');d.className='fig-op';
+      d.innerHTML=(o.svg?o.svg:'<span class="emo-g">'+o.e+'</span>')+
+        '<span class="rot">'+o.rot+'</span><span class="cx"></span>';
+      d.onclick=()=>respUnica(d,o,'fig-op');f.appendChild(d);});
+  }else if(r.tipo==='quadros'){
+    const q=areaOn('quadros-rod');
+    r.ops.forEach(o=>{
+      const b=document.createElement('button');b.className='op-quadro';
+      b.innerHTML='<span class="cx"></span><span>'+o.t+'</span>';
+      b.onclick=()=>respUnica(b,o,'op-quadro');q.appendChild(b);});
+  }else if(r.tipo==='marcar'||r.tipo==='livre'){
+    const a=areaOn('itens-rod');
+    r.ops.forEach(o=>{
+      const d=document.createElement('div');d.className='item';
+      d.innerHTML='<span class="emo">'+o.e+'</span><span class="nome">'+o.n+'</span>';
+      d.onclick=()=>clicaItem(d,o);a.appendChild(d);});
+    contaRod();
+  }else if(r.tipo==='cores'){
+    const a=areaOn('itens-rod');
+    r.ops.forEach((o,k)=>{
+      const d=document.createElement('div');d.className='item';d.id='it-'+k;
+      d.innerHTML='<span class="emo">'+o.e+'</span><span class="nome">'+o.n+'</span>';
+      d.onclick=()=>{if(d.classList.contains('sol')||d.classList.contains('chuva'))return;
+        a.querySelectorAll('.item').forEach(x=>x.classList.remove('pintado'));
+        d.classList.add('pintado');selCor=k;falar(o.n);};
+      a.appendChild(d);});
+    const c=areaOn('cores-rod');
+    [['sol','☀️','AMARELO — DIA DE SOL'],['chuva','🌧️','AZUL — DIA DE CHUVA']].forEach(b=>{
+      const el=document.createElement('button');el.className='btn-cor btn-'+b[0];
+      el.innerHTML='<span class="ico">'+b[1]+'</span>'+b[2];
+      el.onclick=()=>pintaCor(el,b[0]);c.appendChild(el);});
+    contaRod();}
+  falar(r.fala);}
+function respUnica(el,o,cls){
+  if(o.ok){
+    el.classList.add('certa');
+    const cx=el.querySelector('.cx');if(cx)cx.textContent='✔';
+    document.querySelectorAll('#quadros-rod .'+cls+', #figs-rod .'+cls).forEach(x=>x.onclick=null);
+    tocarSom(true);fbRod('certo',elogio());
+    falar(JG.rodadas[rI].exp||'Isso mesmo!');
+    MAR[rI]=[o.t||o.rot];liberaProx();
+  }else{
+    el.classList.add('errada');
+    const cx=el.querySelector('.cx');if(cx)cx.textContent='✖';
+    tocarSom(false);fbRod('tente','TENTE DE NOVO 😊');falar('Quase! Pense de novo.');
+    setTimeout(()=>{el.classList.remove('errada');const c=el.querySelector('.cx');if(c)c.textContent='';},900);}}
+function clicaItem(el,o){
+  const r=JG.rodadas[rI],m=MAR[rI];
+  if(r.tipo==='marcar'){
+    if(m.indexOf(o.n)>=0)return;
+    if(o.ok){m.push(o.n);el.classList.add('pintado');tocarSom(true);falar(o.n);document.getElementById('fb-rod').textContent='';}
+    else{el.classList.add('errou');tocarSom(false);fbRod('tente','ESSE NÃO É 😊');
+      falar('Esse não. Tente de novo.');setTimeout(()=>el.classList.remove('errou'),700);return;}
+  }else{
+    const i=m.indexOf(o.n);
+    if(i>=0){m.splice(i,1);el.classList.remove('pintado');}
+    else{if(m.length>=r.n){falar('Você já escolheu. Para trocar, toque no que já marcou.');return;}
+      m.push(o.n);el.classList.add('pintado');tocarSom(true);falar(o.n);}}
+  contaRod();}
+function pintaCor(btn,cor){
+  const r=JG.rodadas[rI];
+  if(selCor===null){fbRod('tente','TOQUE PRIMEIRO NUM OBJETO 👆');falar('Primeiro toque num objeto.');return;}
+  const o=r.ops[selCor],d=document.getElementById('it-'+selCor);
+  if(o.cor===cor){
+    d.classList.remove('pintado');d.classList.add(cor);
+    MAR[rI].push(o.n+(cor==='sol'?' (AMARELO)':' (AZUL)'));
+    selCor=null;tocarSom(true);fbRod('certo',elogio());
+    falar(o.n+(cor==='sol'?', dia de sol. Pinte de amarelo.':', dia de chuva. Pinte de azul.'));
+    contaRod();
+  }else{
+    btn.classList.add('errada');tocarSom(false);fbRod('tente','TENTE DE NOVO 😊');
+    falar('Quase! Pense de novo.');setTimeout(()=>btn.classList.remove('errada'),700);}}
+function contaRod(){
+  const r=JG.rodadas[rI],m=MAR[rI],c=document.getElementById('cont-rod');
+  let alvo;
+  if(r.tipo==='marcar')alvo=r.ops.filter(o=>o.ok).length;
+  else if(r.tipo==='cores')alvo=r.ops.length;
+  else alvo=r.n;
+  c.textContent=(r.tipo==='cores'?'PINTADOS: ':'VOCÊ MARCOU ')+m.length+' DE '+alvo;
+  if(m.length>=alvo){if(r.tipo!=='cores')fbRod('certo',elogio());liberaProx();}
+  else document.getElementById('prox-rod').classList.remove('mostrar');}
+function proxRod(){
+  if(rI<JG.rodadas.length-1){rI++;montarRod();return;}
+  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>({
+    tit:(r.tit?r.tit+' ':'')+(r.res||''),
+    txt:r.resp||MAR[i].join(' • ')||'—'})));}
+
+/* ===== desenhos ===== */
+const SVG_CEU='<svg viewBox="0 0 220 130"><rect width="220" height="130" fill="#90A4AE"/>'+
+ '<ellipse cx="60" cy="34" rx="46" ry="20" fill="#546E7A"/><ellipse cx="120" cy="26" rx="52" ry="18" fill="#455A64"/>'+
+ '<ellipse cx="180" cy="36" rx="42" ry="17" fill="#546E7A"/><ellipse cx="95" cy="48" rx="60" ry="15" fill="#607D8B"/>'+
+ '<rect x="0" y="92" width="220" height="38" fill="#B0BEC5"/>'+
+ '<rect x="12" y="68" width="24" height="26" fill="#78909C"/><rect x="44" y="56" width="20" height="38" fill="#90A4AE"/>'+
+ '<rect x="72" y="74" width="26" height="20" fill="#78909C"/><rect x="106" y="60" width="22" height="34" fill="#90A4AE"/>'+
+ '<rect x="136" y="72" width="28" height="22" fill="#78909C"/><rect x="172" y="62" width="22" height="32" fill="#90A4AE"/>'+
+ '<rect x="200" y="76" width="16" height="18" fill="#78909C"/></svg>';
+function svgTempo(k){
+  const sol='<circle cx="46" cy="40" r="17" fill="#FFC107"/>'+
+    '<g stroke="#FFC107" stroke-width="5" stroke-linecap="round">'+
+    '<line x1="46" y1="8" x2="46" y2="17"/><line x1="46" y1="63" x2="46" y2="72"/>'+
+    '<line x1="14" y1="40" x2="23" y2="40"/><line x1="69" y1="40" x2="78" y2="40"/>'+
+    '<line x1="23" y1="17" x2="30" y2="24"/><line x1="62" y1="56" x2="69" y2="63"/>'+
+    '<line x1="23" y1="63" x2="30" y2="56"/><line x1="62" y1="24" x2="69" y2="17"/></g>';
+  const nuvem=(c)=>'<ellipse cx="44" cy="62" rx="26" ry="16" fill="'+c+'"/>'+
+    '<ellipse cx="66" cy="58" rx="20" ry="15" fill="'+c+'"/><ellipse cx="56" cy="70" rx="30" ry="12" fill="'+c+'"/>';
+  const chuva='<g stroke="#1E88E5" stroke-width="5" stroke-linecap="round">'+
+    '<line x1="34" y1="84" x2="30" y2="96"/><line x1="52" y1="84" x2="48" y2="96"/>'+
+    '<line x1="70" y1="84" x2="66" y2="96"/></g>';
+  let dentro='';
+  if(k==='sol')dentro=sol;
+  else if(k==='solnuvem')dentro=sol+nuvem('#CFD8DC');
+  else if(k==='nuvem')dentro=nuvem('#90A4AE');
+  else dentro=nuvem('#78909C')+chuva;
+  return '<svg viewBox="0 0 100 100">'+dentro+'</svg>';}
+const SVG_FRIO='<svg viewBox="0 0 200 130"><rect width="200" height="130" fill="#B0BEC5"/>'+
+ '<rect x="0" y="86" width="200" height="44" fill="#9E9E9E"/>'+
+ '<rect x="6" y="24" width="30" height="62" fill="#78909C"/><rect x="42" y="14" width="26" height="72" fill="#607D8B"/>'+
+ '<rect x="148" y="20" width="30" height="66" fill="#78909C"/><rect x="182" y="34" width="18" height="52" fill="#607D8B"/>'+
+ '<g fill="#37474F"><rect x="78" y="62" width="14" height="30" rx="4"/><rect x="104" y="66" width="14" height="26" rx="4"/>'+
+ '<rect x="128" y="64" width="13" height="28" rx="4"/></g>'+
+ '<g fill="#263238"><circle cx="85" cy="56" r="7"/><circle cx="111" cy="60" r="7"/><circle cx="134" cy="58" r="6"/></g>'+
+ '<path d="M68 52a18 10 0 0 1 36 0z" fill="#455A64"/><path d="M96 56a16 9 0 0 1 32 0z" fill="#546E7A"/>'+
+ '<g stroke="#CFD8DC" stroke-width="3" stroke-linecap="round" opacity=".8">'+
+ '<line x1="20" y1="8" x2="16" y2="20"/><line x1="60" y1="4" x2="56" y2="16"/><line x1="160" y1="8" x2="156" y2="20"/></g></svg>';
+const SVG_CALOR='<svg viewBox="0 0 200 130"><rect width="200" height="130" fill="#81D4FA"/>'+
+ '<circle cx="168" cy="26" r="16" fill="#FFD54F"/>'+
+ '<rect x="0" y="92" width="200" height="38" fill="#FFE0B2"/><rect x="0" y="78" width="200" height="16" fill="#4FC3F7"/>'+
+ '<g stroke="#6D4C41" stroke-width="5"><line x1="36" y1="78" x2="36" y2="40"/><line x1="76" y1="78" x2="76" y2="46"/></g>'+
+ '<g fill="#2E7D32"><ellipse cx="36" cy="34" rx="24" ry="8"/><ellipse cx="22" cy="42" rx="18" ry="7"/>'+
+ '<ellipse cx="50" cy="42" rx="18" ry="7"/><ellipse cx="76" cy="40" rx="20" ry="7"/>'+
+ '<ellipse cx="64" cy="48" rx="15" ry="6"/><ellipse cx="88" cy="48" rx="15" ry="6"/></g>'+
+ '<g fill="#FF7043"><rect x="118" y="78" width="11" height="22" rx="4"/></g>'+
+ '<circle cx="123" cy="70" r="7" fill="#8D6E63"/>'+
+ '<g fill="#29B6F6"><rect x="150" y="80" width="11" height="20" rx="4"/></g>'+
+ '<circle cx="155" cy="72" r="7" fill="#6D4C41"/>'+
+ '<circle cx="146" cy="104" r="7" fill="none" stroke="#424242" stroke-width="3"/>'+
+ '<circle cx="168" cy="104" r="7" fill="none" stroke="#424242" stroke-width="3"/>'+
+ '<line x1="146" y1="104" x2="168" y2="104" stroke="#424242" stroke-width="3"/></svg>';
+const SVG_RIO_CHEIO='<svg viewBox="0 0 200 130"><rect width="200" height="130" fill="#B3E5FC"/>'+
+ '<path d="M0 54 Q50 30 100 46 Q150 62 200 44 L200 0 L0 0 Z" fill="#AED581" opacity="0"/>'+
+ '<path d="M0 60 Q40 34 90 44 Q140 54 200 36 L200 0 L0 0 Z" fill="#81C784"/>'+
+ '<path d="M0 72 Q50 50 110 58 Q160 64 200 52 L200 30 Q150 46 100 36 Q40 26 0 48 Z" fill="#4CAF50"/>'+
+ '<path d="M0 130 L0 74 Q60 56 120 66 Q170 74 200 60 L200 130 Z" fill="#4FC3F7"/>'+
+ '<g stroke="#E1F5FE" stroke-width="3" stroke-linecap="round" opacity=".9">'+
+ '<path d="M24 92 q12 -6 24 0"/><path d="M70 106 q12 -6 24 0"/><path d="M124 94 q12 -6 24 0"/>'+
+ '<path d="M44 118 q12 -6 24 0"/><path d="M150 116 q12 -6 24 0"/></g></svg>';
+const SVG_RIO_SECO='<svg viewBox="0 0 200 130"><rect width="200" height="130" fill="#CFD8DC"/>'+
+ '<path d="M0 60 Q40 34 90 44 Q140 54 200 36 L200 0 L0 0 Z" fill="#A5D6A7"/>'+
+ '<path d="M0 72 Q50 50 110 58 Q160 64 200 52 L200 30 Q150 46 100 36 Q40 26 0 48 Z" fill="#81C784"/>'+
+ '<path d="M0 130 L0 74 Q60 56 120 66 Q170 74 200 60 L200 130 Z" fill="#BCAAA4"/>'+
+ '<g stroke="#6D4C41" stroke-width="2.6" fill="none">'+
+ '<path d="M10 118 L40 100 L34 82 M40 100 L70 108"/><path d="M70 108 L96 92 L92 76 M96 92 L130 100"/>'+
+ '<path d="M130 100 L160 86 L156 70 M160 86 L192 94"/><path d="M20 90 L48 80"/><path d="M106 118 L128 106"/>'+
+ '<path d="M150 120 L172 108"/></g></svg>';
+
+/* ===== estacao do ano (hemisferio sul) ===== */
+function estacaoAtual(){
+  const d=new Date(),md=(d.getMonth()+1)*100+d.getDate();
+  if(md>=1221||md<320)return 'VERÃO';
+  if(md<621)return 'OUTONO';
+  if(md<923)return 'INVERNO';
+  return 'PRIMAVERA';}
+
+/* ===== J3 — CA pág.3 nº1 A, B e C: sol ou chuva? ===== */
+function abrirJogo3(){
+  abrirRodadas(3,'CA PÁG. 3 — Nº 1',[
+   {tit:'A)',ilustra:SVG_CEU,tipo:'quadros',
+    perg:'EMÍLIA OLHOU PELA JANELA E VIU ESTE CÉU.<br>A QUE CONCLUSÃO ELA PODERIA CHEGAR SOBRE A POSSIBILIDADE DE CHUVA?',
+    fala:'Enquanto Emília fazia a lição de casa, olhou pela janela e viu este céu. A que conclusão ela poderia chegar sobre a possibilidade de chuva nesse dia?',
+    exp:'Isso mesmo! O céu está cheio de nuvens escuras, então poderá chover.',
+    ops:[{t:'DE QUE NÃO HÁ POSSIBILIDADE DE CHUVA.',ok:false},
+         {t:'DE QUE PODERÁ CHOVER.',ok:true}],
+    res:'A CONCLUSÃO',resp:'DE QUE PODERÁ CHOVER.'},
+   {tit:'B)',tipo:'figs',
+    perg:'QUAL ELEMENTO PRESENTE NO CÉU CONFIRMA A SUA RESPOSTA?<br>ASSINALE COM UM “X”.',
+    fala:'Qual elemento presente no céu confirma a sua resposta anterior? Assinale com um xis.',
+    exp:'Isso mesmo! São as nuvens escuras que confirmam a possibilidade de chuva.',
+    figs:[{svg:svgTempo('sol'),rot:'O SOL',ok:false},
+          {svg:svgTempo('nuvem'),rot:'AS NUVENS',ok:true}],
+    res:'O ELEMENTO NO CÉU',resp:'AS NUVENS (ESCURAS)'},
+   {tit:'C)',tipo:'figs',
+    perg:'QUE SÍMBOLO PODEMOS USAR PARA REPRESENTAR A POSSIBILIDADE DE CHUVA?<br>ASSINALE COM UM “X”.',
+    fala:'Que símbolo podemos usar para representar a possibilidade de chuva? Assinale com um xis.',
+    exp:'Isso mesmo! A nuvem com pingos de chuva.',
+    figs:[{svg:svgTempo('sol'),rot:'SOL',ok:false},
+          {svg:svgTempo('solnuvem'),rot:'SOL COM NUVENS',ok:false},
+          {svg:svgTempo('nuvem'),rot:'NUBLADO',ok:false},
+          {svg:svgTempo('chuva'),rot:'NUVEM COM CHUVA',ok:true}],
+    res:'O SÍMBOLO',resp:'NUVEM COM PINGOS DE CHUVA'}
+  ]);}
+
+/* ===== J4 — CA pág.4 nº2: desenhe você realizando uma atividade ===== */
+function abrirJogo4(){
+  abrirRodadas(4,'CA PÁG. 4 — Nº 2',[
+   {tipo:'livre',n:1,tit:'EM UM DIA ENSOLARADO',
+    perg:'ESCOLHA UMA ATIVIDADE QUE VOCÊ FAZ<br>EM UM <b>DIA ENSOLARADO</b>.',
+    fala:'Escolha uma atividade que você realiza em um dia ensolarado. Depois você vai desenhar no caderno.',
+    ops:[{e:'🚲',n:'ANDAR DE BICICLETA'},{e:'⚽',n:'JOGAR BOLA'},{e:'🪁',n:'SOLTAR PIPA'},
+         {e:'🏊',n:'IR À PISCINA'},{e:'🛝',n:'BRINCAR NO PARQUE'},{e:'🛼',n:'ANDAR DE PATINETE'}],
+    res:'EU DESENHO'},
+   {tipo:'livre',n:1,tit:'EM UM DIA CHUVOSO',
+    perg:'AGORA ESCOLHA UMA ATIVIDADE QUE VOCÊ FAZ<br>EM UM <b>DIA CHUVOSO</b>.',
+    fala:'Agora escolha uma atividade que você realiza em um dia chuvoso.',
+    ops:[{e:'📖',n:'LER UM LIVRO'},{e:'🎨',n:'DESENHAR E PINTAR'},{e:'📺',n:'VER UM FILME'},
+         {e:'🧩',n:'MONTAR QUEBRA-CABEÇA'},{e:'🎵',n:'OUVIR MÚSICA'},{e:'🧸',n:'BRINCAR EM CASA'}],
+    res:'EU DESENHO'}
+  ]);}
+
+/* ===== J5 — CA pág.4 nº3: circule de amarelo e de azul ===== */
+function abrirJogo5(){
+  abrirRodadas(5,'CA PÁG. 4 — Nº 3',[
+   {tipo:'cores',
+    perg:'TOQUE NUM OBJETO E DEPOIS NA COR CERTA.<br><b>AMARELO</b> = DIA DE SOL &nbsp; • &nbsp; <b>AZUL</b> = DIA DE CHUVA',
+    fala:'Circule de amarelo os objetos adequados para um dia de sol e de azul os objetos adequados para um dia de chuva. Toque num objeto e depois na cor certa.',
+    ops:[{e:'🧢',n:'BONÉ',cor:'sol'},{e:'☂️',n:'GUARDA-CHUVA',cor:'chuva'},
+         {e:'🕶️',n:'ÓCULOS DE SOL',cor:'sol'},{e:'🧥',n:'CAPA DE CHUVA',cor:'chuva'},
+         {e:'🧴',n:'PROTETOR SOLAR',cor:'sol'},{e:'👕',n:'BERMUDA E CAMISETA',cor:'sol'}],
+    res:'COMO EU PINTEI'},
+   {tipo:'livre',n:1,
+    perg:'VOCÊ COSTUMA USAR ALGUM DESSES OBJETOS<br>EM DIAS DE SOL OU DE CHUVA? QUAL?',
+    fala:'Você costuma utilizar algum desses objetos em dias de sol ou de chuva? Se sim, qual? Escolha.',
+    ops:[{e:'🧢',n:'BONÉ'},{e:'☂️',n:'GUARDA-CHUVA'},{e:'🕶️',n:'ÓCULOS DE SOL'},
+         {e:'🧥',n:'CAPA DE CHUVA'},{e:'🧴',n:'PROTETOR SOLAR'},{e:'👕',n:'BERMUDA E CAMISETA'}],
+    res:'O QUE EU USO'}
+  ]);}
+
+/* ===== J6 — CA pág.5 nº1 A e B: calor ou frio? ===== */
+function abrirJogo6(){
+  abrirRodadas(6,'CA PÁG. 5 — Nº 1',[
+   {tit:'A)',tipo:'figs',
+    perg:'ANITA VIU ESTAS DUAS FOTOS NO ÁLBUM DA FAMÍLIA.<br>QUAL DELAS REPRESENTA UM <b>DIA DE CALOR</b>?',
+    fala:'Anita estava olhando um álbum de fotografias da família e viu estas duas imagens. Qual das fotos representa um dia de calor?',
+    exp:'Isso mesmo! A foto 2, das pessoas passeando no Rio de Janeiro.',
+    figs:[{svg:SVG_FRIO,rot:'FOTO 1 — CENTRO DE SÃO PAULO',ok:false},
+          {svg:SVG_CALOR,rot:'FOTO 2 — CIDADE DO RIO DE JANEIRO',ok:true}],
+    res:'A FOTO DO DIA DE CALOR',resp:'FOTO 2'},
+   {tit:'B)',tipo:'marcar',
+    perg:'QUAIS ELEMENTOS DA FOTO 2 MOSTRAM QUE O DIA ERA DE CALOR?<br><b>PINTE</b> OS DOIS CERTOS.',
+    fala:'Quais elementos presentes na foto assinalada permitiram que você identificasse o dia de calor? Pinte os dois certos.',
+    ops:[{e:'👕',n:'ROUPAS LEVES',ok:true},{e:'🌧️',n:'CHUVA',ok:false},
+         {e:'☀️',n:'LUZ DO SOL',ok:true}],
+    res:'OS ELEMENTOS',resp:'ROUPAS LEVES • LUZ DO SOL'}
+  ]);}
+
+/* ===== J7 — CA pág.5 nº2: como você se veste em dia frio ===== */
+function abrirJogo7(){
+  abrirRodadas(7,'CA PÁG. 5 — Nº 2',[
+   {tipo:'livre',n:3,
+    perg:'COMO VOCÊ COSTUMA SE VESTIR EM UM <b>DIA FRIO</b>?<br>ESCOLHA 3 PEÇAS PARA DESENHAR.',
+    fala:'Como você costuma se vestir em um dia frio? Escolha três peças de roupa para desenhar no caderno.',
+    ops:[{e:'🧥',n:'CASACO'},{e:'🧣',n:'CACHECOL'},{e:'🧤',n:'LUVAS'},
+         {e:'👖',n:'CALÇA COMPRIDA'},{e:'🧦',n:'MEIAS'},{e:'👟',n:'TÊNIS'},
+         {e:'👢',n:'BOTA'},{e:'🎽',n:'BLUSA DE MANGA LONGA'}],
+    res:'EU DESENHO (DIA FRIO)'}
+  ]);}
+
+/* ===== J8 — CA pág.6 nº3, nº4 e nº5 ===== */
+function abrirJogo8(){
+  abrirRodadas(8,'CA PÁG. 6 — Nº 3, 4 E 5',[
+   {tit:'Nº3 — EM UM DIA QUENTE',tipo:'livre',n:1,
+    perg:'ITA ADORA PESCAR COM O PAI QUANDO ESTÁ CALOR.<br>E VOCÊ? O QUE GOSTA DE FAZER EM UM <b>DIA QUENTE</b>?',
+    fala:'Quando está calor, Ita adora pescar com o pai. E você, o que gosta de fazer em um dia quente?',
+    ops:[{e:'🏊',n:'NADAR'},{e:'🍦',n:'TOMAR SORVETE'},{e:'🏖️',n:'IR À PRAIA'},
+         {e:'🚲',n:'ANDAR DE BICICLETA'},{e:'🎣',n:'PESCAR'},{e:'🛝',n:'BRINCAR NO PARQUE'}],
+    res:'EU DESENHO'},
+   {tit:'Nº3 — EM UM DIA FRIO',tipo:'livre',n:1,
+    perg:'E EM UM <b>DIA FRIO</b>, O QUE VOCÊ GOSTA DE FAZER?',
+    fala:'E em um dia frio, o que você gosta de fazer?',
+    ops:[{e:'📺',n:'ASSISTIR À TEVÊ'},{e:'🍶',n:'TOMAR CHOCOLATE QUENTE'},{e:'📖',n:'LER UM LIVRO'},
+         {e:'🛏️',n:'FICAR EMBAIXO DO COBERTOR'},{e:'🧩',n:'BRINCAR EM CASA'},{e:'🍲',n:'TOMAR SOPA'}],
+    res:'EU DESENHO'},
+   {tit:'Nº4 A) — NO VERÃO',tipo:'livre',n:2,
+    perg:'COMO FICA A PAISAGEM DO LUGAR ONDE VOCÊ MORA <b>NO VERÃO</b>?<br>ESCOLHA 2 PARA DESENHAR.',
+    fala:'Desenhe como fica a paisagem do lugar em que você mora no verão. Escolha dois elementos.',
+    ops:[{e:'☀️',n:'SOL FORTE'},{e:'🌳',n:'ÁRVORES BEM VERDES'},{e:'🌺',n:'FLORES'},
+         {e:'🌦️',n:'CHUVA DE VERÃO'},{e:'👕',n:'PESSOAS DE ROUPA LEVE'},{e:'🦋',n:'BORBOLETAS'}],
+    res:'EU DESENHO (VERÃO)'},
+   {tit:'Nº4 B) — NO INVERNO',tipo:'livre',n:2,
+    perg:'E COMO FICA A PAISAGEM <b>NO INVERNO</b>?<br>ESCOLHA 2 PARA DESENHAR.',
+    fala:'E como fica a paisagem do lugar em que você mora no inverno? Escolha dois elementos.',
+    ops:[{e:'🍂',n:'ÁRVORES SEM FOLHAS'},{e:'☁️',n:'CÉU CINZENTO'},{e:'🌫️',n:'NEBLINA'},
+         {e:'🧥',n:'PESSOAS AGASALHADAS'},{e:'🌃',n:'ESCURECE MAIS CEDO'},{e:'🌾',n:'GRAMA SECA'}],
+    res:'EU DESENHO (INVERNO)'},
+   {tit:'Nº5',tipo:'livre',n:1,
+    perg:'DE QUAL PAISAGEM VOCÊ GOSTA MAIS:<br>A DO VERÃO OU A DO INVERNO?',
+    fala:'De acordo com o que você desenhou, de qual paisagem você gosta mais: a do verão ou a do inverno?',
+    ops:[{e:'☀️',n:'A DO VERÃO'},{e:'❄️',n:'A DO INVERNO'}],
+    res:'EU GOSTO MAIS'}
+  ]);}
+
+/* ===== J9 — CA pág.7 nº6 e nº7: que estação do ano sou eu? ===== */
+function estOps(certa){
+  return [{e:'🌼',n:'PRIMAVERA'},{e:'☀️',n:'VERÃO'},
+          {e:'🍂',n:'OUTONO'},{e:'❄️',n:'INVERNO'}]
+    .map(o=>({e:o.e,n:o.n,ok:(o.n===certa)}));}
+function abrirJogo9(){
+  const hoje=estacaoAtual();
+  abrirRodadas(9,'CA PÁG. 7 — Nº 6 E 7',[
+   {tit:'A)',tipo:'marcar',
+    perg:'❓ QUE ESTAÇÃO DO ANO SOU EU?<br><b>AS FOLHAS DAS ÁRVORES CAEM PARA MAIS TARDE FLORESCER.</b>',
+    fala:'Vamos brincar de adivinha? Que estação do ano sou eu? As folhas das árvores caem para mais tarde florescer.',
+    ops:estOps('OUTONO'),res:'A RESPOSTA',resp:'OUTONO'},
+   {tit:'B)',tipo:'marcar',
+    perg:'❓ QUE ESTAÇÃO DO ANO SOU EU?<br><b>FLORES E MAIS FLORES COLOREM OS JARDINS.</b>',
+    fala:'Que estação do ano sou eu? Flores e mais flores colorem os jardins.',
+    ops:estOps('PRIMAVERA'),res:'A RESPOSTA',resp:'PRIMAVERA'},
+   {tit:'C)',tipo:'marcar',
+    perg:'❓ QUE ESTAÇÃO DO ANO SOU EU?<br><b>O FRIO É GRANDE, É PRECISO SE AGASALHAR!</b>',
+    fala:'Que estação do ano sou eu? O frio é grande, é preciso se agasalhar!',
+    ops:estOps('INVERNO'),res:'A RESPOSTA',resp:'INVERNO'},
+   {tit:'D)',tipo:'marcar',
+    perg:'❓ QUE ESTAÇÃO DO ANO SOU EU?<br><b>QUE CALOR! O SOL BRILHA FORTE E AQUECE TODA GENTE!</b>',
+    fala:'Que estação do ano sou eu? Que calor! O sol brilha forte e aquece toda gente!',
+    ops:estOps('VERÃO'),res:'A RESPOSTA',resp:'VERÃO'},
+   {tit:'Nº7',tipo:'marcar',
+    perg:'AGORA RESPONDA:<br>EM QUE ESTAÇÃO DO ANO <b>VOCÊ</b> ESTÁ HOJE?',
+    fala:'Agora responda: em que estação do ano você está hoje?',
+    ops:estOps(hoje),res:'EU ESTOU NA',resp:hoje}
+  ]);}
+
+/* ===== J10 — CA pág.7 nº8 A e B: o rio ===== */
+function abrirJogo10(){
+  abrirRodadas(10,'CA PÁG. 7 — Nº 8',[
+   {tit:'A)',tipo:'figs',
+    perg:'MARINA MOSTRA UM RIO EM DOIS MOMENTOS:<br>UM EM ÉPOCA DE CHUVA E OUTRO EM ÉPOCA DE SECA.<br>ASSINALE A IMAGEM DO <b>RIO SECO</b>.',
+    fala:'Marina quer mostrar a você imagens de um rio em dois momentos diferentes: uma em época de chuva e outra em época de seca. Assinale a imagem que retrata um rio seco.',
+    exp:'Isso mesmo! Esse é o rio seco, com a terra rachada.',
+    figs:[{svg:SVG_RIO_CHEIO,rot:'RIO EM ÉPOCA DE CHUVA',ok:false},
+          {svg:SVG_RIO_SECO,rot:'RIO EM ÉPOCA DE SECA',ok:true}],
+    res:'O RIO SECO',resp:'A SEGUNDA IMAGEM — RIO EM ÉPOCA DE SECA'},
+   {tit:'B)',tipo:'marcar',
+    perg:'O QUE PODE ACONTECER QUANDO O RIO FICA SECO?<br><b>MARQUE AS DUAS CERTAS.</b>',
+    fala:'Agora, assinale o que pode acontecer quando o rio fica seco. Marque as duas certas.',
+    ops:[{e:'🚰',n:'FALTA ÁGUA PARA BEBER',ok:true},
+         {e:'🚿',n:'FALTA ÁGUA PARA TOMAR BANHO',ok:true},
+         {e:'🥤',n:'O RIO FORNECE MAIS ÁGUA',ok:false}],
+    res:'O QUE ACONTECE',resp:'FALTA ÁGUA PARA BEBER • FALTA ÁGUA PARA TOMAR BANHO'}
+  ]);}
+
+/* ===== J11 — CA pág.8 nº1 A e B: o que a Emília deve comer ===== */
+function abrirJogo11(){
+  abrirRodadas(11,'CA PÁG. 8 — Nº 1',[
+   {tit:'A)',tipo:'livre',n:1,
+    perg:'☀️ DIA MUITO QUENTE! É PRECISO SE REFRESCAR.<br>QUAL ALIMENTO A EMÍLIA DEVE INGERIR?',
+    fala:'Dia muito quente! É preciso se refrescar. Qual alimento Emília deve ingerir? Escreva uma sugestão adequada.',
+    ops:[{e:'🍉',n:'MELANCIA'},{e:'🧃',n:'SUCO GELADO DE FRUTA'},{e:'🥥',n:'ÁGUA DE COCO'},
+         {e:'🥗',n:'SALADA'},{e:'🍦',n:'PICOLÉ DE FRUTA'},{e:'🥤',n:'ÁGUA GELADA'}],
+    res:'MINHA SUGESTÃO'},
+   {tit:'B)',tipo:'livre',n:1,
+    perg:'🌧️ CHOVEU O DIA TODO E FEZ MUITO FRIO!<br>QUAL ALIMENTO A EMÍLIA DEVE INGERIR?',
+    fala:'Choveu o dia todo e fez muito frio! Qual alimento Emília deve ingerir?',
+    ops:[{e:'🍲',n:'SOPA DE LEGUMES'},{e:'🍵',n:'CHÁ QUENTE'},{e:'☕',n:'CHOCOLATE QUENTE'},
+         {e:'🥣',n:'CALDO DE FEIJÃO'},{e:'🍜',n:'CANJA'},{e:'🍞',n:'PÃO COM LEITE QUENTE'}],
+    res:'MINHA SUGESTÃO'}
+  ]);}
+
+/* ===== J12 — CA pág.8 nº2 A e B: as frutas ===== */
+function abrirJogo12(){
+  abrirRodadas(12,'CA PÁG. 8 — Nº 2',[
+   {tit:'A)',tipo:'livre',n:1,
+    perg:'AS FRUTAS DEVEM SER CONSUMIDAS O ANO TODO.<br>ASSINALE COM UM “X” AQUELA DE QUE VOCÊ <b>MAIS GOSTA</b>.',
+    fala:'As frutas são alimentos que devem ser consumidos o ano todo. Veja as frutas a seguir e assinale, com um xis, aquela de que você mais gosta.',
+    ops:[{e:'🍇',n:'UVA'},{e:'🍉',n:'MELANCIA'},{e:'🥭',n:'MANGA'},{e:'🍍',n:'ABACAXI'}],
+    res:'A FRUTA DE QUE MAIS GOSTO'},
+   {tit:'B)',tipo:'livre',n:1,
+    perg:'ESCREVA O NOME DE UMA FRUTA<br>QUE VOCÊ <b>NÃO APRECIA MUITO</b>.',
+    fala:'Escreva o nome de uma fruta que você não aprecia muito. Escolha uma.',
+    ops:[{e:'🍇',n:'UVA'},{e:'🍉',n:'MELANCIA'},{e:'🥭',n:'MANGA'},{e:'🍍',n:'ABACAXI'},
+         {e:'🍌',n:'BANANA'},{e:'🍊',n:'LARANJA'},{e:'🍎',n:'MAÇÃ'},{e:'🍋',n:'LIMÃO'},
+         {e:'🍓',n:'MORANGO'},{e:'🥝',n:'KIWI'}],
+    res:'A FRUTA QUE NÃO APRECIO MUITO'}
+  ]);}
+
+/* ===== J13 — CA pág.8 nº3: alimentos da época do ano ===== */
+function abrirJogo13(){
+  const est=estacaoAtual();
+  abrirRodadas(13,'CA PÁG. 8 — Nº 3',[
+   {tipo:'livre',n:6,tit:'ESTAÇÃO DE HOJE: '+est,
+    perg:'ESCOLHA <b>6 ALIMENTOS</b> FÁCEIS DE ENCONTRAR<br>NA ÉPOCA DO ANO EM QUE VOCÊ ESTÁ.',
+    fala:'Agora, com seus familiares, faça uma pesquisa para saber quais alimentos são mais facilmente encontrados na época do ano em que você está. Escolha seis desses alimentos.',
+    ops:[{e:'🍓',n:'MORANGO'},{e:'🍍',n:'ABACAXI'},{e:'🥭',n:'MANGA'},{e:'🍌',n:'BANANA'},
+         {e:'🍊',n:'LARANJA'},{e:'🍋',n:'LIMÃO'},{e:'🍉',n:'MELANCIA'},{e:'🥝',n:'MAMÃO'},
+         {e:'🥕',n:'CENOURA'},{e:'🥬',n:'ALFACE'},{e:'🍅',n:'TOMATE'},{e:'🌽',n:'MILHO'},
+         {e:'🥒',n:'PEPINO'},{e:'🥦',n:'BRÓCOLIS'},{e:'🥔',n:'BATATA'},{e:'🫘',n:'FEIJÃO'}],
+    res:'ALIMENTOS DA ÉPOCA (RECORTE E COLE)'}
+  ]);}
+
+/* ===== J14 — CA pág.9 nº4: a mala da Marina (inverno) ===== */
+function abrirJogo14(){
+  abrirRodadas(14,'CA PÁG. 9 — Nº 4',[
+   {tipo:'marcar',
+    perg:'MARINA VAI VISITAR OS TIOS E A ESTAÇÃO É O <b>INVERNO</b>.<br>CIRCULE O QUE ELA DEVE ESCOLHER (SÃO 5).',
+    fala:'Marina vai visitar seus tios e quer a sua ajuda para escolher as peças de roupa e os acessórios que usará. Sabendo que a estação do ano é o inverno, o que ela deve escolher? Circule.',
+    ops:[{e:'🧣',n:'CACHECOL',ok:true},{e:'👕',n:'CAMISETA',ok:false},
+         {e:'🩳',n:'SHORTS',ok:false},{e:'🧢',n:'TOUCA DE LÃ',ok:true},
+         {e:'👢',n:'BOTAS',ok:true},{e:'🩴',n:'SANDÁLIAS',ok:false},
+         {e:'🧥',n:'BLUSA DE FRIO',ok:true},{e:'👖',n:'CALÇA COMPRIDA',ok:true}],
+    res:'A MALA DO INVERNO',
+    resp:'CACHECOL • TOUCA DE LÃ • BOTAS • BLUSA DE FRIO • CALÇA COMPRIDA'},
+   {tipo:'quadros',
+    perg:'AS ROUPAS QUE VOCÊ <b>NÃO</b> CIRCULOU<br>SÃO ADEQUADAS PARA QUAL ESTAÇÃO DO ANO?',
+    fala:'As roupas que você não circulou são adequadas para qual estação do ano?',
+    exp:'Isso mesmo! Camiseta, shorts e sandálias são roupas de verão.',
+    ops:[{t:'PRIMAVERA.',ok:false},{t:'VERÃO.',ok:true},{t:'OUTONO.',ok:false},{t:'INVERNO.',ok:false}],
+    res:'A ESTAÇÃO DAS OUTRAS ROUPAS',resp:'VERÃO'}
+  ]);}
+
+/* ===== J15 — CA pág.9 nº5: roupas de verão e de inverno ===== */
+function abrirJogo15(){
+  abrirRodadas(15,'CA PÁG. 9 — Nº 5',[
+   {tit:'VERÃO',tipo:'livre',n:3,
+    perg:'ESCOLHA <b>3 PEÇAS</b> PARA DESENHAR VOCÊ<br>COM ROUPAS ADEQUADAS PARA O <b>VERÃO</b>.',
+    fala:'Agora faça dois desenhos: um de você usando roupas adequadas para o verão. Escolha três peças.',
+    ops:[{e:'👕',n:'CAMISETA'},{e:'🩳',n:'SHORTS'},{e:'👗',n:'VESTIDO LEVE'},
+         {e:'🩴',n:'SANDÁLIAS'},{e:'🧢',n:'BONÉ'},{e:'🕶️',n:'ÓCULOS DE SOL'},
+         {e:'🩱',n:'ROUPA DE BANHO'},{e:'👟',n:'TÊNIS LEVE'}],
+    res:'EU DESENHO (VERÃO)'},
+   {tit:'INVERNO',tipo:'livre',n:3,
+    perg:'AGORA ESCOLHA <b>3 PEÇAS</b> PARA DESENHAR VOCÊ<br>COM ROUPAS ADEQUADAS PARA O <b>INVERNO</b>.',
+    fala:'E outro desenho de você usando roupas adequadas para o inverno. Escolha três peças.',
+    ops:[{e:'🧥',n:'CASACO'},{e:'👖',n:'CALÇA COMPRIDA'},{e:'🧣',n:'CACHECOL'},
+         {e:'🧤',n:'LUVAS'},{e:'🧢',n:'TOUCA DE LÃ'},{e:'👢',n:'BOTAS'},
+         {e:'🧦',n:'MEIAS'},{e:'🎽',n:'BLUSA DE MANGA LONGA'}],
+    res:'EU DESENHO (INVERNO)'}
+  ]);}
+
+/* ===== J16 — CA pág.10 nº6 e nº7: vestindo os personagens ===== */
+const ROUPAS16=[
+ {e:'👕',n:'CAMISETA'},{e:'🩳',n:'SHORTS'},{e:'👗',n:'VESTIDO'},
+ {e:'🩱',n:'ROUPA DE BANHO'},{e:'🩴',n:'SANDÁLIAS'},{e:'🧢',n:'BONÉ'},
+ {e:'🕶️',n:'ÓCULOS DE SOL'},{e:'👟',n:'TÊNIS'},{e:'👖',n:'CALÇA COMPRIDA'},
+ {e:'🧥',n:'CASACO'},{e:'🧣',n:'CACHECOL'},{e:'🧤',n:'LUVAS'},
+ {e:'👢',n:'BOTAS'},{e:'🧦',n:'MEIAS'},{e:'👞',n:'SAPATO SOCIAL'},
+ {e:'👔',n:'ROUPA DE FESTA'}
+];
+function abrirJogo16(){
+  abrirRodadas(16,'CA PÁG. 10 — Nº 6 E 7',[
+   {tit:'A)',tipo:'livre',n:3,perg:'VISTA O PERSONAGEM <b>PARA IR À PRAIA</b>.<br>ESCOLHA 3 PEÇAS.',
+    fala:'Que tal vestirmos as personagens desenhando a roupa adequada para cada ocasião? Primeiro, para ir à praia. Escolha três peças.',
+    ops:ROUPAS16,res:'PARA IR À PRAIA'},
+   {tit:'B)',tipo:'livre',n:3,perg:'AGORA <b>PARA BRINCAR NO PARQUE EM DIA DE SOL</b>.<br>ESCOLHA 3 PEÇAS.',
+    fala:'Agora, para brincar no parque em dia de sol. Escolha três peças.',
+    ops:ROUPAS16,res:'PARA O PARQUE EM DIA DE SOL'},
+   {tit:'C)',tipo:'livre',n:3,perg:'AGORA <b>PARA UMA FESTA DE ANIVERSÁRIO</b>.<br>ESCOLHA 3 PEÇAS.',
+    fala:'Agora, para uma festa de aniversário. Escolha três peças.',
+    ops:ROUPAS16,res:'PARA A FESTA DE ANIVERSÁRIO'},
+   {tit:'D)',tipo:'livre',n:3,perg:'AGORA <b>PARA UMA VIAGEM A UM LUGAR MUITO FRIO</b>.<br>ESCOLHA 3 PEÇAS.',
+    fala:'Agora, para uma viagem a um lugar muito frio. Escolha três peças.',
+    ops:ROUPAS16,res:'PARA O LUGAR MUITO FRIO'},
+   {tit:'Nº7',tipo:'livre',n:3,perg:'AGORA RESPONDA:<br>O QUE VOCÊ VESTIU <b>PARA IR À ESCOLA HOJE</b>?',
+    fala:'Agora responda: o que você vestiu para ir à escola hoje? Escolha três peças.',
+    ops:ROUPAS16,res:'EU VESTI PARA A ESCOLA'}
+  ]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
