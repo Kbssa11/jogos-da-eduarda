@@ -439,6 +439,19 @@
 <style>
   h1{color:#2E7D32 !important;}
   .p1{background:#66BB6A;} .p2{background:#FFA726;} .p3{background:#42A5F5;}
+  .p4{background:#AB47BC;} .p5{background:#26A69A;}
+  .grade-cruz{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;max-width:420px;margin:8px auto;
+    background:#fff;padding:10px;border-radius:20px;border:5px solid #C8E6C9;}
+  .cel{aspect-ratio:1;border:3px solid #90A4AE;border-radius:8px;display:flex;align-items:center;
+    justify-content:center;font-size:1.25rem;font-weight:bold;color:#37474F;background:#fff;
+    font-family:Arial,sans-serif;}
+  .cel.dada{background:#ECEFF1;color:#212121;}
+  .cel.cheia{background:#E8F5E9;border-color:#43A047;color:#1B5E20;animation:pula .4s;}
+  .cel.atual{border-color:#FFB300;box-shadow:0 0 0 3px #FFE082;}
+  .cel.atual.dada{background:#FFF8E1;}
+  .padrao{display:inline-block;font-family:Arial,sans-serif;font-size:1.6rem;letter-spacing:6px;
+    color:#2E7D32;background:#FFF8E1;border:3px dashed #FFCA28;border-radius:14px;padding:4px 12px;margin-top:6px;}
+  .item .emo svg{width:52px;height:52px;display:inline-block;}
   .figs{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));}
   .fig-op .emo-g{font-size:3.6rem;}
   .fig-op .emo-g svg{width:64px;height:64px;display:inline-block;vertical-align:middle;}
@@ -469,6 +482,8 @@
   <button class="menu-btn p1" onclick="abrirJogo1()"><span class="emo">📰</span><span><span class="pag">CA PÁG. 2 E 3</span>O JORNAL DA EMÍLIA</span><span class="done" id="d1"></span></button>
   <button class="menu-btn p2" onclick="abrirJogo2()"><span class="emo">🪀</span><span><span class="pag">CA PÁG. 3</span>AS LETRAS DE BRINQUEDO</span><span class="done" id="d2"></span></button>
   <button class="menu-btn p3" onclick="abrirJogo3()"><span class="emo">💡</span><span><span class="pag">CA PÁG. 3</span>O QUE TEM NO JORNAL?</span><span class="done" id="d3"></span></button>
+  <button class="menu-btn p4" onclick="abrirJogo4()"><span class="emo">🧸</span><span><span class="pag">CA PÁG. 4</span>A CURIOSIDADE DO MEU BRINQUEDO</span><span class="done" id="d4"></span></button>
+  <button class="menu-btn p5" onclick="abrirJogo5()"><span class="emo">🔤</span><span><span class="pag">CA PÁG. 4</span>PALAVRAS DE 7 LETRAS</span><span class="done" id="d5"></span></button>
   </div>
 </div>
 
@@ -484,6 +499,17 @@
   <div class="feedback" id="fb-rod"></div>
   <div class="contador" id="cont-rod"></div>
   <button class="prox" id="prox-rod" onclick="proxRod()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-cruz">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-cruz"></div>
+  <div class="pergunta" id="perg-cruz"></div>
+  <div class="grade-cruz" id="grade-cruz"></div>
+  <div class="itens" id="ops-cruz"></div>
+  <div class="feedback" id="fb-cruz"></div>
+  <button class="prox" id="prox-cruz" onclick="proxCruz()">CONTINUAR ➜</button>
 </div>
 
 <div class="tela" id="tela-resumo">
@@ -750,6 +776,91 @@ function abrirJogo3(){
     ops:[{t:'RECEITAS.',ok:false},{t:'CARDÁPIOS.',ok:false},{t:'CURIOSIDADES.',ok:true}],
     res:'PINTE',resp:'CURIOSIDADES'}
   ]);}
+
+/* ===== J4 — CA pág.4 nº1 D: a curiosidade do meu brinquedo ===== */
+function abrirJogo4(){
+  abrirRodadas(4,'CA PÁG. 4 — Nº 1 D',[
+   {tit:'D)',tipo:'livre',n:1,
+    perg:'A EMÍLIA QUER SABER <b>COMO A BONECA É FEITA</b>. E VOCÊ?<br>ESCOLHA UM BRINQUEDO DE QUE VOCÊ GOSTA.',
+    fala:'A curiosidade que Emília gostaria de saber é como a boneca é feita. E você? Escolha um brinquedo de sua preferência. Depois você vai desenhar ele no quadro.',
+    ops:[{e:'🪆',n:'BONECA'},{e:'🚗',n:'CARRINHO'},{e:'⚽',n:'BOLA'},{e:'🪀',n:'IOIÔ'},
+         {e:'🪁',n:'PIPA'},{e:'🧸',n:'URSINHO'},{e:'🚲',n:'BICICLETA'},{e:'🎮',n:'VIDEOGAME'}],
+    res:'DESENHE NO QUADRO'},
+   {tit:'D)',tipo:'livre',n:1,
+    perg:'AGORA ESCOLHA A <b>CURIOSIDADE</b><br>QUE VOCÊ GOSTARIA DE SABER SOBRE ELE.',
+    fala:'Agora escolha a curiosidade que você gostaria de saber sobre esse brinquedo. Depois você vai escrever nas linhas.',
+    ops:[{e:'🛠️',n:'COMO ELE É FEITO?'},{e:'🧱',n:'DE QUE MATERIAL ELE É FEITO?'},
+         {e:'🧑‍🔬',n:'QUEM INVENTOU ELE?'},{e:'⚙️',n:'COMO ELE FUNCIONA?'},
+         {e:'⏳',n:'QUANTO TEMPO DEMORA PARA FICAR PRONTO?'}],
+    res:'ESCREVA NAS LINHAS'}
+  ]);}
+
+/* ===== J5 — CA pág.4 nº2 A: palavras de 7 letras ===== */
+const SVG_FOSFORO='<svg viewBox="0 0 64 64"><g transform="rotate(-35 32 32)"><rect x="29" y="18" width="6" height="40" rx="2" fill="#D7B98E" stroke="#8D6E63" stroke-width="1.5"/><ellipse cx="32" cy="15" rx="6" ry="8" fill="#E53935"/></g></svg>';
+const PAL7=[
+ {w:'SERROTE',e:'🪚'},{w:'VESTIDO',e:'👗'},{w:'FÓSFORO',e:SVG_FOSFORO},{w:'TESOURA',e:'✂️'},
+ {w:'PÁSSARO',e:'🐦'},{w:'BÚSSOLA',e:'🧭'},{w:'ESTRELA',e:'⭐'},{w:'PÊSSEGO',e:'🍑'},
+ {w:'BESOURO',e:'🪲'},{w:'SORVETE',e:'🍦'}];
+const LINHAS7=[[0,'S'],[5,'D'],[4,'O'],[5,'R'],[2,'S'],[5,'L'],[3,'V'],[2,'T'],[5,'G'],[0,'B']];
+const ORD=['PRIMEIRO','SEGUNDO','TERCEIRO','QUARTO','QUINTO','SEXTO','SÉTIMO'];
+function semAc(t){return t.normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+function cabe(i,w){const [c,l]=LINHAS7[i];return semAc(w).length===7&&semAc(w)[c]===l;}
+function resolve(i,usadas){
+  if(i>=LINHAS7.length)return true;
+  return PAL7.some(p=>!usadas.has(p.w)&&cabe(i,p.w)&&resolve(i+1,new Set([...usadas,p.w])));}
+let lin7=0,usadas7=new Set(),feitas7=[];
+function abrirJogo5(){lin7=0;usadas7=new Set();feitas7=[];mostrar('tela-cruz');desenhaGrade();montarCruz();}
+function desenhaGrade(){
+  const g=document.getElementById('grade-cruz');g.innerHTML='';
+  LINHAS7.forEach((ln,i)=>{
+    for(let c=0;c<7;c++){
+      const d=document.createElement('div');d.className='cel';d.id='c'+i+'-'+c;
+      if(feitas7[i]){d.textContent=[...feitas7[i]][c];d.classList.add('cheia');}
+      else if(c===ln[0]){d.textContent=ln[1];d.classList.add('dada');}
+      if(i===lin7&&!feitas7[i])d.classList.add('atual');
+      g.appendChild(d);}});}
+function montarCruz(){
+  estrelas(document.getElementById('prog-cruz'),lin7,LINHAS7.length);
+  document.getElementById('fb-cruz').textContent='';
+  document.getElementById('prox-cruz').classList.remove('mostrar');
+  const [c,l]=LINHAS7[lin7];
+  let pad='';for(let k=0;k<7;k++)pad+=(k===c?l:'_');
+  document.getElementById('perg-cruz').innerHTML='LINHA '+(lin7+1)+' — QUAL OBJETO CABE AQUI?<br>'+
+    'TEM 7 LETRAS E A LETRA <b>'+l+'</b> NO '+ORD[c]+' QUADRINHO.<br><span class="padrao">'+pad+'</span>';
+  textoFala='Linha '+(lin7+1)+'. Qual objeto cabe aqui? Ele tem sete letras e a letra '+l+' no '+ORD[c].toLowerCase()+' quadrinho.';
+  const a=document.getElementById('ops-cruz');a.innerHTML='';
+  PAL7.filter(p=>!usadas7.has(p.w)).forEach(p=>{
+    const d=document.createElement('div');d.className='item';
+    d.innerHTML='<span class="emo">'+p.e+'</span><span class="nome">'+p.w+'</span>';
+    d.onclick=()=>escolheCruz(d,p);a.appendChild(d);});
+  desenhaGrade();falar(textoFala);}
+function escolheCruz(el,p){
+  const fb=document.getElementById('fb-cruz');
+  if(document.getElementById('prox-cruz').classList.contains('mostrar'))return;
+  const [c,l]=LINHAS7[lin7];
+  if(!cabe(lin7,p.w)){
+    el.classList.add('errou');tocarSom(false);fb.className='feedback tente';
+    fb.textContent='OLHE A LETRA '+l+' 😊';
+    falar(p.w.toLowerCase()+' não tem a letra '+l+' no '+ORD[c].toLowerCase()+' quadrinho. Tente outra.');
+    setTimeout(()=>el.classList.remove('errou'),700);return;}
+  const nova=new Set([...usadas7,p.w]);
+  if(!resolve(lin7+1,nova)){
+    el.classList.add('errou');tocarSom(false);fb.className='feedback tente';
+    fb.textContent='CABE, MAS VAI FALTAR EM OUTRA LINHA 😊';
+    falar('Essa palavra cabe aqui, mas depois vai faltar em outra linha. Tente outra.');
+    setTimeout(()=>el.classList.remove('errou'),700);return;}
+  usadas7=nova;feitas7[lin7]=p.w;
+  el.classList.add('pintado');tocarSom(true);
+  fb.className='feedback certo';fb.textContent=elogio();
+  falar(p.w.toLowerCase()+'! Escreva '+p.w.toLowerCase()+' na linha '+(lin7+1)+'.');
+  desenhaGrade();
+  const b=document.getElementById('prox-cruz');
+  b.textContent=(lin7<LINHAS7.length-1)?'CONTINUAR ➜':'PRONTO ➜';
+  b.classList.add('mostrar');}
+function proxCruz(){
+  if(lin7<LINHAS7.length-1){lin7++;montarCruz();return;}
+  fimResumo(5,'CA PÁG. 4 — Nº 2 A',
+    [{tit:'ESCREVA EM CADA LINHA DO QUADRO',txt:feitas7.map((w,i)=>(i+1)+'. '+w).join('<br>')}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
