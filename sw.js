@@ -1,4 +1,4 @@
-const CACHE='jogos-v41';
+const CACHE='jogos-v42';
 const ARQS=['./','./index.html','./bim1.html','./bim2.html','./portugues2.html','./matematica2.html','./matematica.html','./portugues.html','./ciencias.html','./geografia.html','./mente.html','./historia.html','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>Promise.all(

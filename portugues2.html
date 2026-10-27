@@ -439,6 +439,44 @@
 <style>
   h1{color:#2E7D32 !important;}
   .p1{background:#66BB6A;} .p2{background:#FFA726;} .p3{background:#42A5F5;}
+  .p6{background:#EF5350;} .p7{background:#5C6BC0;} .p8{background:#FFA726;} .p9{background:#29B6F6;}
+  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;}
+  .ps-area{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:8px;}
+  .ps-pal{background:#fff;border:4px solid #E0E0E0;border-radius:16px;padding:8px 4px;text-align:center;}
+  .ps-pal.ok{border-color:#43A047;background:#F1F8E9;}
+  .ltr{display:inline-block;min-width:22px;padding:4px 2px;margin:1px;border-radius:8px;cursor:pointer;
+    font-family:Arial,sans-serif;font-size:1.3rem;font-weight:bold;color:#37474F;border:2px solid transparent;}
+  .ltr.s-ok{background:#E53935;color:#fff;animation:pula .35s;}
+  .ltr.erro{border-color:#EF9A9A;animation:treme .35s;}
+  .pal-gde{display:block;font-family:Arial,sans-serif;font-size:2.6rem;letter-spacing:4px;margin:6px 0;color:#37474F;}
+  .pal-gde .s{color:#E53935;text-decoration:underline;}
+  .pal-gde .viz{color:#1E88E5;}
+  .col-botoes{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:8px;}
+  .col-bt{border:none;border-radius:20px;padding:14px 8px;font-family:inherit;font-size:1rem;font-weight:bold;
+    color:#fff;cursor:pointer;line-height:1.25;box-shadow:0 5px 0 rgba(0,0,0,.2);}
+  .col-bt:active{transform:translateY(4px);box-shadow:none;}
+  .col-bt.errada{animation:treme .4s;}
+  .cb0{background:#EF5350;} .cb1{background:#FFA726;} .cb2{background:#42A5F5;} .cb3{background:#66BB6A;}
+  .tabela-s{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:12px;background:#fff;
+    border:4px solid #CFD8DC;border-radius:16px;padding:6px;}
+  .tabela-s .th{font-size:.72rem;font-weight:bold;color:#fff;border-radius:8px;padding:5px 3px;text-align:center;line-height:1.15;}
+  .tabela-s .td{font-size:.85rem;font-weight:bold;color:#37474F;text-align:center;padding:3px;min-height:1.2rem;}
+  .gota{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;background:#E3F2FD;border:5px solid #90CAF9;
+    border-radius:50% 50% 46% 46%/58% 58% 42% 42%;padding:30px 20px 24px;margin:8px auto;max-width:340px;}
+  .sil-bt{border:none;background:#fff;border:4px solid #42A5F5;border-radius:16px;padding:10px 14px;
+    font-family:Arial,sans-serif;font-size:1.5rem;font-weight:bold;color:#1565C0;cursor:pointer;box-shadow:0 4px 0 #90CAF9;}
+  .sil-bt.usada{opacity:.25;pointer-events:none;}
+  .sil-bt.errada{border-color:#EF9A9A;animation:treme .4s;}
+  .slots{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0;}
+  .slot{min-width:72px;height:58px;border:4px dashed #B0BEC5;border-radius:14px;display:flex;align-items:center;
+    justify-content:center;font-family:Arial,sans-serif;font-size:1.5rem;font-weight:bold;color:#2E7D32;background:#fff;}
+  .slot.cheio{border-style:solid;border-color:#43A047;background:#E8F5E9;animation:pula .35s;}
+  .dica-bt{display:block;margin:6px auto;border:none;background:#FFF8E1;border:3px dashed #FFCA28;border-radius:14px;
+    padding:8px 14px;font-family:inherit;font-size:1rem;font-weight:bold;color:#6D4C41;cursor:pointer;}
+  .premio{text-align:center;font-size:3.4rem;min-height:3.6rem;}
+  .lacuna-s{display:inline-block;min-width:44px;border-bottom:4px solid #E53935;color:#E53935;margin:0 3px;}
+  .fig-frase{display:inline-block;background:#FFF8E1;border:3px dashed #FFB300;border-radius:12px;padding:0 6px;margin:0 3px;}
+  .feita{color:#2E7D32;text-decoration:underline;}
   .p4{background:#AB47BC;} .p5{background:#26A69A;}
   .grade-cruz{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;max-width:420px;margin:8px auto;
     background:#fff;padding:10px;border-radius:20px;border:5px solid #C8E6C9;}
@@ -484,6 +522,14 @@
   <button class="menu-btn p3" onclick="abrirJogo3()"><span class="emo">💡</span><span><span class="pag">CA PÁG. 3</span>O QUE TEM NO JORNAL?</span><span class="done" id="d3"></span></button>
   <button class="menu-btn p4" onclick="abrirJogo4()"><span class="emo">🧸</span><span><span class="pag">CA PÁG. 4</span>A CURIOSIDADE DO MEU BRINQUEDO</span><span class="done" id="d4"></span></button>
   <button class="menu-btn p5" onclick="abrirJogo5()"><span class="emo">🔤</span><span><span class="pag">CA PÁG. 4</span>PALAVRAS DE 7 LETRAS</span><span class="done" id="d5"></span></button>
+  <button class="menu-btn p6" onclick="abrirJogo6()"><span class="emo">🖍️</span><span><span class="pag">CA PÁG. 5</span>PINTE A LETRA S</span><span class="done" id="d6"></span></button>
+  <button class="menu-btn p7" onclick="abrirJogo7()"><span class="emo">📋</span><span><span class="pag">CA PÁG. 5</span>ONDE ESTÁ O S?</span><span class="done" id="d7"></span></button>
+  <button class="menu-btn p8" onclick="abrirJogo8()"><span class="emo">🖼️</span><span><span class="pag">CA PÁG. 5 E 6</span>TROQUE O DESENHO PELA PALAVRA</span><span class="done" id="d8"></span></button>
+  <button class="menu-btn p9" onclick="abrirJogo9()"><span class="emo">💧</span><span><span class="pag">CA PÁG. 6</span>DESEMBARALHE AS SÍLABAS</span><span class="done" id="d9"></span></button>
+  <button class="menu-btn p10" onclick="abrirJogo10()"><span class="emo">👧</span><span><span class="pag">CA PÁG. 6</span>S OU SS NOS NOMES</span><span class="done" id="d10"></span></button>
+  <button class="menu-btn p11" onclick="abrirJogo11()"><span class="emo">📝</span><span><span class="pag">CA PÁG. 7</span>UM NOME COM S E OUTRO COM SS</span><span class="done" id="d11"></span></button>
+  <button class="menu-btn p12" onclick="abrirJogo12()"><span class="emo">👂</span><span><span class="pag">CA PÁG. 7</span>O SOM DIFERENTE</span><span class="done" id="d12"></span></button>
+  <button class="menu-btn p13" onclick="abrirJogo13()"><span class="emo">✂️</span><span><span class="pag">CA PÁG. 7</span>SEPARANDO AS SÍLABAS</span><span class="done" id="d13"></span></button>
   </div>
 </div>
 
@@ -510,6 +556,40 @@
   <div class="itens" id="ops-cruz"></div>
   <div class="feedback" id="fb-cruz"></div>
   <button class="prox" id="prox-cruz" onclick="proxCruz()">CONTINUAR ➜</button>
+</div>
+
+<div class="tela" id="tela-ps">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="pergunta" id="perg-ps"></div>
+  <div class="ps-area" id="ps-area"></div>
+  <div class="feedback" id="fb-ps"></div>
+  <div class="contador" id="cont-ps"></div>
+  <button class="prox" id="prox-ps" onclick="fimPS()">PRONTO ➜</button>
+</div>
+
+<div class="tela" id="tela-cl">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-cl"></div>
+  <div class="pergunta" id="perg-cl"></div>
+  <div class="col-botoes" id="bts-cl"></div>
+  <div class="feedback" id="fb-cl"></div>
+  <button class="prox" id="prox-cl" onclick="proxCL()">CONTINUAR ➜</button>
+  <div class="tabela-s" id="tab-cl"></div>
+</div>
+
+<div class="tela" id="tela-ms">
+  <div class="topo"><button class="voltar" onclick="irMenu()">🏠</button>
+    <button class="falar" onclick="falarPergunta()">🔊</button></div>
+  <div class="progresso" id="prog-ms"></div>
+  <div class="pergunta" id="perg-ms"></div>
+  <div class="gota" id="gota-ms"></div>
+  <div class="slots" id="slots-ms"></div>
+  <button class="dica-bt" id="dica-ms" onclick="dicaMS()">💡 DICA</button>
+  <div class="premio" id="premio-ms"></div>
+  <div class="feedback" id="fb-ms"></div>
+  <button class="prox" id="prox-ms" onclick="proxMS()">CONTINUAR ➜</button>
 </div>
 
 <div class="tela" id="tela-resumo">
@@ -706,9 +786,9 @@ function contaRod(){
   else document.getElementById('prox-rod').classList.remove('mostrar');}
 function proxRod(){
   if(rI<JG.rodadas.length-1){rI++;montarRod();return;}
-  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>({
+  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>r.semResumo?null:({
     tit:(r.tit?r.tit+' ':'')+(r.res||''),
-    txt:r.resp||MAR[i].join(' • ')||'—'})));}
+    txt:r.resp||MAR[i].join(' • ')||'—'})).filter(Boolean));}
 
 /* ===== desenhos ===== */
 const SVG_DOMINO='<svg viewBox="0 0 40 64"><rect x="3" y="3" width="34" height="58" rx="7" fill="#fff" stroke="#424242" stroke-width="3"/>'+
@@ -861,6 +941,226 @@ function proxCruz(){
   if(lin7<LINHAS7.length-1){lin7++;montarCruz();return;}
   fimResumo(5,'CA PÁG. 4 — Nº 2 A',
     [{tit:'ESCREVA EM CADA LINHA DO QUADRO',txt:feitas7.map((w,i)=>(i+1)+'. '+w).join('<br>')}]);}
+
+/* ===== banco de palavras da pág. 5 ===== */
+const BANCO5=['SERROTE','VESTIDO','CAMISETA','FÓSFORO','RAPOSA','TESOURA','VASSOURA','SORVETE','BÚSSOLA','SAPATO','PÁSSARO','PÊSSEGO','BESOURO','ESTRELA'];
+
+/* ===== J6 — pág.5 B: pinte a letra S ===== */
+let ps=0,psTot=0;
+function abrirJogo6(){
+  ps=0;psTot=0;mostrar('tela-ps');
+  textoFala='Agora pinte a letra S em cada palavra do banco de palavras. Toque em todas as letras S.';
+  document.getElementById('perg-ps').innerHTML='🖍️ TOQUE EM <b>TODAS AS LETRAS S</b><br>DAS PALAVRAS DO BANCO.';
+  document.getElementById('fb-ps').textContent='';
+  document.getElementById('prox-ps').classList.remove('mostrar');
+  const a=document.getElementById('ps-area');a.innerHTML='';
+  BANCO5.forEach(w=>{
+    const d=document.createElement('div');d.className='ps-pal';
+    let falta=0;
+    [...w].forEach(ch=>{
+      const sp=document.createElement('span');sp.className='ltr';sp.textContent=ch;
+      const eS=(ch==='S');if(eS){falta++;psTot++;}
+      sp.onclick=()=>{
+        if(sp.classList.contains('s-ok'))return;
+        if(eS){sp.classList.add('s-ok');ps++;falta--;tocarSom(true);
+          if(falta===0){d.classList.add('ok');falar(w.toLowerCase());}
+          contaPS();}
+        else{sp.classList.add('erro');tocarSom(false);
+          const fb=document.getElementById('fb-ps');fb.className='feedback tente';fb.textContent='ESSA É A LETRA '+ch+' 😊';
+          falar('Essa é a letra '+ch+'. Procure a letra S.');setTimeout(()=>sp.classList.remove('erro'),450);}};
+      d.appendChild(sp);});
+    a.appendChild(d);});
+  contaPS();falar(textoFala);}
+function contaPS(){
+  document.getElementById('cont-ps').textContent='LETRAS S PINTADAS: '+ps+' DE '+psTot;
+  if(ps>=psTot&&psTot>0){const fb=document.getElementById('fb-ps');fb.className='feedback certo';
+    fb.textContent=elogio();document.getElementById('prox-ps').classList.add('mostrar');
+    falar('Muito bem! Você pintou todas as letras S. Repare que algumas palavras têm dois S juntinhos.');}}
+function fimPS(){
+  fimResumo(6,'CA PÁG. 5 — B',[{tit:'PINTE O S NO BANCO DE PALAVRAS',
+    txt:BANCO5.map(w=>w.replace(/S/g,'<span style="color:#E53935;text-decoration:underline">S</span>')).join(' • ')}]);}
+
+/* ===== J7 — pág.5 C: a posição do S ===== */
+const COLS=['S INICIAL','S ENTRE VOGAL E CONSOANTE','S ENTRE DUAS VOGAIS','S DOBRADO ENTRE DUAS VOGAIS'];
+const COLFALA=['S no começo','S entre vogal e consoante','S entre duas vogais','S dobrado entre duas vogais'];
+const CLASS5=[['SERROTE',0],['VESTIDO',1],['CAMISETA',2],['FÓSFORO',1],['RAPOSA',2],['TESOURA',2],['VASSOURA',3],
+  ['SORVETE',0],['BÚSSOLA',3],['SAPATO',0],['PÁSSARO',3],['PÊSSEGO',3],['BESOURO',2],['ESTRELA',1]];
+let cl=0,colunas=[[],[],[],[]];
+function marcaS(w){
+  const i=w.indexOf('S'),dobro=w[i+1]==='S';const L=[...w];
+  return L.map((ch,k)=>{
+    if(k===i||(dobro&&k===i+1))return '<span class="s">'+ch+'</span>';
+    if(k===i-1||k===(dobro?i+2:i+1))return '<span class="viz">'+ch+'</span>';
+    return ch;}).join('');}
+function abrirJogo7(){cl=0;colunas=[[],[],[],[]];mostrar('tela-cl');montarCL();}
+function desenhaTab(){
+  const t=document.getElementById('tab-cl');let h='';
+  COLS.forEach((c,k)=>h+='<div class="th cb'+k+'">'+c+'</div>');
+  for(let r=0;r<4;r++)for(let k=0;k<4;k++)h+='<div class="td">'+(colunas[k][r]||'')+'</div>';
+  t.innerHTML=h;}
+function montarCL(){
+  const [w]=CLASS5[cl];
+  estrelas(document.getElementById('prog-cl'),cl,CLASS5.length);
+  document.getElementById('perg-cl').innerHTML='ONDE ESTÁ O <b style="color:#E53935">S</b> NESTA PALAVRA?<span class="pal-gde">'+marcaS(w)+'</span>'+
+    '<span style="font-size:.85rem">EM <b style="color:#1E88E5">AZUL</b>: AS LETRAS VIZINHAS DO S</span>';
+  textoFala='Observe a palavra '+w.toLowerCase()+'. Onde está a letra S? Olhe as letras vizinhas.';
+  document.getElementById('fb-cl').textContent='';
+  document.getElementById('prox-cl').classList.remove('mostrar');
+  const b=document.getElementById('bts-cl');b.innerHTML='';
+  COLS.forEach((c,k)=>{const e=document.createElement('button');e.className='col-bt cb'+k;e.textContent=c;
+    e.onclick=()=>respCL(e,k);b.appendChild(e);});
+  desenhaTab();falar(textoFala);}
+function respCL(el,k){
+  const [w,c]=CLASS5[cl],fb=document.getElementById('fb-cl');
+  if(document.getElementById('prox-cl').classList.contains('mostrar'))return;
+  if(k===c){
+    colunas[k].push(w);desenhaTab();tocarSom(true);fb.className='feedback certo';fb.textContent=elogio();
+    falar('Isso mesmo! '+w.toLowerCase()+' tem '+COLFALA[c]+'.');
+    const p=document.getElementById('prox-cl');p.textContent=(cl<CLASS5.length-1)?'CONTINUAR ➜':'PRONTO ➜';p.classList.add('mostrar');
+  }else{
+    el.classList.add('errada');tocarSom(false);fb.className='feedback tente';fb.textContent='TENTE DE NOVO 😊';
+    const i=w.indexOf('S');
+    let dica=i===0?'O S está no começo da palavra.':(w[i+1]==='S'?'Tem dois S juntinhos.':
+      'Antes do S tem a letra '+w[i-1]+' e depois tem a letra '+w[i+1]+'.');
+    falar('Quase! '+dica);setTimeout(()=>el.classList.remove('errada'),500);}}
+function proxCL(){
+  if(cl<CLASS5.length-1){cl++;montarCL();return;}
+  fimResumo(7,'CA PÁG. 5 — C',COLS.map((c,k)=>({tit:c,txt:colunas[k].join(' • ')})));}
+
+/* ===== J8 — pág.5 e 6 D: troque o desenho pela palavra ===== */
+function frase(partes){return partes.join(' ');}
+function figF(e){return '<span class="fig-frase">'+e+'</span>';}
+function okF(w){return '<span class="feita">'+w+'</span>';}
+function abrirJogo8(){
+  const R=[
+   {p:frase(['SUSI USOU O',figF('👗'),'NOVO QUE GANHOU.']),c:'VESTIDO',o:['CAMISETA','VESTIDO','SAPATO'],
+    f:'Susi usou o... novo que ganhou.',fr:'SUSI USOU O VESTIDO NOVO QUE GANHOU.'},
+   {p:frase(['ANA VIU UMA',figF('⭐'),'NO CÉU.']),c:'ESTRELA',o:['BÚSSOLA','RAPOSA','ESTRELA'],
+    f:'Ana viu uma... no céu.',fr:'ANA VIU UMA ESTRELA NO CÉU.'},
+   {p:frase(['MASSARU RECORTOU COM A',figF('✂️'),'SEU DESENHO DA','🦊.']),c:'TESOURA',o:['SERROTE','TESOURA','VASSOURA'],
+    f:'Massaru recortou com a... seu desenho.',fr:''},
+   {p:frase(['MASSARU RECORTOU COM A',okF('TESOURA'),'SEU DESENHO DA',figF('🦊')+'.']),c:'RAPOSA',o:['RAPOSA','BESOURO','PÁSSARO'],
+    f:'Massaru recortou com a tesoura seu desenho da...',fr:'MASSARU RECORTOU COM A TESOURA SEU DESENHO DA RAPOSA.'},
+   {p:frase(['NO CALOR, TOMAR',figF('🍦'),'DE','🍑','É UMA DELÍCIA!']),c:'SORVETE',o:['SAPATO','SERROTE','SORVETE'],
+    f:'No calor, tomar... é uma delícia!',fr:''},
+   {p:frase(['NO CALOR, TOMAR',okF('SORVETE'),'DE',figF('🍑'),'É UMA DELÍCIA!']),c:'PÊSSEGO',o:['FÓSFORO','PÊSSEGO','PÁSSARO'],
+    f:'No calor, tomar sorvete de... é uma delícia!',fr:'NO CALOR, TOMAR SORVETE DE PÊSSEGO É UMA DELÍCIA!'}];
+  abrirRodadas(8,'CA PÁG. 5 E 6 — D',R.map(q=>({tipo:'quadros',
+    perg:'QUAL PALAVRA DO BANCO ENTRA NO LUGAR DO DESENHO?<br><span style="display:block;margin-top:8px;font-size:1.35rem">'+q.p+'</span>',
+    fala:'Qual palavra do banco entra no lugar do desenho? '+q.f,
+    exp:'Isso mesmo! '+q.c.toLowerCase()+'.',
+    ops:q.o.map(t=>({t:t,ok:t===q.c})),tit:'',res:q.fr?'REESCREVA A FRASE':'',resp:q.fr||''})).map(r=>r)
+  );
+  // so as frases completas entram no resumo
+  JG.rodadas.forEach(r=>{if(!r.resp)r.semResumo=true;});}
+
+/* ===== jogo de montar sílabas (pág. 6 nº3 e pág. 7 nº5 B) ===== */
+let MS=null,ms=0,msPos=0,msFeitas=[];
+function abrirMonta(n,titulo,lista,separar){
+  MS={n:n,titulo:titulo,lista:lista,separar:separar};ms=0;msFeitas=[];mostrar('tela-ms');montarMS();}
+function montarMS(){
+  const q=MS.lista[ms];msPos=0;
+  estrelas(document.getElementById('prog-ms'),ms,MS.lista.length);
+  document.getElementById('perg-ms').innerHTML=MS.separar?
+    'SEPARE AS SÍLABAS DE <b style="font-size:1.6rem;color:#2E7D32">'+q.p+'</b><br>TOQUE NOS PEDAÇOS NA ORDEM.':
+    '💧 DESEMBARALHE AS SÍLABAS<br>E DESCUBRA A PALAVRA. TOQUE NA ORDEM CERTA.';
+  textoFala=MS.separar?('Vamos separar as sílabas da palavra '+q.p.toLowerCase()+'. Toque nos pedaços na ordem.'):
+    'Desembaralhe as sílabas e descubra a palavra. Toque nas sílabas na ordem certa.';
+  const g=document.getElementById('gota-ms');g.innerHTML='';
+  q.mist.forEach(si=>{const b=document.createElement('button');b.className='sil-bt';b.textContent=si;
+    b.onclick=()=>clicaSil(b,si);g.appendChild(b);});
+  const sl=document.getElementById('slots-ms');sl.innerHTML='';
+  q.sil.forEach(()=>{const d=document.createElement('div');d.className='slot';sl.appendChild(d);});
+  document.getElementById('premio-ms').textContent='';
+  document.getElementById('fb-ms').textContent='';
+  document.getElementById('dica-ms').style.display=MS.separar?'none':'block';
+  document.getElementById('prox-ms').classList.remove('mostrar');
+  falar(textoFala);}
+function dicaMS(){const q=MS.lista[ms];document.getElementById('premio-ms').textContent=q.e;
+  falar('Dica: a palavra é '+q.p.toLowerCase()+'.');}
+function clicaSil(b,si){
+  const q=MS.lista[ms];if(msPos>=q.sil.length)return;
+  const fb=document.getElementById('fb-ms');
+  if(si===q.sil[msPos]){
+    const slot=document.getElementById('slots-ms').children[msPos];slot.textContent=si;slot.classList.add('cheio');
+    b.classList.add('usada');msPos++;tocarSom(true);falar(si.toLowerCase());fb.textContent='';
+    if(msPos===q.sil.length){
+      document.getElementById('premio-ms').textContent=q.e;fb.className='feedback certo';fb.textContent=elogio()+' '+q.p;
+      falar(MS.separar?(q.p.toLowerCase()+': '+q.sil.join(', ').toLowerCase()+'. '+q.sil.length+' sílabas.'):('Muito bem! '+q.p.toLowerCase()+'!'));
+      msFeitas.push(q);
+      const p=document.getElementById('prox-ms');p.textContent=(ms<MS.lista.length-1)?'CONTINUAR ➜':'PRONTO ➜';p.classList.add('mostrar');}
+  }else{
+    b.classList.add('errada');tocarSom(false);fb.className='feedback tente';fb.textContent='ESSA NÃO VEM AGORA 😊';
+    falar(msPos===0?'Essa não é a primeira. Tente outra.':('Depois de '+q.sil[msPos-1].toLowerCase()+' vem outra sílaba. Tente de novo.'));
+    setTimeout(()=>b.classList.remove('errada'),450);}}
+function proxMS(){
+  if(ms<MS.lista.length-1){ms++;montarMS();return;}
+  fimResumo(MS.n,MS.titulo,MS.separar?
+    msFeitas.map(q=>({tit:q.p,txt:q.sil.join(' | ')})):
+    [{tit:'ESCREVA NOS QUADRINHOS',txt:msFeitas.map(q=>q.p).join('<br>')}]);}
+
+/* ===== J9 — pág.6 nº3: desembaralhe as sílabas ===== */
+function abrirJogo9(){
+  abrirMonta(9,'CA PÁG. 6 — Nº 3',[
+   {p:'SABONETE',sil:['SA','BO','NE','TE'],mist:['BO','NE','TE','SA'],e:'🧼'},
+   {p:'CAMISETA',sil:['CA','MI','SE','TA'],mist:['MI','SE','CA','TA'],e:'👕'},
+   {p:'PASSARELA',sil:['PAS','SA','RE','LA'],mist:['PAS','RE','LA','SA'],e:'💃'},
+   {p:'GASOLINA',sil:['GA','SO','LI','NA'],mist:['LI','NA','GA','SO'],e:'⛽'},
+   {p:'PASSAGEIRO',sil:['PAS','SA','GEI','RO'],mist:['GEI','RO','PAS','SA'],e:'🧳'},
+   {p:'ESQUILO',sil:['ES','QUI','LO'],mist:['QUI','LO','ES'],e:'🐿️'}],false);}
+
+/* ===== J10 — pág.6 nº4 A: S ou SS nos nomes ===== */
+function abrirJogo10(){
+  const L=[
+   {mostra:'VANE<span class="lacuna-s">?</span>A',c:'SS',nome:'VANESSA',f:'Vanessa'},
+   {mostra:'<span class="lacuna-s">?</span>U__ANA',c:'S',nome:'',f:'Susana. Primeiro espaço, no começo do nome'},
+   {mostra:'SU<span class="lacuna-s">?</span>ANA',c:'S',nome:'SUSANA',f:'Susana. Agora o segundo espaço'},
+   {mostra:'CÁ<span class="lacuna-s">?</span>IO',c:'SS',nome:'CÁSSIO',f:'Cássio'},
+   {mostra:'LUÍ<span class="lacuna-s">?</span>A',c:'S',nome:'LUÍSA',f:'Luísa'},
+   {mostra:'VINÍCIU<span class="lacuna-s">?</span>',c:'S',nome:'VINÍCIUS',f:'Vinícius'},
+   {mostra:'JÉ<span class="lacuna-s">?</span>ICA',c:'SS',nome:'JÉSSICA',f:'Jéssica'}];
+  abrirRodadas(10,'CA PÁG. 6 — Nº 4 A',L.map(q=>({tipo:'quadros',tit:'',
+    perg:'COMPLETE O NOME COM <b>S</b> OU <b>SS</b>:<br><span class="pal-gde">'+q.mostra+'</span>',
+    fala:'Complete com S ou com dois S. Fale o nome: '+q.f+'. É com S ou com dois S?',
+    exp:q.c==='SS'?('Isso mesmo! '+q.f.split('.')[0]+' se escreve com dois S.'):'Isso mesmo! É com um S só.',
+    ops:[{t:'S',ok:q.c==='S'},{t:'SS',ok:q.c==='SS'}],res:q.nome?'O NOME':'',resp:q.nome})));
+  JG.rodadas.forEach(r=>{if(!r.resp)r.semResumo=true;});}
+
+/* ===== J11 — pág.7 nº4 B: um nome com S e outro com SS ===== */
+function abrirJogo11(){
+  abrirRodadas(11,'CA PÁG. 7 — Nº 4 B',[
+   {tipo:'livre',n:1,tit:'S',perg:'SE VOCÊ PUDESSE ACRESCENTAR <b>UM NOME COM S</b>,<br>QUAL SERIA?',
+    fala:'Se você pudesse acrescentar um nome com S, qual seria? Escolha um.',
+    ops:[{e:'👧',n:'SOFIA'},{e:'👦',n:'SAMUEL'},{e:'👧',n:'ISABELA'},{e:'👦',n:'LUCAS'},
+         {e:'👧',n:'SARA'},{e:'👦',n:'MOISÉS'},{e:'👧',n:'LUÍSA'},{e:'👦',n:'SILAS'}],res:'NOME COM S'},
+   {tipo:'livre',n:1,tit:'SS',perg:'E <b>UM NOME COM SS</b>,<br>QUAL SERIA?',
+    fala:'E um nome com dois S, qual seria? Escolha um.',
+    ops:[{e:'👧',n:'CLARISSA'},{e:'👧',n:'MELISSA'},{e:'👧',n:'LARISSA'},{e:'👦',n:'MESSIAS'},
+         {e:'👧',n:'ALESSANDRA'},{e:'👧',n:'CÁSSIA'},{e:'👦',n:'ALESSANDRO'},{e:'👧',n:'VANESSA'}],res:'NOME COM SS'}]);}
+
+/* ===== J12 — pág.7 nº5 A: o som diferente ===== */
+function abrirJogo12(){
+  const G=[
+   {w:['MESADA','GIRASSOL','ROSA','CASACO','RASA'],c:'GIRASSOL',
+    e:'Em mesada, rosa, casaco e rasa, o S tem som de Z. Em girassol, os dois S têm som de S.'},
+   {w:['PASSADO','PESSOA','OSSO','ROSA','TOSSE'],c:'ROSA',
+    e:'Em passado, pessoa, osso e tosse, os dois S têm som de S. Em rosa, o S tem som de Z.'},
+   {w:['SEMANA','ESPADA','ESCOVA','MOSQUITO','PASTA'],c:'SEMANA',
+    e:'Em espada, escova, mosquito e pasta, o S vem antes de uma consoante. Em semana, o S está no começo.'},
+   {w:['SELO','SINO','APOSTA','SUMIDO','SALAME'],c:'APOSTA',
+    e:'Em selo, sino, sumido e salame, o S está no começo. Em aposta, o S está no meio, antes de uma consoante.'}];
+  abrirRodadas(12,'CA PÁG. 7 — Nº 5 A',G.map((g,k)=>({tipo:'quadros',tit:'GRUPO '+(k+1),
+    perg:'👂 OUÇA E <b>PINTE</b> A PALAVRA QUE TEM<br>O <b>SOM DIFERENTE</b> DAS OUTRAS.',
+    fala:'Pinte a palavra que tem som diferente das outras. Escute: '+g.w.map(x=>x.toLowerCase()).join(', ')+'.',
+    exp:'Isso mesmo! '+g.e,ops:g.w.map(x=>({t:x,ok:x===g.c})),res:'PINTE',resp:g.c})));}
+
+/* ===== J13 — pág.7 nº5 B: separando as sílabas ===== */
+function abrirJogo13(){
+  abrirMonta(13,'CA PÁG. 7 — Nº 5 B',[
+   {p:'GIRASSOL',sil:['GI','RAS','SOL'],mist:['SOL','GI','RAS'],e:'🌻'},
+   {p:'ROSA',sil:['RO','SA'],mist:['SA','RO'],e:'🌹'},
+   {p:'SEMANA',sil:['SE','MA','NA'],mist:['NA','SE','MA'],e:'📅'},
+   {p:'APOSTA',sil:['A','POS','TA'],mist:['TA','POS','A'],e:'🤝'}],true);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
