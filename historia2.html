@@ -485,6 +485,10 @@
   <button class="menu-btn y4" onclick="abrirJogo1()"><span class="emo">⭐</span><span><span class="pag">CA PÁG. 2</span>BRINCAR É UM DIREITO</span><span class="done" id="d1"></span></button>
   <button class="menu-btn y3" onclick="abrirJogo2()"><span class="emo">🧊</span><span><span class="pag">CA PÁG. 3</span>O CUBO MÁGICO</span><span class="done" id="d2"></span></button>
   <button class="menu-btn y2" onclick="abrirJogo3()"><span class="emo">🤝</span><span><span class="pag">CA PÁG. 3</span>BRINCADEIRAS QUE AJUDAM</span><span class="done" id="d3"></span></button>
+  <button class="menu-btn y1" onclick="abrirJogo4()"><span class="emo">👨‍👧</span><span><span class="pag">CA PÁG. 4</span>BRINCAR COM UM ADULTO</span><span class="done" id="d4"></span></button>
+  <button class="menu-btn y4" onclick="abrirJogo5()"><span class="emo">⛺</span><span><span class="pag">CA PÁG. 4</span>BRINCADEIRAS DA EMÍLIA</span><span class="done" id="d5"></span></button>
+  <button class="menu-btn y3" onclick="abrirJogo6()"><span class="emo">😊</span><span><span class="pag">CA PÁG. 5</span>EU BRINQUEI E ME SENTI</span><span class="done" id="d6"></span></button>
+  <button class="menu-btn y2" onclick="abrirJogo7()"><span class="emo">🪀</span><span><span class="pag">CA PÁG. 5</span>BRINQUEDOS DE ANTIGAMENTE</span><span class="done" id="d7"></span></button>
   </div>
 </div>
 
@@ -715,9 +719,9 @@ function contaRod(){
   else document.getElementById('prox-rod').classList.remove('mostrar');}
 function proxRod(){
   if(rI<JG.rodadas.length-1){rI++;montarRod();return;}
-  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>({
+  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>r.semResumo?null:({
     tit:(r.tit?r.tit+' ':'')+(r.res||''),
-    txt:r.resp||MAR[i].join(' • ')||'—'})));}
+    txt:r.resp||MAR[i].join(' • ')||'—'})).filter(Boolean));}
 
 /* ===== extensoes do motor (matematica) ===== */
 function respNum(el,v){
@@ -845,6 +849,82 @@ function abrirJogo3(){
     fala:'Agora escolha um brinquedo ou brincadeira que ajude na atenção, quando a gente precisa prestar bastante atenção.',
     ops:[{e:'🧩',n:'QUEBRA-CABEÇA'},{e:'🃏',n:'JOGO DA MEMÓRIA'},{e:SVG_CUBO,n:'CUBO MÁGICO'},
          {e:'♟️',n:'XADREZ'},{e:'🧑‍🏫',n:'O MESTRE MANDOU'},{e:'🗿',n:'ESTÁTUA'}],res:'DESENHE'}]);}
+
+/* ===== desenhos dos brinquedos antigos (pág. 5) ===== */
+const SVG_VARETA=(function(){const C=['#E53935','#1E88E5','#FDD835','#43A047','#212121','#8E24AA','#FB8C00','#00ACC1','#E53935','#1E88E5','#43A047','#FDD835'];
+  let g='<svg viewBox="0 0 120 120"><rect width="120" height="120" rx="14" fill="#FFF8E1"/>';
+  C.forEach((c,k)=>{const a=-60+k*10;g+='<line x1="60" y1="108" x2="'+(60+78*Math.sin(a*Math.PI/180)).toFixed(1)+'" y2="'+(108-78*Math.cos(a*Math.PI/180)).toFixed(1)+'" stroke="'+c+'" stroke-width="4" stroke-linecap="round"/>';});
+  return g+'<circle cx="60" cy="108" r="7" fill="#FFCC80"/></svg>';})();
+const SVG_VAIVEM='<svg viewBox="0 0 120 120"><rect width="120" height="120" rx="14" fill="#E3F2FD"/>'+
+  '<line x1="22" y1="96" x2="56" y2="56" stroke="#5D4037" stroke-width="2"/><line x1="36" y1="102" x2="58" y2="62" stroke="#5D4037" stroke-width="2"/>'+
+  '<line x1="98" y1="96" x2="64" y2="56" stroke="#5D4037" stroke-width="2"/><line x1="84" y1="102" x2="62" y2="62" stroke="#5D4037" stroke-width="2"/>'+
+  '<ellipse cx="60" cy="50" rx="30" ry="18" fill="#FB8C00" stroke="#E65100" stroke-width="3"/><line x1="34" y1="50" x2="86" y2="50" stroke="#FFE0B2" stroke-width="3"/>'+
+  '<path d="M12 92 h22 a6 6 0 0 1 0 14 h-22 a6 6 0 0 1 0-14z" fill="#E53935"/><path d="M86 92 h22 a6 6 0 0 1 0 14 h-22 a6 6 0 0 1 0-14z" fill="#E53935"/></svg>';
+const SVG_BOTAO=(function(){let g='<svg viewBox="0 0 120 120"><rect width="120" height="120" rx="14" fill="#5D4037"/><rect x="10" y="22" width="100" height="76" fill="#43A047"/>'+
+  '<rect x="14" y="26" width="92" height="68" fill="none" stroke="#fff" stroke-width="2"/><line x1="60" y1="26" x2="60" y2="94" stroke="#fff" stroke-width="2"/><circle cx="60" cy="60" r="11" fill="none" stroke="#fff" stroke-width="2"/>'+
+  '<rect x="14" y="48" width="8" height="24" fill="none" stroke="#fff" stroke-width="2"/><rect x="98" y="48" width="8" height="24" fill="none" stroke="#fff" stroke-width="2"/>';
+  [[34,40,'#E53935'],[34,80,'#E53935'],[46,60,'#E53935'],[86,40,'#1E88E5'],[86,80,'#1E88E5'],[74,60,'#1E88E5']].forEach(b=>{g+='<circle cx="'+b[0]+'" cy="'+b[1]+'" r="7" fill="'+b[2]+'" stroke="#fff" stroke-width="2"/>';});
+  return g+'<circle cx="60" cy="66" r="3" fill="#fff"/></svg>';})();
+const SVG_MOLA=(function(){const C=['#E53935','#FB8C00','#FDD835','#43A047','#1E88E5','#8E24AA'];
+  let g='<svg viewBox="0 0 120 120"><rect width="120" height="120" rx="14" fill="#F3E5F5"/>';
+  for(let k=0;k<12;k++){const x=22+k*6.5,y=72-Math.sin(k/11*Math.PI)*30;g+='<ellipse cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" rx="14" ry="24" fill="none" stroke="'+C[k%6]+'" stroke-width="4"/>';}
+  return g+'</svg>';})();
+const ANTIGOS=[{e:SVG_VARETA,n:'PEGA VARETA'},{e:SVG_VAIVEM,n:'VAI E VEM'},{e:SVG_BOTAO,n:'FUTEBOL DE BOTÃO'},{e:SVG_MOLA,n:'MOLA MALUCA'}];
+const EMILIA=[{e:'🎲♟️',n:'JOGO DE TABULEIRO'},{e:'💃🎶',n:'DANÇA'},{e:'⛺🔦',n:'ACAMPAMENTO NA SALA'},{e:'🃏👨‍👧',n:'JOGO DE CARTAS'}];
+
+/* ===== J4 — CA pág.4 nº1: brincar com um adulto da família ===== */
+function abrirJogo4(){
+  abrirRodadas(4,'CA PÁG. 4 — Nº 1',[
+   {tit:'1)',tipo:'livre',n:1,
+    perg:'👨‍👩‍👧 <b>JOGOS E BRINCADEIRAS EM FAMÍLIA</b><br>CONVERSE COM UM ADULTO DA SUA FAMÍLIA E PERGUNTE:<br><b>COM QUAL BRINQUEDO, JOGO OU BRINCADEIRA ELE GOSTA DE BRINCAR COM VOCÊ?</b><br>DEPOIS, TOQUE NA RESPOSTA DELE.',
+    fala:'Jogos e brincadeiras em família. Chame um adulto da sua família, como o papai ou a mamãe, e pergunte: com qual brinquedo, jogo ou brincadeira você gosta de brincar comigo? Depois toque na resposta. Se não estiver aqui, escolha outra brincadeira.',
+    ops:[{e:'🧩',n:'QUEBRA-CABEÇA'},{e:'🎲',n:'JOGO DE TABULEIRO'},{e:'🃏',n:'JOGO DE CARTAS'},{e:'🙈',n:'ESCONDE-ESCONDE'},
+         {e:'🏃',n:'PEGA-PEGA'},{e:'⚽',n:'BOLA'},{e:'💃',n:'DANÇAR'},{e:'🧸',n:'BONECAS'},
+         {e:'🎨',n:'DESENHAR E PINTAR'},{e:'🧱',n:'MONTAR BLOCOS'},{e:'🚲',n:'ANDAR DE BICICLETA'},{e:'✏️',n:'OUTRA BRINCADEIRA'}],
+    res:'DESENHE A BRINCADEIRA NO QUADRO E ESCREVA O NOME DELA'}]);}
+
+/* ===== J5 — CA pág.4 nº2: as brincadeiras da Emília em família ===== */
+function abrirJogo5(){
+  abrirRodadas(5,'CA PÁG. 4 — Nº 2',[
+   {tit:'2)',tipo:'livre',n:4,min:1,
+    perg:'OBSERVE AS BRINCADEIRAS QUE <b>EMÍLIA</b> COSTUMA FAZER COM A FAMÍLIA.<br>VOCÊ TAMBÉM FAZ ALGUMA DELAS EM CASA? <b>QUAL OU QUAIS?</b> MARQUE.',
+    fala:'Observe as brincadeiras que Emília costuma fazer com a família: jogo de tabuleiro, dança, acampamento na sala e jogo de cartas. Você também faz alguma delas em casa? Qual ou quais? Pode marcar mais de uma.',
+    ops:EMILIA,res:'PINTE A LEGENDA DE'}]);}
+
+/* ===== J6 — CA pág.5 nº3: eu brinquei e me senti ===== */
+function abrirJogo6(){
+  abrirRodadas(6,'CA PÁG. 5 — Nº 3',[
+   {tit:'EU BRINQUEI DE',tipo:'livre',n:1,
+    perg:'ESCOLHA UMA BRINCADEIRA PARA FAZER COM SUA FAMÍLIA.<br>BRINQUE DE VERDADE! 😄 DEPOIS COMPLETE:<br><b>EU BRINQUEI DE...</b>',
+    fala:'Escolha uma brincadeira para fazer com sua família. Brinque de verdade! Depois volte aqui e complete: eu brinquei de...',
+    ops:[{e:'🎲',n:'JOGO DE TABULEIRO'},{e:'🃏',n:'JOGO DE CARTAS'},{e:'💃',n:'DANÇA'},{e:'⛺',n:'ACAMPAMENTO NA SALA'},
+         {e:'🙈',n:'ESCONDE-ESCONDE'},{e:'🧩',n:'QUEBRA-CABEÇA'},{e:'⚽',n:'BOLA'},{e:'🏃',n:'PEGA-PEGA'}],res:''},
+   {tit:'EU BRINQUEI COM',tipo:'livre',n:4,min:1,
+    perg:'<b>EU BRINQUEI COM...</b><br>QUEM BRINCOU COM VOCÊ? PODE MARCAR MAIS DE UM.',
+    fala:'Eu brinquei com... Quem brincou com você? Pode marcar mais de um.',
+    ops:[{e:'👩',n:'MAMÃE'},{e:'👨',n:'PAPAI'},{e:'👧',n:'IRMÃ'},{e:'👦',n:'IRMÃO'},
+         {e:'👵',n:'VOVÓ'},{e:'👴',n:'VOVÔ'},{e:'👩‍🦱',n:'TIA'},{e:'👨‍🦱',n:'TIO'}],res:''},
+   {tit:'EU ME SENTI',tipo:'livre',n:1,
+    perg:'<b>EU ME SENTI...</b><br>TOQUE NA CARINHA QUE MOSTRA COMO VOCÊ SE SENTIU!',
+    fala:'Eu me senti... Toque na carinha que mostra como você se sentiu brincando com a sua família.',
+    ops:[{e:'🙂',n:'FELIZ'},{e:'😃',n:'ANIMADO'},{e:'🥰',n:'AMADO'},{e:'😆',n:'DIVERTIDO'}],res:'(PINTE A CARINHA)'}]);}
+
+/* ===== J7 — CA pág.5 nº4 A e B: brinquedos dos pais de Marina ===== */
+function abrirJogo7(){
+  abrirRodadas(7,'CA PÁG. 5 — Nº 4',[
+   {tit:'4)',tipo:'livre',n:1,semResumo:true,
+    perg:'OBSERVE ALGUNS DOS BRINQUEDOS COM QUE OS <b>PAIS DE MARINA</b> BRINCAVAM QUANDO ERAM CRIANÇAS.<br>TOQUE EM CADA UM PARA OUVIR O NOME. DEPOIS TOQUE EM <b>ENTENDI</b>.',
+    fala:'Observe alguns dos brinquedos com que os pais de Marina brincavam quando eram crianças: pega vareta, vai e vem, futebol de botão e mola maluca. Quando terminar de olhar, toque em entendi.',
+    ilustra:'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:420px;margin:0 auto">'+ANTIGOS.map(a=>'<div style="text-align:center;font-weight:bold">'+a.e.replace('<svg','<svg style="width:120px;height:120px"')+'<br>'+a.n+'</div>').join('')+'</div>',
+    ops:[{e:'👍',n:'ENTENDI'}]},
+   {tit:'A)',tipo:'livre',n:5,min:1,
+    perg:'ALGUM DESSES BRINQUEDOS <b>SE PARECE COM ALGUM QUE VOCÊ CONHECE</b> E COM O QUAL BRINCA EM CASA?<br>SE SIM, MARQUE. SE NÃO, MARQUE <b>NENHUM</b>.',
+    fala:'Algum desses brinquedos se parece com algum que você conhece e com o qual brinca em casa? Se sim, marque. Se não, marque nenhum.',
+    ops:ANTIGOS.concat([{e:'🚫',n:'NENHUM'}]),res:'CIRCULE'},
+   {tit:'B)',tipo:'livre',n:5,min:1,
+    perg:'MOSTRE ESSES BRINQUEDOS A <b>ALGUÉM DA SUA FAMÍLIA</b>.<br>ESSA PESSOA <b>RECONHECEU</b> ALGUM DELES? MARQUE QUAL OU QUAIS.',
+    fala:'Agora chame alguém da sua família, como o papai, a mamãe ou a vovó, e mostre esses brinquedos. Essa pessoa reconheceu algum deles? Marque qual ou quais.',
+    ops:ANTIGOS.concat([{e:'🤷',n:'NÃO RECONHECEU'}]),res:'PINTE A LEGENDA DE'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
