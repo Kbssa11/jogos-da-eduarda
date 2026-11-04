@@ -489,6 +489,7 @@
   <button class="menu-btn y4" onclick="abrirJogo5()"><span class="emo">⛺</span><span><span class="pag">CA PÁG. 4</span>BRINCADEIRAS DA EMÍLIA</span><span class="done" id="d5"></span></button>
   <button class="menu-btn y3" onclick="abrirJogo6()"><span class="emo">😊</span><span><span class="pag">CA PÁG. 5</span>EU BRINQUEI E ME SENTI</span><span class="done" id="d6"></span></button>
   <button class="menu-btn y2" onclick="abrirJogo7()"><span class="emo">🪀</span><span><span class="pag">CA PÁG. 5</span>BRINQUEDOS DE ANTIGAMENTE</span><span class="done" id="d7"></span></button>
+  <button class="menu-btn y4" onclick="abrirJogo9()"><span class="emo">🎤</span><span><span class="pag">CA PÁG. 9</span>ENTREVISTA COM O PAPAI</span><span class="done" id="d9"></span></button>
   </div>
 </div>
 
@@ -606,7 +607,7 @@ function liberaProx(){
   b.textContent=(rI<JG.rodadas.length-1)?'CONTINUAR ➜':'PRONTO ➜';
   b.classList.add('mostrar');}
 function montarRod(){
-  const r=JG.rodadas[rI];selCor=null;
+  const r=JG.rodadas[rI];selCor=null;if(r.antes)r.antes();
   estrelas(document.getElementById('prog-rod'),rI,JG.rodadas.length);
   limparRod();
   document.getElementById('perg-rod').innerHTML=
@@ -925,6 +926,90 @@ function abrirJogo7(){
     perg:'MOSTRE ESSES BRINQUEDOS A <b>ALGUÉM DA SUA FAMÍLIA</b>.<br>ESSA PESSOA <b>RECONHECEU</b> ALGUM DELES? MARQUE QUAL OU QUAIS.',
     fala:'Agora chame alguém da sua família, como o papai, a mamãe ou a vovó, e mostre esses brinquedos. Essa pessoa reconheceu algum deles? Marque qual ou quais.',
     ops:ANTIGOS.concat([{e:'🤷',n:'NÃO RECONHECEU'}]),res:'PINTE A LEGENDA DE'}]);}
+
+/* ===== pág. 9 — você faz a história ===== */
+const PREF=[{e:'⚽',n:'FUTEBOL',v:'JOGAR FUTEBOL'},{e:'🧸',n:'BONECA',v:'BRINCAR DE BONECA'},{e:'🎮',n:'VIDEOGAME',v:'JOGAR VIDEOGAME'},
+  {e:'🙈',n:'ESCONDE-ESCONDE',v:'BRINCAR DE ESCONDE-ESCONDE'},{e:'🏃',n:'PEGA-PEGA',v:'BRINCAR DE PEGA-PEGA'},{e:'🪁',n:'PIPA',v:'SOLTAR PIPA'},
+  {e:'🔵',n:'BOLINHA DE GUDE',v:'JOGAR BOLINHA DE GUDE'},{e:'🪀',n:'IOIÔ',v:'BRINCAR DE IOIÔ'},{e:'🚲',n:'BICICLETA',v:'ANDAR DE BICICLETA'},
+  {e:'🧩',n:'QUEBRA-CABEÇA',v:'MONTAR QUEBRA-CABEÇA'},{e:'🎨',n:'DESENHAR',v:'DESENHAR'},{e:'💃',n:'DANÇAR',v:'DANÇAR'}];
+const FAMILIA=[{e:'👨',n:'PAPAI',a:'O PAPAI'},{e:'👩',n:'MAMÃE',a:'A MAMÃE'},{e:'👴',n:'VOVÔ',a:'O VOVÔ'},
+  {e:'👵',n:'VOVÓ',a:'A VOVÓ'},{e:'👨‍🦱',n:'TIO',a:'O TIO'},{e:'👩‍🦱',n:'TIA',a:'A TIA'}];
+function achaPref(n){return PREF.find(p=>p.n===n)||{e:'⭐',n:n,v:'BRINCAR DE '+n};}
+function inicialOps(palavra){const l=palavra[0],out=new Set([l]);['B','P','T','F','M','D','C','V'].forEach(x=>{if(out.size<4)out.add(x);});
+  return [...out].sort().map(x=>({t:x,ok:x===l}));}
+
+
+/* esboço simples para copiar na folha (traço grosso, poucas formas) */
+function numTag(x,y,n,c){return '<circle cx="'+x+'" cy="'+y+'" r="11" fill="'+c+'"/><text x="'+x+'" y="'+(y+5)+'" font-size="14" font-weight="bold" fill="#fff" text-anchor="middle">'+n+'</text>';}
+function bonecoPapai(x,chute){ // menino de palitos (o papai criança)
+  return '<g stroke="#222" stroke-width="5" stroke-linecap="round" fill="none">'+
+   '<circle cx="'+x+'" cy="70" r="22" fill="#FFE0B2"/>'+
+   '<path d="M'+(x-20)+' 60 Q'+x+' 38 '+(x+20)+' 60" stroke="#5D4037" stroke-width="7"/>'+
+   '<line x1="'+x+'" y1="92" x2="'+x+'" y2="150"/>'+
+   '<line x1="'+x+'" y1="108" x2="'+(x-28)+'" y2="88"/><line x1="'+x+'" y1="108" x2="'+(x+28)+'" y2="126"/>'+
+   '<line x1="'+x+'" y1="150" x2="'+(x-20)+'" y2="192"/>'+
+   (chute?'<line x1="'+x+'" y1="150" x2="'+(x+34)+'" y2="178"/>':'<line x1="'+x+'" y1="150" x2="'+(x+20)+'" y2="192"/>')+'</g>'+
+   '<circle cx="'+(x-8)+'" cy="67" r="3" fill="#222"/><circle cx="'+(x+8)+'" cy="67" r="3" fill="#222"/>'+
+   '<path d="M'+(x-9)+' 78 Q'+x+' 87 '+(x+9)+' 78" stroke="#222" stroke-width="3" fill="none" stroke-linecap="round"/>'+
+   '<rect x="'+(x-14)+'" y="100" width="28" height="34" rx="6" fill="#1E88E5" opacity=".55"/>';}
+function svgDesenho(pref){
+  let g='<svg viewBox="0 0 320 230" style="width:100%;max-width:440px;background:#fff;border:4px solid #B39DDB;border-radius:18px">'+
+    '<circle cx="290" cy="30" r="16" fill="#FDD835" stroke="#F9A825" stroke-width="3"/>'+
+    '<line x1="10" y1="200" x2="310" y2="200" stroke="#43A047" stroke-width="6" stroke-linecap="round"/>'+
+    '<path d="M20 200 l6 -12 l6 12 M60 200 l6 -12 l6 12 M150 200 l6 -12 l6 12 M290 200 l6 -12 l6 12" stroke="#43A047" stroke-width="3" fill="none"/>';
+  if(pref.n==='FUTEBOL'){
+    g+='<g stroke="#222" stroke-width="5" fill="none" stroke-linecap="round"><line x1="220" y1="200" x2="220" y2="95"/><line x1="220" y1="95" x2="300" y2="95"/><line x1="300" y1="95" x2="300" y2="200"/></g>'+
+       '<g stroke="#9E9E9E" stroke-width="2">';
+    for(let k=1;k<4;k++)g+='<line x1="'+(220+k*20)+'" y1="97" x2="'+(220+k*20)+'" y2="198"/>';
+    for(let k=1;k<5;k++)g+='<line x1="222" y1="'+(95+k*21)+'" x2="298" y2="'+(95+k*21)+'"/>';
+    g+='</g>'+bonecoPapai(90,true)+
+       '<circle cx="150" cy="182" r="15" fill="#fff" stroke="#222" stroke-width="4"/><path d="M144 176 l6 -4 l6 4 l-2 7 h-8z" fill="#222"/>'+
+       numTag(260,80,'1','#8E24AA')+numTag(55,40,'2','#E65100')+numTag(150,155,'3','#1565C0')+numTag(40,218,'4','#2E7D32');
+  }else{
+    g+=bonecoPapai(100,false)+'<text x="215" y="160" font-size="80" text-anchor="middle">'+pref.e+'</text>'+
+       numTag(55,40,'1','#E65100')+numTag(215,70,'2','#1565C0')+numTag(40,218,'3','#2E7D32');
+  }
+  return g+'</svg>';}
+function passosDesenho(pref){
+  const ps=pref.n==='FUTEBOL'?['O GOL (3 RISCOS E A REDE)','O MENINO (O PAPAI CRIANÇA)','A BOLA NO PÉ DELE','A GRAMA VERDE E O SOL']
+    :['O MENINO (O PAPAI CRIANÇA)','O BRINQUEDO: '+pref.n,'A GRAMA VERDE E O SOL'];
+  return '<div style="text-align:left;max-width:440px;margin:8px auto 0;font-weight:bold;line-height:1.6">'+
+    ps.map((t,i)=>'<div>'+(i+1)+'️⃣ '+t+'</div>').join('')+'</div>';}
+/* J9 — CA pág.9 hora da pesquisa: entrevista com o papai */
+function abrirJogo9(){
+  abrirRodadas(9,'CA PÁG. 9 — HORA DA PESQUISA',[
+   {tit:'',tipo:'livre',n:1,semResumo:true,
+    perg:'🎤 <b>HORA DA PESQUISA!</b><br>HOJE VOCÊ É A <b>REPÓRTER</b>.<br>VOCÊ VAI ENTREVISTAR O <b>PAPAI</b> 👨 PARA DESCOBRIR QUAL ERA A BRINCADEIRA PREFERIDA DELE QUANDO ERA CRIANÇA.',
+    fala:'Hora da pesquisa! Hoje você é a repórter. Você vai entrevistar o papai para descobrir qual era o jogo, o brinquedo ou a brincadeira preferida dele quando era criança, e por quê. Pegue o microfone e chame o papai. Quando estiver pronta, toque em vamos.',
+    ops:[{e:'🎤👨',n:'VAMOS!'}]},
+   {tit:'PERGUNTA 1',tipo:'livre',n:1,
+    perg:'🎤 PERGUNTE AO PAPAI:<br><b>"PAPAI, QUANDO VOCÊ ERA CRIANÇA, QUAL ERA SEU JOGO, BRINQUEDO OU BRINCADEIRA PREFERIDA?"</b><br>DEPOIS TOQUE NA RESPOSTA DELE.',
+    fala:'Pergunte ao papai: Papai, quando você era criança, qual era o seu jogo, brinquedo ou brincadeira preferida? Depois toque na resposta dele.',
+    ops:PREF,res:'A BRINCADEIRA PREFERIDA DO PAPAI'},
+   {tit:'A PRIMEIRA LETRA',tipo:'quadros',perg:'',fala:'',ops:[],res:''},
+   {tit:'PERGUNTA 2',tipo:'livre',n:1,
+    perg:'🎤 AGORA PERGUNTE:<br><b>"POR QUE VOCÊ GOSTAVA DESSA BRINCADEIRA?"</b><br>TOQUE NA RESPOSTA DO PAPAI.',
+    fala:'Agora pergunte: Papai, por que você gostava dessa brincadeira? Toque na resposta dele.',
+    ops:[{e:'😆',n:'ERA DIVERTIDO'},{e:'👫',n:'BRINCAVA COM OS AMIGOS'},{e:'🏃',n:'CORRIA E SE MEXIA'},
+         {e:'💭',n:'USAVA A IMAGINAÇÃO'},{e:'🏆',n:'GOSTAVA DE GANHAR'},{e:'🧠',n:'APRENDIA'}],res:'POR QUÊ'},
+   {tit:'RESULTADO DA PESQUISA',tipo:'livre',n:1,
+    perg:'🎉 ESTE É O <b>RESULTADO DA SUA PESQUISA</b>! TOQUE NA FRASE PARA OUVIR.<br>NA FOLHA, <b>DESENHE</b> E <b>COPIE</b> A FRASE.',
+    fala:'Parabéns, repórter! Este é o resultado da sua pesquisa. Toque na frase para ouvir. Depois desenhe e copie na folha, para apresentar na escola.',
+    ops:()=>{const p=achaPref(MAR[1][0]);return [{e:'👨'+p.e,n:'O PAPAI GOSTAVA DE '+p.v+' PORQUE '+MAR[3][0]+'.'}];},
+    res:'✏️ COPIE A FRASE NA FOLHA'},
+   {tit:'VEJA O SEU DESENHO',tipo:'livre',n:1,semResumo:true,ilustra:'',
+    perg:'🎨 AGORA <b>COPIE ESTE DESENHO</b> NA FOLHA, EM CIMA DA FRASE.<br>DESENHE NA ORDEM DOS NÚMEROS!',
+    fala:'Agora veja o seu desenho! Copie na folha, desenhando na ordem dos números.',
+    ops:[{e:'✏️',n:'VOU DESENHAR!'}]}]);
+  const d=JG.rodadas[5];
+  d.antes=function(){const p=achaPref(MAR[1][0]);d.ilustra=svgDesenho(p)+passosDesenho(p);
+    d.fala='Agora veja o seu desenho! Copie na folha, na ordem dos números. '+(p.n==='FUTEBOL'?'Primeiro o gol. Depois o menino, que é o papai criança. Depois a bola no pé dele. Por último a grama verde e o sol.':'Primeiro o menino, que é o papai criança. Depois o brinquedo. Por último a grama verde e o sol.');};
+  const r=JG.rodadas[2];
+  r.antes=function(){const p=achaPref(MAR[1][0]);const pal=p.n.replace(/ .*/,'');
+    r.perg=p.e+' <b>'+p.n+'</b><br>VAMOS ESCREVER! COM QUAL LETRA COMEÇA <b>'+pal+'</b>?';
+    r.fala='Vamos escrever! Com qual letra começa '+pal+'?';
+    r.exp='Isso! '+pal+' começa com a letra '+pal[0]+'.';
+    r.ops=inicialOps(pal);r.resp=pal[0]+' DE '+pal;};}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
