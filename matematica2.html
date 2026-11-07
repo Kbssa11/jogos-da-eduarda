@@ -479,6 +479,9 @@
   <button class="menu-btn x3" onclick="abrirJogo3()"><span class="emo">🐸</span><span><span class="pag">CA PÁG. 3</span>O SALTO MÁGICO</span><span class="done" id="d3"></span></button>
   <button class="menu-btn x4" onclick="abrirJogo4()"><span class="emo">✖️</span><span><span class="pag">CA PÁG. 4</span>QUANTAS VEZES MAIS?</span><span class="done" id="d4"></span></button>
   <button class="menu-btn x5" onclick="abrirJogo5()"><span class="emo">🧁</span><span><span class="pag">CA PÁG. 4</span>OS DOCINHOS DA LANCHONETE</span><span class="done" id="d5"></span></button>
+  <button class="menu-btn x1" onclick="abrirJogo6()"><span class="emo">💵</span><span><span class="pag">CA PÁG. 5</span>QUANTO DINHEIRO ELES TÊM?</span><span class="done" id="d6"></span></button>
+  <button class="menu-btn x2" onclick="abrirJogo7()"><span class="emo">🧃</span><span><span class="pag">CA PÁG. 5</span>PAGAR SEM TROCO</span><span class="done" id="d7"></span></button>
+  <button class="menu-btn x3" onclick="abrirJogo8()"><span class="emo">👕</span><span><span class="pag">CA PÁG. 5 E 6</span>A CAMISETA DO URBANO</span><span class="done" id="d8"></span></button>
   </div>
 </div>
 
@@ -669,7 +672,7 @@ function respUnica(el,o,cls){
   }else{
     el.classList.add('errada');
     const cx=el.querySelector('.cx');if(cx)cx.textContent='✖';
-    tocarSom(false);fbRod('tente','TENTE DE NOVO 😊');falar('Quase! Pense de novo.');
+    tocarSom(false);fbRod('tente','TENTE DE NOVO 😊');falar(JG.rodadas[rI].dicaErro||'Quase! Pense de novo.');
     setTimeout(()=>{el.classList.remove('errada');const c=el.querySelector('.cx');if(c)c.textContent='';},900);}}
 function clicaItem(el,o){
   const r=JG.rodadas[rI],m=MAR[rI];
@@ -708,9 +711,9 @@ function contaRod(){
   else document.getElementById('prox-rod').classList.remove('mostrar');}
 function proxRod(){
   if(rI<JG.rodadas.length-1){rI++;montarRod();return;}
-  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>({
+  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>r.semResumo?null:({
     tit:(r.tit?r.tit+' ':'')+(r.res||''),
-    txt:r.resp||MAR[i].join(' • ')||'—'})));}
+    txt:r.resp||MAR[i].join(' • ')||'—'})).filter(Boolean));}
 
 /* ===== extensoes do motor (matematica) ===== */
 function respNum(el,v){
@@ -843,6 +846,98 @@ function abrirJogo5(){
     exp:'Isso mesmo! Seis mais seis mais seis mais seis é igual a vinte e quatro docinhos.',
     res:'RESPOSTA',resp:'6 + 6 + 6 + 6 = 24. FORAM COMPRADOS 24 DOCINHOS.'}
   ]);}
+
+/* ===== dinheiro: cédulas e moedas desenhadas ===== */
+const COR_CED={2:['#90A4AE','#455A64'],5:['#B39DDB','#5E35B1'],10:['#EF9A9A','#C62828'],20:['#FFE082','#F57F17'],50:['#FFCC80','#E65100']};
+function cedula(v,w){const c=COR_CED[v];w=w||118;
+  return '<svg viewBox="0 0 160 80" style="width:'+w+'px;height:auto;display:inline-block;vertical-align:middle;margin:3px;border-radius:6px">'+
+    '<rect x="2" y="2" width="156" height="76" rx="8" fill="'+c[0]+'" stroke="'+c[1]+'" stroke-width="4"/>'+
+    '<circle cx="62" cy="40" r="22" fill="#fff" opacity=".55"/><text x="62" y="47" font-size="18" text-anchor="middle" fill="'+c[1]+'">R$</text>'+
+    '<text x="146" y="30" font-size="26" font-weight="bold" text-anchor="end" fill="'+c[1]+'">'+v+'</text>'+
+    '<text x="20" y="70" font-size="13" font-weight="bold" fill="'+c[1]+'">'+v+' REAIS</text></svg>';}
+function moeda1(w){w=w||52;
+  return '<svg viewBox="0 0 60 60" style="width:'+w+'px;height:auto;display:inline-block;vertical-align:middle;margin:3px">'+
+    '<circle cx="30" cy="30" r="28" fill="#FFD54F" stroke="#B8860B" stroke-width="3"/><circle cx="30" cy="30" r="18" fill="#E0E0E0" stroke="#9E9E9E" stroke-width="2"/>'+
+    '<text x="30" y="37" font-size="20" font-weight="bold" text-anchor="middle" fill="#424242">1</text></svg>';}
+function carteira(nome,emo,itens){return '<div style="display:inline-block;background:#fff;border:3px dashed #B0BEC5;border-radius:16px;padding:6px 8px;margin:4px;text-align:center">'+
+  '<div style="font-size:2rem">'+emo+'</div><div style="font-weight:bold;color:#37474F">'+nome+'</div><div>'+itens+'</div></div>';}
+const DIN_OTAVIO=cedula(10)+cedula(5)+moeda1()+moeda1();
+const DIN_MASSARU=cedula(10)+cedula(2)+cedula(2)+cedula(2);
+const DIN_URBANO=cedula(50)+cedula(20)+cedula(5);
+const VIS_OM='<div style="text-align:center">'+carteira('OTÁVIO','🧢👦',DIN_OTAVIO)+carteira('MASSARU','👦',DIN_MASSARU)+'</div>';
+
+/* ===== J6 — CA pág.5 nº1: quanto dinheiro eles têm ===== */
+function abrirJogo6(){
+  abrirRodadas(6,'CA PÁG. 5 — Nº 1',[
+   {tit:'A) OTÁVIO',tipo:'num',ilustra:carteira('OTÁVIO','🧢👦',DIN_OTAVIO),
+    perg:'OTÁVIO E MASSARU FORAM À LANCHONETE DO PARQUE.<br>QUANTOS REAIS <b>OTÁVIO</b> TEM?<br><span class="conta">10 + 5 + 1 + 1 = ?</span>',
+    fala:'Otávio e Massaru foram à lanchonete do parque. Quantos reais Otávio tem? Ele tem uma nota de dez, uma nota de cinco e duas moedas de um real. Comece pelo dez e vá contando.',
+    certo:17,ops:[15,16,17,18],mostra:'10 + 5 + 1 + 1 = 17',
+    dicaErro:'Quase! Comece no dez. Dez, mais cinco dá quinze, mais um dezesseis, mais um...',
+    exp:'Isso mesmo! Otávio tem dezessete reais.',res:'ANOTE NO QUADRO',resp:'OTÁVIO: 17 REAIS'},
+   {tit:'A) MASSARU',tipo:'num',ilustra:carteira('MASSARU','👦',DIN_MASSARU),
+    perg:'E QUANTOS REAIS <b>MASSARU</b> TEM?<br><span class="conta">10 + 2 + 2 + 2 = ?</span>',
+    fala:'E quantos reais Massaru tem? Ele tem uma nota de dez e três notas de dois. Comece pelo dez e vá contando de dois em dois.',
+    certo:16,ops:[14,16,17,18],mostra:'10 + 2 + 2 + 2 = 16',
+    dicaErro:'Quase! Comece no dez. Dez, doze, catorze...',
+    exp:'Isso mesmo! Massaru tem dezesseis reais.',res:'ANOTE NO QUADRO',resp:'MASSARU: 16 REAIS'},
+   {tit:'B)',tipo:'quadros',ilustra:VIS_OM,
+    perg:'QUEM POSSUI <b>MAIS DINHEIRO</b>?<br>OTÁVIO TEM <b>17</b> E MASSARU TEM <b>16</b>.',
+    fala:'Quem possui mais dinheiro, Otávio ou Massaru? Otávio tem dezessete reais e Massaru tem dezesseis.',
+    exp:'Isso mesmo! Otávio tem mais, porque dezessete é maior que dezesseis.',
+    ops:[{t:'OTÁVIO',ok:true},{t:'MASSARU',ok:false}],res:'ESCREVA',resp:'OTÁVIO'},
+   {tit:'C)',tipo:'num',
+    perg:'QUANTO A MAIS?<br>DO <b>16</b> ATÉ O <b>17</b>, QUANTOS FALTAM?<br><span class="conta">17 − 16 = ?</span>',
+    fala:'Quanto a mais? Do dezesseis até o dezessete, quantos faltam?',
+    certo:1,ops:[1,2,3,0],mostra:'17 − 16 = 1',
+    exp:'Isso mesmo! Otávio tem um real a mais.',res:'ESCREVA',resp:'1 REAL A MAIS'}]);}
+
+/* ===== J7 — CA pág.5 nº2: pagar sem troco ===== */
+function abrirJogo7(){
+  abrirRodadas(7,'CA PÁG. 5 — Nº 2',[
+   {tit:'',tipo:'num',
+    perg:'OTÁVIO COMPROU UM <b>DOCE POR 4 REAIS</b> 🍬 E UM <b>SUCO POR 6 REAIS</b> 🧃.<br>QUANTO ELE GASTOU AO TODO?<br><span class="conta">4 + 6 = ?</span>',
+    fala:'Além de comprar um doce por quatro reais, Otávio comprou um suco por seis reais. Quanto ele gastou ao todo? Quatro mais seis.',
+    certo:10,ops:[8,9,10,12],mostra:'4 + 6 = 10',
+    exp:'Isso mesmo! Ele gastou dez reais.',res:'',resp:'4 + 6 = 10 REAIS',semResumo:true},
+   {tit:'2)',tipo:'figs',
+    perg:'COMO ELE PODERIA PAGAR <b>10 REAIS</b> SEM RECEBER TROCO?<br>TOQUE NO DINHEIRO CERTO.',
+    fala:'Como Otávio poderia ter pagado os dez reais sem receber troco? Toque no dinheiro certo.',
+    figs:[{svg:cedula(10,150),rot:'NOTA DE 10',ok:true},{svg:cedula(5,150),rot:'NOTA DE 5',ok:false},
+          {svg:moeda1(60)+moeda1(60),rot:'2 MOEDAS DE 1',ok:false},{svg:cedula(5,110)+moeda1(40)+moeda1(40),rot:'5 + 1 + 1 = 7',ok:false}],
+    exp:'Isso mesmo! Com a nota de dez reais ele paga certinho, sem troco.',res:'CIRCULE',resp:'A NOTA DE 10 REAIS'}]);}
+
+/* ===== J8 — CA pág.5 nº3 e pág.6: a camiseta do Urbano ===== */
+function abrirJogo8(){
+  abrirRodadas(8,'CA PÁG. 5 E 6 — Nº 3',[
+   {tit:'A)',tipo:'num',ilustra:carteira('URBANO','👦🏼',DIN_URBANO),
+    perg:'URBANO QUIS COMPRAR UMA CAMISETA DO PARQUE.<br>QUAL É A QUANTIA QUE URBANO POSSUI?<br><span class="conta">50 + 20 + 5 = ?</span>',
+    fala:'Urbano quis comprar uma camiseta do parque. Veja o dinheiro dele: uma nota de cinquenta, uma de vinte e uma de cinco. Quanto ele tem?',
+    certo:75,ops:[70,75,80,85],mostra:'50 + 20 + 5 = 75',
+    dicaErro:'Quase! Cinquenta mais vinte dá setenta. Mais cinco...',
+    exp:'Isso mesmo! Urbano tem setenta e cinco reais.',res:'RESPOSTA',resp:'75 REAIS'},
+   {tit:'B)',tipo:'quadros',ilustra:'<div style="text-align:center;font-size:1.3rem;font-weight:bold">👕 = 25 REAIS &nbsp;&nbsp; 👦🏼 TEM 75 REAIS</div>',
+    perg:'A CAMISETA CUSTA <b>25 REAIS</b>.<br>COM 75 REAIS, ELE PODERÁ COMPRÁ-LA?',
+    fala:'A camiseta custa vinte e cinco reais. Com setenta e cinco reais, Urbano poderá comprá-la?',
+    exp:'Isso mesmo! Setenta e cinco é mais que vinte e cinco, então ele pode comprar.',
+    ops:[{t:'SIM',ok:true},{t:'NÃO',ok:false}],res:'ASSINALE',resp:'SIM'},
+   {tit:'C)',tipo:'figs',
+    perg:'PARA PAGAR A CAMISETA DE <b>25 REAIS</b>, URBANO QUER DAR <b>UMA ÚNICA CÉDULA</b>.<br>QUAL SERIA ELA?',
+    fala:'Para pagar a camiseta de vinte e cinco reais, Urbano quer dar uma única nota. Qual nota dá para pagar sozinha?',
+    figs:[{svg:cedula(50,150),rot:'NOTA DE 50',ok:true},{svg:cedula(20,150),rot:'NOTA DE 20',ok:false},{svg:cedula(5,150),rot:'NOTA DE 5',ok:false}],
+    dicaErro:'Quase! Essa nota é menor que vinte e cinco. Não dá para pagar.',
+    exp:'Isso mesmo! A nota de cinquenta. As notas de vinte e de cinco são menores que vinte e cinco.',res:'DESENHE NO QUADRO',resp:'A NOTA DE 50 REAIS'},
+   {tit:'D)',tipo:'num',ilustra:'<div style="text-align:center">'+cedula(50,150)+'<span style="font-size:2rem;font-weight:bold"> − 25 = ?</span></div>',
+    perg:'ELE DEU A NOTA DE <b>50</b> E A CAMISETA CUSTA <b>25</b>.<br>ELE RECEBERÁ TROCO? <b>QUANTO?</b>',
+    fala:'Urbano deu a nota de cinquenta e a camiseta custa vinte e cinco. Ele vai receber troco? Quanto? Dica: vinte e cinco mais quanto dá cinquenta?',
+    certo:25,ops:[15,20,25,30],mostra:'50 − 25 = 25',
+    dicaErro:'Quase! Pense: vinte e cinco mais vinte e cinco dá...',
+    exp:'Isso mesmo! Sim, ele recebe vinte e cinco reais de troco.',res:'RESPOSTA',resp:'SIM. 50 − 25 = 25. ELE RECEBERÁ 25 REAIS DE TROCO.'},
+   {tit:'E)',tipo:'num',ilustra:'<div style="text-align:center;font-size:2.2rem">👕 👕</div>',
+    perg:'SE URBANO QUISESSE COMPRAR <b>2 CAMISETAS</b>, QUANTO ELE GASTARIA?<br><span class="conta">25 + 25 = ?</span>',
+    fala:'Se Urbano quisesse comprar duas camisetas, quanto ele gastaria? Vinte e cinco mais vinte e cinco.',
+    certo:50,ops:[40,45,50,55],mostra:'25 + 25 = 50',
+    exp:'Isso mesmo! Duas camisetas custam cinquenta reais.',res:'RESPOSTA',resp:'25 + 25 = 50. ELE GASTARIA 50 REAIS.'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
