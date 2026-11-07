@@ -485,6 +485,7 @@
   <button class="menu-btn y1" onclick="abrirJogo1()"><span class="emo">🛝</span><span><span class="pag">CA PÁG. 2</span>VAMOS BRINCAR DE QUÊ?</span><span class="done" id="d1"></span></button>
   <button class="menu-btn y2" onclick="abrirJogo2()"><span class="emo">🧱</span><span><span class="pag">CA PÁG. 3</span>BRINCANDO SOZINHA</span><span class="done" id="d2"></span></button>
   <button class="menu-btn y3" onclick="abrirJogo3()"><span class="emo">🙈</span><span><span class="pag">CA PÁG. 3</span>A BRINCADEIRA DA TURMA</span><span class="done" id="d3"></span></button>
+  <button class="menu-btn y4" onclick="abrirJogo4()"><span class="emo">⭕</span><span><span class="pag">CA PÁG. 4</span>JOGO DA VELHA</span><span class="done" id="d4"></span></button>
   </div>
 </div>
 
@@ -610,6 +611,7 @@ function montarRod(){
   textoFala=r.fala;
   if(r.ilustra){const f=areaOn('figs-rod');
     f.innerHTML='<div class="fig-op" style="cursor:default;box-shadow:none;filter:none">'+r.ilustra+'</div>';}
+  if(r.tipo==='velha'){montaVelha(r);return;}
   if(r.tipo==='figs'){
     const f=areaOn('figs-rod');
     r.figs.forEach(o=>{
@@ -715,9 +717,9 @@ function contaRod(){
   else document.getElementById('prox-rod').classList.remove('mostrar');}
 function proxRod(){
   if(rI<JG.rodadas.length-1){rI++;montarRod();return;}
-  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>({
+  fimResumo(JG.n,JG.titulo,JG.rodadas.map((r,i)=>r.semResumo?null:({
     tit:(r.tit?r.tit+' ':'')+(r.res||''),
-    txt:r.resp||MAR[i].join(' • ')||'—'})));}
+    txt:r.resp||MAR[i].join(' • ')||'—'})).filter(Boolean));}
 
 /* ===== extensoes do motor (matematica) ===== */
 function respNum(el,v){
@@ -854,6 +856,82 @@ function abrirJogo3(){
     ops:[{e:'👍',n:'SIM, EU CONHEÇO'},{e:'📖',n:'AGORA EU APRENDI'}],
     res:'EXPLIQUE PARA ALGUÉM DA FAMÍLIA',
     resp:'UMA CRIANÇA FICA DE OLHOS VENDADOS E TENTA PEGAR OS AMIGOS. QUEM FOR PEGO VIRA A NOVA CABRA-CEGA.'}]);}
+
+/* ===== J4 — CA pág.4 nº6: jogo da velha ===== */
+const PARCEIROS=[{e:'👨',n:'PAPAI'},{e:'👩',n:'MAMÃE'},{e:'👵',n:'VOVÓ'},{e:'👴',n:'VOVÔ'},{e:'👩‍🦱',n:'TIA'},{e:'👨‍🦱',n:'TIO'}];
+const LINHAS3=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+const SVG_VELHA_EX='<svg viewBox="0 0 120 120" style="width:130px;height:130px;display:block;margin:0 auto">'+
+  '<g stroke="#5D4037" stroke-width="4" stroke-linecap="round"><line x1="40" y1="5" x2="40" y2="115"/><line x1="80" y1="5" x2="80" y2="115"/><line x1="5" y1="40" x2="115" y2="40"/><line x1="5" y1="80" x2="115" y2="80"/></g>'+
+  '<g stroke="#1565C0" stroke-width="5" stroke-linecap="round"><path d="M10 10 L30 30 M30 10 L10 30"/><path d="M50 50 L70 70 M70 50 L50 70"/><path d="M90 90 L110 110 M110 90 L90 110"/></g>'+
+  '<circle cx="60" cy="20" r="11" fill="#E53935"/><circle cx="100" cy="20" r="11" fill="#E53935"/><circle cx="20" cy="100" r="11" fill="#E53935"/>'+
+  '<line x1="8" y1="8" x2="112" y2="112" stroke="#43A047" stroke-width="4" opacity=".7"/></svg>';
+let VL=null;
+function parceiro(){return (JG.rodadas[0]&&MAR[0][0])||'ADULTO';}
+function montaVelha(r){
+  if(!VL||VL.rI!==rI)VL={rI:rI,partida:1,res:[]};
+  const f=areaOn('figs-rod');
+  VL.cas=Array(9).fill('');VL.vez=(VL.partida===1?'X':'O');VL.fim=false;
+  const nomeX='EDUARDA',nomeO=parceiro();
+  f.innerHTML='<div style="text-align:center">'+
+    '<div style="font-size:1.4rem;font-weight:bold;color:#6A1B9A">PARTIDA '+VL.partida+' DE 2</div>'+
+    '<div style="font-size:1.15rem;font-weight:bold;margin:4px 0"><span style="color:#1565C0">✖ = '+nomeX+'</span> &nbsp; • &nbsp; <span style="color:#E53935">⬤ = '+nomeO+'</span></div>'+
+    '<div id="vez-velha" style="font-size:1.3rem;font-weight:bold;margin:6px 0"></div>'+
+    '<div id="tab-velha" style="display:grid;grid-template-columns:repeat(3,92px);grid-template-rows:repeat(3,92px);gap:0;justify-content:center;margin:8px auto"></div>'+
+    '<div id="placar-velha" style="font-weight:bold;margin-top:6px"></div>'+
+    '<button id="nova-velha" style="display:none;margin:10px auto 0;font:inherit;font-weight:bold;font-size:1.2rem;padding:12px 22px;border:none;border-radius:16px;background:#7E57C2;color:#fff;box-shadow:0 4px 0 #4527A0">JOGAR A 2ª PARTIDA ➜</button></div>';
+  const t=document.getElementById('tab-velha');
+  for(let k=0;k<9;k++){const c=document.createElement('button');c.id='cv'+k;
+    const bd=[];if(k%3<2)bd.push('border-right:5px solid #5D4037');if(k<6)bd.push('border-bottom:5px solid #5D4037');
+    c.style.cssText='background:#fff;border:none;'+bd.join(';')+';font-size:3.4rem;font-weight:bold;cursor:pointer;padding:0;font-family:inherit';
+    c.onclick=()=>jogaVelha(k);t.appendChild(c);}
+  document.getElementById('nova-velha').onclick=()=>{VL.partida=2;montaVelha(r);};
+  atualizaVez();placarVelha();
+  if(VL.partida===2)falar('Segunda partida! Agora quem começa é '+nomeO.toLowerCase()+', com a bolinha.');}
+function nomeVez(){return VL.vez==='X'?'EDUARDA':parceiro();}
+function atualizaVez(){const v=document.getElementById('vez-velha');
+  v.innerHTML='VEZ DE: <span style="color:'+(VL.vez==='X'?'#1565C0':'#E53935')+'">'+(VL.vez==='X'?'✖ ':'⬤ ')+nomeVez()+'</span>';}
+function placarVelha(){const p=document.getElementById('placar-velha');
+  p.innerHTML=VL.res.map((x,i)=>'PARTIDA '+(i+1)+': '+x).join('<br>');}
+function jogaVelha(k){
+  if(VL.fim||VL.cas[k])return;
+  VL.cas[k]=VL.vez;const c=document.getElementById('cv'+k);
+  c.innerHTML=VL.vez==='X'?'<span style="color:#1565C0">✖</span>':'<span style="color:#E53935;font-size:2.6rem">⬤</span>';
+  tocarSom(true);
+  const lin=LINHAS3.find(l=>l.every(i=>VL.cas[i]===VL.vez));
+  if(lin){lin.forEach(i=>document.getElementById('cv'+i).style.background='#C8E6C9');fimPartida(nomeVez()+' VENCEU! 🏆');return;}
+  if(VL.cas.every(x=>x)){fimPartida('DEU VELHA (EMPATE) 🤝');return;}
+  VL.vez=VL.vez==='X'?'O':'X';atualizaVez();}
+function fimPartida(txt){
+  VL.fim=true;VL.res.push(txt);MAR[rI]=VL.res.slice();
+  document.getElementById('vez-velha').textContent=txt;placarVelha();
+  fbRod('certo',txt);falar(txt.replace(/[🏆🤝]/g,'').replace('DEU VELHA (EMPATE)','Deu velha! Empate.'));
+  if(typeof confete==='function')confete();
+  if(VL.partida===1)document.getElementById('nova-velha').style.display='block';
+  else liberaProx();}
+window._autoVelha=async function(){for(const k of [0,3,1,4,2])jogaVelha(k);document.getElementById('nova-velha').click();for(const k of [4,0,2,6,1,7,3,5,8])jogaVelha(k);};
+
+function abrirJogo4(){
+  VL=null;
+  abrirRodadas(4,'CA PÁG. 4 — Nº 6',[
+   {tit:'',tipo:'livre',n:1,semResumo:true,ilustra:SVG_VELHA_EX+
+     '<div class="regras" style="text-align:left">📋 AS REGRAS:<br>1. DESENHE DUAS LINHAS EM PÉ E DUAS DEITADAS (#).<br>2. DUAS PESSOAS JOGAM, UMA DE CADA VEZ.<br>3. CADA UMA ESCOLHE UM SÍMBOLO: ✖ OU ⬤.<br>4. VENCE QUEM FIZER PRIMEIRO UMA LINHA COM 3 SÍMBOLOS IGUAIS: EM PÉ, DEITADA OU TORTA.</div>',
+    perg:'⭕ UM DOS JOGOS PREFERIDOS DE MASSARU É O <b>JOGO DA VELHA</b>!<br>PEÇA A UM ADULTO PARA JOGAR COM VOCÊ. <b>QUEM VAI JOGAR?</b>',
+    fala:'Um dos jogos preferidos de Massaru é o jogo da velha. Você já jogou? As regras são: duas pessoas jogam, uma de cada vez. Uma usa o xis e a outra usa a bolinha. Vence quem fizer primeiro uma linha com três símbolos iguais, em pé, deitada ou torta. Chame um adulto e toque em quem vai jogar com você.',
+    ops:PARCEIROS},
+   {tit:'VAMOS JOGAR!',tipo:'velha',semResumo:false,res:'RESULTADO',
+    perg:'JOGUEM <b>DUAS PARTIDAS</b>! TOQUEM NOS QUADRINHOS, UM DE CADA VEZ.',
+    fala:'Vamos jogar duas partidas! Você é o xis azul e começa a primeira. Toquem nos quadradinhos, um de cada vez.'},
+   {tit:'A)',tipo:'livre',n:1,
+    perg:'<b>QUEM VENCEU A PARTIDA?</b><br>OLHE O RESULTADO E ESCOLHA PARA ESCREVER.',
+    fala:'Quem venceu a partida? Escolha a resposta para escrever no livro.',
+    ops:()=>[{e:'👧',n:'EU, EDUARDA'},{e:(PARCEIROS.find(x=>x.n===parceiro())||{e:'🧑'}).e,n:parceiro()},{e:'🤝',n:'DEU VELHA (EMPATE)'}],
+    res:'QUEM VENCEU'},
+   {tit:'B)',tipo:'livre',n:1,
+    perg:'QUE OUTRO JOGO OU BRINCADEIRA VOCÊ CONHECE QUE É POSSÍVEL BRINCAR <b>EM DUPLA</b> (DUAS PESSOAS)?',
+    fala:'Que outro jogo ou brincadeira você conhece que dá para brincar em dupla, só com duas pessoas?',
+    ops:[{e:'⚫',n:'DAMA'},{e:'🁫',n:'DOMINÓ'},{e:'🃏',n:'JOGO DA MEMÓRIA'},{e:'✊',n:'PEDRA, PAPEL E TESOURA'},
+         {e:'🥢',n:'PEGA-VARETA'},{e:'♟️',n:'XADREZ'},{e:'🏓',n:'PINGUE-PONGUE'},{e:'👏',n:'ADOLETA'}],
+    res:'JOGO EM DUPLA'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
