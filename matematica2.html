@@ -482,6 +482,7 @@
   <button class="menu-btn x1" onclick="abrirJogo6()"><span class="emo">💵</span><span><span class="pag">CA PÁG. 5</span>QUANTO DINHEIRO ELES TÊM?</span><span class="done" id="d6"></span></button>
   <button class="menu-btn x2" onclick="abrirJogo7()"><span class="emo">🧃</span><span><span class="pag">CA PÁG. 5</span>PAGAR SEM TROCO</span><span class="done" id="d7"></span></button>
   <button class="menu-btn x3" onclick="abrirJogo8()"><span class="emo">👕</span><span><span class="pag">CA PÁG. 5 E 6</span>A CAMISETA DO URBANO</span><span class="done" id="d8"></span></button>
+  <button class="menu-btn x4" onclick="abrirJogo9()"><span class="emo">📐</span><span><span class="pag">CA PÁG. 7</span>TRAÇANDO FIGURAS PLANAS</span><span class="done" id="d9"></span></button>
   </div>
 </div>
 
@@ -607,6 +608,7 @@ function montarRod(){
   textoFala=r.fala;
   if(r.ilustra){const f=areaOn('figs-rod');
     f.innerHTML='<div class="fig-op" style="cursor:default;box-shadow:none;filter:none">'+r.ilustra+'</div>';}
+  if(r.tipo==='malha'){montaMalha(r);return;}
   if(r.tipo==='figs'){
     const f=areaOn('figs-rod');
     r.figs.forEach(o=>{
@@ -938,6 +940,80 @@ function abrirJogo8(){
     fala:'Se Urbano quisesse comprar duas camisetas, quanto ele gastaria? Vinte e cinco mais vinte e cinco.',
     certo:50,ops:[40,45,50,55],mostra:'25 + 25 = 50',
     exp:'Isso mesmo! Duas camisetas custam cinquenta reais.',res:'RESPOSTA',resp:'25 + 25 = 50. ELE GASTARIA 50 REAIS.'}]);}
+
+/* ===== J9 — CA pág.7 nº1: traçando figuras planas na malha pontilhada ===== */
+const FORMAS3='<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;font-weight:bold;text-align:center">'+
+  '<div><svg viewBox="0 0 100 100" style="width:110px;height:110px"><rect x="15" y="15" width="70" height="70" fill="#FFCA28" stroke="#F57F17" stroke-width="5"/></svg><br>QUADRADO</div>'+
+  '<div><svg viewBox="0 0 100 100" style="width:110px;height:110px"><polygon points="50,12 90,88 10,88" fill="#EF5350" stroke="#B71C1C" stroke-width="5"/></svg><br>TRIÂNGULO</div>'+
+  '<div><svg viewBox="0 0 140 100" style="width:154px;height:110px"><rect x="10" y="20" width="120" height="60" fill="#42A5F5" stroke="#0D47A1" stroke-width="5"/></svg><br>RETÂNGULO</div></div>';
+const MALHAS=[
+ {n:'CATA-VENTO',e:'🎡',w:5,h:5,cor:'#E53935',ed:[[2,0,3,1],[3,1,2,2],[2,2,2,0],[2,2,4,2],[4,2,3,3],[3,3,2,2],[2,2,2,4],[2,4,1,3],[1,3,2,2],[2,2,0,2],[0,2,1,1],[1,1,2,2]],
+  f:'O cata-vento tem quatro triângulos em volta do meio.'},
+ {n:'CASINHA',e:'🏠',w:7,h:8,cor:'#1E88E5',ed:[[3,0,0,3],[0,3,6,3],[6,3,3,0],[2,3,2,7],[2,7,4,7],[4,7,4,3]],
+  f:'A casinha tem um triângulo grande em cima, que é o telhado, e um retângulo embaixo.'},
+ {n:'PEIXE',e:'🐟',w:5,h:3,cor:'#43A047',ed:[[0,0,0,2],[0,2,1,1],[1,1,0,0],[1,0,3,0],[3,0,3,2],[3,2,1,2],[1,2,1,0],[3,0,4,1],[4,1,3,2]],
+  f:'O peixe tem um triângulo no rabo, um quadrado no meio e um triângulo na cabeça.'}];
+function mdc(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a;}
+function unidades(x1,y1,x2,y2){const g=mdc(x2-x1,y2-y1);if(!g)return [];const dx=(x2-x1)/g,dy=(y2-y1)/g,out=[];
+  for(let k=0;k<g;k++){const a=[x1+k*dx,y1+k*dy],b=[x1+(k+1)*dx,y1+(k+1)*dy];
+    out.push((a[0]<b[0]||(a[0]===b[0]&&a[1]<b[1]))?a.join(',')+'-'+b.join(','):b.join(',')+'-'+a.join(','));}
+  return out;}
+function alvoMalha(M){const S=new Set();M.ed.forEach(e=>unidades(e[0],e[1],e[2],e[3]).forEach(u=>S.add(u)));return S;}
+function svgModelo(M,px){const P=14,W=(M.w-1)*px+2*P,H=(M.h-1)*px+2*P;let g='<svg viewBox="0 0 '+W+' '+H+'" style="width:'+W+'px;max-width:100%;height:auto;background:#fff;border:3px solid #B0BEC5;border-radius:12px">';
+  M.ed.forEach(e=>{g+='<line x1="'+(P+e[0]*px)+'" y1="'+(P+e[1]*px)+'" x2="'+(P+e[2]*px)+'" y2="'+(P+e[3]*px)+'" stroke="'+M.cor+'" stroke-width="4" stroke-linecap="round"/>';});
+  for(let y=0;y<M.h;y++)for(let x=0;x<M.w;x++)g+='<circle cx="'+(P+x*px)+'" cy="'+(P+y*px)+'" r="3.5" fill="#37474F"/>';
+  return g+'</svg>';}
+let ML=null;
+function montaMalha(r){
+  const M=r.malha;ML={M:M,alvo:alvoMalha(M),feito:new Set(),sel:null};
+  const px=Math.min(74,Math.floor(470/(M.w-1))),P=30,W=(M.w-1)*px+2*P,H=(M.h-1)*px+2*P;ML.px=px;ML.P=P;
+  const f=areaOn('figs-rod');
+  let g='<div style="text-align:center"><div style="font-weight:bold;color:#455A64;margin-bottom:4px">👀 MODELO: '+M.e+' '+M.n+'</div>'+svgModelo(M,Math.min(34,Math.floor(200/(M.w-1))))+
+    '<div style="font-weight:bold;color:#6A1B9A;margin:10px 0 4px">✏️ SUA MALHA: TOQUE EM 2 PONTINHOS PARA FAZER UM RISCO</div>'+
+    '<svg id="svg-malha" viewBox="0 0 '+W+' '+H+'" style="width:100%;max-width:'+W+'px;height:auto;background:#fff;border:4px solid #B39DDB;border-radius:16px;touch-action:manipulation"><g id="ln-malha"></g>';
+  for(let y=0;y<M.h;y++)for(let x=0;x<M.w;x++)
+    g+='<circle id="pt-'+x+'-'+y+'" cx="'+(P+x*px)+'" cy="'+(P+y*px)+'" r="7" fill="#37474F"/><circle cx="'+(P+x*px)+'" cy="'+(P+y*px)+'" r="'+Math.min(26,px/2-2)+'" fill="transparent" style="cursor:pointer" onclick="tocaPonto('+x+','+y+')"/>';
+  g+='</svg><div id="cont-malha" style="font-weight:bold;margin-top:6px"></div>'+
+    '<button onclick="dicaMalha()" style="margin-top:8px;font:inherit;font-weight:bold;font-size:1.1rem;padding:10px 20px;border:none;border-radius:16px;background:#FFD54F;color:#5D4037;box-shadow:0 4px 0 #F9A825">💡 DICA</button></div>';
+  f.innerHTML=g;contaMalha();}
+function linhaMalha(u,cor,cls){const [a,b]=u.split('-').map(p=>p.split(',').map(Number)),px=ML.px,P=ML.P;
+  const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1',P+a[0]*px);l.setAttribute('y1',P+a[1]*px);l.setAttribute('x2',P+b[0]*px);l.setAttribute('y2',P+b[1]*px);
+  l.setAttribute('stroke',cor);l.setAttribute('stroke-width',cls?5:7);l.setAttribute('stroke-linecap','round');if(cls){l.setAttribute('stroke-dasharray','6 8');l.setAttribute('class',cls);}
+  document.getElementById('ln-malha').appendChild(l);return l;}
+function contaMalha(){document.getElementById('cont-malha').textContent='RISCOS: '+ML.feito.size+' DE '+ML.alvo.size;}
+function marcaSel(on){if(!ML.sel)return;const c=document.getElementById('pt-'+ML.sel[0]+'-'+ML.sel[1]);c.setAttribute('r',on?12:7);c.setAttribute('fill',on?'#FB8C00':'#37474F');}
+function tocaPonto(x,y){
+  if(ML.feito.size>=ML.alvo.size)return;
+  if(!ML.sel){ML.sel=[x,y];marcaSel(true);return;}
+  const a=ML.sel;marcaSel(false);ML.sel=null;
+  if(a[0]===x&&a[1]===y)return;
+  const us=unidades(a[0],a[1],x,y);
+  if(us.length&&us.every(u=>ML.alvo.has(u))){
+    let novo=0;us.forEach(u=>{if(!ML.feito.has(u)){ML.feito.add(u);linhaMalha(u,ML.M.cor);novo++;}});
+    document.querySelectorAll('.dica-malha').forEach(e=>e.remove());
+    if(novo)tocarSom(true);contaMalha();
+    if(ML.feito.size>=ML.alvo.size){fbRod('certo',elogio());MAR[rI]=[ML.M.n];falar('Muito bem! Você desenhou '+(ML.M.n==='PEIXE'?'o peixe':ML.M.n==='CASINHA'?'a casinha':'o cata-vento')+'. '+ML.M.f);liberaProx();}
+    else if(novo)fbRod('certo','ISSO! ✏️');
+  }else{tocarSom(false);fbRod('tente','TENTE DE NOVO 😊');falar('Esse risco não está no modelo. Olhe o modelo e tente de novo.');}}
+function dicaMalha(){
+  document.querySelectorAll('.dica-malha').forEach(e=>e.remove());
+  const e=ML.M.ed.find(e=>unidades(e[0],e[1],e[2],e[3]).some(u=>!ML.feito.has(u)));if(!e)return;
+  unidades(e[0],e[1],e[2],e[3]).forEach(u=>linhaMalha(u,'#FB8C00','dica-malha'));
+  falar('Veja o risco laranja. Toque no pontinho onde ele começa e depois no pontinho onde ele termina.');}
+window._autoMalha=async function(){tocaPonto(0,0);tocaPonto(ML.M.w-1,ML.M.h-1===0?0:ML.M.h-1);const bad=document.getElementById('prox-rod').classList.contains('mostrar');
+  ML.M.ed.forEach(e=>{tocaPonto(e[0],e[1]);tocaPonto(e[2],e[3]);});return bad;};
+
+function abrirJogo9(){
+  abrirRodadas(9,'CA PÁG. 7 — Nº 1',[
+   {tit:'TRAÇANDO FIGURAS PLANAS',tipo:'livre',n:1,semResumo:true,ilustra:FORMAS3,
+    perg:'NO PARQUE DE DIVERSÕES, ANITA VIU MUITAS COISAS QUE LEMBRAM ESTAS <b>FIGURAS GEOMÉTRICAS</b>.',
+    fala:'No parque de diversões, Anita viu muitas coisas que lembram estas figuras geométricas: o quadrado, o triângulo e o retângulo. Agora vamos desenhar na malha de pontinhos. Toque em vamos.',
+    ops:[{e:'✏️',n:'VAMOS!'}]}
+  ].concat(MALHAS.map((M,k)=>({tit:'DESENHO '+(k+1)+' DE 3',tipo:'malha',malha:M,
+    perg:'VEJA O QUE ANITA VIU: <b>'+M.e+' '+M.n+'</b>.<br>REPRODUZA O DESENHO NA SUA MALHA.',
+    fala:'Veja o que Anita viu: '+M.n.toLowerCase()+'. '+M.f+' Reproduza o desenho na sua malha. Toque em dois pontinhos para fazer um risco. Se precisar, toque na dica.',
+    res:'✏️ DESENHE NA MALHA DO LIVRO',resp:M.e+' '+M.n}))));}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
