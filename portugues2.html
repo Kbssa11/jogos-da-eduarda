@@ -1166,12 +1166,55 @@ function abrirJogo13(){
    {p:'SEMANA',sil:['SE','MA','NA'],mist:['NA','SE','MA'],e:'📅'},
    {p:'APOSTA',sil:['A','POS','TA'],mist:['TA','POS','A'],e:'🤝'}],true);}
 
+/* ===== desenhos-dica dos contrários (pág. 8) ===== */
+const SV=(c)=>'<svg viewBox="0 0 120 120" style="width:120px;height:120px;display:block;margin:0 auto">'+c+'</svg>';
+const POTE=(cheio)=>'<rect x="30" y="34" width="60" height="72" rx="10" fill="#E3F2FD" stroke="#1565C0" stroke-width="4"/>'+
+  (cheio?'<rect x="34" y="44" width="52" height="58" rx="6" fill="#FB8C00"/><circle cx="46" cy="58" r="6" fill="#FFCC80"/><circle cx="66" cy="70" r="6" fill="#FFCC80"/><circle cx="52" cy="88" r="6" fill="#FFCC80"/><circle cx="74" cy="52" r="5" fill="#FFCC80"/>':'')+
+  '<rect x="26" y="24" width="68" height="12" rx="4" fill="#8D6E63"/>';
+const CAIXA='<path d="M20 60 h80 v46 h-80z" fill="#D7A86E" stroke="#8D6E63" stroke-width="4"/><path d="M20 60 l-10 -14 h80 l20 14" fill="#E8C08A" stroke="#8D6E63" stroke-width="4"/>';
+const BOLA=(x,y)=>'<circle cx="'+x+'" cy="'+y+'" r="15" fill="#fff" stroke="#212121" stroke-width="3"/><polygon points="'+x+','+(y-6)+' '+(x+6)+','+(y-1)+' '+(x+4)+','+(y+6)+' '+(x-4)+','+(y+6)+' '+(x-6)+','+(y-1)+'" fill="#212121"/>';
+const DICA_DES={
+ VAZIO:SV(POTE(false)),CHEIO:SV(POTE(true)),
+ DENTRO:SV(CAIXA.replace('<path d="M20 60 l','<g opacity=".95">'+'<path d="M20 60 l')+'</g>'+'<circle cx="60" cy="84" r="0"/>').replace('</g>','')+'',
+ FORA:SV('<g transform="translate(-4,26) scale(0.72)">'+CAIXA+'</g>'+BOLA(100,98)),
+ MOLE:SV('<path d="M14 70 Q20 44 60 48 Q100 44 106 70 Q100 96 60 92 Q20 96 14 70z" fill="#F8BBD0" stroke="#AD1457" stroke-width="4"/><path d="M44 52 Q60 72 76 52" stroke="#AD1457" stroke-width="3" fill="none"/><text x="60" y="114" font-size="12" font-weight="bold" text-anchor="middle" fill="#AD1457">TRAVESSEIRO</text>'),
+ DURO:SV('<path d="M18 92 L28 52 L54 34 L86 40 L104 70 L96 96 Z" fill="#90A4AE" stroke="#37474F" stroke-width="4"/><path d="M40 60 L58 56 M66 74 L82 70" stroke="#546E7A" stroke-width="3"/><text x="60" y="114" font-size="12" font-weight="bold" text-anchor="middle" fill="#37474F">PEDRA</text>'),
+ CARO:SV('<path d="M20 30 h56 l26 30 -26 30 h-56z" fill="#FFF59D" stroke="#F9A825" stroke-width="4"/><circle cx="32" cy="60" r="5" fill="#F9A825"/><text x="64" y="68" font-size="22" font-weight="bold" text-anchor="middle" fill="#C62828">R$ 100</text><text x="60" y="112" font-size="20" text-anchor="middle">💰💰💰</text>'),
+ BARATO:SV('<path d="M20 30 h56 l26 30 -26 30 h-56z" fill="#FFF59D" stroke="#F9A825" stroke-width="4"/><circle cx="32" cy="60" r="5" fill="#F9A825"/><text x="64" y="70" font-size="26" font-weight="bold" text-anchor="middle" fill="#2E7D32">R$ 1</text><text x="60" y="112" font-size="20" text-anchor="middle">🪙</text>'),
+ VELHO:SV('<path d="M24 50 L42 30 L78 30 L96 50 L84 58 L84 104 L36 104 L36 58 Z" fill="#BCAAA4" stroke="#6D4C41" stroke-width="4"/><rect x="48" y="62" width="16" height="14" fill="#8D6E63" transform="rotate(-10 56 69)"/><path d="M66 86 l8 8 m0 -8 l-8 8" stroke="#4E342E" stroke-width="3"/><path d="M40 98 l4 -8 4 8" stroke="#4E342E" stroke-width="3" fill="none"/>'),
+ NOVO:SV('<path d="M24 50 L42 30 L78 30 L96 50 L84 58 L84 104 L36 104 L36 58 Z" fill="#42A5F5" stroke="#0D47A1" stroke-width="4"/><text x="60" y="80" font-size="22" text-anchor="middle">⭐</text><text x="102" y="30" font-size="18" text-anchor="middle">✨</text><text x="16" y="96" font-size="16" text-anchor="middle">✨</text>'),
+ FORTE:SV('<circle cx="60" cy="40" r="11" fill="#FFE0B2" stroke="#222" stroke-width="3"/><path d="M52 40 q8 6 16 0" stroke="#222" stroke-width="2" fill="none"/><line x1="60" y1="51" x2="60" y2="84" stroke="#222" stroke-width="4"/><path d="M60 60 L38 40 M60 60 L82 40" stroke="#222" stroke-width="4"/><path d="M60 84 L46 108 M60 84 L74 108" stroke="#222" stroke-width="4"/>'+
+   '<line x1="16" y1="24" x2="104" y2="24" stroke="#455A64" stroke-width="5"/><rect x="10" y="12" width="12" height="24" rx="3" fill="#E53935"/><rect x="98" y="12" width="12" height="24" rx="3" fill="#E53935"/>'),
+ FRACO:SV('<circle cx="60" cy="40" r="11" fill="#FFE0B2" stroke="#222" stroke-width="3"/><path d="M52 46 q8 -5 16 0" stroke="#222" stroke-width="2" fill="none"/><path d="M76 34 q3 6 0 8" stroke="#29B6F6" stroke-width="3" fill="none"/><line x1="60" y1="51" x2="62" y2="80" stroke="#222" stroke-width="4"/><path d="M61 60 L44 88 M61 60 L78 88" stroke="#222" stroke-width="4"/><path d="M62 80 L50 106 M62 80 L74 106" stroke="#222" stroke-width="4"/>'+
+   '<line x1="16" y1="102" x2="104" y2="102" stroke="#455A64" stroke-width="5"/><rect x="10" y="90" width="12" height="24" rx="3" fill="#E53935"/><rect x="98" y="90" width="12" height="24" rx="3" fill="#E53935"/>'),
+ MEDROSO:'<div style="font-size:80px;line-height:120px">😨</div>',CORAJOSO:'<div style="font-size:80px;line-height:120px">🦸‍♀️</div>',
+ ABERTO:SV('<rect x="30" y="16" width="60" height="96" fill="#5D4037"/><path d="M30 16 L64 26 L64 104 L30 112z" fill="#A1887F" stroke="#4E342E" stroke-width="4"/><circle cx="58" cy="66" r="4" fill="#FDD835"/>'),
+ FECHADO:SV('<rect x="30" y="16" width="60" height="96" fill="#A1887F" stroke="#4E342E" stroke-width="4"/><circle cx="80" cy="66" r="4" fill="#FDD835"/>'),
+ BONITO:'<div style="font-size:80px;line-height:120px">🌻</div>',FEIO:'<div style="font-size:80px;line-height:120px">🥀</div>',
+ RIR:'<div style="font-size:80px;line-height:120px">😂</div>',CHORAR:'<div style="font-size:80px;line-height:120px">😭</div>',
+ CEDO:'<div style="font-size:80px;line-height:120px">🌅</div>',TARDE:'<div style="font-size:80px;line-height:120px">🌙</div>',
+ GANHAR:'<div style="font-size:80px;line-height:120px">🏆</div>',PERDER:'<div style="font-size:80px;line-height:120px">😞</div>'};
+DICA_DES.DENTRO=SV(BOLA(60,42)+CAIXA);
+function dicaContr(a,b,id){
+  return '<div style="text-align:center;margin-top:10px"><button onclick="abreDica(\''+id+'\',\''+a+'\',\''+b+'\')" style="font:inherit;font-weight:bold;font-size:1.15rem;padding:10px 22px;border:none;border-radius:16px;background:#FFD54F;color:#5D4037;box-shadow:0 4px 0 #F9A825;cursor:pointer">💡 DICA</button>'+
+    '<div id="'+id+'" style="display:none;margin-top:10px;gap:8px;justify-content:center;align-items:center;flex-wrap:nowrap">'+
+    '<div style="background:#fff;border:3px solid #90CAF9;border-radius:16px;padding:6px 8px;min-width:130px">'+DICA_DES[a]+'<div style="font-weight:bold;font-size:1.2rem;color:#1565C0">'+a+'</div></div>'+
+    '<div style="font-size:2rem">↔️</div>'+
+    '<div style="background:#fff;border:3px dashed #FFB300;border-radius:16px;padding:6px 8px;min-width:130px">'+DICA_DES[b]+'<div style="font-weight:bold;font-size:1.2rem;color:#E65100">???</div></div></div></div>';}
+function abreDica(id,a,b){const d=document.getElementById(id);d.style.display='flex';
+  const f={VAZIO:'Veja: este pote está vazio. E este outro pote, como ele está?',DENTRO:'Veja: a bola está dentro da caixa. E agora, onde está a bola?',
+    MOLE:'O travesseiro é mole. E a pedra, como ela é?',CARO:'Cem reais é caro. E um real, como é?',VELHO:'Esta camiseta está velha e rasgada. E a outra, como ela está?',
+    FORTE:'Este menino é forte, levanta o peso. E o outro menino, que não consegue levantar?',MEDROSO:'Medroso tem medo. Quem não tem medo é...?',
+    ABERTO:'A porta está aberta. E a outra porta, como está?',BONITO:'Esta flor está bonita. E a flor murcha?',RIR:'Esta carinha está rindo. E a outra, o que ela está fazendo?',
+    CEDO:'De manhãzinha é cedo. E de noite, quando o sol já foi embora?',GANHAR:'Quem pega o troféu vai ganhar. E quem fica triste?'}[a]||'Olhe os desenhos.';
+  falar(f);}
+
 /* ===== J14 — pág.8 nº6: jogo da memória de palavras contrárias ===== */
 const CONTR6=[[1,'VAZIO','CHEIO','🥛'],[2,'DENTRO','FORA','📦'],[3,'MOLE','DURO','🪨'],[4,'CARO','BARATO','💰'],[5,'VELHO','NOVO','✨'],[6,'FORTE','FRACO','💪']];
 const DIREITA6=['FRACO','NOVO','CHEIO','BARATO','FORA','DURO'];
 function abrirJogo14(){
   abrirRodadas(14,'CA PÁG. 8 — Nº 6',CONTR6.map((c,k)=>({tipo:'quadros',tit:'PAR NÚMERO '+c[0],
-    ilustra:'<div style="text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:4px solid #5C6BC0;font-size:2rem;font-weight:bold;color:#283593;background:#fff">'+c[0]+'</span><div style="font-size:2.2rem;font-weight:bold;margin-top:6px">'+c[1]+'</div></div>',
+    ilustra:'<div style="text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:4px solid #5C6BC0;font-size:2rem;font-weight:bold;color:#283593;background:#fff">'+c[0]+'</span><div style="font-size:2.2rem;font-weight:bold;margin-top:6px">'+c[1]+'</div></div>'+dicaContr(c[1],c[2],'dk14'),
     perg:(k===0?'🔁 JOGO DA MEMÓRIA DE <b>PALAVRAS CONTRÁRIAS</b>!<br>':'')+'QUAL É O <b>CONTRÁRIO</b> DE <b>'+c[1]+'</b>?<br>ELE GANHA O MESMO NÚMERO: <b>'+c[0]+'</b>.',
     fala:(k===0?'A mãe de Emília quis brincar de outro jogo: o jogo da memória de palavras contrárias. Vamos organizar os pares usando o mesmo número. ':'')+'Qual é o contrário de '+c[1].toLowerCase()+'?',
     exp:'Isso mesmo! O contrário de '+c[1].toLowerCase()+' é '+c[2].toLowerCase()+'. Escreva o número '+c[0]+' na bolinha de '+c[2].toLowerCase()+'.',
@@ -1197,7 +1240,7 @@ function abrirJogo15(){
     exp:'Isso mesmo! '+L.w.toLowerCase()+' é o contrário de '+L.de.toLowerCase()+'.',
     ops:['FECHADO','TARDE','CHORAR','PERDER','CORAJOSO','FEIO'].map(w=>({t:w,ok:w===L.w})),
     res:'',resp:L.w+'  (CONTRÁRIO DE '+L.de+')'}));
-  rod.forEach((r,k)=>{r.antes=function(){r.ilustra=gradeCruzC(k);};});
+  rod.forEach((r,k)=>{r.antes=function(){r.ilustra=gradeCruzC(k)+'<div style="font-weight:bold;margin-top:8px;font-size:1.2rem">CONTRÁRIO DE <span style="color:#C62828">'+CRUZ_C[k].de+'</span></div>'+dicaContr(CRUZ_C[k].de,CRUZ_C[k].w,'dk15');};});
   rod.push({tipo:'livre',n:1,semResumo:true,tit:'CRUZADINHA COMPLETA!',ilustra:gradeCruzC(6),
     perg:'🎉 VOCÊ COMPLETOU A CRUZADINHA!<br>AGORA COPIE AS PALAVRAS NO LIVRO.',fala:'Parabéns! Você completou a cruzadinha. Agora copie as palavras no seu livro.',ops:[{e:'✏️',n:'VOU COPIAR!'}]});
   abrirRodadas(15,'CA PÁG. 8 — Nº 7',rod);}
