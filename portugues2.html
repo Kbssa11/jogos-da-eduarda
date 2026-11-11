@@ -440,7 +440,7 @@
   h1{color:#2E7D32 !important;}
   .p1{background:#66BB6A;} .p2{background:#FFA726;} .p3{background:#42A5F5;}
   .p6{background:#EF5350;} .p7{background:#5C6BC0;} .p8{background:#FFA726;} .p9{background:#29B6F6;}
-  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;}
+  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;} .p14{background:#5C6BC0;} .p15{background:#F4511E;} .p16{background:#43A047;} .p17{background:#6D4C41;}
   .ps-area{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:8px;}
   .ps-pal{background:#fff;border:4px solid #E0E0E0;border-radius:16px;padding:8px 4px;text-align:center;}
   .ps-pal.ok{border-color:#43A047;background:#F1F8E9;}
@@ -530,6 +530,10 @@
   <button class="menu-btn p11" onclick="abrirJogo11()"><span class="emo">📝</span><span><span class="pag">CA PÁG. 7</span>UM NOME COM S E OUTRO COM SS</span><span class="done" id="d11"></span></button>
   <button class="menu-btn p12" onclick="abrirJogo12()"><span class="emo">👂</span><span><span class="pag">CA PÁG. 7</span>O SOM DIFERENTE</span><span class="done" id="d12"></span></button>
   <button class="menu-btn p13" onclick="abrirJogo13()"><span class="emo">✂️</span><span><span class="pag">CA PÁG. 7</span>SEPARANDO AS SÍLABAS</span><span class="done" id="d13"></span></button>
+  <button class="menu-btn p14" onclick="abrirJogo14()"><span class="emo">🔁</span><span><span class="pag">CA PÁG. 8</span>MEMÓRIA DAS PALAVRAS CONTRÁRIAS</span><span class="done" id="d14"></span></button>
+  <button class="menu-btn p15" onclick="abrirJogo15()"><span class="emo">🔠</span><span><span class="pag">CA PÁG. 8</span>CRUZADINHA DOS CONTRÁRIOS</span><span class="done" id="d15"></span></button>
+  <button class="menu-btn p16" onclick="abrirJogo16()"><span class="emo">🧸</span><span><span class="pag">CA PÁG. 9</span>OS BRINQUEDOS DA EMÍLIA</span><span class="done" id="d16"></span></button>
+  <button class="menu-btn p17" onclick="abrirJogo17()"><span class="emo">📰</span><span><span class="pag">CA PÁG. 9</span>A MANCHETE DA NOTÍCIA</span><span class="done" id="d17"></span></button>
   </div>
 </div>
 
@@ -692,7 +696,7 @@ function liberaProx(){
   b.textContent=(rI<JG.rodadas.length-1)?'CONTINUAR ➜':'PRONTO ➜';
   b.classList.add('mostrar');}
 function montarRod(){
-  const r=JG.rodadas[rI];selCor=null;
+  const r=JG.rodadas[rI];selCor=null;if(r.antes)r.antes();
   estrelas(document.getElementById('prog-rod'),rI,JG.rodadas.length);
   limparRod();
   document.getElementById('perg-rod').innerHTML=
@@ -1161,6 +1165,71 @@ function abrirJogo13(){
    {p:'ROSA',sil:['RO','SA'],mist:['SA','RO'],e:'🌹'},
    {p:'SEMANA',sil:['SE','MA','NA'],mist:['NA','SE','MA'],e:'📅'},
    {p:'APOSTA',sil:['A','POS','TA'],mist:['TA','POS','A'],e:'🤝'}],true);}
+
+/* ===== J14 — pág.8 nº6: jogo da memória de palavras contrárias ===== */
+const CONTR6=[[1,'VAZIO','CHEIO','🥛'],[2,'DENTRO','FORA','📦'],[3,'MOLE','DURO','🪨'],[4,'CARO','BARATO','💰'],[5,'VELHO','NOVO','✨'],[6,'FORTE','FRACO','💪']];
+const DIREITA6=['FRACO','NOVO','CHEIO','BARATO','FORA','DURO'];
+function abrirJogo14(){
+  abrirRodadas(14,'CA PÁG. 8 — Nº 6',CONTR6.map((c,k)=>({tipo:'quadros',tit:'PAR NÚMERO '+c[0],
+    ilustra:'<div style="text-align:center"><span style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;border:4px solid #5C6BC0;font-size:2rem;font-weight:bold;color:#283593;background:#fff">'+c[0]+'</span><div style="font-size:2.2rem;font-weight:bold;margin-top:6px">'+c[1]+'</div></div>',
+    perg:(k===0?'🔁 JOGO DA MEMÓRIA DE <b>PALAVRAS CONTRÁRIAS</b>!<br>':'')+'QUAL É O <b>CONTRÁRIO</b> DE <b>'+c[1]+'</b>?<br>ELE GANHA O MESMO NÚMERO: <b>'+c[0]+'</b>.',
+    fala:(k===0?'A mãe de Emília quis brincar de outro jogo: o jogo da memória de palavras contrárias. Vamos organizar os pares usando o mesmo número. ':'')+'Qual é o contrário de '+c[1].toLowerCase()+'?',
+    exp:'Isso mesmo! O contrário de '+c[1].toLowerCase()+' é '+c[2].toLowerCase()+'. Escreva o número '+c[0]+' na bolinha de '+c[2].toLowerCase()+'.',
+    ops:DIREITA6.map(w=>({t:w,ok:w===c[2]})),res:'ESCREVA O NÚMERO '+c[0]+' EM',resp:c[2]+'  ('+c[1]+' ↔ '+c[2]+')'})));}
+
+/* ===== J15 — pág.8 nº7: cruzadinha dos contrários ===== */
+const CRUZ_C=[{w:'CORAJOSO',de:'MEDROSO',d:{1:'O',4:'J'}},{w:'FECHADO',de:'ABERTO',d:{1:'E',3:'H'}},{w:'FEIO',de:'BONITO',d:{0:'F'}},
+  {w:'CHORAR',de:'RIR',d:{1:'H',5:'R'}},{w:'TARDE',de:'CEDO',d:{2:'R'}},{w:'PERDER',de:'GANHAR',d:{3:'D'}}];
+function gradeCruzC(atual){
+  let h='<div style="display:inline-block;text-align:left">';
+  CRUZ_C.forEach((L,i)=>{h+='<div style="display:flex">';
+    for(let c=0;c<L.w.length;c++){const feita=i<atual,dica=L.d[c]!==undefined;
+      const letra=feita?L.w[c]:(dica?L.d[c]:'');
+      h+='<span style="width:44px;height:44px;border:2px solid #5D4037;margin:-1px;display:inline-flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:bold;background:'+
+        (i===atual?'#FFF59D':feita?'#C8E6C9':'#fff')+';color:'+(feita&&!dica?'#1B5E20':'#3E2723')+'">'+letra+'</span>';}
+    h+='</div>';});
+  return h+'</div>';}
+function abrirJogo15(){
+  const rod=CRUZ_C.map((L,k)=>({tipo:'quadros',tit:'LINHA '+(k+1)+' — '+L.w.length+' LETRAS',ilustra:'',
+    perg:(k===0?'🔠 CRUZADINHA! ESCREVA O <b>CONTRÁRIO</b> DAS PALAVRAS.<br>':'')+'OLHE A LINHA <b>AMARELA</b> E AS LETRAS DELA.<br>QUAL PALAVRA CABE AÍ?',
+    fala:(k===0?'Emília recebeu um novo desafio: escrever o contrário das palavras na cruzadinha. ':'')+'Olhe a linha amarela. Ela tem '+L.w.length+' quadrinhos. Qual palavra cabe aí? As palavras são: '+CRUZ_C.map(x=>x.w.toLowerCase()).join(', ')+'.',
+    dicaErro:'Quase! Conte os quadrinhos e veja as letras que já estão na linha.',
+    exp:'Isso mesmo! '+L.w.toLowerCase()+' é o contrário de '+L.de.toLowerCase()+'.',
+    ops:['FECHADO','TARDE','CHORAR','PERDER','CORAJOSO','FEIO'].map(w=>({t:w,ok:w===L.w})),
+    res:'',resp:L.w+'  (CONTRÁRIO DE '+L.de+')'}));
+  rod.forEach((r,k)=>{r.antes=function(){r.ilustra=gradeCruzC(k);};});
+  rod.push({tipo:'livre',n:1,semResumo:true,tit:'CRUZADINHA COMPLETA!',ilustra:gradeCruzC(6),
+    perg:'🎉 VOCÊ COMPLETOU A CRUZADINHA!<br>AGORA COPIE AS PALAVRAS NO LIVRO.',fala:'Parabéns! Você completou a cruzadinha. Agora copie as palavras no seu livro.',ops:[{e:'✏️',n:'VOU COPIAR!'}]});
+  abrirRodadas(15,'CA PÁG. 8 — Nº 7',rod);}
+
+/* ===== J16 — pág.9 nº8: os brinquedos da Emília ===== */
+function abrirJogo16(){
+  const B=[['⚽','A BOLA DE EMÍLIA NÃO É','NOVA','ELA É','VELHA',['VELHA','BONITA','REDONDA']],
+    ['🪢','A CORDA NÃO É','COMPRIDA','ELA É','CURTA',['FINA','CURTA','NOVA']],
+    ['🪆','A BONECA NÃO É','PEQUENA','ELA É','GRANDE',['GRANDE','BAIXA','FEIA']],
+    ['🏸','A PETECA NÃO ESTÁ','LIMPA','ELA ESTÁ','SUJA',['CHEIA','LEVE','SUJA']],
+    ['📕','O LIVRO NÃO ESTÁ','ABERTO','ELE ESTÁ','FECHADO',['FECHADO','NOVO','PESADO']]];
+  abrirRodadas(16,'CA PÁG. 9 — Nº 8',B.map((b,k)=>({tipo:'quadros',tit:'FRASE '+(k+1)+' DE 5',
+    ilustra:'<div style="font-size:90px;text-align:center;line-height:1.1">'+b[0]+'</div>',
+    perg:(k===0?'EMÍLIA DECIDIU BRINCAR COM SEUS BRINQUEDOS. COMPLETE COM A PALAVRA <b>CONTRÁRIA</b>.<br>':'')+b[1]+' <b style="color:#C62828">'+b[2]+'</b>, '+b[3]+' ______.',
+    fala:(k===0?'Emília decidiu brincar com seus brinquedos. Complete as frases com a palavra contrária. ':'')+b[1].toLowerCase()+' '+b[2].toLowerCase()+', '+b[3].toLowerCase()+'... Qual é o contrário de '+b[2].toLowerCase()+'?',
+    exp:'Isso mesmo! '+b[1].toLowerCase()+' '+b[2].toLowerCase()+', '+b[3].toLowerCase()+' '+b[4].toLowerCase()+'.',
+    ops:b[5].map(w=>({t:w,ok:w===b[4]})),res:b[1]+' '+b[2]+', '+b[3],resp:b[4]})));}
+
+/* ===== J17 — pág.9 nº9: a manchete da notícia ===== */
+function abrirJogo17(){
+  abrirRodadas(17,'CA PÁG. 9 — Nº 9',[
+   {tipo:'livre',n:1,semResumo:true,tit:'O QUE É MANCHETE?',
+    ilustra:'<div style="font-size:70px;text-align:center">📰🧸🔄🚗</div><div style="text-align:left;background:#FFF8E1;border:3px dashed #FFB300;border-radius:16px;padding:10px 14px;font-weight:bold;line-height:1.5;margin-top:8px">📰 <b>MANCHETE</b> É O TÍTULO DA NOTÍCIA. ELA É CURTA, EM LETRAS GRANDES, E CONTA O ASSUNTO.<br>🔄 NA <b>FEIRA DE TROCAS</b>, AS CRIANÇAS LEVAM UM BRINQUEDO E TROCAM POR OUTRO, SEM USAR DINHEIRO.</div>',
+    perg:'IMAGINE QUE VOCÊ VAI ESCREVER UMA <b>NOTÍCIA</b> SOBRE AS <b>FEIRAS DE TROCAS DE BRINQUEDOS</b>.',
+    fala:'Imagine que você vai escrever uma notícia sobre as feiras de trocas de brinquedos. Na feira de trocas, as crianças levam um brinquedo e trocam por outro, sem usar dinheiro. A manchete é o título da notícia. Ela é curta e conta o assunto. Toque em entendi.',
+    ops:[{e:'👍',n:'ENTENDI'}]},
+   {tipo:'livre',n:1,tit:'9)',
+    perg:'QUAL <b>MANCHETE</b> VOCÊ ESCOLHERIA? TOQUE EM UMA PARA OUVIR E ESCOLHER.',
+    fala:'Qual manchete você escolheria para a sua notícia? Toque em uma para ouvir e escolher.',
+    ops:[{e:'🔄',n:'CRIANÇAS TROCAM BRINQUEDOS NA FEIRA'},{e:'🎉',n:'FEIRA DE TROCAS ALEGRA AS CRIANÇAS'},
+         {e:'🧸',n:'TROCAR BRINQUEDOS É DIVERTIDO'},{e:'🤝',n:'BRINQUEDO VELHO VIRA BRINQUEDO NOVO NA FEIRA'}],
+    res:'ESCREVA A MANCHETE NO QUADRO'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
