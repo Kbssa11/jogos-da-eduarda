@@ -1,5 +1,5 @@
-const CACHE='jogos-v51';
-const ARQS=['./','./index.html','./bim1.html','./bim2.html','./portugues2.html','./matematica2.html','./geografia2.html','./historia2.html','./ciencias2.html','./mente2.html','./matematica.html','./portugues.html','./ciencias.html','./geografia.html','./mente.html','./historia.html','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
+const CACHE='jogos-v52';
+const ARQS=['./','./index.html','./bim1.html','./bim2.html','./portugues2.html','./matematica2.html','./geografia2.html','./historia2.html','./ciencias2.html','./mente2.html','./leitura.html','./matematica.html','./portugues.html','./ciencias.html','./geografia.html','./mente.html','./historia.html','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>Promise.all(
     ARQS.map(u=>fetch(u,{cache:'no-store'}).then(r=>r.ok?c.put(u,r):null).catch(()=>null))
