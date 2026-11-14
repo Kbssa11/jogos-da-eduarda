@@ -440,7 +440,7 @@
   h1{color:#2E7D32 !important;}
   .p1{background:#66BB6A;} .p2{background:#FFA726;} .p3{background:#42A5F5;}
   .p6{background:#EF5350;} .p7{background:#5C6BC0;} .p8{background:#FFA726;} .p9{background:#29B6F6;}
-  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;} .p14{background:#5C6BC0;} .p15{background:#F4511E;} .p16{background:#43A047;} .p17{background:#6D4C41;}
+  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;} .p14{background:#5C6BC0;} .p15{background:#F4511E;} .p16{background:#43A047;} .p17{background:#6D4C41;} .p18{background:#0288D1;} .p19{background:#7CB342;} .p20{background:#D81B60;}
   .ps-area{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:8px;}
   .ps-pal{background:#fff;border:4px solid #E0E0E0;border-radius:16px;padding:8px 4px;text-align:center;}
   .ps-pal.ok{border-color:#43A047;background:#F1F8E9;}
@@ -534,6 +534,9 @@
   <button class="menu-btn p15" onclick="abrirJogo15()"><span class="emo">🔠</span><span><span class="pag">CA PÁG. 8</span>CRUZADINHA DOS CONTRÁRIOS</span><span class="done" id="d15"></span></button>
   <button class="menu-btn p16" onclick="abrirJogo16()"><span class="emo">🧸</span><span><span class="pag">CA PÁG. 9</span>OS BRINQUEDOS DA EMÍLIA</span><span class="done" id="d16"></span></button>
   <button class="menu-btn p17" onclick="abrirJogo17()"><span class="emo">📰</span><span><span class="pag">CA PÁG. 9</span>A MANCHETE DA NOTÍCIA</span><span class="done" id="d17"></span></button>
+  <button class="menu-btn p18" onclick="abrirJogo18()"><span class="emo">💻</span><span><span class="pag">CA PÁG. 10</span>O SITE DA EMÍLIA</span><span class="done" id="d18"></span></button>
+  <button class="menu-btn p19" onclick="abrirJogo19()"><span class="emo">🔎</span><span><span class="pag">CA PÁG. 11</span>OS FILTROS DO SITE</span><span class="done" id="d19"></span></button>
+  <button class="menu-btn p20" onclick="abrirJogo20()"><span class="emo">🍨</span><span><span class="pag">CA PÁG. 11</span>O JOGO DO PLURAL</span><span class="done" id="d20"></span></button>
   </div>
 </div>
 
@@ -1273,6 +1276,87 @@ function abrirJogo17(){
     ops:[{e:'🔄',n:'CRIANÇAS TROCAM BRINQUEDOS NA FEIRA'},{e:'🎉',n:'FEIRA DE TROCAS ALEGRA AS CRIANÇAS'},
          {e:'🧸',n:'TROCAR BRINQUEDOS É DIVERTIDO'},{e:'🤝',n:'BRINQUEDO VELHO VIRA BRINQUEDO NOVO NA FEIRA'}],
     res:'ESCREVA A MANCHETE NO QUADRO'}]);}
+
+/* ===== J18 — pág.10 nº10: o site da Emília (desenho simples, não é o site real) ===== */
+const NAV10=['FÁCIL','MÉDIO','DIFÍCIL','JOGOS','LIVROS','APLICATIVOS'];
+const SVG_SITE=(function(){
+  let g='<svg viewBox="0 0 360 230" style="width:100%;max-width:560px;border-radius:12px;display:block;margin:0 auto">'+
+   '<rect width="360" height="230" rx="10" fill="#ECEFF1"/><rect x="0" y="0" width="360" height="22" rx="10" fill="#CFD8DC"/>'+
+   '<circle cx="12" cy="11" r="4" fill="#EF5350"/><circle cx="24" cy="11" r="4" fill="#FFCA28"/><circle cx="36" cy="11" r="4" fill="#66BB6A"/>'+
+   '<rect x="50" y="5" width="200" height="12" rx="6" fill="#fff"/><text x="56" y="14" font-size="8" fill="#546E7A">www.escolagames.com.br</text>'+
+   '<rect x="0" y="22" width="360" height="26" fill="#37474F"/>'+
+   '<rect x="6" y="25" width="62" height="20" rx="10" fill="#FB8C00"/><text x="37" y="38.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">ESCOLA GAMES</text>';
+  NAV10.forEach((t,k)=>{g+='<text x="'+([78,112,146,182,216,252][k])+'" y="39" font-size="7.5" font-weight="bold" fill="#fff">'+t+'</text>';});
+  g+='<rect x="0" y="48" width="360" height="146" fill="#A5D6A7"/>'+
+   '<ellipse cx="60" cy="150" rx="26" ry="20" fill="#66BB6A"/><circle cx="74" cy="122" r="12" fill="#66BB6A"/><circle cx="78" cy="119" r="3" fill="#fff"/>'+
+   '<ellipse cx="290" cy="150" rx="28" ry="20" fill="#7E57C2"/><rect x="296" y="96" width="10" height="48" rx="5" fill="#7E57C2"/><circle cx="304" cy="94" r="10" fill="#7E57C2"/><circle cx="307" cy="92" r="3" fill="#fff"/>'+
+   '<text x="180" y="100" font-size="30" font-weight="bold" fill="#fff" stroke="#1B5E20" stroke-width="1.5" text-anchor="middle">LIGA PONTOS</text>'+
+   '<text x="180" y="128" font-size="18" font-weight="bold" fill="#FFF59D" stroke="#1B5E20" stroke-width="1" text-anchor="middle">FOFOSSAUROS</text>'+
+   '<rect x="260" y="160" width="84" height="26" rx="8" fill="#455A64"/><text x="302" y="177" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">JOGAR AGORA</text>'+
+   '<rect x="0" y="194" width="360" height="36" fill="#546E7A"/><text x="14" y="216" font-size="11" font-weight="bold" fill="#fff">APRENDA BRINCANDO</text>'+
+   '<rect x="150" y="203" width="56" height="18" rx="5" fill="#90A4AE"/><text x="178" y="216" font-size="9" fill="#fff" text-anchor="middle">FÁCIL</text>'+
+   '<rect x="212" y="203" width="56" height="18" rx="5" fill="#90A4AE"/><text x="240" y="216" font-size="9" fill="#fff" text-anchor="middle">MÉDIO</text>'+
+   '<rect x="274" y="203" width="56" height="18" rx="5" fill="#90A4AE"/><text x="302" y="216" font-size="9" fill="#fff" text-anchor="middle">DIFÍCIL</text></svg>';
+  return g;})();
+function abrirJogo18(){
+  abrirRodadas(18,'CA PÁG. 10 — Nº 10',[
+   {tit:'A)',tipo:'quadros',ilustra:SVG_SITE,
+    perg:'💻 UM DOS PASSATEMPOS DE EMÍLIA É NAVEGAR NA INTERNET. VEJA O SITE QUE ELA ENCONTROU.<br><b>QUAL É O NOME DO SITE?</b>',
+    fala:'Um dos passatempos preferidos de Emília é navegar na internet. Veja a primeira página de um site que ela encontrou. Qual é o nome do site? Dica: o nome fica no cantinho de cima, na plaquinha laranja.',
+    exp:'Isso mesmo! O nome do site é Escola Games.',dicaErro:'Quase! Olhe a plaquinha laranja no cantinho de cima.',
+    ops:[{t:'LIGA PONTOS',ok:false},{t:'ESCOLA GAMES',ok:true},{t:'APRENDA BRINCANDO',ok:false},{t:'JOGAR AGORA',ok:false}],res:'ESCREVA',resp:'ESCOLA GAMES'},
+   {tit:'B)',tipo:'marcar',ilustra:SVG_SITE,
+    perg:'O QUE É POSSÍVEL ENCONTRAR NESSE SITE?<br>OLHE A BARRA ESCURA DE CIMA E <b>MARQUE OS 3</b>.',
+    fala:'O que é possível encontrar nesse site? Olhe a barra escura lá em cima. Marque as três coisas que o site tem.',
+    ops:[{e:'🎮',n:'JOGOS',ok:true},{e:'📚',n:'LIVROS',ok:true},{e:'📱',n:'APLICATIVOS',ok:true},{e:'👕',n:'ROUPAS',ok:false},{e:'🍕',n:'COMIDA',ok:false},{e:'🧸',n:'BRINQUEDOS',ok:false}],
+    res:'ESCREVA',resp:'JOGOS, LIVROS E APLICATIVOS'},
+   {tit:'C)',tipo:'quadros',ilustra:SVG_SITE,
+    perg:'PARA ACESSAR <b>TODOS OS JOGOS</b>, ONDE EMÍLIA DEVE CLICAR? CIRCULE.',
+    fala:'Para acessar todos os jogos, onde Emília deve clicar na página?',
+    exp:'Isso mesmo! Ela deve clicar em jogos.',
+    ops:NAV10.map(t=>({t:t,ok:t==='JOGOS'})),res:'CIRCULE',resp:'JOGOS'},
+   {tit:'D)',tipo:'quadros',ilustra:SVG_SITE,
+    perg:'EMÍLIA CLICOU NO JOGO QUE ESTÁ <b>EM DESTAQUE</b>, BEM GRANDE NO MEIO DA PÁGINA.<br>QUAL É O NOME DESSE JOGO?',
+    fala:'Emília foi logo clicando sobre o jogo que está em destaque na página, aquele com letras grandes no meio, com os dinossauros. Qual é o nome desse jogo?',
+    exp:'Isso mesmo! O jogo se chama Liga Pontos Fofossauros.',
+    ops:[{t:'ESCOLA GAMES',ok:false},{t:'LIGA PONTOS FOFOSSAUROS',ok:true},{t:'APRENDA BRINCANDO',ok:false},{t:'JOGAR AGORA',ok:false}],res:'ESCREVA',resp:'LIGA PONTOS FOFOSSAUROS'}]);}
+
+/* ===== J19 — pág.11 nº10 E e F: os filtros ===== */
+const JOGOS11=[['👹','LENDAS DO FOLCLORE'],['🐘','MEMÓRIA ANIMAL'],['🩰','SONHO DE BAILARINA'],['🦋','VOO EDUCATIVO'],['🐰','COELHO DA PÁSCOA'],
+  ['👾','MONSTRO COME FRUTA'],['🧸','URSINHO A, E, I, O, U'],['🔤','FORMA PALAVRAS'],['👨‍🍳','ZEBU NA COZINHA'],['🐄','CRIANDO ZEBU']];
+const SVG_FILTRO='<div style="background:#fff;border:3px solid #B0BEC5;border-radius:14px;padding:8px">'+
+  '<div style="display:flex;justify-content:space-between;align-items:center;font-weight:bold;margin-bottom:6px"><span style="font-size:1.3rem">TODOS OS JOGOS</span>'+
+  '<span style="border:2px solid #546E7A;border-radius:6px;padding:2px 8px;background:#FFF9C4">🔎 LÍNGUA PORTUGUESA ▾</span></div>'+
+  '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:5px">'+JOGOS11.map(j=>'<div style="background:#E3F2FD;border-radius:8px;padding:4px 2px;text-align:center;font-size:.62rem;font-weight:bold;line-height:1.15"><div style="font-size:1.6rem">'+j[0]+'</div>'+j[1]+'</div>').join('')+'</div></div>';
+function abrirJogo19(){
+  abrirRodadas(19,'CA PÁG. 11 — Nº 10 E e F',[
+   {tit:'E)',tipo:'quadros',ilustra:SVG_FILTRO,
+    perg:'OS JOGOS TAMBÉM PODEM SER ACESSADOS COM <b>FILTROS</b>.<br>APLICANDO O FILTRO, QUAIS JOGOS APARECERAM?',
+    fala:'Emília descobriu que os jogos também podem ser acessados utilizando filtros. O filtro escolhe só um tipo de jogo. Olhe a caixinha amarela no alto: qual filtro foi escolhido? Quais tipos de jogos foram acessados?',
+    exp:'Isso mesmo! O filtro escolhido foi língua portuguesa, então apareceram os jogos de língua portuguesa.',dicaErro:'Quase! Olhe o que está escrito na caixinha amarela, lá no alto.',
+    ops:[{t:'OS JOGOS DE MATEMÁTICA.',ok:false},{t:'OS JOGOS DE ARTES.',ok:false},{t:'OS JOGOS DE LÍNGUA PORTUGUESA.',ok:true}],res:'ASSINALE',resp:'OS JOGOS DE LÍNGUA PORTUGUESA'},
+   {tit:'F)',tipo:'livre',n:1,
+    perg:'OUTRO FILTRO É O <b>NÍVEL DE DIFICULDADE</b>.<br>QUAL VOCÊ ESCOLHERIA PARA JOGAR? PINTE.',
+    fala:'Outro filtro muito usado nesse site é escolher os jogos pelo nível de dificuldade: fácil, médio ou difícil. Qual você escolheria para jogar? Não tem resposta errada!',
+    ops:[{e:'🟢',n:'FÁCIL'},{e:'🟡',n:'MÉDIO'},{e:'🔴',n:'DIFÍCIL'}],res:'PINTE'}]);}
+
+/* ===== J20 — pág.11 nº11: o jogo do plural ===== */
+const PLURAL11=[['🍨','SORVETE','SORVETES',['SORVETES','SORVETE','SORVETAS']],['⚽','BOLA','BOLAS',['BOLO','BOLAS','BOLA']],
+  ['🐱','GATO','GATOS',['GATA','GATO','GATOS']],['📘','LIVRO','LIVROS',['LIVROS','LIVRA','LIVRO']],['🦆','PATO','PATOS',['PATO','PATOS','PRATOS']],['🏠','CASA','CASAS',['CASO','CASA','CASAS']]];
+function abrirJogo20(){
+  const rod=[{tit:'GLOSSÁRIO',tipo:'livre',n:1,semResumo:true,
+    ilustra:'<div style="display:flex;gap:16px;justify-content:center;align-items:center;font-weight:bold;font-size:1.3rem;text-align:center"><div><div style="font-size:4rem">🍨</div>SORVETE<br><small>UM</small></div><div style="font-size:2rem">➜</div><div><div style="font-size:4rem">🍨🍨</div>SORVETE<b style="color:#D81B60">S</b><br><small>MAIS DE UM</small></div></div>'+
+      '<div style="text-align:left;background:#FFF8E1;border:3px dashed #FFB300;border-radius:16px;padding:10px 14px;font-weight:bold;margin-top:10px">📖 <b>PLURAL</b>: MAIS DE UMA PESSOA, ANIMAL OU COISA. MUITAS VEZES É SÓ COLOCAR UM <b style="color:#D81B60">S</b> NO FINAL!</div>',
+    perg:'🍨 EMÍLIA BRINCOU NO <b>JOGO DO PLURAL</b>.',
+    fala:'Em um dos jogos, Emília brincou com as palavras. É o jogo do plural. Plural quer dizer mais de uma pessoa, animal ou coisa. Um sorvete. Dois sorvetes. Muitas vezes é só colocar um esse no final! Toque em entendi.',
+    ops:[{e:'👍',n:'ENTENDI'}]}];
+  PLURAL11.forEach((p,k)=>rod.push({tit:'PALAVRA '+(k+1)+' DE '+PLURAL11.length,tipo:'quadros',
+    ilustra:'<div style="display:flex;gap:16px;justify-content:center;align-items:center;font-weight:bold;font-size:1.3rem;text-align:center"><div><div style="font-size:4rem">'+p[0]+'</div>'+p[1]+'</div><div style="font-size:2rem">➜</div><div><div style="font-size:4rem">'+p[0]+p[0]+'</div>???</div></div>',
+    perg:'QUAL É O <b>PLURAL</b> DE <b>'+p[1]+'</b>?',
+    fala:(['BOLA','CASA'].includes(p[1])?'Uma ':'Um ')+p[1].toLowerCase()+'. E quando são dois? Qual é o plural de '+p[1].toLowerCase()+'?',
+    exp:'Isso mesmo! '+p[1].toLowerCase()+', '+p[2].toLowerCase()+'.',dicaErro:'Quase! É só colocar o esse no final da palavra.',
+    ops:p[3].map(w=>({t:w,ok:w===p[2]})),res:p[1]+' →',resp:p[2]}));
+  abrirRodadas(20,'CA PÁG. 11 — Nº 11',rod);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
