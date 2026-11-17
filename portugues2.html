@@ -440,7 +440,7 @@
   h1{color:#2E7D32 !important;}
   .p1{background:#66BB6A;} .p2{background:#FFA726;} .p3{background:#42A5F5;}
   .p6{background:#EF5350;} .p7{background:#5C6BC0;} .p8{background:#FFA726;} .p9{background:#29B6F6;}
-  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;} .p14{background:#5C6BC0;} .p15{background:#F4511E;} .p16{background:#43A047;} .p17{background:#6D4C41;} .p18{background:#0288D1;} .p19{background:#7CB342;} .p20{background:#D81B60;}
+  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;} .p14{background:#5C6BC0;} .p15{background:#F4511E;} .p16{background:#43A047;} .p17{background:#6D4C41;} .p18{background:#0288D1;} .p19{background:#7CB342;} .p20{background:#D81B60;} .p21{background:#8E24AA;} .p22{background:#00ACC1;} .p23{background:#F57C00;}
   .ps-area{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:8px;}
   .ps-pal{background:#fff;border:4px solid #E0E0E0;border-radius:16px;padding:8px 4px;text-align:center;}
   .ps-pal.ok{border-color:#43A047;background:#F1F8E9;}
@@ -537,6 +537,9 @@
   <button class="menu-btn p18" onclick="abrirJogo18()"><span class="emo">💻</span><span><span class="pag">CA PÁG. 10</span>O SITE DA EMÍLIA</span><span class="done" id="d18"></span></button>
   <button class="menu-btn p19" onclick="abrirJogo19()"><span class="emo">🔎</span><span><span class="pag">CA PÁG. 11</span>OS FILTROS DO SITE</span><span class="done" id="d19"></span></button>
   <button class="menu-btn p20" onclick="abrirJogo20()"><span class="emo">🍨</span><span><span class="pag">CA PÁG. 11</span>O JOGO DO PLURAL</span><span class="done" id="d20"></span></button>
+  <button class="menu-btn p21" onclick="abrirJogo21()"><span class="emo">🦋</span><span><span class="pag">CA PÁG. 12</span>MAIS DE UM ELEMENTO</span><span class="done" id="d21"></span></button>
+  <button class="menu-btn p22" onclick="abrirJogo22()"><span class="emo">🎮</span><span><span class="pag">CA PÁG. 12</span>OS JOGOS NO PLURAL</span><span class="done" id="d22"></span></button>
+  <button class="menu-btn p23" onclick="abrirJogo23()"><span class="emo">💬</span><span><span class="pag">CA PÁG. 13</span>A CONVERSA DOS AMIGOS</span><span class="done" id="d23"></span></button>
   </div>
 </div>
 
@@ -1357,6 +1360,43 @@ function abrirJogo20(){
     exp:'Isso mesmo! '+p[1].toLowerCase()+', '+p[2].toLowerCase()+'.',dicaErro:'Quase! É só colocar o esse no final da palavra.',
     ops:p[3].map(w=>({t:w,ok:w===p[2]})),res:p[1]+' →',resp:p[2]}));
   abrirRodadas(20,'CA PÁG. 11 — Nº 11',rod);}
+
+/* ===== J21 — pág.12: palavras que indicam mais de um elemento ===== */
+const PLURAL12=[['🦋','BORBOLETA','BORBOLETAS',['BORBOLETA','BORBOLETAS','BORBOLETOS'],2],['🧑','PESSOA','PESSOAS',['PESSOAS','PESSOA','PESSOOS'],3],
+  ['👕','CAMISETA','CAMISETAS',['CAMISETO','CAMISETA','CAMISETAS'],2],['🦜','ARARA','ARARAS',['ARARAS','ARARO','ARARA'],2],
+  ['🥕','CENOURA','CENOURAS',['CENOURA','CENOURAS','CENOURES'],3],['🍭','PIRULITO','PIRULITOS',['PIRULITAS','PIRULITOS','PIRULITO'],4]];
+function abrirJogo21(){
+  abrirRodadas(21,'CA PÁG. 12',PLURAL12.map((p,k)=>({tit:'PALAVRA '+(k+1)+' DE 6',tipo:'quadros',
+    ilustra:'<div style="display:flex;gap:14px;justify-content:center;align-items:center;font-weight:bold;font-size:1.3rem;text-align:center"><div><div style="font-size:3.6rem">'+p[0]+'</div>'+p[1]+'</div><div style="font-size:2rem">➜</div><div><div style="font-size:3.2rem">'+p[0].repeat(p[4])+'</div>???</div></div>',
+    perg:(k===0?'E SE EMÍLIA ENCONTRASSE ESTAS IMAGENS NO JOGO?<br>':'')+'QUAL PALAVRA INDICA <b>MAIS DE UM</b>?',
+    fala:(k===0?'E se Emília encontrasse estas imagens no jogo? Vamos escrever as palavras que indicam mais de um elemento. ':'')+(p[1]==='PIRULITO'?'Um ':'Uma ')+p[1].toLowerCase()+'. E quando são muitos, como fica?',
+    exp:'Isso mesmo! '+p[2].toLowerCase()+'. É só colocar o esse no final.',dicaErro:'Quase! É a palavra com o esse no final.',
+    ops:p[3].map(w=>({t:w,ok:w===p[2]})),res:p[1]+' →',resp:p[2]})));}
+
+/* ===== J22 — pág.12 nº12: nomes de jogos com palavras no plural ===== */
+function abrirJogo22(){
+  abrirRodadas(22,'CA PÁG. 12 — Nº 12',[
+   {tit:'12)',tipo:'marcar',
+    perg:'EMÍLIA PESQUISOU OUTROS JOGOS NA INTERNET.<br>MARQUE OS NOMES QUE TÊM PALAVRAS QUE INDICAM <b>MAIS DE UM</b> (SÃO 4).',
+    fala:'Emília pesquisou outros jogos na internet. Marque o nome dos jogos que têm palavras que indicam mais de um elemento. Dica: procure as palavras que terminam com esse. São quatro.',
+    ops:[{e:'1️⃣',n:'RESTA 1',ok:false},{e:'🍇',n:'FRUTAS',ok:true},{e:'🐶',n:'ANIMAIS DOMÉSTICOS',ok:true},{e:'🌀',n:'LABIRINTO ANIMAL',ok:false},
+         {e:'🫧',n:'PEGA BOLHAS',ok:true},{e:'✋',n:'EU SEI CONTAR',ok:false},{e:'🌈',n:'JOGO DAS CORES',ok:true},{e:'🧼',n:'ALFABETO DE SABÃO',ok:false}],
+    res:'ASSINALE',resp:'FRUTAS • ANIMAIS DOMÉSTICOS • PEGA BOLHAS • JOGO DAS CORES'}]);}
+
+/* ===== J23 — pág.13 nº13: a conversa dos amigos ===== */
+const CONV13=[['OTÁVIO, VOCÊ TEM UMA BARRACA?','⛺',2,'DUAS BARRACAS',['DUAS BARRACAS','UMA BARRACA','TRÊS BARRACAS'],'Otávio, você tem uma barraca?','👦'],
+  ['MARINA, VOCÊ TEM UM ESPELHO?','🪞',3,'TRÊS ESPELHOS',['DOIS ESPELHOS','TRÊS ESPELHOS','UM ESPELHO'],'Marina, você tem um espelho?','👧🏾'],
+  ['ZECA, VOCÊ TEM UM LIVRO?','📕',2,'DOIS LIVROS',['UM LIVRO','QUATRO LIVROS','DOIS LIVROS'],'Zeca, você tem um livro?','🧒']];
+function abrirJogo23(){
+  abrirRodadas(23,'CA PÁG. 13 — Nº 13',CONV13.map((c,k)=>({tit:'CONVERSA '+(k+1)+' DE 3',tipo:'quadros',
+    ilustra:'<div style="text-align:center;font-weight:bold"><div style="display:inline-block;background:#fff;border:3px solid #455A64;border-radius:18px;padding:8px 14px;font-size:1.15rem">'+c[0]+'</div>'+
+      '<div style="display:flex;justify-content:center;align-items:center;gap:10px;margin-top:8px"><span style="font-size:3.6rem">'+c[6]+'</span><span style="font-size:1.6rem;color:#90A4AE">💭</span>'+
+      '<span style="background:#ECEFF1;border-radius:40px;padding:8px 16px;font-size:3rem">'+c[1].repeat(c[2])+'</span></div>'+
+      '<div style="display:inline-block;margin-top:8px;background:#FFF8E1;border:3px solid #FFB300;border-radius:18px;padding:8px 14px;font-size:1.15rem">NÃO, EU TENHO ______</div></div>',
+    perg:(k===0?'EMÍLIA ENCONTROU OS AMIGOS FAZENDO <b>CONTAGEM DE OBJETOS</b>.<br>':'')+'CONTE OS OBJETOS NO PENSAMENTO E <b>COMPLETE A RESPOSTA</b>.',
+    fala:(k===0?'Depois de jogar na internet, Emília foi se encontrar com seus amigos, que estavam fazendo contagem de objetos. ':'')+c[5]+' Olhe o pensamento e conte. Complete: não, eu tenho...',
+    exp:'Isso mesmo! Não, eu tenho '+c[3].toLowerCase()+'.',dicaErro:'Quase! Conte de novo os objetos no pensamento.',
+    ops:c[4].map(w=>({t:w,ok:w===c[3]})),res:'NÃO, EU TENHO',resp:c[3]+'.'})));}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
