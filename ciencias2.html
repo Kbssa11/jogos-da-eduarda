@@ -486,6 +486,11 @@
   <button class="menu-btn y3" onclick="abrirJogo2()"><span class="emo">🏠</span><span><span class="pag">CA PÁG. 2</span>OBJETOS QUE USO SÓ EM CASA</span><span class="done" id="d2"></span></button>
   <button class="menu-btn y2" onclick="abrirJogo3()"><span class="emo">🍽️</span><span><span class="pag">CA PÁG. 3</span>A COZINHA DE ANITA</span><span class="done" id="d3"></span></button>
   <button class="menu-btn y1" onclick="abrirJogo4()"><span class="emo">🧊</span><span><span class="pag">CA PÁG. 3</span>ÁGUA BEM GELADA</span><span class="done" id="d4"></span></button>
+  <button class="menu-btn y4" onclick="abrirJogo5()"><span class="emo">✏️</span><span><span class="pag">CA PÁG. 4</span>DE QUE SÃO FEITOS?</span><span class="done" id="d5"></span></button>
+  <button class="menu-btn y3" onclick="abrirJogo6()"><span class="emo">🍽️</span><span><span class="pag">CA PÁG. 4</span>OS PRATOS</span><span class="done" id="d6"></span></button>
+  <button class="menu-btn y2" onclick="abrirJogo7()"><span class="emo">🔍</span><span><span class="pag">CA PÁG. 4</span>OBSERVE À SUA VOLTA</span><span class="done" id="d7"></span></button>
+  <button class="menu-btn y1" onclick="abrirJogo8()"><span class="emo">♻️</span><span><span class="pag">CA PÁG. 5</span>A RECICLAGEM NA ESCOLA</span><span class="done" id="d8"></span></button>
+  <button class="menu-btn y4" onclick="abrirJogo9()"><span class="emo">🗑️</span><span><span class="pag">CA PÁG. 5</span>O QUE MAIS PODE SER RECICLADO?</span><span class="done" id="d9"></span></button>
   </div>
 </div>
 
@@ -824,7 +829,7 @@ const COZ=['CADEIRA','GELADEIRA','PIA','MESA','MICRO-ONDAS','ARMÁRIO'];
 function figObj(o){return '<div style="text-align:center;font-weight:bold;font-size:1.2rem">'+(o.e.indexOf('<svg')===0?o.e.replace('<svg','<svg style="width:140px;height:140px"'):'<div style="font-size:110px;line-height:1.1">'+o.e+'</div>')+'<br>'+o.n+'</div>';}
 
 /* ===== J1 — CA pág.2 nº1: ligue os objetos às funções ===== */
-function abrirJogo1(){
+function abrirJogo1(){document.getElementById('figs-rod').classList.remove('lix');
   abrirRodadas(1,'CA PÁG. 2 — Nº 1',OBJ.map((o,k)=>({tit:o.n,tipo:'quadros',ilustra:figObj(o),
     perg:'EM CASA, ANITA SEPAROU ESTES OBJETOS.<br>PARA QUE SERVE '+(o.n==='PENTE'?'O':'A')+' <b>'+o.n+'</b>? LIGUE À FUNÇÃO.',
     fala:(k===0?'Em casa, Anita separou alguns objetos. Vamos ligar cada objeto à sua função. ':'')+'Para que serve '+(o.n==='PENTE'?'o pente':o.n==='CALCULADORA'?'a calculadora':o.n==='MOCHILA ESCOLAR'?'a mochila escolar':'a caixa de lápis de cor')+'?',
@@ -832,7 +837,7 @@ function abrirJogo1(){
     ops:FUNC.map(f=>({t:f,ok:f===o.f})),res:'LIGUE A',resp:o.f})));}
 
 /* ===== J2 — CA pág.2 nº2: objetos usados somente em casa ===== */
-function abrirJogo2(){
+function abrirJogo2(){document.getElementById('figs-rod').classList.remove('lix');
   abrirRodadas(2,'CA PÁG. 2 — Nº 2',[
    {tit:'2)',tipo:'livre',n:3,
     perg:'ESCOLHA <b>TRÊS OBJETOS</b> QUE VOCÊ USA <b>SOMENTE EM CASA</b>.<br>DEPOIS DESENHE OS TRÊS NO CADERNO.',
@@ -842,7 +847,7 @@ function abrirJogo2(){
     res:'DESENHE NOS 3 QUADROS'}]);}
 
 /* ===== J3 — CA pág.3 nº3: a cozinha da casa de Anita ===== */
-function abrirJogo3(){
+function abrirJogo3(){document.getElementById('figs-rod').classList.remove('lix');
   const Q=[['A)','QUAL DOS OBJETOS É UTILIZADO PARA <b>SENTAR</b>?','Qual dos objetos é utilizado para sentar?','CADEIRA'],
     ['B)','QUAL DOS OBJETOS É UTILIZADO PARA <b>CONSERVAR ALIMENTOS</b>?','Qual dos objetos é utilizado para conservar os alimentos, deixar a comida fresquinha e gelada?','GELADEIRA'],
     ['C)','QUAL DOS OBJETOS É UTILIZADO PARA <b>LAVAR A LOUÇA</b>?','Qual dos objetos é utilizado para lavar a louça?','PIA'],
@@ -854,13 +859,84 @@ function abrirJogo3(){
     ops:COZ.map(c=>({t:c,ok:c===q[3]})),res:'ESCREVA',resp:q[3]})));}
 
 /* ===== J4 — CA pág.3 nº4: água bem gelada ===== */
-function abrirJogo4(){
+function abrirJogo4(){document.getElementById('figs-rod').classList.remove('lix');
   abrirRodadas(4,'CA PÁG. 3 — Nº 4',[
    {tit:'4)',tipo:'quadros',ilustra:'<div style="font-size:90px;text-align:center">👧🥛🧊</div>',
     perg:'ANITA DISSE À MÃE QUE GOSTARIA DE TOMAR <b>ÁGUA BEM GELADA</b>.<br>QUAL EQUIPAMENTO, EM CASA, PODERIA GELAR A ÁGUA? ASSINALE COM UM X.',
     fala:'Anita disse à mãe que gostaria de tomar água bem gelada. Qual equipamento, em casa, poderia gelar a água para Anita?',
     exp:'Isso mesmo! A geladeira gela a água. O micro-ondas esquenta e o liquidificador bate os alimentos.',
     ops:[{t:'MICRO-ONDAS',ok:false},{t:'GELADEIRA',ok:true},{t:'LIQUIDIFICADOR',ok:false}],res:'ASSINALE COM X',resp:'GELADEIRA'}]);}
+
+/* ===== pág. 4 — de onde vêm os objetos ===== */
+const SVG_REGUA=(function(){let g='<svg viewBox="0 0 120 120"><rect width="120" height="120" rx="14" fill="#E1F5FE"/><rect x="8" y="46" width="104" height="28" rx="3" fill="#B3E5FC" stroke="#0277BD" stroke-width="3" opacity=".9"/>';
+  for(let k=0;k<=20;k++)g+='<line x1="'+(12+k*4.8)+'" y1="46" x2="'+(12+k*4.8)+'" y2="'+(k%5?54:60)+'" stroke="#01579B" stroke-width="1.5"/>';return g+'</svg>';})();
+const SVG_CADERNO=(function(){let g='<svg viewBox="0 0 120 120"><rect width="120" height="120" rx="14" fill="#FFF3E0"/><rect x="30" y="14" width="66" height="92" rx="5" fill="#8D6E63" stroke="#4E342E" stroke-width="3"/>';
+  for(let k=0;k<9;k++)g+='<ellipse cx="30" cy="'+(22+k*10)+'" rx="7" ry="3" fill="none" stroke="#9E9E9E" stroke-width="2.5"/>';return g+'</svg>';})();
+const OBJ4=[{e:SVG_CADERNO,n:'CADERNO'},{e:'✏️',n:'LÁPIS'},{e:'🍼',n:'GARRAFA PLÁSTICA'},{e:SVG_REGUA,n:'RÉGUA'}];
+OBJ4[2].e='<svg viewBox="0 0 120 120"><rect width="120" height="120" rx="14" fill="#E3F2FD"/><rect x="50" y="10" width="20" height="12" rx="3" fill="#1565C0"/><path d="M46 24 h28 q6 10 6 20 v56 q0 8 -8 8 h-24 q-8 0 -8 -8 v-56 q0 -10 6 -20z" fill="#BBDEFB" stroke="#1E88E5" stroke-width="3"/><rect x="40" y="56" width="40" height="18" fill="#64B5F6"/></svg>';
+function vis4(){return '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-weight:bold;font-size:.95rem;text-align:center">'+
+  OBJ4.map(o=>'<div style="width:96px">'+(o.e.indexOf('<svg')===0?o.e.replace('<svg','<svg style="width:84px;height:84px"'):'<div style="font-size:64px;line-height:84px">'+o.e+'</div>')+'<br>'+o.n+'</div>').join('')+'</div>';}
+function abrirJogo5(){document.getElementById('figs-rod').classList.remove('lix');
+  abrirRodadas(5,'CA PÁG. 4 — Nº 1',[
+   {tit:'A)',tipo:'quadros',ilustra:vis4(),
+    perg:'VEJA OS OBJETOS QUE URBANO SEPAROU PARA LEVAR À ESCOLA.<br>QUAL É FEITO DE <b>PAPEL E METAL</b>?',
+    fala:'Veja os objetos que Urbano separou para levar à escola: caderno, lápis, garrafa plástica e régua. Qual desses objetos é feito de papel e metal? Dica: olhe a espiral.',
+    exp:'Isso mesmo! O caderno tem folhas de papel e a espiral de metal.',dicaErro:'Quase! Procure o objeto que tem folhas de papel e uma espiral de metal.',
+    ops:OBJ4.map(o=>({t:o.n,ok:o.n==='CADERNO'})),res:'ESCREVA',resp:'CADERNO'},
+   {tit:'B)',tipo:'quadros',ilustra:vis4(),
+    perg:'QUAL DESSES OBJETOS É FEITO DE <b>MADEIRA</b>?',
+    fala:'Qual desses objetos é feito de madeira? Dica: a madeira vem da árvore.',
+    exp:'Isso mesmo! O lápis é feito de madeira. A madeira vem das árvores.',
+    ops:OBJ4.map(o=>({t:o.n,ok:o.n==='LÁPIS'})),res:'ESCREVA',resp:'LÁPIS'},
+   {tit:'C)',tipo:'marcar',
+    perg:'QUAIS DESSES OBJETOS SÃO FEITOS DE <b>PLÁSTICO</b>? (SÃO 2)',
+    fala:'Quais desses objetos são feitos de plástico? São dois.',
+    ops:OBJ4.map(o=>({e:o.e.indexOf('<svg')===0?o.e:o.e,n:o.n,ok:o.n==='GARRAFA PLÁSTICA'||o.n==='RÉGUA'})),res:'ESCREVA',resp:'GARRAFA PLÁSTICA E RÉGUA'}]);}
+
+function abrirJogo6(){document.getElementById('figs-rod').classList.remove('lix');
+  abrirRodadas(6,'CA PÁG. 4 — Nº 2',[
+   {tit:'2)',tipo:'marcar',ilustra:'<div style="font-size:80px;text-align:center">🍽️</div><div style="text-align:center;font-weight:bold">PRATO DE CERÂMICA</div>',
+    perg:'URBANO ALMOÇA EM UM PRATO DE <b>CERÂMICA</b>.<br>DE QUE OUTROS MATERIAIS PODEM SER FEITOS OS PRATOS? PINTE (SÃO 4).',
+    fala:'Na hora do almoço, Urbano se alimenta usando um prato de cerâmica. De que outros materiais podem ser feitos os pratos? Pense nos pratos que você já viu: de festa, de acampamento, de vidro... São quatro.',
+    ops:[{e:'🥛',n:'VIDRO',ok:true},{e:'📦',n:'PAPELÃO',ok:true},{e:'👞',n:'COURO',ok:false},{e:'🥄',n:'METAL',ok:true},{e:'🧴',n:'PLÁSTICO',ok:true}],
+    res:'PINTE',resp:'VIDRO • PAPELÃO • METAL • PLÁSTICO'}]);}
+
+function abrirJogo7(){document.getElementById('figs-rod').classList.remove('lix');
+  abrirRodadas(7,'CA PÁG. 4 — Nº 3',[
+   {tit:'A)',tipo:'livre',n:1,
+    perg:'🔍 OBSERVE À SUA VOLTA.<br>ESCOLHA UM OBJETO FEITO DE <b>PLÁSTICO E METAL</b>. DEPOIS DESENHE.',
+    fala:'Observe à sua volta com atenção. Escolha um objeto feito de plástico e metal. Depois desenhe no quadrinho.',
+    ops:[{e:'✂️',n:'TESOURA SEM PONTA'},{e:'🍳',n:'PANELA COM CABO'},{e:'🖊️',n:'CANETA'},{e:'🎧',n:'FONE DE OUVIDO'},{e:'🔦',n:'LANTERNA'},{e:'📎',n:'GRAMPEADOR'}],
+    res:'DESENHE'},
+   {tit:'B)',tipo:'livre',n:1,
+    perg:'AGORA ESCOLHA UM OBJETO FEITO DE <b>TECIDO E MADEIRA</b>. DEPOIS DESENHE.',
+    fala:'Agora escolha um objeto feito de tecido e madeira. Depois desenhe.',
+    ops:[{e:'🪑',n:'CADEIRA ESTOFADA'},{e:'🛋️',n:'SOFÁ'},{e:'🖌️',n:'PINCEL'},{e:'🏖️',n:'CADEIRA DE PRAIA'},{e:'🛏️',n:'CAMA COM COLCHÃO'},{e:'🖼️',n:'QUADRO DE PINTURA'}],
+    res:'DESENHE'}]);}
+
+/* ===== pág. 5 — o descarte adequado ===== */
+const LIX={PAPEL:['#1E88E5','📄'],PLÁSTICO:['#E53935','🧴'],VIDRO:['#43A047','🍾'],METAL:['#FDD835','🥫']};
+function svgLixeira(nome){const c=LIX[nome][0];return '<svg viewBox="0 0 120 130" style="width:96px;height:auto"><rect x="18" y="10" width="84" height="16" rx="6" fill="'+c+'" stroke="#333" stroke-width="2"/><path d="M24 28 h72 l-8 92 h-56z" fill="'+c+'" stroke="#333" stroke-width="2"/>'+
+  '<text x="60" y="78" font-size="26" text-anchor="middle">♻️</text><text x="60" y="108" font-size="10.5" font-weight="bold" text-anchor="middle" fill="'+(nome==='METAL'?'#333':'#fff')+'">'+nome+'</text></svg>';}
+const COLETA=[['🗞️','JORNAIS','PAPEL'],['🛍️','SACOLA PLÁSTICA','PLÁSTICO'],['📓','CADERNO','PAPEL'],['🧴','GARRAFA PET','PLÁSTICO'],['🥫','LATA','METAL'],['🍾','GARRAFA DE VIDRO','VIDRO'],['🍳','PANELA','METAL']];
+function abrirJogo8(){
+  if(!document.getElementById('st-lix')){const st=document.createElement('style');st.id='st-lix';st.textContent='#figs-rod.lix{grid-template-columns:repeat(2,1fr)!important;gap:10px}';document.head.appendChild(st);}
+  abrirRodadas(8,'CA PÁG. 5 — Nº 1',COLETA.map((c,k)=>({tit:'MATERIAL '+(k+1)+' DE 7',tipo:'figs',antes:()=>document.getElementById('figs-rod').classList.add('lix'),
+    perg:'<div style="font-size:72px;line-height:1.1">'+c[0]+'</div>'+(k===0?'♻️ A TURMA DA ANITA ESTÁ FAZENDO <b>RECICLAGEM</b> NA ESCOLA.<br>':'')+'EM QUAL LIXEIRA VAI '+(['A ','A ','O ','A ','A ','A ','A '][k])+'<b>'+c[1]+'</b>?',
+    fala:(k===0?'A turma da Anita está participando da reciclagem na escola. Ajude a separar o que já coletaram. Papel vai na lixeira azul, plástico na vermelha, vidro na verde e metal na amarela. ':'')+'Em qual lixeira vai '+c[1].toLowerCase()+'?',
+    exp:'Isso mesmo! '+c[1].toLowerCase()+' vai na lixeira de '+c[2].toLowerCase()+'.',
+    dicaErro:'Quase! Pense: '+c[1].toLowerCase()+' é feito de quê?',
+    figs:['PAPEL','PLÁSTICO','VIDRO','METAL'].map(n=>({svg:svgLixeira(n),rot:n,ok:n===c[2]})),
+    res:c[1]+' →',resp:'LIXEIRA DE '+c[2]})));}
+
+function abrirJogo9(){document.getElementById('figs-rod').classList.remove('lix');
+  const R=[['A) PLÁSTICO','plástico',[{e:'🧴',n:'GARRAFA PET'},{e:'🛍️',n:'SACOLA'},{e:'🪣',n:'BALDE'},{e:'🥤',n:'COPO DE PLÁSTICO'},{e:'🧸',n:'BRINQUEDO DE PLÁSTICO'},{e:'🔵',n:'TAMPINHA DE GARRAFA'}]],
+    ['B) VIDRO','vidro',[{e:'🍾',n:'GARRAFA DE VIDRO'},{e:'🫙',n:'POTE DE VIDRO'},{e:'🥛',n:'COPO DE VIDRO'},{e:'🧴',n:'FRASCO DE PERFUME'}]],
+    ['C) PAPEL','papel',[{e:'🗞️',n:'JORNAL'},{e:'📦',n:'CAIXA DE PAPELÃO'},{e:'📓',n:'CADERNO'},{e:'📰',n:'REVISTA'},{e:'✉️',n:'ENVELOPE'},{e:'🧻',n:'ROLINHO DE PAPEL'}]]];
+  abrirRodadas(9,'CA PÁG. 5 — Nº 2',R.map((r,k)=>({tit:r[0],tipo:'livre',n:2,
+    perg:(k===0?'🗑️ ESCREVA O NOME DE <b>DOIS OUTROS MATERIAIS</b> QUE PODEM SER RECICLADOS.<br>':'')+'ESCOLHA <b>2 OBJETOS</b> FEITOS DE <b>'+r[1].toUpperCase()+'</b>.',
+    fala:(k===0?'Escreva o nome de dois outros materiais que podem ser reciclados. ':'')+'Escolha dois objetos feitos de '+r[1]+'.',
+    ops:r[2],res:'ESCREVA'})));}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
