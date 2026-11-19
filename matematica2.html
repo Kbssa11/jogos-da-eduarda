@@ -483,6 +483,9 @@
   <button class="menu-btn x2" onclick="abrirJogo7()"><span class="emo">🧃</span><span><span class="pag">CA PÁG. 5</span>PAGAR SEM TROCO</span><span class="done" id="d7"></span></button>
   <button class="menu-btn x3" onclick="abrirJogo8()"><span class="emo">👕</span><span><span class="pag">CA PÁG. 5 E 6</span>A CAMISETA DO URBANO</span><span class="done" id="d8"></span></button>
   <button class="menu-btn x4" onclick="abrirJogo9()"><span class="emo">📐</span><span><span class="pag">CA PÁG. 7</span>TRAÇANDO FIGURAS PLANAS</span><span class="done" id="d9"></span></button>
+  <button class="menu-btn x1" onclick="abrirJogo10()"><span class="emo">📝</span><span><span class="pag">CA PÁG. 8</span>O GARÇOM CONTOU</span><span class="done" id="d10"></span></button>
+  <button class="menu-btn x2" onclick="abrirJogo11()"><span class="emo">🥟</span><span><span class="pag">CA PÁG. 9</span>O QUE SOBROU MAIS?</span><span class="done" id="d11"></span></button>
+  <button class="menu-btn x3" onclick="abrirJogo12()"><span class="emo">🍎</span><span><span class="pag">CA PÁG. 9</span>PESQUISA DAS CORES</span><span class="done" id="d12"></span></button>
   </div>
 </div>
 
@@ -600,7 +603,7 @@ function liberaProx(){
   b.textContent=(rI<JG.rodadas.length-1)?'CONTINUAR ➜':'PRONTO ➜';
   b.classList.add('mostrar');}
 function montarRod(){
-  const r=JG.rodadas[rI];selCor=null;
+  const r=JG.rodadas[rI];selCor=null;if(r.antes)r.antes();
   estrelas(document.getElementById('prog-rod'),rI,JG.rodadas.length);
   limparRod();
   document.getElementById('perg-rod').innerHTML=
@@ -624,6 +627,7 @@ function montarRod(){
       b.onclick=()=>respUnica(b,o,'op-quadro');q.appendChild(b);});
   }else if(r.tipo==='marcar'||r.tipo==='livre'){
     const a=areaOn('itens-rod');
+    if(typeof r.ops==='function')r.ops=r.ops();
     r.ops.forEach(o=>{
       const d=document.createElement('div');d.className='item';
       d.innerHTML='<span class="emo">'+o.e+'</span><span class="nome">'+o.n+'</span>';
@@ -1014,6 +1018,97 @@ function abrirJogo9(){
     perg:'VEJA O QUE ANITA VIU: <b>'+M.e+' '+M.n+'</b>.<br>REPRODUZA O DESENHO NA SUA MALHA.',
     fala:'Veja o que Anita viu: '+M.n.toLowerCase()+'. '+M.f+' Reproduza o desenho na sua malha. Toque em dois pontinhos para fazer um risco. Se precisar, toque na dica.',
     res:'✏️ DESENHE NA MALHA DO LIVRO',resp:M.e+' '+M.n}))));}
+
+/* ===== pág. 8 e 9 — contagem com risquinhos (tracinhos) ===== */
+function svgTally(n){ // grupos de 5 = quadrado com diagonal; resto = lados do quadrado na ordem do livro
+  let g='',x=4;const S=34;
+  const lados=[[0,S,0,0],[0,0,S,0],[S,0,S,S],[0,S,S,S]]; // esquerda, topo, direita, base
+  let resto=n;
+  while(resto>0){
+    if(resto>=5){lados.forEach(l=>{g+='<line x1="'+(x+l[0])+'" y1="'+(4+l[1])+'" x2="'+(x+l[2])+'" y2="'+(4+l[3])+'"/>';});g+='<line x1="'+x+'" y1="4" x2="'+(x+S)+'" y2="'+(4+S)+'"/>';resto-=5;x+=S+12;}
+    else if(resto===1&&x>4){g+='<line x1="'+x+'" y1="4" x2="'+x+'" y2="'+(4+S)+'"/>';resto=0;x+=12;}
+    else{for(let k=0;k<resto;k++){const l=lados[k];g+='<line x1="'+(x+l[0])+'" y1="'+(4+l[1])+'" x2="'+(x+l[2])+'" y2="'+(4+l[3])+'"/>';}x+=S+12;resto=0;}}
+  return '<svg viewBox="0 0 '+x+' 42" style="height:56px;width:auto;vertical-align:middle"><g stroke="#263238" stroke-width="4" stroke-linecap="round">'+g+'</g></svg>';}
+const SOBRA=[['🌭','CACHORRO-QUENTE',5,'CACHORROS-QUENTES'],['🥪','LANCHE NATURAL',4,'LANCHES NATURAIS'],['🧀','PÃO DE QUEIJO',3,'PÃES DE QUEIJO'],['🍗','COXINHA',9,'COXINHAS'],['🥙','QUIBE',6,'QUIBES'],['🧁','EMPADA',1,'EMPADAS']];
+const LEG_TALLY='<div style="display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;font-weight:bold;font-size:1.1rem">'+
+  '<span>'+svgTally(1)+' = 1</span><span>'+svgTally(2)+' = 2</span><span>'+svgTally(3)+' = 3</span><span>'+svgTally(4)+' = 4</span><span>'+svgTally(5)+' = 5</span></div>';
+function abrirJogo10(){
+  const rod=[{tit:'CADA RISQUINHO VALE 1!',tipo:'livre',n:1,semResumo:true,ilustra:LEG_TALLY,
+    perg:'🍔 O DIA NO PARQUE ESTAVA ACABANDO. MARINA E A TURMA TOMARAM UM ÚLTIMO LANCHE.<br>O GARÇOM ANOTOU <b>QUANTO SOBROU</b> COM RISQUINHOS.',
+    fala:'O dia no parque estava quase acabando. Marina e sua turma resolveram tomar um último lanche. O garçom anotou quantos alimentos sobraram usando risquinhos. Cada risquinho vale um. Um, dois, três, quatro risquinhos fazem um quadrado. E o risquinho atravessado no meio faz cinco! Toque em entendi.',
+    ops:[{e:'👍',n:'ENTENDI'}]}];
+  SOBRA.forEach((a,k)=>rod.push({tit:'ALIMENTO '+(k+1)+' DE 6',tipo:'num',
+    ilustra:'<div style="text-align:center"><div style="font-size:4rem;line-height:1.1">'+a[0]+'</div><div style="font-weight:bold;font-size:1.2rem">'+a[1]+'</div>'+
+      '<div style="display:inline-block;background:#fff;border:3px dashed #B0BEC5;border-radius:30px;padding:8px 18px;margin-top:6px">💭 '+svgTally(a[2])+'</div></div>',
+    perg:'CONTE OS RISQUINHOS DO GARÇOM.<br>QUANTOS <b>'+a[3]+'</b> SOBRARAM?',
+    fala:'Conte os risquinhos que o garçom anotou. Quantos '+a[3].toLowerCase().replace('-',' ')+' sobraram?'+(a[2]>=5?' Lembre: o quadrado com o risco atravessado vale cinco.':''),
+    certo:a[2],ops:opsNum(a[2],[a[2]-1,a[2]+1,a[2]+2]),mostra:a[1]+': '+a[2],
+    dicaErro:'Quase! Conte cada risquinho devagar. O quadrado com o risco no meio vale cinco.',
+    exp:'Isso mesmo! Sobraram '+a[2]+'.',res:a[1]+' →',resp:'SOBROU '+a[2]}));
+  rod.push({tit:'A SUA TABELA',tipo:'livre',n:1,semResumo:true,
+    ilustra:'<table style="border-collapse:collapse;margin:0 auto;background:#fff;font-weight:bold;font-size:1.05rem"><tr><th style="border:2px solid #90A4AE;padding:6px 12px;background:#CFD8DC">ALIMENTO</th><th style="border:2px solid #90A4AE;padding:6px 12px;background:#CFD8DC">QUANTO SOBROU</th></tr>'+
+      SOBRA.map(a=>'<tr><td style="border:2px solid #90A4AE;padding:6px 12px">'+a[0]+' '+a[1]+'</td><td style="border:2px solid #90A4AE;padding:6px 12px;text-align:center;font-size:1.3rem">'+a[2]+'</td></tr>').join('')+'</table>',
+    perg:'🎉 A) VEJA A TABELA PRONTA! AGORA <b>COPIE NA TABELA DO LIVRO</b>.',
+    fala:'Muito bem! Veja a tabela pronta. Agora copie na tabela do livro: o nome do alimento e quanto sobrou.',
+    ops:[{e:'✏️',n:'VOU COPIAR!'}]});
+  abrirRodadas(10,'CA PÁG. 8 — Nº 1 A',rod);}
+
+const TAB_SOBRA='<table style="border-collapse:collapse;margin:0 auto;background:#fff;font-weight:bold">'+SOBRA.map(a=>'<tr><td style="border:2px solid #90A4AE;padding:4px 10px">'+a[0]+' '+a[1]+'</td><td style="border:2px solid #90A4AE;padding:4px 12px;text-align:center;font-size:1.2rem">'+a[2]+'</td></tr>').join('')+'</table>';
+function abrirJogo11(){
+  abrirRodadas(11,'CA PÁG. 9 — Nº 1 B, C e D',[
+   {tit:'B)',tipo:'quadros',ilustra:TAB_SOBRA,
+    perg:'OLHE A TABELA. QUAL DOS ALIMENTOS <b>SOBROU MAIS</b>?',
+    fala:'Olhe a tabela. Qual dos alimentos sobrou mais? Procure o maior número.',
+    exp:'Isso mesmo! A coxinha sobrou mais: nove.',dicaErro:'Quase! Procure o maior número da tabela.',
+    ops:SOBRA.map(a=>({t:a[1],ok:a[1]==='COXINHA'})),res:'ESCREVA',resp:'COXINHA (9)'},
+   {tit:'C)',tipo:'quadros',ilustra:'<div style="display:flex;gap:16px;justify-content:center;font-weight:bold;text-align:center;font-size:1.1rem">'+
+      [['🍗','COXINHA',9],['🥙','QUIBE',6],['🧀','PÃO DE QUEIJO',3]].map(a=>'<div><div style="font-size:3rem">'+a[0]+'</div>'+a[1]+'<br><span style="font-size:1.6rem">'+a[2]+'</span></div>').join('')+'</div>',
+    perg:'ENTRE A COXINHA, O QUIBE E O PÃO DE QUEIJO,<br>QUAL <b>SOBROU MENOS</b>?',
+    fala:'Entre a coxinha, o quibe e o pão de queijo, qual deles sobrou menos? Procure o menor número.',
+    exp:'Isso mesmo! O pão de queijo sobrou menos: três.',dicaErro:'Quase! Procure o menor número.',
+    ops:[{t:'COXINHA',ok:false},{t:'QUIBE',ok:false},{t:'PÃO DE QUEIJO',ok:true}],res:'ESCREVA',resp:'PÃO DE QUEIJO (3)'},
+   {tit:'D)',tipo:'num',ilustra:TAB_SOBRA,
+    perg:'NO TOTAL, QUANTOS ALIMENTOS SOBRARAM?<br><span class="conta">5 + 4 + 3 + 9 + 6 + 1 = ?</span>',
+    fala:'No total, quantos alimentos sobraram? Some tudo: cinco, mais quatro, mais três, mais nove, mais seis, mais um. Dica: vá juntando aos poucos.',
+    certo:28,ops:[24,26,28,30],mostra:'5 + 4 + 3 + 9 + 6 + 1 = 28',
+    dicaErro:'Quase! Vá juntando: cinco mais quatro dá nove, mais três dá doze, mais nove dá vinte e um, mais seis dá vinte e sete, mais um...',
+    exp:'Isso mesmo! Sobraram vinte e oito alimentos no total.',res:'ESCREVA',resp:'28 ALIMENTOS'}]);}
+
+/* ===== pág. 9 nº2: pesquisa das cores em casa ===== */
+const CORES9=[['AMARELA','#FDD835',[{e:'🍌',n:'BANANA'},{e:'🍋',n:'LIMÃO-SICILIANO'},{e:'🌽',n:'MILHO'},{e:'🍍',n:'ABACAXI'},{e:'🥭',n:'MANGA'}]],
+  ['VERMELHA','#E53935',[{e:'🍎',n:'MAÇÃ'},{e:'🍅',n:'TOMATE'},{e:'🍓',n:'MORANGO'},{e:'🍉',n:'MELANCIA'},{e:'🌶️',n:'PIMENTÃO VERMELHO'}]],
+  ['VERDE','#43A047',[{e:'🥬',n:'ALFACE'},{e:'🥦',n:'BRÓCOLIS'},{e:'🥒',n:'PEPINO'},{e:'🍐',n:'PERA'},{e:'🍈',n:'LIMÃO'},{e:'🫑',n:'PIMENTÃO VERDE'}]],
+  ['ROXO','#7B1FA2',[{e:'🍆',n:'BERINJELA'},{e:'🍇',n:'UVA'},{e:'🟣',n:'BETERRABA'},{e:'🫐',n:'AÇAÍ'},{e:'🥬',n:'REPOLHO ROXO'}]],
+  ['LARANJA','#FB8C00',[{e:'🍊',n:'LARANJA'},{e:'🥕',n:'CENOURA'},{e:'🎃',n:'ABÓBORA'},{e:'🍑',n:'MAMÃO'},{e:'🍠',n:'BATATA-DOCE'}]],
+  ['BRANCO','#9E9E9E',[{e:'🧅',n:'CEBOLA'},{e:'🧄',n:'ALHO'},{e:'🥥',n:'COCO'},{e:'🥔',n:'BATATA'},{e:'🌼',n:'COUVE-FLOR'}]]];
+const QTD9=[1,2,3,4,5,6].map(q=>({e:['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣'][q-1],n:String(q)})).concat([{e:'➕',n:'MAIS DE 6'}]);
+function achado9(cor){const i=CORES9.findIndex(c=>c[0]===cor);return {nome:(MAR[1+i*2]||[])[0]||'?',qtd:(MAR[2+i*2]||[])[0]||'?'};}
+function abrirJogo12(){
+  const rod=[{tit:'🔎 PESQUISA EM CASA',tipo:'livre',n:1,semResumo:true,
+    ilustra:'<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">'+CORES9.map(c=>'<span style="background:'+c[1]+';color:#fff;font-weight:bold;border-radius:14px;padding:8px 12px">'+c[0]+'</span>').join('')+'</div>',
+    perg:'PESQUISE EM CASA <b>6 FRUTAS, VERDURAS OU LEGUMES</b>, UM DE CADA COR!<br>CHAME UM ADULTO E VÁ ATÉ A COZINHA. 🍎🥬🥕',
+    fala:'Hora da pesquisa! Pesquise em casa seis exemplos de frutas, verduras ou legumes, um de cada cor: amarela, vermelha, verde, roxo, laranja e branco. Chame um adulto e vá até a cozinha. Para cada cor, toque no alimento que você encontrou e depois conte quantos tem.',
+    ops:[{e:'🏃‍♀️',n:'VAMOS PESQUISAR!'}]}];
+  CORES9.forEach(c=>{
+    rod.push({tit:'COR '+c[0],tipo:'livre',n:1,
+      perg:'<span style="display:inline-block;background:'+c[1]+';color:#fff;border-radius:12px;padding:4px 14px">'+c[0]+'</span><br>QUAL ALIMENTO DE COR <b>'+c[0]+'</b> VOCÊ ENCONTROU EM CASA?',
+      fala:'Qual alimento de cor '+c[0].toLowerCase()+' você encontrou em casa?',ops:c[2].concat([{e:'✏️',n:'OUTRO'}]),res:'— ALIMENTO'});
+    rod.push({tit:'COR '+c[0],tipo:'livre',n:1,
+      perg:'QUANTOS VOCÊ ENCONTROU? CONTE E TOQUE NO NÚMERO.',
+      fala:'Agora conte. Quantos você encontrou?',ops:QTD9,res:'— QUANTIDADE'});});
+  rod.push({tit:'B)',tipo:'livre',n:1,
+    perg:'QUAL ALIMENTO DA COR <b style="color:#43A047">VERDE</b> FOI ENCONTRADO EM MAIOR QUANTIDADE?',
+    fala:'Qual alimento da cor verde foi encontrado em maior quantidade? Toque nele.',
+    ops:()=>{const a=achado9('VERDE');return [{e:'🟢',n:a.nome+' ('+a.qtd+')'}];},res:'ESCREVA'});
+  rod.push({tit:'C)',tipo:'livre',n:1,
+    perg:'E DA COR <b style="color:#E53935">VERMELHA</b>?',
+    fala:'E da cor vermelha? Toque no alimento.',
+    ops:()=>{const a=achado9('VERMELHA');return [{e:'🔴',n:a.nome+' ('+a.qtd+')'}];},res:'ESCREVA'});
+  rod.push({tit:'D)',tipo:'livre',n:2,
+    perg:'QUAIS ALIMENTOS DA TABELA VOCÊ <b>MAIS GOSTA</b>? ESCOLHA 2.',
+    fala:'Quais alimentos da tabela você mais aprecia, quer dizer, mais gosta? Escolha dois.',
+    ops:()=>CORES9.map(c=>{const a=achado9(c[0]);const o=c[2].find(x=>x.n===a.nome);return {e:o?o.e:'✏️',n:a.nome};}).filter((o,i,arr)=>arr.findIndex(z=>z.n===o.n)===i),res:'ESCREVA'});
+  abrirRodadas(12,'CA PÁG. 9 — Nº 2',rod);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
