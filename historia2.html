@@ -489,6 +489,10 @@
   <button class="menu-btn y4" onclick="abrirJogo5()"><span class="emo">⛺</span><span><span class="pag">CA PÁG. 4</span>BRINCADEIRAS DA EMÍLIA</span><span class="done" id="d5"></span></button>
   <button class="menu-btn y3" onclick="abrirJogo6()"><span class="emo">😊</span><span><span class="pag">CA PÁG. 5</span>EU BRINQUEI E ME SENTI</span><span class="done" id="d6"></span></button>
   <button class="menu-btn y2" onclick="abrirJogo7()"><span class="emo">🪀</span><span><span class="pag">CA PÁG. 5</span>BRINQUEDOS DE ANTIGAMENTE</span><span class="done" id="d7"></span></button>
+  <button class="menu-btn y1" onclick="abrirJogo10()"><span class="emo">🗿</span><span><span class="pag">CA PÁG. 6</span>BRINCADEIRAS COM OS VIZINHOS</span><span class="done" id="d10"></span></button>
+  <button class="menu-btn y3" onclick="abrirJogo11()"><span class="emo">🏡</span><span><span class="pag">CA PÁG. 6</span>DO QUE EU BRINCO EM CASA</span><span class="done" id="d11"></span></button>
+  <button class="menu-btn y2" onclick="abrirJogo12()"><span class="emo">🏫</span><span><span class="pag">CA PÁG. 7</span>OS ESPAÇOS DA ESCOLA</span><span class="done" id="d12"></span></button>
+  <button class="menu-btn y4" onclick="abrirJogo13()"><span class="emo">🤫</span><span><span class="pag">CA PÁG. 7</span>ONDE EU BRINCARIA?</span><span class="done" id="d13"></span></button>
   <button class="menu-btn y4" onclick="abrirJogo9()"><span class="emo">🎤</span><span><span class="pag">CA PÁG. 9</span>ENTREVISTA COM O PAPAI</span><span class="done" id="d9"></span></button>
   </div>
 </div>
@@ -1010,6 +1014,59 @@ function abrirJogo9(){
     r.fala='Vamos escrever! Com qual letra começa '+pal+'?';
     r.exp='Isso! '+pal+' começa com a letra '+pal[0]+'.';
     r.ops=inicialOps(pal);r.resp=pal[0]+' DE '+pal;};}
+
+/* ===== pág. 6 nº5 e nº6 ===== */
+const VIZ6=[['🔵🟢🔴','BOLINHAS DE GUDE'],['💍👐','PASSA ANEL'],['🪀🌀','RODA PIÃO'],['🗿🎵','ESTÁTUA'],['🪢🦘','PULAR CORDA'],['🏸','PETECA']];
+const VIS_VIZ6='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:460px;margin:0 auto">'+VIZ6.map(v=>'<div style="background:#fff;border-radius:14px;padding:6px;text-align:center;font-weight:bold;font-size:.9rem"><div style="font-size:2.4rem">'+v[0]+'</div>'+v[1]+'</div>').join('')+'</div>';
+function abrirJogo10(){
+  abrirRodadas(10,'CA PÁG. 6 — Nº 5',[
+   {tit:'A)',tipo:'livre',n:1,ilustra:VIS_VIZ6,
+    perg:'OBSERVE AS BRINCADEIRAS DE QUE ANITA E OS AMIGOS BRINCAM EM CASA OU COM OS VIZINHOS.<br><b>VOCÊ CONHECE AS REGRAS DESSAS BRINCADEIRAS?</b>',
+    fala:'Observe algumas das brincadeiras de que Anita e seus amigos brincam em casa ou com os vizinhos: bolinhas de gude, passa anel, roda pião, estátua, pular corda e peteca. Você conhece as regras dessas brincadeiras? Sim, não, ou somente de algumas delas?',
+    ops:[{e:'👍',n:'SIM'},{e:'👎',n:'NÃO'},{e:'🤏',n:'SOMENTE DE ALGUMAS DELAS'}],res:'ASSINALE'},
+   {tit:'B)',tipo:'quadros',ilustra:VIS_VIZ6,
+    perg:'QUAL DESSAS BRINCADEIRAS TEM COMO REGRA <b>NÃO SE MEXER</b> PARA PODER VENCER?',
+    fala:'Qual dessas brincadeiras tem como regra não se mexer para poder vencer? Dica: quando a música para, todo mundo fica parado.',
+    exp:'Isso mesmo! Na estátua, quando a música para, todo mundo congela. Quem se mexer sai da brincadeira.',dicaErro:'Quase! Pense na brincadeira em que todo mundo congela quando a música para.',
+    ops:VIZ6.map(v=>({t:v[1],ok:v[1]==='ESTÁTUA'})),res:'ESCREVA',resp:'ESTÁTUA'}]);}
+function abrirJogo11(){
+  abrirRodadas(11,'CA PÁG. 6 — Nº 6',[
+   {tit:'A)',tipo:'livre',n:1,
+    perg:'ESCOLHA UM <b>BRINQUEDO, JOGO OU BRINCADEIRA</b> DE QUE VOCÊ COSTUMA BRINCAR EM CASA.',
+    fala:'Escolha um brinquedo, um jogo ou uma brincadeira de que você costuma brincar em casa.',
+    ops:PREF,res:'NOME DO BRINQUEDO, JOGO OU BRINCADEIRA (DESENHE NO QUADRO)'},
+   {tit:'B)',tipo:'livre',n:3,min:1,
+    perg:'COM QUEM VOCÊ BRINCA <b>EM FAMÍLIA</b>? PODE MARCAR MAIS DE UM.',
+    fala:'Com quem você brinca em família? Pode marcar mais de um.',
+    ops:FAMILIA.concat([{e:'👧',n:'IRMÃ'},{e:'👦',n:'IRMÃO'},{e:'🧒',n:'PRIMO'},{e:'👧🏽',n:'PRIMA'}]),res:'NOME DE COM QUEM VOCÊ BRINCA EM FAMÍLIA'}]);}
+
+/* ===== pág. 7 — jogos e brincadeiras na escola ===== */
+const ESP7={
+ QUADRA:'<svg viewBox="0 0 200 120" style="width:100%;max-width:300px"><rect width="200" height="120" rx="10" fill="#ECEFF1"/><path d="M0 40 L200 40" stroke="#B0BEC5" stroke-width="2"/><rect x="0" y="40" width="200" height="80" fill="#90A4AE"/><rect x="20" y="55" width="160" height="56" fill="none" stroke="#fff" stroke-width="3"/><line x1="100" y1="55" x2="100" y2="111" stroke="#fff" stroke-width="3"/><circle cx="100" cy="83" r="12" fill="none" stroke="#fff" stroke-width="3"/><line x1="60" y1="20" x2="60" y2="70" stroke="#455A64" stroke-width="3"/><line x1="140" y1="20" x2="140" y2="70" stroke="#455A64" stroke-width="3"/><rect x="60" y="22" width="80" height="12" fill="none" stroke="#455A64" stroke-width="1.5" stroke-dasharray="3 2"/>'+
+   '<path d="M0 12 L40 0 L80 12 L120 0 L160 12 L200 0" stroke="#78909C" stroke-width="2" fill="none"/></svg>',
+ PATIO:'<svg viewBox="0 0 200 120" style="width:100%;max-width:300px"><rect width="200" height="120" rx="10" fill="#ECEFF1"/><path d="M0 22 L100 6 L200 22" fill="#B0BEC5" stroke="#78909C" stroke-width="2"/><rect x="0" y="70" width="200" height="50" fill="#CFD8DC"/><rect x="10" y="30" width="60" height="40" fill="#fff" stroke="#90A4AE" stroke-width="2"/><rect x="150" y="34" width="40" height="36" fill="#78909C"/>'+
+   '<g fill="#5D4037"><rect x="40" y="80" width="40" height="6"/><rect x="100" y="86" width="40" height="6"/></g><g fill="#455A64"><circle cx="35" cy="96" r="6"/><circle cx="85" cy="96" r="6"/><circle cx="95" cy="104" r="6"/><circle cx="145" cy="104" r="6"/></g></svg>',
+ JARDIM:'<svg viewBox="0 0 200 120" style="width:100%;max-width:300px"><rect width="200" height="120" rx="10" fill="#E3F2FD"/><rect x="0" y="80" width="200" height="40" fill="#BCAAA4"/><g fill="#66BB6A"><circle cx="150" cy="40" r="22"/><circle cx="175" cy="50" r="20"/><circle cx="125" cy="52" r="18"/></g><rect x="148" y="56" width="6" height="26" fill="#6D4C41"/>'+
+   '<rect x="10" y="30" width="90" height="50" fill="#FFF8E1" stroke="#A1887F" stroke-width="2"/><path d="M5 30 L55 12 L105 30" fill="#A1887F"/><circle cx="30" cy="54" r="7" fill="#EF9A9A"/><circle cx="55" cy="54" r="7" fill="#FFE082"/><circle cx="80" cy="54" r="7" fill="#A5D6A7"/></svg>',
+ SALA:'<svg viewBox="0 0 200 120" style="width:100%;max-width:300px"><rect width="200" height="120" rx="10" fill="#F5F5F5"/><rect x="60" y="14" width="80" height="40" fill="#fff" stroke="#90A4AE" stroke-width="2"/><path d="M70 30 q10 -10 20 0 t20 0 M95 40 q10 -6 20 0" stroke="#90A4AE" stroke-width="2" fill="none"/>'+
+   '<g fill="#B0BEC5"><rect x="20" y="66" width="70" height="8"/><rect x="110" y="66" width="70" height="8"/><rect x="20" y="92" width="70" height="8"/><rect x="110" y="92" width="70" height="8"/></g><g fill="#455A64"><rect x="30" y="76" width="14" height="12"/><rect x="62" y="76" width="14" height="12"/><rect x="120" y="76" width="14" height="12"/><rect x="152" y="76" width="14" height="12"/><rect x="30" y="102" width="14" height="12"/><rect x="62" y="102" width="14" height="12"/><rect x="120" y="102" width="14" height="12"/><rect x="152" y="102" width="14" height="12"/></g></svg>'};
+const ESP7N=[['QUADRA','QUADRA DE ESPORTES',[{e:'⚽',n:'FUTEBOL'},{e:'🏐',n:'VÔLEI'},{e:'🏀',n:'BASQUETE'},{e:'🏃',n:'PEGA-PEGA'},{e:'🔴',n:'QUEIMADA'},{e:'🪢',n:'CABO DE GUERRA'}]],
+  ['PATIO','PÁTIO COBERTO',[{e:'🗿',n:'ESTÁTUA'},{e:'👫',n:'CIRANDA'},{e:'💍',n:'PASSA ANEL'},{e:'🙈',n:'ESCONDE-ESCONDE'},{e:'👆',n:'O MESTRE MANDOU'},{e:'🪢',n:'PULAR CORDA'}]],
+  ['JARDIM','PÁTIO ABERTO',[{e:'🔢',n:'AMARELINHA'},{e:'🏃',n:'PEGA-PEGA'},{e:'🪢',n:'PULAR CORDA'},{e:'🏸',n:'PETECA'},{e:'🙈',n:'CABRA-CEGA'},{e:'🔵',n:'BOLINHA DE GUDE'}]],
+  ['SALA','SALA DE AULA',[{e:'🧩',n:'QUEBRA-CABEÇA'},{e:'🃏',n:'JOGO DA MEMÓRIA'},{e:'🤫',n:'MÍMICA'},{e:'❓',n:'ADIVINHAÇÃO'},{e:'♟️',n:'DAMA'},{e:'🎲',n:'JOGO DE TABULEIRO'}]]];
+function abrirJogo12(){
+  abrirRodadas(12,'CA PÁG. 7 — Nº 1',ESP7N.map((e,k)=>({tit:'ESPAÇO '+(k+1)+' DE 4: '+e[1],tipo:'livre',n:1,ilustra:ESP7[e[0]],
+    perg:(k===0?'🏫 MARINA E OS AMIGOS BRINCAM BASTANTE NA ESCOLA.<br>':'')+'QUE JOGO OU BRINCADEIRA PODE SER FEITO NESTE ESPAÇO: <b>'+e[1]+'</b>?',
+    fala:(k===0?'Marina e seus amigos brincam bastante na escola. Observe os espaços. ':'')+'Este espaço é '+(['a ','o ','o ','a '][k])+e[1].toLowerCase()+'. Que jogo ou brincadeira pode ser feito aqui? Escolha um.',
+    ops:e[2],res:'→'})));}
+function abrirJogo13(){
+  const esp=[{e:'⚽',n:'QUADRA'},{e:'🍽️',n:'PÁTIO COBERTO'},{e:'🌳',n:'PÁTIO ABERTO'},{e:'📚',n:'SALA DE AULA'}];
+  const B=[['A)','AMARELINHA','🔢','Amarelinha é pular nas casinhas desenhadas no chão.'],['B)','JOGO DE MÍMICA','🤫','Mímica é contar uma coisa só com gestos, sem falar.'],['C)','ADIVINHAÇÃO','❓','Adivinhação é descobrir a resposta de uma charada.']];
+  abrirRodadas(13,'CA PÁG. 7 — Nº 2',B.map((b,k)=>({tit:b[0],tipo:'livre',n:1,
+    ilustra:'<div style="text-align:center;font-weight:bold"><div style="font-size:4rem">'+b[2]+'</div>'+b[1]+'</div>',
+    perg:'QUAL ESPAÇO DA ESCOLA VOCÊ ESCOLHERIA PARA BRINCAR DE <b>'+b[1]+'</b>?',
+    fala:b[3]+' Qual espaço da escola você escolheria para brincar de '+b[1].toLowerCase()+'?',
+    ops:esp,res:'DE '+b[1]})));}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
