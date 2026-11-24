@@ -440,7 +440,7 @@
   h1{color:#2E7D32 !important;}
   .p1{background:#66BB6A;} .p2{background:#FFA726;} .p3{background:#42A5F5;}
   .p6{background:#EF5350;} .p7{background:#5C6BC0;} .p8{background:#FFA726;} .p9{background:#29B6F6;}
-  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;} .p14{background:#5C6BC0;} .p15{background:#F4511E;} .p16{background:#43A047;} .p17{background:#6D4C41;} .p18{background:#0288D1;} .p19{background:#7CB342;} .p20{background:#D81B60;} .p21{background:#8E24AA;} .p22{background:#00ACC1;} .p23{background:#F57C00;}
+  .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;} .p14{background:#5C6BC0;} .p15{background:#F4511E;} .p16{background:#43A047;} .p17{background:#6D4C41;} .p18{background:#0288D1;} .p19{background:#7CB342;} .p20{background:#D81B60;} .p21{background:#8E24AA;} .p22{background:#00ACC1;} .p23{background:#F57C00;} .p24{background:#5D4037;} .p25{background:#3949AB;} .p26{background:#00897B;}
   .ps-area{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:8px;}
   .ps-pal{background:#fff;border:4px solid #E0E0E0;border-radius:16px;padding:8px 4px;text-align:center;}
   .ps-pal.ok{border-color:#43A047;background:#F1F8E9;}
@@ -540,6 +540,9 @@
   <button class="menu-btn p21" onclick="abrirJogo21()"><span class="emo">🦋</span><span><span class="pag">CA PÁG. 12</span>MAIS DE UM ELEMENTO</span><span class="done" id="d21"></span></button>
   <button class="menu-btn p22" onclick="abrirJogo22()"><span class="emo">🎮</span><span><span class="pag">CA PÁG. 12</span>OS JOGOS NO PLURAL</span><span class="done" id="d22"></span></button>
   <button class="menu-btn p23" onclick="abrirJogo23()"><span class="emo">💬</span><span><span class="pag">CA PÁG. 13</span>A CONVERSA DOS AMIGOS</span><span class="done" id="d23"></span></button>
+  <button class="menu-btn p24" onclick="abrirJogo24()"><span class="emo">⚽</span><span><span class="pag">CA PÁG. 14</span>QUANDO A BOLA SURGIU?</span><span class="done" id="d24"></span></button>
+  <button class="menu-btn p25" onclick="abrirJogo25()"><span class="emo">🔄</span><span><span class="pag">CA PÁG. 15</span>INVENTARAM OU CRIARAM?</span><span class="done" id="d25"></span></button>
+  <button class="menu-btn p26" onclick="abrirJogo26()"><span class="emo">🤝</span><span><span class="pag">CA PÁG. 15</span>PALAVRAS AMIGAS</span><span class="done" id="d26"></span></button>
   </div>
 </div>
 
@@ -1397,6 +1400,69 @@ function abrirJogo23(){
     fala:(k===0?'Depois de jogar na internet, Emília foi se encontrar com seus amigos, que estavam fazendo contagem de objetos. ':'')+c[5]+' Olhe o pensamento e conte. Complete: não, eu tenho...',
     exp:'Isso mesmo! Não, eu tenho '+c[3].toLowerCase()+'.',dicaErro:'Quase! Conte de novo os objetos no pensamento.',
     ops:c[4].map(w=>({t:w,ok:w===c[3]})),res:'NÃO, EU TENHO',resp:c[3]+'.'})));}
+
+/* ===== pág. 14 — quando a bola surgiu? ===== */
+const TXT_BOLA='<div style="text-align:left;background:#FFF8E1;border:3px solid #BCAAA4;border-radius:16px;padding:12px 14px;font-weight:bold;line-height:1.6;font-size:1rem">'+
+  '<div style="text-align:center;font-size:1.15rem;margin-bottom:6px">⚽ QUANDO A BOLA SURGIU?</div>'+
+  'A BOLA É O BRINQUEDO MAIS ANTIGO DO MUNDO. <span style="background:#C8E6C9">ELA EXISTE HÁ MAIS DE 6 MIL ANOS.</span> AS PRIMEIRAS BOLAS ERAM FEITAS COM PELOS DE ANIMAIS OU BAMBU.<br>'+
+  'MUITO TEMPO DEPOIS É QUE INVENTARAM A BOLA DE FUTEBOL. A PRIMEIRA DELAS ERA DE COURO E, PORTANTO, MARROM. POR ISSO, JOGAR BOLA À NOITE ERA UM PROBLEMA, ATÉ QUE UM BRASILEIRO, JOAQUIM SIMÃO, EM 1935, CRIOU A BOLA DE FUTEBOL BRANCA.</div>';
+const TXT_BOLA_LIMPO=TXT_BOLA.replace('<span style="background:#C8E6C9">','<span>');
+const FALA_BOLA='Quando a bola surgiu? A bola é o brinquedo mais antigo do mundo. Ela existe há mais de seis mil anos. As primeiras bolas eram feitas com pelos de animais ou bambu. Muito tempo depois é que inventaram a bola de futebol. A primeira delas era de couro e, portanto, marrom. Por isso, jogar bola à noite era um problema, até que um brasileiro, Joaquim Simão, em mil novecentos e trinta e cinco, criou a bola de futebol branca.';
+function abrirJogo24(){
+  abrirRodadas(24,'CA PÁG. 14 — Nº 1',[
+   {tit:'OUÇA O TEXTO',tipo:'livre',n:1,semResumo:true,ilustra:TXT_BOLA_LIMPO,
+    perg:'⚽ ANITA E A TURMA BRINCAM COM BOLA NA ESCOLA. <b>VOCÊ SABE QUANDO A BOLA SURGIU?</b><br>OUÇA O TEXTO DE CURIOSIDADE.',
+    fala:'Algumas brincadeiras de que Anita e sua turma participam na escola são com bola. Você sabe quando esse objeto surgiu? Ouça o texto de curiosidade. '+FALA_BOLA+' Toque em entendi.',
+    ops:[{e:'👍',n:'ENTENDI'}]},
+   {tit:'A)',tipo:'quadros',ilustra:TXT_BOLA_LIMPO,
+    perg:'O TÍTULO DO TEXTO É UMA PERGUNTA: <b>QUANDO A BOLA SURGIU?</b><br>QUAL FRASE RESPONDE?',
+    fala:'O título do texto é uma pergunta: quando a bola surgiu? Qual frase responde quando a bola surgiu? Dica: procure a frase que fala de anos.',
+    exp:'Isso mesmo! Ela existe há mais de seis mil anos. Agora copie essa frase no livro.',dicaErro:'Quase! Procure a frase que fala de quantos anos a bola tem.',
+    ops:[{t:'A BOLA É O BRINQUEDO MAIS ANTIGO DO MUNDO.',ok:false},{t:'ELA EXISTE HÁ MAIS DE 6 MIL ANOS.',ok:true},{t:'A PRIMEIRA DELAS ERA DE COURO.',ok:false}],
+    res:'COPIE A FRASE',resp:'ELA EXISTE HÁ MAIS DE 6 MIL ANOS.'},
+   {tit:'B)',tipo:'marcar',ilustra:TXT_BOLA_LIMPO,
+    perg:'AS PRIMEIRAS BOLAS ERAM FEITAS DE... (SÃO 2)',
+    fala:'As primeiras bolas eram feitas de quê? Lembre do texto: as primeiras bolas eram feitas com pelos de animais ou bambu. São duas respostas.',
+    ops:[{e:'🎋',n:'BAMBU',ok:true},{e:'👞',n:'COURO',ok:false},{e:'🐑',n:'PELOS DE ANIMAIS',ok:true}],res:'ASSINALE',resp:'BAMBU E PELOS DE ANIMAIS'},
+   {tit:'C)',tipo:'quadros',ilustra:'<div style="font-size:4rem;text-align:center">🟤⚽</div>',
+    perg:'PINTE A PALAVRA QUE REPRESENTA A <b>COR</b> DA PRIMEIRA BOLA DE FUTEBOL:<br>"A PRIMEIRA BOLA ERA MARROM."',
+    fala:'Pinte, na frase, a palavra que representa a cor da primeira bola de futebol. A primeira bola era marrom.',
+    exp:'Isso mesmo! Marrom é a cor. A primeira bola era de couro, por isso era marrom.',dicaErro:'Quase! Qual dessas palavras é uma cor?',
+    ops:['A','PRIMEIRA','BOLA','ERA','MARROM'].map(w=>({t:w,ok:w==='MARROM'})),res:'PINTE',resp:'MARROM'}]);}
+
+/* ===== pág. 15 — inventaram x criaram ===== */
+function abrirJogo25(){
+  abrirRodadas(25,'CA PÁG. 15 — Nº 1 D',[
+   {tit:'D)',tipo:'quadros',ilustra:'<div style="text-align:center;font-weight:bold;font-size:1.2rem;background:#FFF59D;border-radius:12px;padding:10px">MUITO TEMPO DEPOIS É QUE <span style="color:#C62828">INVENTARAM</span> A BOLA DE FUTEBOL.</div>',
+    perg:'TROQUE A PALAVRA <b style="color:#C62828">INVENTARAM</b> POR <b style="color:#1565C0">CRIARAM</b>.<br>COMO FICA A FRASE?',
+    fala:'Releia a frase: muito tempo depois é que inventaram a bola de futebol. Agora troque a palavra inventaram por criaram. Como fica a frase?',
+    exp:'Isso mesmo! Muito tempo depois é que criaram a bola de futebol. Agora copie no livro.',dicaErro:'Quase! Só a palavra inventaram muda. O resto fica igual.',
+    ops:[{t:'MUITO TEMPO DEPOIS É QUE CRIARAM A BOLA DE FUTEBOL.',ok:true},{t:'MUITO TEMPO DEPOIS É QUE INVENTARAM A BOLA DE FUTEBOL.',ok:false},{t:'MUITO TEMPO DEPOIS É QUE CRIARAM O BRINQUEDO.',ok:false}],
+    res:'COPIE A FRASE',resp:'MUITO TEMPO DEPOIS É QUE CRIARAM A BOLA DE FUTEBOL.'},
+   {tit:'D)',tipo:'quadros',
+    perg:'AS PALAVRAS <b>INVENTARAM</b> E <b>CRIARAM</b> POSSUEM...',
+    fala:'As palavras inventaram e criaram possuem significados diferentes ou o mesmo significado? Pense: a frase continuou dizendo a mesma coisa?',
+    exp:'Isso mesmo! Inventaram e criaram têm o mesmo significado. A frase continua dizendo a mesma coisa.',
+    ops:[{t:'SIGNIFICADOS DIFERENTES.',ok:false},{t:'O MESMO SIGNIFICADO.',ok:true}],res:'ASSINALE',resp:'O MESMO SIGNIFICADO'}]);}
+
+/* ===== pág. 15 nº2 — palavras com o mesmo significado ===== */
+const SINON15=[['🚗','CARRO','AUTOMÓVEL',['AUTOMÓVEL','BICICLETA','RODA']],['🏠','LAR','CASA',['RUA','CASA','JANELA']],
+  ['👸','LINDA','BONITA',['FEIA','ALTA','BONITA']],['🐢','LENTO','DEVAGAR',['DEVAGAR','RÁPIDO','FORTE']],
+  ['🐶','ANIMAL','BICHO',['PLANTA','BICHO','PEDRA']],['😄','FELIZ','CONTENTE',['TRISTE','CANSADO','CONTENTE']],
+  ['😠','IRRITADO','BRAVO',['BRAVO','CALMO','FELIZ']],['🧒','ESTUDANTE','ALUNO',['PROFESSOR','ALUNO','DIRETOR']]];
+function abrirJogo26(){
+  const rod=[{tit:'O JOGO DA BOLA',tipo:'livre',n:1,semResumo:true,
+    ilustra:'<div style="display:flex;justify-content:center;align-items:center;gap:14px;font-weight:bold;font-size:1.2rem;text-align:center"><div><div style="font-size:3.4rem">👧</div><span style="background:#fff;border:2px solid #555;border-radius:12px;padding:4px 10px">CAMINHAR</span></div><div style="font-size:2.6rem">⚽</div><div><div style="font-size:3.4rem">👦</div><span style="background:#fff;border:2px solid #555;border-radius:12px;padding:4px 10px">ANDAR</span></div></div>',
+    perg:'ANITA BRINCOU EM DUPLA: UM DIZ UMA PALAVRA E O COLEGA DIZ OUTRA <b>COM O MESMO SIGNIFICADO</b>.',
+    fala:'A primeira brincadeira com bola de que Anita participou foi em dupla. Um aluno dizia uma palavra e o colega dizia outra com o mesmo significado. Caminhar e andar querem dizer a mesma coisa! Agora é a sua vez de jogar a bola. Toque em vamos jogar.',
+    ops:[{e:'⚽',n:'VAMOS JOGAR!'}]}];
+  SINON15.forEach((p,k)=>rod.push({tit:'BOLA '+(k+1)+' DE 8',tipo:'quadros',
+    ilustra:'<div style="text-align:center;font-weight:bold"><div style="font-size:3.6rem">'+p[0]+'</div><span style="font-size:1.6rem">'+p[1]+'</span> <span style="font-size:1.6rem">= ?</span></div>',
+    perg:'QUAL PALAVRA TEM O <b>MESMO SIGNIFICADO</b> DE <b>'+p[1]+'</b>?',
+    fala:'Qual palavra quer dizer a mesma coisa que '+p[1].toLowerCase()+'?',
+    exp:'Isso mesmo! '+p[1].toLowerCase()+' e '+p[2].toLowerCase()+' têm o mesmo significado.',dicaErro:'Quase! Procure a palavra que quer dizer a mesma coisa.',
+    ops:p[3].map(w=>({t:w,ok:w===p[2]})),res:p[1]+' →',resp:p[2]}));
+  abrirRodadas(26,'CA PÁG. 15 — Nº 2 A',rod);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
