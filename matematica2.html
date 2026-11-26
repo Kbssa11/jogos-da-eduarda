@@ -486,6 +486,9 @@
   <button class="menu-btn x1" onclick="abrirJogo10()"><span class="emo">📝</span><span><span class="pag">CA PÁG. 8</span>O GARÇOM CONTOU</span><span class="done" id="d10"></span></button>
   <button class="menu-btn x2" onclick="abrirJogo11()"><span class="emo">🥟</span><span><span class="pag">CA PÁG. 9</span>O QUE SOBROU MAIS?</span><span class="done" id="d11"></span></button>
   <button class="menu-btn x3" onclick="abrirJogo12()"><span class="emo">🍎</span><span><span class="pag">CA PÁG. 9</span>PESQUISA DAS CORES</span><span class="done" id="d12"></span></button>
+  <button class="menu-btn x4" onclick="abrirJogo13()"><span class="emo">🔴</span><span><span class="pag">CA PÁG. 10</span>DIVIDINDO OS BOTÕES</span><span class="done" id="d13"></span></button>
+  <button class="menu-btn x5" onclick="abrirJogo14()"><span class="emo">👫</span><span><span class="pag">CA PÁG. 10</span>BRINCADEIRA EM DUPLAS</span><span class="done" id="d14"></span></button>
+  <button class="menu-btn x1" onclick="abrirJogo15()"><span class="emo">🔵</span><span><span class="pag">CA PÁG. 11</span>AS 20 TAMPINHAS</span><span class="done" id="d15"></span></button>
   </div>
 </div>
 
@@ -612,6 +615,7 @@ function montarRod(){
   if(r.ilustra){const f=areaOn('figs-rod');
     f.innerHTML='<div class="fig-op" style="cursor:default;box-shadow:none;filter:none">'+r.ilustra+'</div>';}
   if(r.tipo==='malha'){montaMalha(r);return;}
+  if(r.custom){r.custom(r);return;}
   if(r.tipo==='figs'){
     const f=areaOn('figs-rod');
     r.figs.forEach(o=>{
@@ -739,14 +743,14 @@ function encheCaixa(d){
   const r=JG.rodadas[rI];let n=+d.dataset.n;
   if(n>=r.por){d.classList.add('errou');falar('Essa criança já tem '+r.por+' fichas.');
     setTimeout(()=>d.classList.remove('errou'),600);return;}
-  n++;d.dataset.n=n;d.querySelector('.fichas').innerHTML+=FICHA;tocarSom(true);falar(String(n));
+  n++;d.dataset.n=n;d.querySelector('.fichas').innerHTML+=(r.ficha||FICHA);tocarSom(true);falar(String(n));
   if(n===r.por)d.classList.add('pintado');
   contaEncher();}
 function contaEncher(){
   const r=JG.rodadas[rI];
   const caixas=[...document.querySelectorAll('#itens-rod .caixa-f')];
   const tot=caixas.reduce((s,d)=>s+(+d.dataset.n),0),alvo=r.caixas.length*r.por;
-  document.getElementById('cont-rod').textContent='FICHAS DESENHADAS: '+tot+' DE '+alvo;
+  document.getElementById('cont-rod').textContent=(r.nomeF||'FICHAS DESENHADAS')+': '+tot+' DE '+alvo;
   if(tot>=alvo){fbRod('certo',elogio());MAR[rI]=[r.resp];falar(r.exp);liberaProx();}}
 let saltoAt=0;
 function xr(i){return 16+i*20.6;}
@@ -1109,6 +1113,81 @@ function abrirJogo12(){
     fala:'Quais alimentos da tabela você mais aprecia, quer dizer, mais gosta? Escolha dois.',
     ops:()=>CORES9.map(c=>{const a=achado9(c[0]);const o=c[2].find(x=>x.n===a.nome);return {e:o?o.e:'✏️',n:a.nome};}).filter((o,i,arr)=>arr.findIndex(z=>z.n===o.n)===i),res:'ESCREVA'});
   abrirRodadas(12,'CA PÁG. 9 — Nº 2',rod);}
+
+/* ===== págs. 10 e 11: repartir igualmente ===== */
+const BOTAO='<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#E53935" stroke="#B71C1C" stroke-width="3"/><circle cx="15" cy="15" r="3" fill="#fff"/><circle cx="25" cy="15" r="3" fill="#fff"/><circle cx="15" cy="25" r="3" fill="#fff"/><circle cx="25" cy="25" r="3" fill="#fff"/></svg>';
+const TAMPA='<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="#1E88E5" stroke="#0D47A1" stroke-width="3"/><circle cx="20" cy="20" r="11" fill="none" stroke="#90CAF9" stroke-width="2" stroke-dasharray="3 3"/></svg>';
+const KIDS=['👧','👦','🧒','👧🏽','👦🏾','🧒🏻','👧🏼','👦🏽','🧒🏾','👧🏻','👦','👧','🧒','👦🏼'];
+function linhaFig(svg,n){return '<div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:420px;margin:0 auto">'+Array(n).fill('<span style="width:30px;height:30px;display:inline-block">'+svg+'</span>').join('')+'</div>';}
+function caixasKids(q,nome){return Array.from({length:q},(_,i)=>({e:KIDS[i%KIDS.length],n:nome+' '+(i+1)}));}
+/* agrupar de 2 em 2 */
+const COR_G=['#FFCDD2','#C8E6C9','#BBDEFB','#FFF9C4','#E1BEE7','#FFE0B2','#B2EBF2'];
+function montaGrupos(r){
+  const a=areaOn('itens-rod');let g=0,sel=[];
+  a.innerHTML='';
+  for(let i=0;i<r.total;i++){const d=document.createElement('div');d.className='item';d.style.minHeight='90px';d.style.filter='none';
+    d.innerHTML='<span class="emo">'+KIDS[i%KIDS.length]+'</span><span class="nome"></span>';
+    d.onclick=()=>{if(d.dataset.g)return;
+      d.dataset.g='1';d.style.background=COR_G[g%COR_G.length];d.style.borderColor='#43A047';
+      d.querySelector('.nome').textContent='GRUPO '+(g+1);sel.push(d);tocarSom(true);
+      if(sel.length===r.tam){g++;sel=[];falar('Grupo '+g+'!');}else falar('Agora mais um.');
+      document.getElementById('cont-rod').textContent='GRUPOS FORMADOS: '+g;
+      if(g*r.tam===r.total){fbRod('certo',elogio());falar(r.exp);MAR[rI]=[r.resp];liberaProx();}};
+    a.appendChild(d);}
+  document.getElementById('cont-rod').textContent='GRUPOS FORMADOS: 0';
+  r.auto=async()=>{[...a.querySelectorAll('.item')].forEach(d=>d.click());return false;};
+  falar(r.fala);}
+function abrirJogo13(){
+  abrirRodadas(13,'CA PÁG. 10 — Nº 1',[
+   {tit:'1)',tipo:'livre',n:1,semResumo:true,ilustra:'<div style="text-align:center"><div style="font-size:3rem">👩‍🏫 👧👦🧒</div>'+linhaFig(BOTAO,15)+'</div>',
+    perg:'A PROFESSORA TEM <b>15 BOTÕES</b> PARA DIVIDIR <b>IGUALMENTE</b> ENTRE <b>3 CRIANÇAS</b>.',
+    fala:'A professora tem quinze botões para dividir igualmente entre três crianças. Igualmente quer dizer: todas ficam com a mesma quantidade.',
+    ops:[{e:'👍',n:'ENTENDI!'}]},
+   {tit:'A) DESENHE OS BOTÕES',tipo:'encher',por:5,ficha:BOTAO,nomeF:'BOTÕES ENTREGUES',caixas:caixasKids(3,'CRIANÇA'),
+    perg:'TOQUE NAS CRIANÇAS PARA DAR OS BOTÕES.<br>DÊ <b>UM DE CADA VEZ</b>, ATÉ ACABAR OS 15!',
+    fala:'Toque nas crianças para dar os botões. Dê um botão para cada uma, de cada vez, até acabar os quinze.',
+    exp:'Muito bem! Os quinze botões foram divididos.',resp:'5 BOTÕES PARA CADA CRIANÇA'},
+   {tit:'B)',tipo:'num',ilustra:'<div style="display:flex;gap:14px;justify-content:center">'+[0,1,2].map(i=>'<div style="text-align:center"><div style="font-size:2.6rem">'+KIDS[i]+'</div>'+linhaFig(BOTAO,5).replace('max-width:420px','max-width:110px')+'</div>').join('')+'</div>',
+    perg:'COM QUANTOS BOTÕES <b>CADA CRIANÇA</b> FICOU?',fala:'Com quantos botões cada criança ficou? Conte os botões de uma criança.',
+    certo:5,ops:[3,4,5,6],mostra:'15 DIVIDIDO POR 3 = 5',dicaErro:'Quase! Conte os botões de uma criança só.',
+    exp:'Isso mesmo! Cada criança ficou com cinco botões.',resp:'CADA CRIANÇA FICOU COM 5 BOTÕES'}]);}
+function abrirJogo14(){
+  abrirRodadas(14,'CA PÁG. 10 — Nº 2',[
+   {tit:'A)',tipo:'num',ilustra:'<div style="font-size:2.3rem;text-align:center;max-width:430px;margin:0 auto;line-height:1.3">'+KIDS.join(' ')+'</div>',
+    perg:'A PROFESSORA VAI FAZER UMA BRINCADEIRA EM <b>DUPLAS</b>.<br>QUANTAS CRIANÇAS HÁ NA TURMA?',
+    fala:'A professora vai fazer uma brincadeira em duplas. Conte: quantas crianças há na turma?',
+    certo:14,ops:[12,13,14,15],dicaErro:'Quase! Conte devagar, uma criança de cada vez.',
+    exp:'Isso mesmo! São catorze crianças.',resp:'14 CRIANÇAS'},
+   {tit:'B) FORME AS DUPLAS',custom:montaGrupos,total:14,tam:2,
+    perg:'TOQUE NAS CRIANÇAS <b>DE 2 EM 2</b> PARA FORMAR AS DUPLAS.<br>NO LIVRO, VOCÊ VAI <b>CONTORNAR</b> DE 2 EM 2.',
+    fala:'Toque nas crianças de duas em duas para formar as duplas. Cada dupla ganha uma cor. No livro, você vai contornar as crianças de duas em duas.',
+    exp:'Muito bem! Todas as crianças estão em duplas.',resp:'DE 2 EM 2'},
+   {tit:'C)',tipo:'num',perg:'QUANTOS <b>GRUPOS</b> (DUPLAS) VOCÊ FORMOU?',fala:'Quantos grupos você formou? Conte as duplas.',
+    ilustra:'<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:440px;margin:0 auto">'+[0,1,2,3,4,5,6].map(i=>'<span style="background:'+COR_G[i]+';border-radius:20px;padding:4px 8px;font-size:2rem">'+KIDS[2*i]+KIDS[2*i+1]+'</span>').join('')+'</div>',
+    certo:7,ops:[5,6,7,8],dicaErro:'Quase! Conte cada bolinha colorida com duas crianças.',
+    exp:'Isso mesmo! Sete grupos.',resp:'7 GRUPOS'},
+   {tit:'D) COMPLETE',tipo:'num',perg:'<span class="conta">14 DIVIDIDO POR 2 É IGUAL A ?</span>',
+    fala:'Complete: catorze dividido por dois é igual a quanto? É o número de grupos que você formou.',
+    certo:7,ops:[2,7,12,14],mostra:'14 DIVIDIDO POR 2 É IGUAL A 7',dicaErro:'Quase! Lembre quantas duplas você formou.',
+    exp:'Isso mesmo! Catorze dividido por dois é igual a sete.',resp:'14 DIVIDIDO POR 2 É IGUAL A 7'}]);}
+function rodTampa(tit,q,por){
+  return [{tit:tit,tipo:'encher',por:por,ficha:TAMPA,nomeF:'TAMPINHAS ENTREGUES',caixas:caixasKids(q,'CRIANÇA'),
+    perg:'O GRUPO TEM <b>'+q+' CRIANÇAS</b>. DIVIDA AS <b>20 TAMPINHAS</b>: TOQUE NAS CRIANÇAS, UMA DE CADA VEZ.',
+    fala:'Este grupo tem '+q+' crianças. Divida as vinte tampinhas igualmente. Toque nas crianças, uma de cada vez.',
+    exp:'Muito bem! Acabaram as tampinhas.',semResumo:true},
+   {tit:tit,tipo:'num',perg:'NO GRUPO DE <b>'+q+' CRIANÇAS</b>, COM QUANTAS TAMPINHAS <b>CADA UMA</b> FICOU?',
+    fala:'No grupo de '+q+' crianças, com quantas tampinhas cada uma ficou?',
+    certo:por,ops:opsNum(por,[por-1,por+1,por+2]),mostra:'20 DIVIDIDO POR '+q+' = '+por,
+    dicaErro:'Quase! Conte as tampinhas de uma criança só.',exp:'Isso mesmo! Cada uma ficou com '+por+' tampinhas.',
+    resp:q+' CRIANÇAS → '+por+' TAMPINHAS CADA'}];}
+function abrirJogo15(){
+  abrirRodadas(15,'CA PÁG. 11 — Nº 3',[
+   {tit:'3)',tipo:'livre',n:1,semResumo:true,ilustra:linhaFig(TAMPA,20),
+    perg:'CADA GRUPO DE CRIANÇAS GANHOU <b>20 TAMPINHAS</b> PARA DIVIDIR <b>IGUALMENTE</b>.',
+    fala:'Cada grupo de crianças ganhou vinte tampinhas para dividir igualmente. Vamos ver com quantas cada criança fica.',
+    ops:[{e:'👍',n:'VAMOS LÁ!'}]}]
+   .concat(rodTampa('A) GRUPO 1',2,10),rodTampa('A) GRUPO 2',4,5),rodTampa('A) GRUPO 3',5,4),
+     rodTampa('B) 10 CRIANÇAS',10,2)));}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
