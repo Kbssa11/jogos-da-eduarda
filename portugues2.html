@@ -438,6 +438,16 @@
 </style>
 <style>
   h1{color:#2E7D32 !important;}
+  #quadros-rod.vg5{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+  #figs-rod.g2{grid-template-columns:1fr 1fr;}
+  .vg-linha{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;}
+  .vg-cx{width:48px;height:58px;display:inline-flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;border:3px solid #90A4AE;border-radius:10px;background:#fff;}
+  .vg-vazio{background:#FFF3E0;border-color:#FB8C00;border-style:dashed;}
+  .vg-agora{box-shadow:0 0 0 4px #FFCA28;animation:pulsa 1s infinite;}
+  .vg-ok{background:#C8E6C9;border-color:#43A047;border-style:solid;box-shadow:none;animation:none;color:#1B5E20;}
+  .vg-btn{font-size:2.2rem;justify-content:center;}
+  @keyframes pulsa{50%{transform:scale(1.08);}}
+  .p27{background:#C0CA33;} .p28{background:#F06292;} .p29{background:#26A69A;} .p30{background:#FF7043;}
   .p1{background:#66BB6A;} .p2{background:#FFA726;} .p3{background:#42A5F5;}
   .p6{background:#EF5350;} .p7{background:#5C6BC0;} .p8{background:#FFA726;} .p9{background:#29B6F6;}
   .p10{background:#8D6E63;} .p11{background:#EC407A;} .p12{background:#7E57C2;} .p13{background:#00897B;} .p14{background:#5C6BC0;} .p15{background:#F4511E;} .p16{background:#43A047;} .p17{background:#6D4C41;} .p18{background:#0288D1;} .p19{background:#7CB342;} .p20{background:#D81B60;} .p21{background:#8E24AA;} .p22{background:#00ACC1;} .p23{background:#F57C00;} .p24{background:#5D4037;} .p25{background:#3949AB;} .p26{background:#00897B;}
@@ -543,6 +553,10 @@
   <button class="menu-btn p24" onclick="abrirJogo24()"><span class="emo">⚽</span><span><span class="pag">CA PÁG. 14</span>QUANDO A BOLA SURGIU?</span><span class="done" id="d24"></span></button>
   <button class="menu-btn p25" onclick="abrirJogo25()"><span class="emo">🔄</span><span><span class="pag">CA PÁG. 15</span>INVENTARAM OU CRIARAM?</span><span class="done" id="d25"></span></button>
   <button class="menu-btn p26" onclick="abrirJogo26()"><span class="emo">🤝</span><span><span class="pag">CA PÁG. 15</span>PALAVRAS AMIGAS</span><span class="done" id="d26"></span></button>
+  <button class="menu-btn p27" onclick="abrirJogo27()"><span class="emo">✍️</span><span><span class="pag">CA PÁG. 16</span>MINHA FRASE</span><span class="done" id="d27"></span></button>
+  <button class="menu-btn p28" onclick="abrirJogo28()"><span class="emo">🅰️</span><span><span class="pag">CA PÁG. 16</span>COMPLETE COM AS VOGAIS</span><span class="done" id="d28"></span></button>
+  <button class="menu-btn p29" onclick="abrirJogo29()"><span class="emo">🐟</span><span><span class="pag">CA PÁG. 16</span>O SEGREDO DOS ANIMAIS</span><span class="done" id="d29"></span></button>
+  <button class="menu-btn p30" onclick="abrirJogo30()"><span class="emo">🦜</span><span><span class="pag">CA PÁG. 17</span>CURIOSIDADES DOS ANIMAIS</span><span class="done" id="d30"></span></button>
   </div>
 </div>
 
@@ -705,7 +719,7 @@ function liberaProx(){
   b.textContent=(rI<JG.rodadas.length-1)?'CONTINUAR ➜':'PRONTO ➜';
   b.classList.add('mostrar');}
 function montarRod(){
-  const r=JG.rodadas[rI];selCor=null;if(r.antes)r.antes();
+  const r=JG.rodadas[rI];selCor=null;document.getElementById('figs-rod').classList.remove('g2');document.getElementById('quadros-rod').classList.remove('vg5');if(r.antes)r.antes();
   estrelas(document.getElementById('prog-rod'),rI,JG.rodadas.length);
   limparRod();
   document.getElementById('perg-rod').innerHTML=
@@ -713,6 +727,7 @@ function montarRod(){
   textoFala=r.fala;
   if(r.ilustra){const f=areaOn('figs-rod');
     f.innerHTML='<div class="fig-op" style="cursor:default;box-shadow:none;filter:none">'+r.ilustra+'</div>';}
+  if(r.custom){r.custom(r);return;}
   if(r.tipo==='figs'){
     const f=areaOn('figs-rod');
     r.figs.forEach(o=>{
@@ -728,6 +743,7 @@ function montarRod(){
       b.onclick=()=>respUnica(b,o,'op-quadro');q.appendChild(b);});
   }else if(r.tipo==='marcar'||r.tipo==='livre'){
     const a=areaOn('itens-rod');
+    if(typeof r.ops==='function')r.ops=r.ops();
     r.ops.forEach(o=>{
       const d=document.createElement('div');d.className='item';
       d.innerHTML='<span class="emo">'+o.e+'</span><span class="nome">'+o.n+'</span>';
@@ -1463,6 +1479,108 @@ function abrirJogo26(){
     exp:'Isso mesmo! '+p[1].toLowerCase()+' e '+p[2].toLowerCase()+' têm o mesmo significado.',dicaErro:'Quase! Procure a palavra que quer dizer a mesma coisa.',
     ops:p[3].map(w=>({t:w,ok:w===p[2]})),res:p[1]+' →',resp:p[2]}));
   abrirRodadas(26,'CA PÁG. 15 — Nº 2 A',rod);}
+
+/* ===== págs. 16 e 17 ===== */
+const FRASE16={CARRO:['O AUTOMÓVEL DO PAPAI É AZUL.','EU GOSTO DE ANDAR DE CARRO.'],LAR:['EU AMO O MEU LAR.','MINHA CASA TEM JARDIM.'],
+  LINDA:['A FLOR É MUITO BONITA.','A LUA ESTÁ LINDA HOJE.'],LENTO:['A TARTARUGA ANDA DEVAGAR.','O CARACOL É LENTO.'],
+  ANIMAL:['O GATO É UM BICHO FOFO.','MEU ANIMAL PREFERIDO É O CACHORRO.'],FELIZ:['EU ESTOU CONTENTE HOJE.','A VOVÓ FICOU FELIZ.'],
+  IRRITADO:['O CACHORRO FICOU BRAVO.','O MENINO ESTÁ IRRITADO.'],ESTUDANTE:['EU SOU UMA BOA ALUNA.','A ESTUDANTE LEU UM LIVRO.']};
+function abrirJogo27(){
+  abrirRodadas(27,'CA PÁG. 16 — Nº 2 B',[
+   {tit:'B) PALAVRA',tipo:'livre',n:1,
+    perg:'ESCOLHA <b>UMA DUPLA</b> DE PALAVRAS AMIGAS DO JOGO DA BOLA.',
+    fala:'Escolha uma dupla de palavras que têm o mesmo significado, lá do jogo da bola. Toque na que você mais gostou.',
+    ops:SINON15.map(p=>({e:p[0],n:p[1]+' = '+p[2]}))},
+   {tit:'B) A FRASE',tipo:'livre',n:1,
+    perg:'AGORA ESCOLHA UMA <b>FRASE</b> COM ESSA PALAVRA.<br>DEPOIS VOCÊ VAI ESCREVER NO LIVRO. ✏️',
+    fala:'Agora escolha uma frase com essa palavra. Depois você vai escrever a frase no livro. Se quiser, pode inventar a sua!',
+    ops:()=>{const w=((MAR[0]||[])[0]||'CARRO').split(' = ')[0];const p=SINON15.find(x=>x[1]===w)||SINON15[0];
+      return FRASE16[p[1]].map(f=>({e:p[0],n:f})).concat([{e:'💭',n:'VOU INVENTAR A MINHA!'}]);}}]);}
+
+const VOG16=[['👀','OLHAR','ENXERGAR','_NX_RG_R'],['🗣️','DIZER','FALAR','F_L_R'],['👂','ESCUTAR','OUVIR','__V_R'],
+  ['🤝','JUNTAR','UNIR','_N_R'],['🍂','TOMBAR','CAIR','C__R'],['💭','FANTASIAR','IMAGINAR','_M_G_N_R']];
+function montaVogais(r){
+  const f=areaOn('figs-rod'),q=areaOn('quadros-rod');let pos=0;q.classList.add('vg5');
+  const falt=[...r.mod].map((c,i)=>c==='_'?i:-1).filter(i=>i>=0);
+  const caixas=()=>[...r.mod].map((c,i)=>'<span class="vg-cx'+(c==='_'?' vg-vazio':'')+'" id="vg'+i+'">'+(c==='_'?'':c)+'</span>').join('');
+  f.innerHTML='<div class="fig-op" style="cursor:default;box-shadow:none;filter:none"><div style="text-align:center"><div style="font-size:3rem">'+r.e+'</div>'+
+    '<div style="font-weight:bold;font-size:1.3rem;margin-bottom:10px">'+r.de+' = ?</div><div class="vg-linha">'+caixas()+'</div></div></div>';
+  ['A','E','I','O','U'].forEach(v=>{const b=document.createElement('button');b.className='op-quadro vg-btn';b.textContent=v;
+    b.onclick=()=>{if(pos>=falt.length)return;const i=falt[pos];
+      if(r.pal[i]===v){const c=document.getElementById('vg'+i);c.textContent=v;c.classList.add('vg-ok');pos++;tocarSom(true);falar(v);
+        if(pos===falt.length){fbRod('certo',elogio());falar(r.exp);MAR[rI]=[r.pal];liberaProx();}
+        else document.getElementById('vg'+falt[pos]).classList.add('vg-agora');}
+      else{b.classList.add('errada');tocarSom(false);fbRod('tente','TENTE DE NOVO 😊');falar('Quase! Fale a palavra '+r.pal.toLowerCase()+' bem devagar e escute o som.');
+        setTimeout(()=>b.classList.remove('errada'),700);}};
+    q.appendChild(b);});
+  document.getElementById('vg'+falt[0]).classList.add('vg-agora');
+  r.auto=async()=>{const bs=[...q.querySelectorAll('.vg-btn')];const w=bs.find(b=>b.textContent!==r.pal[falt[0]]);w.click();
+    if(document.getElementById('prox-rod').classList.contains('mostrar'))return true;
+    falt.forEach(i=>bs.find(b=>b.textContent===r.pal[i]).click());return false;};
+  falar(r.fala);}
+function abrirJogo28(){
+  abrirRodadas(28,'CA PÁG. 16 — Nº 3',VOG16.map((v,k)=>({tit:'PALAVRA '+(k+1)+' DE 6',custom:montaVogais,
+    e:v[0],de:v[1],pal:v[2],mod:v[3],
+    perg:'COMPLETE COM AS <b>VOGAIS</b> E FORME UMA PALAVRA<br>COM O <b>MESMO SIGNIFICADO</b> DE <b>'+v[1]+'</b>.',
+    fala:'Complete com as vogais: a, e, i, o, u. Forme uma palavra que quer dizer o mesmo que '+v[1].toLowerCase()+'. A palavra é '+v[2].toLowerCase()+'.',
+    exp:'Isso mesmo! '+v[1].toLowerCase()+' e '+v[2].toLowerCase()+' têm o mesmo significado.',res:v[1]+' →',resp:v[2]})));}
+
+const SVG_ANTA='<svg viewBox="0 0 160 110" width="150"><ellipse cx="78" cy="58" rx="50" ry="30" fill="#5D4037"/><ellipse cx="132" cy="50" rx="20" ry="16" fill="#5D4037"/><path d="M146 46 Q160 52 152 64 Q146 60 144 56Z" fill="#4E342E"/><circle cx="134" cy="44" r="3" fill="#fff"/><circle cx="134" cy="44" r="1.5" fill="#000"/><ellipse cx="124" cy="34" rx="5" ry="7" fill="#4E342E"/><rect x="40" y="78" width="12" height="26" rx="5" fill="#4E342E"/><rect x="62" y="80" width="12" height="24" rx="5" fill="#4E342E"/><rect x="92" y="80" width="12" height="24" rx="5" fill="#4E342E"/><rect x="110" y="76" width="12" height="28" rx="5" fill="#4E342E"/></svg>';
+const SVG_EMA='<svg viewBox="0 0 120 150" width="110"><ellipse cx="55" cy="80" rx="38" ry="28" fill="#9E9E9E"/><path d="M30 70 Q20 90 40 100" stroke="#757575" stroke-width="5" fill="none"/><path d="M82 70 Q92 40 90 18" stroke="#9E9E9E" stroke-width="10" fill="none" stroke-linecap="round"/><circle cx="91" cy="16" r="9" fill="#9E9E9E"/><path d="M99 15 L112 18 L99 21Z" fill="#FFB300"/><circle cx="93" cy="13" r="2" fill="#000"/><path d="M45 104 L40 140 M65 104 L70 140" stroke="#FFB300" stroke-width="5" stroke-linecap="round"/><path d="M32 140 L48 140 M62 140 L78 140" stroke="#FFB300" stroke-width="5" stroke-linecap="round"/></svg>';
+const SVG_EMAP=SVG_EMA.replace('width="110"','style="width:auto;height:90px"');
+const ANIMAIS_A=[{e:'🐝',n:'ABELHA',cur:'A ABELHA FAZ MEL.',fc:'A abelha faz o mel que a gente come!'},
+  {e:'🕷️',n:'ARANHA',cur:'A ARANHA TEM 8 PERNAS E FAZ TEIAS.',fc:'A aranha tem oito pernas e faz teias.'},
+  {e:SVG_ANTA,n:'ANTA',cur:'A ANTA É O MAIOR MAMÍFERO DO BRASIL.',fc:'A anta é o maior mamífero que vive em terra no Brasil.'},
+  {e:'🦜',n:'ARARA',cur:'A ARARA PODE VIVER MAIS DE 50 ANOS.',fc:'A arara pode viver mais de cinquenta anos!'}];
+let ANIMAL17=null;
+function letraCor(w,ini,fim){return [...w].map((c,i)=>'<span style="'+((ini&&i===0)||(fim&&i===w.length-1)?'color:#E53935;font-size:1.25em':'')+'">'+c+'</span>').join('');}
+function abrirJogo29(){
+  abrirRodadas(29,'CA PÁG. 16 — Nº 4',[
+   {tit:'4) O SEGREDO',tipo:'livre',n:1,semResumo:true,
+    ilustra:'<div style="display:flex;align-items:center;justify-content:center;gap:12px;font-weight:bold;font-size:1.7rem;text-align:center"><div><div style="font-size:3.2rem">🐟</div>'+letraCor('PEIXE',0,1)+'</div><div style="font-size:2.4rem">➜</div><div>'+SVG_EMA+'<br>'+letraCor('EMA',1,0)+'</div></div>',
+    perg:'DESCUBRA O SEGREDO! 🔍<br>A <b>ÚLTIMA LETRA</b> DE UMA PALAVRA É A <b>PRIMEIRA LETRA</b> DA OUTRA.',
+    fala:'Descubra o segredo! Peixe termina com a letra e. E ema começa com a letra e! A última letra de uma palavra é a primeira letra da próxima.',
+    ops:[{e:'🤩',n:'DESCOBRI!'}]},
+   {tit:'O SEGREDO',tipo:'quadros',ilustra:'<div style="font-size:2rem;font-weight:bold;text-align:center">🐟 PEIXE</div>',
+    perg:'COM QUAL LETRA A PALAVRA <b>PEIXE TERMINA</b>?',fala:'Com qual letra a palavra peixe termina?',
+    exp:'Isso! Peixe termina com e. E ema começa com e!',dicaErro:'Quase! Olhe a última letra.',
+    ops:[{t:'P',ok:false},{t:'X',ok:false},{t:'E',ok:true}],semResumo:true},
+   {tit:'O SEGREDO',tipo:'quadros',ilustra:'<div style="text-align:center;font-weight:bold;font-size:2rem">'+SVG_EMA+'<br>EMA</div>',
+    perg:'E A PALAVRA <b>EMA</b>, TERMINA COM QUAL LETRA?',fala:'E a palavra ema? Termina com qual letra?',
+    exp:'Isso mesmo! Ema termina com a. Então o próximo animal começa com a!',dicaErro:'Quase! Olhe a última letra de ema.',
+    ops:[{t:'E',ok:false},{t:'M',ok:false},{t:'A',ok:true}],semResumo:true},
+   {tit:'A)',tipo:'figs',perg:'QUAL DESTES ANIMAIS <b>COMEÇA COM A</b>?',fala:'Qual destes animais começa com a letra a?',
+    antes:function(){document.getElementById('figs-rod').classList.add('g2');},
+    exp:'Isso mesmo! Abelha começa com a.',dicaErro:'Quase! Fale o nome do animal e escute o primeiro som.',
+    figs:[{e:'🐱',rot:'GATO',ok:false},{e:'🐝',rot:'ABELHA',ok:true},{e:'🐶',rot:'CACHORRO',ok:false},{e:'🐻',rot:'URSO',ok:false}],semResumo:true},
+   {tit:'A) ANIMAL COM A',tipo:'livre',n:1,
+    perg:'TODOS ESTES COMEÇAM COM <b>A</b>! QUAL ANIMAL VOCÊ VAI <b>ESCREVER</b> NO LIVRO?',
+    fala:'Todos estes animais começam com a letra a: abelha, aranha, anta e arara. Qual você vai escrever no livro?',
+    ops:ANIMAIS_A.map(a=>({e:a.e.length>4?'<span style="display:inline-block;width:70px">'+a.e+'</span>':a.e,n:a.n}))}]);}
+function animalEsc(){return ANIMAIS_A.find(a=>a.n===((MAR[0]||[])[0]))||ANIMAIS_A[0];}
+function abrirJogo30(){
+  abrirRodadas(30,'CA PÁG. 17',[
+   {tit:'B) SEU ANIMAL',tipo:'livre',n:1,
+    perg:'QUAL ANIMAL COM <b>A</b> VOCÊ ESCOLHEU?',fala:'Qual animal com a letra a você escolheu?',
+    ops:()=>ANIMAIS_A.map(a=>({e:a.e.length>4?'<span style="display:inline-block;width:70px">'+a.e+'</span>':a.e,n:a.n}))},
+   {tit:'B) DESENHE',tipo:'livre',n:1,semResumo:true,
+    antes:function(){const a=animalEsc();this.ilustra='<div style="text-align:center"><div style="font-size:7rem;line-height:1.1">'+(a.e.length>4?a.e.replace('width="150"','width="230"'):a.e)+'</div><b style="font-size:1.6rem">'+a.n+'</b></div>';
+      this.perg='🖍️ <b>DESENHE</b> A '+a.n+' NO QUADRO DO LIVRO.';this.fala='Muito bem! Agora desenhe a '+a.n.toLowerCase()+' no quadro do livro. Olhe o desenho para te ajudar.';},
+    perg:'',fala:'',ops:[{e:'🖍️',n:'JÁ DESENHEI!'}]},
+   {tit:'B) CURIOSIDADE',tipo:'livre',n:1,
+    antes:function(){const a=animalEsc();this.ilustra='<div style="text-align:center;font-weight:bold;font-size:1.5rem;background:#FFF8E1;border-radius:16px;padding:12px">💡 '+a.cur+'</div>';
+      this.perg='VOCÊ SABIA? ESCREVA UMA <b>CURIOSIDADE</b> SOBRE A '+a.n+'.';this.fala='Você sabia? '+a.fc+' Escreva essa curiosidade no livro.';this.resp=a.cur;},
+    perg:'',fala:'',ops:[{e:'✏️',n:'VOU ESCREVER!'}]},
+   {tit:'C) LIGUE',tipo:'figs',antes:function(){document.getElementById('figs-rod').classList.add('g2');},
+    perg:'<span style="display:block;background:#E3F2FD;border-radius:12px;padding:8px;margin:6px 0">"A EMA É A SEGUNDA AVE MAIS VELOZ DO MUNDO."</span>DE QUAL ANIMAL É ESTA CURIOSIDADE?',
+    fala:'Leia a curiosidade: a ema é a segunda ave mais veloz do mundo. De qual animal é essa curiosidade? Ligue ao animal.',
+    exp:'Isso mesmo! A ema corre muito rápido!',dicaErro:'Quase! Procure a palavra ema na frase.',
+    figs:[{e:'🐟',rot:'PEIXE',ok:false},{svg:SVG_EMAP,rot:'EMA',ok:true}],res:'AVE VELOZ →',resp:'EMA'},
+   {tit:'C) LIGUE',tipo:'figs',antes:function(){document.getElementById('figs-rod').classList.add('g2');},
+    perg:'<span style="display:block;background:#E3F2FD;border-radius:12px;padding:8px;margin:6px 0">"OS PEIXES NÃO PISCAM."</span>DE QUAL ANIMAL É ESTA CURIOSIDADE?',
+    fala:'Leia a curiosidade: os peixes não piscam. De qual animal é essa curiosidade? Ligue ao animal.',
+    exp:'Isso mesmo! Os peixes não piscam os olhos!',dicaErro:'Quase! Procure a palavra peixes na frase.',
+    figs:[{e:'🐟',rot:'PEIXE',ok:true},{svg:SVG_EMAP,rot:'EMA',ok:false}],res:'NÃO PISCAM →',resp:'PEIXE'}]);}
 
 /* ===== painel de apoio: silabário e alfabeto fônico ===== */
 const SIL_LETRAS=['B','C','D','F','G','H','J','K','L','M','N','P','Q','R','S','T','V','W','X','Y','Z'];
